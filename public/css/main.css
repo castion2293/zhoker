@@ -1,0 +1,123 @@
+body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Lato", sans-serif;
+  }
+  
+  body,
+  html {
+    height: 100%;
+    color: #777;
+    line-height: 1.8;
+  }
+
+  body input::-webkit-input-placeholder {
+    color: black;
+    font-weight: bold;
+  }
+
+  body input::-moz-placeholder {
+    color: black;
+    font-weight: bold;
+  }
+  /* Create a Parallax Effect */
+  
+  .bgimg-1,
+  .bgimg-2,
+  .bgimg-3 {
+    opacity: 1;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  /* First image (Logo. Full height) */
+  
+  .bgimg-1 {
+    background-image: url('DSC_0397.JPG');
+    min-height: 100%;
+  }
+  /* Second image (Portfolio) */
+  
+  .bgimg-2 {
+    /*background-image: url('DSC_0395.JPG');*/
+    min-height: 400px;
+  }
+  /* Third image (Contact) */
+  
+  .bgimg-3 {
+    background-image: url("DSC_0394.JPG");
+    min-height: 400px;
+  }
+  /* Adjust the position of the parallax image text */
+  
+  .w3-display-middle {
+    bottom: 45%;
+  }
+  
+  .w3-wide {
+    letter-spacing: 10px;
+  }
+  
+  .w3-hover-opacity {
+    cursor: pointer;
+  }
+
+  .inputbkg {
+    /*background-color: rgba(76,175,80,0.9);*/
+    background-color: rgba(255,255,255,0.7);
+  }
+
+  /*footer style*/
+  footer ul {
+     list-style-type: none;
+  }
+
+  footer .footlink {
+    margin:0px;
+  }  
+
+  footer .footlink a {
+    text-decoration: none;
+  }
+
+  footer .iconlist li {
+     display: inline-block;
+     margin: 0px 5px;
+  }  
+
+  footer .iconlist li .w3-btn-floating{
+    border: 1px solid;
+  }
+
+  /*form validation message*/
+  form.cmxform label.error,
+    label.error {
+      /* remove the next line when you have trouble in IE6 with labels in list */
+      color:#f44336;
+      /*font-style: italic;*/
+    }
+
+  /*shrink the word or icon when hover it*/
+  .zk-shrink-hover:hover {
+     -moz-transform: scale(0.95);
+     -ms-transform: scale(0.95);
+     -o-transform: scale(0.95);
+     -webkit-transform: scale(0.95);
+     transform: scale(0.95);
+  }
+  
+  /*#googleMap {
+    width: 100%;
+    height: 400px;
+    -webkit-filter: grayscale(90%);
+    filter: grayscale(90%);
+  }*/
+
+  /*#myNavbar li:first-child  {
+    margin-left: 5em;
+  }*/
