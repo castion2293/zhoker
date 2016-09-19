@@ -138,10 +138,14 @@
                 {{ Form::text('phone_number', null, ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'placeholder' => 'Phone Number ']) }}
                 {{ Form::password('password', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Password ']) }}
                 {{ Form::password('password_confirmation', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Verify Password ']) }}
-                <label class="w3-text-red w3-large" id="sign_up_wmsg"></label>
-                <div class="checkbox">
-                  <label><input type="checkbox" value="" checked>Receive Email alert after registering to be a member</label>
+                <div class="form-group w3-margin-top">
+                  {!! app('captcha')->display()!!}
+                  {!! $errors->first('g-recaptcha-response','<p class="alert alert-danger">:message</p>')!!}
                 </div>
+                <label class="w3-text-red w3-large" id="sign_up_wmsg"></label>
+                <!--div class="checkbox">
+                  <label><input type="checkbox" value="" checked>Receive Email alert after registering to be a member</label>
+                </div-->
                 <p class="w3-large">By registering, I accept the zhoker.com
                   <span class="w3-text-green" style="cursor:pointer;">Term of Use.</span>
                 </p>
