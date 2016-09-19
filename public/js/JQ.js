@@ -38,10 +38,6 @@ $(function () {
        }//end if
     });
 
-    $("#sign-in-bar").click(function(){
-          $("#myModal").modal();
-    });
-
     //Click erease the text
     $("#eatlocation").focus(function(){
       if( $("#eatlocation").val() == "Where to eat?")

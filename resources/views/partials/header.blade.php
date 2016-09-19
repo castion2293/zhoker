@@ -185,3 +185,22 @@
 
   <div class="w3-overlay w3-animate-opacity" style="cursor:pointer"></div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+  $(function () {
+
+        @if (count($errors) > 0)
+          $("#wmsg").text("Wrong Username or Password");
+          $("#myModal").modal();//失敗後的顯示
+
+          $("#sign-in-bar").click(function(){
+            $("#myModal").modal();
+          });
+        @else
+          $("#sign-in-bar").click(function(){
+            $("#myModal").modal();
+          });
+        @endif
+    
+  });
+</script>
