@@ -54,7 +54,7 @@
             <div class="form-group">
               <label for="password"><span class="glyphicon glyphicon-eye-open w3-large"></span> Password</label>
               {{ Form::password('password',['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Password']) }}
-              <label class="w3-text-red w3-large" id="wmsg"></label>
+              <label class="w3-text-red w3-large" id="sign_in_wmsg"></label>
               <span class="w3-text-green" data-dismiss="modal" data-toggle="modal" data-target="#forgotModal" style="cursor:pointer;">Forgot Password?</span>
             </div>
             <div class="checkbox">
@@ -138,6 +138,7 @@
                 {{ Form::text('phone_number', null, ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'placeholder' => 'Phone Number ']) }}
                 {{ Form::password('password', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Password ']) }}
                 {{ Form::password('password_confirmation', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Verify Password ']) }}
+                <label class="w3-text-red w3-large" id="sign_up_wmsg"></label>
                 <div class="checkbox">
                   <label><input type="checkbox" value="" checked>Receive Email alert after registering to be a member</label>
                 </div>
@@ -185,13 +186,53 @@
 
   <div class="w3-overlay w3-animate-opacity" style="cursor:pointer"></div>
 
+<!--SignIn and SignUp Error show-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
   $(function () {
+        var error_show = '';
 
         @if (count($errors) > 0)
-          $("#wmsg").text("Wrong Username or Password");
-          $("#myModal").modal();//失敗後的顯示
+          @foreach($errors->all() as $error)
+            var status = '{{ $error }}';
+            var form_name = "";
+
+            // get the error message
+            switch(status) {
+              case 'These credentials do not match our records.':
+                  error_show = error_show.concat(status).concat('<br>');
+                  form_name = "SignIn Form";
+                  break;
+              case 'The email has already been taken.':
+                  error_show = error_show.concat(status).concat('<br>');
+                  form_name = "SignUp Form";
+                  break;
+              case 'The phone number must be a number.':
+                  error_show = error_show.concat(status).concat('<br>');
+                  form_name = "SignUp Form";
+                  break;
+              case 'The password confirmation does not match.':
+                  error_show = error_show.concat(status).concat('<br>');
+                  form_name = "SignUp Form";
+                  break;
+              default:
+                  break;
+            }
+          @endforeach
+
+          //show the error message
+          switch(form_name) {
+              case "SignIn Form":
+                $("#sign_in_wmsg").html(error_show);
+                $("#myModal").modal();//失敗後的顯示
+                break;
+              case "SignUp Form":
+                $("#sign_up_wmsg").html(error_show);
+                $("#signupModal").modal();//失敗後的顯示
+                break;
+              default:
+                break;
+          }
 
           $("#sign-in-bar").click(function(){
             $("#myModal").modal();
