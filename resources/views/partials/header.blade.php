@@ -99,6 +99,7 @@
             <div class=" form-group ">
               <div class="col-sm-10" style="margin-top:1px">
                 {{ Form::email('email', null, ['class' => 'form-control w3-large', 'placeholder' => 'Email Address']) }}
+                <label class="w3-text-red w3-large" id="Forgot_pwd_wmsg"></label>
               </div>
               {{ Form::submit('Send', ['class' => 'w3-btn w3-green w3-round w3-medium col-sm-2 w3-hover-dark-grey', 'style' => 'height:35px']) }}
             </div>
@@ -195,12 +196,12 @@
 <script>
   $(function () {
         var error_show = '';
-
+       
         @if (count($errors) > 0)
           @foreach($errors->all() as $error)
             var status = '{{ $error }}';
             var form_name = "";
-
+            
             // get the error message
             switch(status) {
               case 'These credentials do not match our records.':
@@ -219,6 +220,10 @@
                   error_show = error_show.concat(status).concat('<br>');
                   form_name = "SignUp Form";
                   break;
+              case 'We can&#039;t find a user with that e-mail address.':
+                  error_show = error_show.concat(status).concat('<br>');
+                  form_name = "Forgot Form";
+                  break;
               default:
                   break;
             }
@@ -233,6 +238,10 @@
               case "SignUp Form":
                 $("#sign_up_wmsg").html(error_show);
                 $("#signupModal").modal();//失敗後的顯示
+                break;
+              case "Forgot Form":
+                $("#Forgot_pwd_wmsg").html(error_show);
+                $("#forgotModal").modal();//失敗後的顯示
                 break;
               default:
                 break;
