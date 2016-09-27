@@ -192,7 +192,6 @@
   <div class="w3-overlay w3-animate-opacity" style="cursor:pointer"></div>
 
 <!--SignIn and SignUp Error show-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
   $(function () {
         var error_show = '';
