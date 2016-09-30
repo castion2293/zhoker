@@ -45,3 +45,8 @@ Route::post('password/reset', [
     'uses' => 'Auth\ResetPasswordController@reset',
     'as' => 'postPasswordReset'
 ]);
+
+Route::get('/maplist', [
+    'uses' => 'MainController@getMaplist',
+    'as' => 'main.maplist'
+]);

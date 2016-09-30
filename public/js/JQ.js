@@ -59,89 +59,24 @@ $(function () {
         $("#eatlocationSmall").val("Where to eat?");
     });
 
-    //DataTimePicker
-    $('.form_date').datetimepicker({
-        language:  '',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		minView: 2,
-		forceParse: 0
-    });
-    
     //googleMap
-    $("#googleMap").googleMap({
-        zoom: 13,
-        type: "ROADMAP" // Map type (optional)
-    });
-    $("#googleMap").addMarker({
-        address: "751 S 300 E Salt Lake City Utah", // Postale Address
-        url: 'https://www.yahoo.com.tw',
-        title: 'HOUSE',
-        text: "751 S 300 E Salt Lake City Utah"
-        //    id: 'marker1'
-    });
-    $("#googleMap").addMarker({
-        address: " 95 N. 300 W., Salt Lake City, UT", // Postale Address
-        url: 'https://www.ldsbc.edu',
-        title: 'LDSBC',
-        text: "95 N. 300 W., Salt Lake City, UT"
-        //    id: 'marker1'
-    });
-
-   // validate the comment form when it is submitted
-   $("#signinForm").validate({
-       rules: {
-          email: {
-			required: true,
-			email: true
-		  },
-          password: {
-			required: true,
-			minlength: 5
-		  },
-          agree: "required"
-        },
-        messages: {
-          email: "Please enter a valid email address",
-          password: {
-			required: "Please provide a password",
-			minlength: "Your password must be at least 5 characters long"
-		  },
-        }
-      });
-    
-
+    // $("#googleMap").googleMap({
+    //     zoom: 13,
+    //     type: "ROADMAP" // Map type (optional)
+    // });
+    // $("#googleMap").addMarker({
+    //     address: "751 S 300 E Salt Lake City Utah", // Postale Address
+    //     url: 'https://www.yahoo.com.tw',
+    //     title: 'HOUSE',
+    //     text: "751 S 300 E Salt Lake City Utah"
+    //     //    id: 'marker1'
+    // });
+    // $("#googleMap").addMarker({
+    //     address: " 95 N. 300 W., Salt Lake City, UT", // Postale Address
+    //     url: 'https://www.ldsbc.edu',
+    //     title: 'LDSBC',
+    //     text: "95 N. 300 W., Salt Lake City, UT"
+    //     //    id: 'marker1'
     // });
 
-    //form validation
-    // validate the comment form when it is submitted
-	// $("#signupform").validate({
-    //     rules: {
-    //       email: {
-	// 		 required: true,
-	// 		 email: true
-	// 	  },
-    //       password: {
-	// 		 required: true,
-	// 		 minlength: 5
-	// 	  },
-    //       agree: "required"
-    //     },
-    //     messages: {
-    //       email: "Please enter a valid email address",
-    //       password: {
-	// 		 required: "Please provide a password",
-	// 		 minlength: "Your password must be at least 5 characters long"
-	// 	  },
-    //     }
-    //   });
-
-    //   $.validator.setDefaults({
-	// 	  submitHandler: function() {
-	// 		  alert("submitted!");
-	// 	    }
-	//   });
 })

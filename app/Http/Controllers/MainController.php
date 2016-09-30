@@ -12,4 +12,9 @@ class MainController extends Controller
     {
         return view('index');
     }
+
+    public function getMaplist()
+    {
+        return view('main.map_list');
+    }
 }
