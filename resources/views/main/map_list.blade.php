@@ -18,60 +18,20 @@
         </div>
         <div class="col-md-5 row">
             <div class="col-md-12">
+
+                @foreach($maps as $map)
                 <!-- Container (About Section) -->
-                <div id="about" class="container-fluid">
+                <div id="{{ $map->id }}" class="container-fluid">
                   <div class="row">
                     <div class="col-sm-8">
-                      <h2>About Company Page</h2><br>
-                      <h2>About Company Page</h2><br>
-                      <h2>About Company Page</h2><br>
-                      <h2>About Company Page</h2><br>
-                      <h2>About Company Page</h2><br>
-                      <h2>About Company Page</h2><br>
-                      <h2>About Company Page</h2><br>
-                      <h2>About Company Page</h2><br>
-                      <h2>About Company Page</h2><br>
+                      <h2>{{ $map->address }}</h2><br>
+                      <h2>{{ $map->city }}</h2><br>
+                      <h2>{{ $map->state }}</h2>
                     </div>
                   </div>
                 </div>
+                @endforeach
 
-                <!-- Container (Services Section) -->
-                <div id="services" class="container-fluid text-center">
-                  <h2>SERVICES</h2>
-                  <h4>What we offer</h4>
-                  <h4>What we offer</h4>
-                  <h4>What we offer</h4>
-                  <h4>What we offer</h4>
-                  <h4>What we offer</h4>
-                  <h4>What we offer</h4>
-                  <h4>What we offer</h4>
-                  <br>
-                </div>
-
-                <!-- Container (Portfolio Section) -->
-                <div id="portfolio" class="container-fluid text-center bg-grey">
-                  <h2>Portfolio</h2><br>
-                  <h4>What we have created</h4>
-                </div>
-
-                <!-- Container (Pricing Section) -->
-                <div id="pricing" class="container-fluid">
-                  <div class="text-center">
-                    <h2>Pricing</h2>
-                    <h4>Choose a payment plan that works for you</h4>
-                    <h4>Choose a payment plan that works for you</h4>
-                    <h4>Choose a payment plan that works for you</h4>
-                    <h4>Choose a payment plan that works for you</h4>
-                    <h4>Choose a payment plan that works for you</h4>
-                    <h4>Choose a payment plan that works for you</h4>
-                    <h4>Choose a payment plan that works for you</h4>
-                  </div>
-                </div>
-
-                <!-- Container (Contact Section) -->
-                <div id="contact" class="container-fluid bg-grey">
-                  <h2 class="text-center">CONTACT</h2>
-                </div>
             </div>
         </div>
     </div>
@@ -86,16 +46,24 @@
          zoom: 13,
          type: "ROADMAP" // Map type (optional)
       });
-      $("#map").addMarker({
-    	   address: "751 S 300 E Salt Lake City Utah", // Postale Address
-         id: 'marker1',
-         url: '#!about', // Link
-      }).addClass("scroll");
-      $("#map").addMarker({
-    	   address: "751 S 600 W Salt Lake City Utah", // Postale Address
-         id: 'marker2',
-    	   url: '#!contact', // Link
-      })
+      $("#map").addClass("scroll")
+      @foreach($maps as $map)
+        $("#map").addMarker({
+    	     address: "{{ $map->address }} . ' ' . {{ $map->city }} . ' ' . {{ $map->state }}", // Postale Address
+           id: '{{ $map->id }}',
+           url: '#!{{ $map->id }}', // Link
+        });
+      @endforeach
+      // $("#map").addMarker({
+    	//    address: "751 S 300 E Salt Lake City Utah", // Postale Address
+      //    id: 'marker1',
+      //    url: '#!about', // Link
+      // });
+      // $("#map").addMarker({
+    	//    address: "751 S 600 W Salt Lake City Utah", // Postale Address
+      //    id: 'marker2',
+    	//    url: '#!contact', // Link
+      // })
 
       // Add smooth scrolling to all links in navbar + footer link
       $(".scroll").on('click', function(event) {
@@ -113,10 +81,8 @@
           // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
           $('html, body').animate({
               scrollTop: $(hash).offset().top
-            }, 900, function(){
+          }, 900, function(){
              
-            // Add hash (#) to URL when done scrolling (default click behavior)
-            //window.location.hash = hash;
           });
        } // End if
       });

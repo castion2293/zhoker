@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Map;
 
 class MainController extends Controller
 {
@@ -15,6 +16,8 @@ class MainController extends Controller
 
     public function getMaplist()
     {
-        return view('main.map_list');
+        $maps = Map::all();
+
+        return view('main.map_list', ['maps' => $maps]);
     }
 }

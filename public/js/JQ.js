@@ -40,23 +40,23 @@ $(function () {
 
     //Click erease the text
     $("#eatlocation").focus(function(){
-      if( $("#eatlocation").val() == "Where to eat?")
+      if( $("#eatlocation").val() == "Salt lake city")
       $("#eatlocation").val("");
     });
 
     $("#eatlocation").focusout(function(){
       if( $("#eatlocation").val() == '') 
-        $("#eatlocation").val("Where to eat?");
+        $("#eatlocation").val("Salt lake city");
     });
 
     $("#eatlocationSmall").focus(function(){
-      if( $("#eatlocationSmall").val() == "Where to eat?")
+      if( $("#eatlocationSmall").val() == "Salt lake city")
       $("#eatlocationSmall").val("");
     });
 
     $("#eatlocationSmall").focusout(function(){
       if( $("#eatlocationSmall").val() == '') 
-        $("#eatlocationSmall").val("Where to eat?");
+        $("#eatlocationSmall").val("Salt lake city");
     });
 
     //googleMap

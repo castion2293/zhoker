@@ -26,8 +26,8 @@
         <!--Input Form large medium screen-->
         <div class="w3-content w3-container w3-hide-small" style="padding-top:9em">
             <form class="w3-row  w3-card-14">
-                <div class="w3-col l4 m4">
-                <input class="w3-input w3-border w3-large w3-text-black inputbkg" type="text" value="Where to eat?" id="eatlocation" style="font-weight:bold;">
+                <div class="w3-col l5 m5">
+                <input class="w3-input w3-border w3-large w3-text-black inputbkg" type="text" value="Salt lake city" id="eatlocation" style="font-weight:bold;">
                 </div>
                 <div class="w3-col l2 m2">
                     <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic" style="height:50px">
@@ -38,11 +38,11 @@
                         <option class="w3-text-black w3-white w3-large">Tea Time</option>
                     </select>
                 </div>
-                <div class="input-group w3-col l3 m3 date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <div class="input-group w3-col l4 m4 date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
                     <span class="input-group-addon inputbkg"><span class="glyphicon glyphicon-calendar"></span></span>
                     <input class="w3-input w3-border w3-large w3-text-black inputbkg" type="text" value="" placeholder="Date" readonly style="font-weight:bold;">
                 </div>
-                <div class="w3-col l2 m2">
+                <!--div class="w3-col l2 m2">
                     <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic" style="height:50px">
                         <option class="w3-text-black w3-white w3-large">1 Person</option>
                         <option class="w3-text-black w3-white w3-large">2 People</option>
@@ -55,7 +55,7 @@
                         <option class="w3-text-black w3-white w3-large">9 People</option>
                         <option class="w3-text-black w3-white w3-large">10 People</option>
                     </select>
-                </div>
+                </div-->
                 <button class="w3-col l1 m1 w3-btn w3-border-green w3-large w3-green" style="height:50px">
                 <i class="w3-text-shadow fa fa-search"></i>
                 </button>
