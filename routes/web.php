@@ -13,7 +13,7 @@
 
 Route::get('/', [
     'uses' => 'MainController@getIndex',
-    'as' => 'main.index'
+    'as' => 'home.index'
 ]);
 
 // Registration Routes
@@ -46,7 +46,7 @@ Route::post('password/reset', [
     'as' => 'postPasswordReset'
 ]);
 
-Route::get('/maplist', [
+Route::post('/maplist', [
     'uses' => 'MainController@getMaplist',
     'as' => 'main.maplist'
 ]);

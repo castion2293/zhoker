@@ -14,9 +14,11 @@ class MainController extends Controller
         return view('index');
     }
 
-    public function getMaplist()
+    public function getMaplist(Request $request)
     {
-        $maps = Map::all();
+        $city = $request->input('city');
+
+        $maps = Map::where('city', $city)->get();
 
         return view('main.map_list', ['maps' => $maps]);
     }

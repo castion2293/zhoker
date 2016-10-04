@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.map_list_layout')
 
 @section('title', '| List')
 
@@ -10,28 +10,25 @@
 @section('content')
     <div class="row">
         <div class="col-md-7">
-            <div  id="fixed" style="position:fixed;height:100%;width:60%;">
+            <div  id="fixed" style="position:fixed;height:80%;width:60%;margin-top:10%;">
+                @include('partials.map_list_header')
                 <div id="map" style="height:100%"></div>
-                <a class="scroll w3-bottom" href="#about">about</a>
-                <!--a class="scroll w3-bottom" href="#contact">contact</a-->
             </div>
         </div>
-        <div class="col-md-5 row">
+        <div class="col-md-5">
             <div class="col-md-12">
-
                 @foreach($maps as $map)
-                <!-- Container (About Section) -->
-                <div id="{{ $map->id }}" class="container-fluid">
-                  <div class="row">
-                    <div class="col-sm-8">
-                      <h2>{{ $map->address }}</h2><br>
-                      <h2>{{ $map->city }}</h2><br>
-                      <h2>{{ $map->state }}</h2>
+                  <!-- Container (About Section) -->
+                  <div id="{{ $map->id }}" class="container-fluid">
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <h2>{{ $map->address }}</h2><br>
+                        <h2>{{ $map->city }}</h2><br>
+                        <h2>{{ $map->state }}</h2>
+                      </div>
                     </div>
                   </div>
-                </div>
                 @endforeach
-
             </div>
         </div>
     </div>

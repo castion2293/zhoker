@@ -18,19 +18,19 @@
             <span class="w3-center w3-padding-xlarge w3-text-white w3-xxlarge w3-wide w3-text-shadow w3-animate-opacity w3-hide-small
                 ">Tasty and Fresh</span><br>
             <!--<span class="w3-center w3-text-white w3-xlarge w3-animate-opacity">-->
-            <button class="w3-btn w3-transparent w3-border w3-round w3-xlarge w3-card-16 w3-hover-green w3-hover-border-green">
+            <button class="w3-btn w3-transparent w3-border w3-round w3-xlarge w3-card-16 w3-hover-green w3-hover-border-green" id="orderbtn">
                 <span class="w3-text-shadow">Order Now</span>
             </button>
         </div>
 
         <!--Input Form large medium screen-->
         <div class="w3-content w3-container w3-hide-small" style="padding-top:9em">
-            <form class="w3-row  w3-card-14">
+            {!! Form::open(['route' => 'main.maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
                 <div class="w3-col l5 m5">
-                <input class="w3-input w3-border w3-large w3-text-black inputbkg" type="text" value="Salt lake city" id="eatlocation" style="font-weight:bold;">
+                    {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'required' => '', 'id' => 'eatlocation', 'style' => 'font-weight:bold;']) }}
                 </div>
                 <div class="w3-col l2 m2">
-                    <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic" style="height:50px">
+                    <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic clickdown" name="shift" style="height:50px">
                         <option class="w3-text-black w3-white w3-large">Dinner</option>
                         <option class="w3-text-black w3-white w3-large">Lunch</option>
                         <option class="w3-text-black w3-white w3-large">Brunch</option>
@@ -39,8 +39,8 @@
                     </select>
                 </div>
                 <div class="input-group w3-col l4 m4 date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                    <span class="input-group-addon inputbkg"><span class="glyphicon glyphicon-calendar"></span></span>
-                    <input class="w3-input w3-border w3-large w3-text-black inputbkg" type="text" value="" placeholder="Date" readonly style="font-weight:bold;">
+                    <span class="input-group-addon inputbkg clickdown"><span class="glyphicon glyphicon-calendar"></span></span>
+                    {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'required' => '', 'placeholder' => 'Date', 'readonly' => '', 'style' => 'font-weight:bold;']) }}
                 </div>
                 <!--div class="w3-col l2 m2">
                     <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic" style="height:50px">
@@ -59,7 +59,7 @@
                 <button class="w3-col l1 m1 w3-btn w3-border-green w3-large w3-green" style="height:50px">
                 <i class="w3-text-shadow fa fa-search"></i>
                 </button>
-            </form>
+            {!! Form::close() !!}
         </div>
 
          <!--Input Form small screen-->
