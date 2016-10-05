@@ -16,9 +16,30 @@
             </div>
         </div>
         <div class="col-md-5">
-            <div class="col-md-12">
-                @foreach($maps as $map)
-                  <!-- Container (About Section) -->
+            <div class="col-md-12 w3-light-grey">
+                <div class="w3-accordion">
+                    @foreach($maps as $map)
+                      <a id="{{ $map->id }}" href="#{{ $map->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-border-light-grey w3-border-top w3-border-bottom" style="margin:4px 0 4px 0">
+                        <div class="row">
+                          <div class="col-md-2">
+                              <img src="{{ URL::to('img/DSC_0395.JPG') }}" alt="Food1" style="width:100%">
+                          </div>
+                          <div class="col-md-10">
+                              KKKK
+                          </div>
+                        </div>
+                      </a>
+                      <!--button id="{{ $map->id }}" class="w3-btn-block w3-left-align dropDownList">Open Section 1</button-->
+                      <div id="drop_{{ $map->id }}" class="w3-accordion-content w3-container">
+                        <h2>{{ $map->address }}</h2><br>
+                        <h2>{{ $map->city }}</h2><br>
+                        <h2>{{ $map->state }}</h2>
+                      </div>
+                    @endforeach
+                </div>
+
+                <!--@foreach($maps as $map)
+                  
                   <div id="{{ $map->id }}" class="container-fluid">
                     <div class="row">
                       <div class="col-sm-8">
@@ -28,7 +49,7 @@
                       </div>
                     </div>
                   </div>
-                @endforeach
+                @endforeach-->
             </div>
         </div>
     </div>
@@ -37,8 +58,8 @@
 @section('scripts')
 <script>
   $(function() {
-      var pos = "";
-
+      
+      // Google Map
       $("#map").googleMap({
          zoom: 13,
          type: "ROADMAP" // Map type (optional)
@@ -51,16 +72,6 @@
            url: '#!{{ $map->id }}', // Link
         });
       @endforeach
-      // $("#map").addMarker({
-    	//    address: "751 S 300 E Salt Lake City Utah", // Postale Address
-      //    id: 'marker1',
-      //    url: '#!about', // Link
-      // });
-      // $("#map").addMarker({
-    	//    address: "751 S 600 W Salt Lake City Utah", // Postale Address
-      //    id: 'marker2',
-    	//    url: '#!contact', // Link
-      // })
 
       // Add smooth scrolling to all links in navbar + footer link
       $(".scroll").on('click', function(event) {
@@ -82,6 +93,32 @@
              
           });
        } // End if
+      });
+
+      $(".dropDownList").click(function(){
+
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+          // Prevent default anchor click behavior
+          event.preventDefault();
+
+          //  Store hash
+          var prefix = "#drop_";
+
+          var hash = this.hash;
+
+          var contentID = prefix.concat(hash.substring(1));
+          $(contentID).toggle();
+
+          var v = $(hash).hasClass("w3-green");
+          if(v) {
+             $(hash).removeClass("w3-green w3-hover-green");
+            $(hash).addClass("w3-white");
+          } else {
+            $(hash).removeClass("w3-white");
+            $(hash).addClass("w3-green w3-hover-green");
+          }
+        }
       });
 })
 </script>
