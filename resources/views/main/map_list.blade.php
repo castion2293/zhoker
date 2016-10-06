@@ -21,11 +21,19 @@
                     @foreach($maps as $map)
                       <a id="{{ $map->id }}" href="#{{ $map->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-border-light-grey w3-border-top w3-border-bottom" style="margin:4px 0 4px 0">
                         <div class="row">
-                          <div class="col-md-2">
+                          <div class="col-md-4">
                               <img src="{{ URL::to('img/DSC_0395.JPG') }}" alt="Food1" style="width:100%">
                           </div>
-                          <div class="col-md-10">
-                              KKKK
+                          <div class="col-md-5">
+                              <div><span class="w3-text-grey w3-xlarge"><b>Chicken Rice<b></span></div>
+                              <div style="padding-top:10px;">
+                                <section>
+                                  <span class="w3-text-green w3-large">$50 TW</span>
+                                  <span class="w3-text-grey w3-slim w3-right" style="padding-top:2px">3 people left</span>
+                                </section>
+                              </div>
+                          </div>
+                          <div class="col-md-3">
                           </div>
                         </div>
                       </a>
@@ -112,7 +120,7 @@
 
           var v = $(hash).hasClass("w3-green");
           if(v) {
-             $(hash).removeClass("w3-green w3-hover-green");
+            $(hash).removeClass("w3-green w3-hover-green");
             $(hash).addClass("w3-white");
           } else {
             $(hash).removeClass("w3-white");
