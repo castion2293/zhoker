@@ -19,7 +19,7 @@
             <div class="col-md-12 w3-light-grey">
                 <div class="w3-accordion">
                     @foreach($maps as $map)
-                      <a id="{{ $map->id }}" href="#{{ $map->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-border-light-grey w3-border-top w3-border-bottom w3-leftbar" style="margin:4px 0 4px 0;border-style: solid;border-color:#4CAF50;">
+                      <a id="{{ $map->id }}" href="#{{ $map->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
                         <div class="row">
                           <div class="col-md-4" id="title_img">
                               <img src="{{ URL::to('img/DSC_0395.JPG') }}" alt="Food1" style="width:100%">
@@ -92,6 +92,7 @@
 @section('scripts')
 <script>
   $(function() {
+      var old_id = "";// store last trigger id
       
       // Google Map
       $("#map").googleMap({
@@ -118,6 +119,7 @@
           //  Store hash
           var marker_url = window.location.hash.split("!");  // split url to # and link
           var hash = marker_url[0].concat(marker_url[1]);    // conbine url into #link
+          
          
           // Using jQuery's animate() method to add smooth page scroll
           // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
@@ -127,7 +129,15 @@
              
           });
 
-          $(hash).addClass("w3-leftbar w3-border-green");
+          // remove last id leftbar
+          if (old_id != "") {
+            $(old_id).removeClass("w3-border-green").addClass("w3-border-light-grey");
+          }
+          
+          $(hash).removeClass("w3-border-light-grey").addClass("w3-border-green");// add leftbar
+          old_id = hash;// store hash_id to old_id
+
+          
        } // End if
       });
 
