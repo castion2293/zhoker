@@ -57,7 +57,7 @@
                     </select>
                 </div-->
                 <button class="w3-col l1 m1 w3-btn w3-border-green w3-large w3-green" style="height:50px">
-                <i class="w3-text-shadow fa fa-search"></i>
+                    <i class="w3-text-shadow fa fa-search"></i>
                 </button>
             {!! Form::close() !!}
         </div>

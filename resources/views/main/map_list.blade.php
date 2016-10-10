@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-7">
-            <div  id="fixed" style="position:fixed;height:80%;width:60%;margin-top:10%;">
+            <div  id="fixed" style="position:fixed;height:90%;width:60%;margin-top:5%;">
                 @include('partials.map_list_header')
                 <div id="map" style="height:100%"></div>
             </div>
@@ -64,8 +64,8 @@
                         </div>
 
                         <div>
-                            <a href="#" class="btn w3-display-bottomright w3-border w3-round w3-large w3-green w3-text-white" style="margin-right:12px;margin-bottom:12px;">
-                                <span>Read More</span>
+                            <a href="#" class="btn w3-display-bottomright w3-border w3-round w3-large w3-green w3-text-white zk-shrink-hover" style="margin-right:12px;margin-bottom:12px;">
+                                <span><i class="fa fa-spoon"></i> Read More</span>
                             </a>
                         </div>
                        </div>
