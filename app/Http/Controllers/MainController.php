@@ -6,12 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Map;
+use Jenssegers\Agent\Agent;
 
 class MainController extends Controller
 {
     public function getIndex()
     {
-        return view('index');
+        $agent = new Agent();
+
+        if ($agent->isMobile()) {
+          print_r("mobile"); 
+        } else {
+          return view('desktop.index');
+        }
     }
 
     public function getMaplist(Request $request)
@@ -20,6 +27,6 @@ class MainController extends Controller
 
         $maps = Map::where('city', $city)->get();
 
-        return view('main.map_list', ['maps' => $maps]);
+        return view('desktop.main.map_list', ['maps' => $maps]);
     }
 }

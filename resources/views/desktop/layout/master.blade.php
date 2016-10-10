@@ -16,11 +16,11 @@
 </head>
 
 <body>
-    @include('partials.header')
+    @include('desktop.partials.header')
     
     @yield('content')
 
-    @include('partials.footer')
+    @include('desktop.partials.footer')
     
     <script src="{{ URL::to('js/0609.js') }}"></script>
     <script type="text/javascript" src="{{ URL::to('js/JQ.js') }}"></script>

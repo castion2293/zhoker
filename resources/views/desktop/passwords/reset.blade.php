@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('desktop.layout.master')
 
 @section('title', '| Home')
 

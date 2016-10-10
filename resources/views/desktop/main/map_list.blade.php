@@ -1,4 +1,4 @@
-@extends('layout.map_list_layout')
+@extends('desktop.layout.map_list_layout')
 
 @section('title', '| List')
 
@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-7">
             <div  id="fixed" style="position:fixed;height:90%;width:60%;margin-top:5%;">
-                @include('partials.map_list_header')
+                @include('desktop.partials.map_list_header')
                 <div id="map" style="height:100%"></div>
             </div>
         </div>
