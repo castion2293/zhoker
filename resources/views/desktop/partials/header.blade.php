@@ -4,13 +4,7 @@
       @if (Auth::check())
           <li><a href="#font" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
           <li class="w3-hide-small w3-right">
-            <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor"><i id="sign-out-bar" class="fa fa-sign-out"></i></a>
-          </li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor"><i id="help-bar" class="fa fa-book"></i></a>
-          </li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor"><i id="chef-bar" class="fa fa-cutlery"></i></a>
+            <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
           </li>
           <li class="w3-hide-large w3-hide-medium">
             <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
@@ -18,13 +12,13 @@
       @else
           <li><a href="#font" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
           <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor"><i id="sign-in-bar" class="fa fa-sign-in"></i></a>
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="sign-in-bar" ><i class="fa fa-sign-in"></i><span class="w3-large"> SignIn</span></a>
           </li>
           <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor"><i id="help-bar" class="fa fa-book"></i></a>
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="sign-up-bar"><i class="fa fa-user"></i><span class="w3-large"> SignUp</span></a>
           </li>
           <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor"><i id="chef-bar" class="fa fa-cutlery"></i></a>
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id=""><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
           </li>
           <li class="w3-hide-large w3-hide-medium">
             <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
@@ -48,20 +42,20 @@
         <div class="modal-body" style="padding:10px 50px;">
           {!! Form::open(['route' => 'login', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
             <div class="form-group">
-              <label for="email"><span class="fa fa-envelope w3-large"></span> Email</label>
+              <label for="email" class="w3-text-grey"><span class="fa fa-envelope w3-large"></span> Email</label>
               {{ Form::email('email', null, ['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Email']) }}              
             </div>
             <div class="form-group">
-              <label for="password"><span class="glyphicon glyphicon-eye-open w3-large"></span> Password</label>
+              <label for="password" class="w3-text-grey"><span class="glyphicon glyphicon-eye-open w3-large"></span> Password</label>
               {{ Form::password('password',['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Password']) }}
               <label class="w3-text-red w3-large" id="sign_in_wmsg"></label>
               <span class="w3-text-green" data-dismiss="modal" data-toggle="modal" data-target="#forgotModal" style="cursor:pointer;">Forgot Password?</span>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="" checked>Remember me</label>
+              <label class="w3-text-grey"><input type="checkbox" value="" checked>Remember me</label>
             </div>
             <div class="form-group">
-              <span class="w3-text-black w3-large">Sing in with
+              <span class="w3-text-grey w3-large">Sing in with
                 <i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i>
                 <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:10px;"></i>
               </span>
@@ -151,7 +145,7 @@
                   <span class="w3-text-green" style="cursor:pointer;">Term of Use.</span>
                 </p>
                 <div class="form-group">
-                  <span class="w3-text-black w3-large">Sing up with
+                  <span class="w3-text-grey w3-large">Sing up with
                    <i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i>
                    <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:10px;"></i>
                   </span>
@@ -252,6 +246,9 @@
         @else
           $("#sign-in-bar").click(function(){
             $("#myModal").modal();
+          });
+          $("#sign-up-bar").click(function(){
+            $("#signupModal").modal();
           });
         @endif
     

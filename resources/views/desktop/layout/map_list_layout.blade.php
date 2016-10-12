@@ -18,6 +18,8 @@
 </head>
 
 <body class="w3-light-grey">
+    @include('desktop.partials.map_list_header')
+
     @yield('content')
     
     @yield('scripts')

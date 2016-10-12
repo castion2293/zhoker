@@ -10,14 +10,14 @@
 @section('content')
     <div class="row">
         <div class="col-md-7">
-            <div  id="fixed" style="position:fixed;height:90%;width:60%;margin-top:5%;">
-                @include('desktop.partials.map_list_header')
+            <div  id="fixed" class="w3-display-container" style="position:fixed;height:90%;width:60%;margin-top:4%;">
                 <div id="map" style="height:100%"></div>
-            </div>
+            </div>      
         </div>
         <div class="col-md-5">
             <div class="col-md-12 w3-light-grey">
                 <div class="w3-accordion">
+                    <div class="w3-red"><h1>Zhoker</h1></div>
                     @foreach($maps as $map)
                       <a id="{{ $map->id }}" href="#{{ $map->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
                         <div class="row">
@@ -36,7 +36,7 @@
                           <div class="col-md-3">
                               <div style="margin-top:8px;">
                                 @for ($i = 0; $i < 5; $i++)
-                                  <span class="w3-text-orange"><i class="fa fa-star"></i></span>
+                                  <span class="w3-text-white"><i class="fa fa-star"></i></span>
                                 @endfor
                               </div>
                           </div>
@@ -124,17 +124,18 @@
           // Using jQuery's animate() method to add smooth page scroll
           // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
           $('html, body').animate({
-              scrollTop: $(hash).offset().top
+              scrollTop: ($(hash).offset().top -200)
+              //scrollTop: ($($anchor.attr('href')).offset().top - 50)
           }, 900, function(){
              
           });
 
           // remove last id leftbar
           if (old_id != "") {
-            $(old_id).removeClass("w3-border-green").addClass("w3-border-light-grey");
+            $(old_id).removeClass("w3-border-deep-orange").addClass("w3-border-light-grey");
           }
           
-          $(hash).removeClass("w3-border-light-grey").addClass("w3-border-green");// add leftbar
+          $(hash).removeClass("w3-border-light-grey").addClass("w3-border-deep-orange");// add leftbar
           old_id = hash;// store hash_id to old_id
 
           
@@ -157,7 +158,7 @@
           var contentID = prefix.concat(hash.substring(1));
           $(contentID).toggle();
 
-          var v = $(hash).hasClass("w3-green");
+          var v = $(hash).hasClass("w3-deep-orange");
           var meal_name = $(hash).find("#meal-name");
           var meal_price = $(hash).find("#meal-price");
           var meal_people = $(hash).find("#meal-people");
@@ -166,7 +167,7 @@
 
           if(v) {
             // close the dropdown content
-            $(hash).removeClass("w3-green w3-hover-green").addClass("w3-white");
+            $(hash).removeClass("w3-deep-orange").addClass("w3-white");
             meal_name.removeClass("w3-text-white").addClass("w3-text-grey");
             meal_price.removeClass("w3-text-white").addClass("w3-text-green");
             meal_people.removeClass("w3-text-white").addClass("w3-text-grey");
@@ -174,7 +175,7 @@
             content_img.animate({width: '0'}, 500);
           } else {
             // open the dropdown content
-            $(hash).removeClass("w3-white").addClass("w3-green w3-hover-green");
+            $(hash).removeClass("w3-white").addClass("w3-deep-orange");
             meal_name.removeClass("w3-text-grey").addClass("w3-text-white");
             meal_price.removeClass("w3-text-green").addClass("w3-text-white");
             meal_people.removeClass("w3-text-grey").addClass("w3-text-white");

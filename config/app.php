@@ -180,6 +180,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         'Jenssegers\Agent\AgentServiceProvider',
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Agent' => 'Jenssegers\Agent\Facades\Agent',
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

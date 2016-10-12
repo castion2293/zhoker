@@ -10,7 +10,8 @@
         "laravelcollective/html": "5.3.*",
         "anhskohbo/no-captcha": "^2.1",
         "doctrine/dbal": "^2.5",
-        "jenssegers/agent": "^2.3"
+        "jenssegers/agent": "^2.3",
+        "barryvdh/laravel-debugbar": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
