@@ -1,10 +1,10 @@
 $(function () {
 
     //Tooltip
-    $("#sign-in-bar").tooltip({title:"<p>Sign In</p>",  html: true, placement: "bottom"});
-    $("#sign-out-bar").tooltip({title:"<p>Sign Out</p>",  html: true, placement: "bottom"});
-    $("#help-bar").tooltip({title:"<p>Help</p>",  html: true, placement: "bottom"});
-    $("#chef-bar").tooltip({title:"<h4>Become a chef</h4>",  html: true, placement: "bottom"});
+    // $("#sign-in-bar").tooltip({title:"<p>Sign In</p>",  html: true, placement: "bottom"});
+    // $("#sign-out-bar").tooltip({title:"<p>Sign Out</p>",  html: true, placement: "bottom"});
+    // $("#help-bar").tooltip({title:"<p>Help</p>",  html: true, placement: "bottom"});
+    // $("#chef-bar").tooltip({title:"<h4>Become a chef</h4>",  html: true, placement: "bottom"});
 
      //sidebar display
     $(".w3-opennav").click(function () {

@@ -28,6 +28,122 @@
     </ul>
   </div>
 
+  <!--Filter Modal -->
+  <div class="modal" id="filterModal" role="dialog">
+    <div class="modal-dialog" style="width:500px;">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div>
+          <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
+        </div>
+        <div>
+          <h1 class="text-center w3-padding-8 w3-text-green">Search</h1>
+          <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a data-toggle="tab" href="#basic">Basic</a></li>
+            <li><a data-toggle="tab" href="#advanced">Advanced</a></li>
+            <li><a data-toggle="tab" href="#detailed">Detailed</a></li>
+          </ul>
+        </div>
+
+        {!! Form::open(['route' => 'main.maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
+        <div class="modal-body" style="padding:10px 50px;">
+            <div class="tab-content">
+              <div id="basic" class="tab-pane fade in active">
+                <div class="form-group">
+                  <label for="city" class="w3-text-grey"><span class="fa fa-map-marker w3-large"></span> City</label>
+                  {{ Form::text('city', null, ['class' => 'form-control w3-large w3-khaki', 'required' => '']) }}              
+                </div>
+                <div class="form-group">
+                  <label for="date" class="w3-text-grey"><span class="fa fa-calendar-o w3-large"></span> Date</label>
+                  <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                      <span class="input-group-addon inputbkg clickdown"><span class="glyphicon glyphicon-calendar"></span></span>
+                      {{ Form::text('date', null, ['class' => 'form-control w3-large w3-khaki w3-text-grey', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;']) }}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="shift" class="w3-text-grey"><span class="fa fa-clock-o w3-large"></span> Time</label>
+                  <select class="w3-select w3-border w3-text-grey w3-khaki w3-large cs-select cs-skin-elastic" name="shift" style="height:50px;">
+                    <option class="w3-text-grey w3-large">All</option>
+                    <option class="w3-text-grey w3-large">Dinner</option>
+                    <option class="w3-text-grey w3-large">Lunch</option>
+                    <option class="w3-text-grey w3-large">Brunch</option>
+                    <option class="w3-text-grey w3-large">Breakfast</option>
+                    <option class="w3-text-grey w3-large">Tea Time</option>
+                  </select>              
+                </div>
+              </div>
+              <div id="advanced" class="tab-pane fade">
+                <div class="form-group">
+                  <label for="minPrice" class="w3-text-grey"><span class="fa fa-money w3-large"></span> Price</label>
+                  <div class="row">
+                    <div class="col-md-5">
+                      {{ Form::text('minPrice', null, ['class' => 'form-control w3-large w3-text-grey w3-khaki', 'placeholder' => 'Min', 'style' => 'font-weight:bold;']) }}
+                    </div>
+                    <div class="col-md-2">
+                      <span class="w3-large w3-center w3-text-grey"> TO </span>
+                    </div>
+                    <div class="col-md-5">
+                      {{ Form::text('maxPrice', null, ['class' => 'form-control w3-large w3-text-grey w3-khaki', 'placeholder' => 'Max', 'style' => 'font-weight:bold;']) }}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group w3-padding-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="people" class="w3-text-grey"><span class="fa fa-users w3-large"></span> People left</label>
+                      <select class="w3-select w3-border w3-text-grey w3-khaki w3-large cs-select cs-skin-elastic" name="people">
+                        <option class="w3-text-grey w3-white w3-large">All</option>
+                        <option class="w3-text-grey w3-white w3-large">1 Person left</option>
+                        <option class="w3-text-grey w3-white w3-large">2 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">3 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">4 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">5 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">6 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">7 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">8 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">9 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">10 People left</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="method" class="w3-text-grey"><span class="fa fa-reply w3-large"></span> Method</label>
+                      <select class="w3-select w3-border w3-text-grey w3-khaki w3-large cs-select cs-skin-elastic" name="method">
+                        <option class="w3-text-grey w3-white w3-large">All</option>
+                        <option class="w3-text-grey w3-white w3-large">In House</option>
+                        <option class="w3-text-grey w3-white w3-large">To Go</option>
+                        <option class="w3-text-grey w3-white w3-large">Delieve</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="detailed" class="tab-pane fade">
+                <div class="form-group">
+                  <label for="rank" class="w3-text-grey"><span class="fa fa-sort-numeric-asc w3-large"></span> Rank</label>
+                  <select class="w3-select w3-border w3-text-grey w3-khaki w3-large cs-select cs-skin-elastic" name="rank">
+                      <option class="w3-text-grey w3-white w3-large">Price Low->High</option>
+                      <option class="w3-text-grey w3-white w3-large">Price High->Low</option>
+                      <option class="w3-text-grey w3-white w3-large">Score High->Low</option>
+                      <option class="w3-text-grey w3-white w3-large">Score Low->Hight</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button class="btn w3-center w3-border-green w3-large w3-green form-control">
+              <span><i class="w3-text-shadow fa fa-search"></i>Search</span>
+            </button>
+          </div>
+        </div>
+        {!! Form::close() !!}
+      </div>
+
+    </div>
+  </div>
+
   <!-- Sidebar (sit on top) in small screen -->
   <nav class="w3-sidenav w3-white w3-animate-left " style="display:none;z-index:5;left:0;width:50%">
   
@@ -262,19 +378,20 @@
         $(".js-example-basic-multiple").select2();
   </script>
 
+<!--Add DatetimePicker-->
+<script src="{{ URL::to('js/bootstrap-datetimepicker.js') }}" charset="UTF-8"></script>
+<!-- Animated Select Option -->
+<script src="{{ URL::to('js/classie.js') }}"></script>
+<script src="{{ URL::to('js/selectFx.js') }}"></script>
+<!-- Animated Select option -->
 <script>
-//sidebar display
-$(function() {
-  $(".w3-opennav").click(function () {
-    $(".w3-sidenav").css("display", "block");
-    $(".w3-overlay").css("display", "block");
-  });
-  $(".w3-overlay").click(function () {
-    $(".w3-sidenav").css("display", "none");
-    $(".w3-overlay").css("display", "none");
-  });
-})
+	(function() {
+		 [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {	
+			    new SelectFx(el);
+		 } );
+	})();
 </script>
+
 
 <!--SignIn and SignUp Error show-->
 <script>
@@ -342,6 +459,23 @@ $(function() {
             $("#signupModal").modal();
           });
         @endif
+
+        //Filter click
+        $("#filter").click(function(){
+          $("#filterModal").modal();
+        });
+
+        //datetimepicker
+        $('.form_date').datetimepicker({
+            language:  '',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
     
   });
 </script>

@@ -6,6 +6,18 @@
           <li class="w3-hide-small w3-right">
             <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
           </li>
+          <li class="w3-hide-small w3-right">
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
+          </li>
+          <li class="w3-hide-small w3-right">
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> SetUp</span></a>
+          </li>
+          <li class="w3-hide-small w3-right">
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="shoppingCart" ><i class="fa fa-shopping-cart"></i><span class="w3-large"> Shopping Cart</span></a>
+          </li>
+          <li class="w3-hide-small w3-right">
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="profile" ><i class="fa fa-user"></i><span class="w3-large"> Profile</span></a>
+          </li>
           <li class="w3-hide-large w3-hide-medium">
             <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
           </li>
@@ -15,7 +27,10 @@
             <a href="#" class="w3-padding-large w3-xlarge listcolor" id="sign-in-bar" ><i class="fa fa-sign-in"></i><span class="w3-large"> SignIn</span></a>
           </li>
           <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="sign-up-bar"><i class="fa fa-user"></i><span class="w3-large"> SignUp</span></a>
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="sign-up-bar"><i class="fa fa-pencil"></i><span class="w3-large"> SignUp</span></a>
+          </li>
+          <li class="w3-hide-small w3-right">
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
           </li>
           <li class="w3-hide-small w3-right">
             <a href="#" class="w3-padding-large w3-xlarge listcolor" id=""><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>

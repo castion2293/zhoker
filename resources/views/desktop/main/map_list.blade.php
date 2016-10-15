@@ -46,28 +46,27 @@
                       <div id="drop_{{ $map->id }}" class="w3-accordion-content w3-container w3-display-container w3-white">
                         <div class="row">
                             <div class="col-md-6 w3-padding-12">
-                              <div class="content-img" style="width:0">
-                                  <img src="{{ URL::to('img/DSC_0419.JPG') }}" alt="Food1" style="width:100%">
+                              <a href="#" class="w3-white">
+                                <div class="content-img" style="width:0">
+                                    <img src="{{ URL::to('img/DSC_0419.JPG') }}" alt="Food1" style="width:100%">
+                                </div>
+                                <div class="content-img" style="margin-top:10px;width:0">
+                                    <img src="{{ URL::to('img/DSC_0417.JPG') }}" alt="Food1" style="width:100%;">
+                                </div>
+                                <div class="content-img" style="margin-top:10px;width:0">
+                                    <img src="{{ URL::to('img/DSC_0410.JPG') }}" alt="Food1" style="width:100%;">
+                                </div>
                               </div>
-                              <div class="content-img" style="margin-top:10px;width:0">
-                                  <img src="{{ URL::to('img/DSC_0417.JPG') }}" alt="Food1" style="width:100%;">
-                              </div>
-                              <div class="content-img" style="margin-top:10px;width:0">
-                                  <img src="{{ URL::to('img/DSC_0410.JPG') }}" alt="Food1" style="width:100%;">
-                              </div>
-                            </div>
+                            </a>
                             <div class="col-md-6 w3-content w3-container">
                               <div class="w3-padding-12 w3-text-grey w3-justify">
-                                 <p>Some women swear that castor oil works, but there's no proof that's true. Plus, the side effects of this gross tasting stuff are, well, pretty gross. Castor oil affects your bowels more than it affects your uterus (which could make the photos taken in the delivery room a bit…spotty). The same goes for herbal preparations, such as red raspberry leaf tea, which (minus the gut-wrenching consequences) is said to tone and relax the uterus. </p>
+                                 <p>Some women swear that castor oil works, but there's no proof that's true. Plus, the side effects of this gross tasting stuff are, well, pretty gross. Castor oil affects your bowels more than it affects your uterus (which could make the photos taken in the delivery room a bit…spotty). The Plus, the side effects of this gross tasting stuff are...</p>
                               </div>
                             </div>
                         </div>
 
-                        <div>
-                            <a href="#" class="btn w3-display-bottomright w3-border w3-round w3-large w3-green w3-text-white zk-shrink-hover" style="margin-right:12px;margin-bottom:12px;">
-                                <span><i class="fa fa-spoon"></i> Read More</span>
-                            </a>
-                        </div>
+                        <a href="#" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">Read More</a>
+                        
                        </div>
                     @endforeach
                 </div>
