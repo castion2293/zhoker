@@ -2,25 +2,32 @@
   <div class="w3-top">
     <ul class="w3-navbar" id="myNavbar">
       @if (Auth::check())
-          <li><a href="#font" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
-          <li class="w3-hide-small w3-right">
-            <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
-          </li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
-          </li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> SetUp</span></a>
-          </li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="shoppingCart" ><i class="fa fa-shopping-cart"></i><span class="w3-large"> Shopping Cart</span></a>
-          </li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="profile" ><i class="fa fa-user"></i><span class="w3-large"> Profile</span></a>
-          </li>
-          <li class="w3-hide-large w3-hide-medium">
-            <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
-          </li>
+          @if (Auth::user()->isChef() && Session::get('login') == 'chef')
+            <li><a href="#font" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
+            <li class="w3-hide-small w3-right">
+              <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
+            </li>
+          @else
+            <li><a href="#font" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
+            <li class="w3-hide-small w3-right">
+              <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> SetUp</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="shoppingCart" ><i class="fa fa-shopping-cart"></i><span class="w3-large"> Shopping Cart</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="profile" ><i class="fa fa-user"></i><span class="w3-large"> Profile</span></a>
+            </li>
+            <li class="w3-hide-large w3-hide-medium">
+              <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
+            </li>
+          @endif
       @else
           <li><a href="#font" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
           <li class="w3-hide-small w3-right">
@@ -33,7 +40,7 @@
             <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
           </li>
           <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id=""><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
+            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef-bar"><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
           </li>
           <li class="w3-hide-large w3-hide-medium">
             <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
@@ -182,6 +189,56 @@
     </div>
   </div>
 
+<!--Chef Sign In Modal -->
+  <div class="modal" id="chefModal" role="dialog">
+    <div class="modal-dialog" style="width:500px;">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div>
+          <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
+        </div>
+        <div>
+          <h1 class="text-center w3-padding-8 w3-text-green">Chef Sign In</h1>
+        </div>
+        <div class="modal-body" style="padding:10px 50px;">
+          {!! Form::open(['route' => 'main.cheflogin', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
+            <div class="form-group">
+              <label for="email" class="w3-text-grey"><span class="fa fa-envelope w3-large"></span> Email</label>
+              {{ Form::email('email', null, ['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Email']) }}              
+            </div>
+            <div class="form-group">
+              <label for="password" class="w3-text-grey"><span class="glyphicon glyphicon-eye-open w3-large"></span> User Password</label>
+              {{ Form::password('password',['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Password']) }}
+              <span class="w3-text-green" data-dismiss="modal" data-toggle="modal" data-target="#forgotModal" style="cursor:pointer;">Forgot Password?</span>
+            </div>
+            <div class="form-group">
+              <label for="chef_psw" class="w3-text-grey"><span class="glyphicon glyphicon-cutlery w3-large"></span> Chef Password</label>
+              {{ Form::password('chef_psw',['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Password']) }}
+              <a href="#" style="text-decoration:none;"><span class="w3-text-green">Forgot Chef Password?</span></a>
+              <label class="w3-text-red w3-large" id="chef_wmsg"></label>
+            </div>
+            <div class="checkbox">
+              <label class="w3-text-grey"><input type="checkbox" value="" checked>Remember me</label>
+              <button type="submit" class="btn btn-success pull-right"><span class="glyphicon glyphicon-off w3-large"></span> Sign In</button>
+            </div>
+          {!! Form::close() !!}
+        </div>
+        <div class="modal-footer">
+          <p class="text-center w3-large">
+            <span class="w3-text-grey w3-large w3-center">Not a Chef ?
+              <a href="#" style="text-decoration:none;">
+                <span class="w3-text-deep-orange">Become a Chef</span>
+                <img src="{{ URL::to('img/marker.png') }}" alt="marker1" style="width:8%;height:8%;">
+              </a>
+            </span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 
 <!-- Sidebar (sit on top) in small screen -->
   <nav class="w3-sidenav w3-white w3-animate-right w3-hide-large w3-hide-medium" style="display:none;z-index:5;right:0;width:50%">
@@ -258,12 +315,21 @@
           $("#sign-in-bar").click(function(){
             $("#myModal").modal();
           });
+          $("#sign-up-bar").click(function(){
+            $("#signupModal").modal();
+          });
+          $("#chef-bar").click(function(){
+            $("#chefModal").modal();
+          });
         @else
           $("#sign-in-bar").click(function(){
             $("#myModal").modal();
           });
           $("#sign-up-bar").click(function(){
             $("#signupModal").modal();
+          });
+          $("#chef-bar").click(function(){
+            $("#chefModal").modal();
           });
         @endif
     

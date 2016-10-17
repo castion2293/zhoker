@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'phone_number',  'password', 'chef_psw', 'chef_id',
+        'first_name', 'last_name', 'email', 'phone_number',  'password', 'chef_psw', 'chef_id', 'role',
     ];
 
     /**
@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'chef_psw', 
     ];
+
+    public function isChef()
+    {
+        return ($this->role == 1);
+    }
 }

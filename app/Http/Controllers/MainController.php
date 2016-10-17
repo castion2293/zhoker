@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Map;
 use Jenssegers\Agent\Agent;
+use Auth;
+use Session;
+use App\Http\Requests\ChefSignInRequest;
 
 class MainController extends Controller
 {
@@ -19,6 +22,21 @@ class MainController extends Controller
         } else {
           return view('desktop.index');
         }
+    }
+
+    public function chefLogin(Request $request)
+    {
+        if (Auth::attempt([
+            'email' => $request->input('email'), 
+            'password' => $request->input('password'),
+            'chef_psw' => $request->input('chef_psw'),
+        ])) {
+            //set flash data with chef login
+            Session::flash('login', 'chef');
+
+            return redirect()->to('chef');
+        }
+        return redirect()->back();
     }
 
     public function getMaplist(Request $request)

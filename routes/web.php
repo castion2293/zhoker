@@ -50,3 +50,17 @@ Route::post('/maplist', [
     'uses' => 'MainController@getMaplist',
     'as' => 'main.maplist'
 ]);
+
+//Chef login
+Route::post('/chef_login', [
+    'uses' => 'MainController@chefLogin',
+    'as' => 'main.cheflogin'
+]);
+
+
+//Chef CRUD and profile
+Route::resource('chef', 'ChefController');
+Route::get('/chef_profile', [
+    'uses' => 'ChefController@getProfile',
+    'as' => 'chef.profile'
+]);

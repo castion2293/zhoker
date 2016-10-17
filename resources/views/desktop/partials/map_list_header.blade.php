@@ -451,6 +451,9 @@
           $("#sign-in-bar").click(function(){
             $("#myModal").modal();
           });
+          $("#sign-up-bar").click(function(){
+            $("#signupModal").modal();
+          });
         @else
           $("#sign-in-bar").click(function(){
             $("#myModal").modal();

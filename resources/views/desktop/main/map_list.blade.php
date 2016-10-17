@@ -104,6 +104,7 @@
     	     address: "{{ $map->address }} . ' ' . {{ $map->city }} . ' ' . {{ $map->state }}", // Postale Address
            id: '{{ $map->id }}',
            url: '#!{{ $map->id }}', // Link
+           icon: new google.maps.MarkerImage("{{ URL::to('img/marker.png') }}"),
         });
       @endforeach
 
