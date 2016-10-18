@@ -1,0 +1,11 @@
+MAIL_DRIVER=smtp
+
+MAIL_HOST=smtp.gmail.com
+
+MAIL_PORT=25
+
+MAIL_USERNAME=castion2293950@gmail.com
+
+MAIL_PASSWORD=boa49561128
+
+MAIL_ENCRYPTION=tls

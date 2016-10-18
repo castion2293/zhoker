@@ -261,7 +261,7 @@
 <script>
   $(function () {
         var error_show = '';
-       
+        
         @if (count($errors) > 0)
           @foreach($errors->all() as $error)
             var status = '{{ $error }}';
@@ -322,6 +322,13 @@
             $("#chefModal").modal();
           });
         @else
+        
+          //Show Chef Login Error message
+          @if (Session::has('ChefError'))
+            $("#chef_wmsg").text('{{ Session::get('ChefError') }}');
+            $("#chefModal").modal();
+          @endif
+
           $("#sign-in-bar").click(function(){
             $("#myModal").modal();
           });

@@ -24,7 +24,7 @@ class MainController extends Controller
         }
     }
 
-    public function chefLogin(Request $request)
+    public function chefLogin(ChefSignInRequest $request)
     {
         if (Auth::attempt([
             'email' => $request->input('email'), 
@@ -36,6 +36,7 @@ class MainController extends Controller
 
             return redirect()->to('chef');
         }
+        Session::flash('ChefError', 'These credentials do not match our records.');
         return redirect()->back();
     }
 
