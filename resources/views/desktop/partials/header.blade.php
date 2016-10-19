@@ -3,12 +3,30 @@
     <ul class="w3-navbar" id="myNavbar">
       @if (Auth::check())
           @if (Auth::user()->isChef() && Session::get('login') == 'chef')
-            <li><a href="#font" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
+            <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
             <li class="w3-hide-small w3-right">
               <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
             </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_create" ><i class="fa fa-pencil-square-o"></i><span class="w3-large"> Create</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_menu" ><i class="fa fa-th-list"></i><span class="w3-large"> Menu</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="{{ url('/chef') }}" class="w3-padding-large w3-xlarge listcolor"><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
+            </li>
           @else
-            <li><a href="#font" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
+            <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
             <li class="w3-hide-small w3-right">
               <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
             </li>
@@ -16,7 +34,7 @@
               <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> SetUp</span></a>
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
             </li>
             <li class="w3-hide-small w3-right">
               <a href="#" class="w3-padding-large w3-xlarge listcolor" id="shoppingCart" ><i class="fa fa-shopping-cart"></i><span class="w3-large"> Shopping Cart</span></a>
@@ -29,7 +47,7 @@
             </li>
           @endif
       @else
-          <li><a href="#font" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
+          <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
           <li class="w3-hide-small w3-right">
             <a href="#" class="w3-padding-large w3-xlarge listcolor" id="sign-in-bar" ><i class="fa fa-sign-in"></i><span class="w3-large"> SignIn</span></a>
           </li>

@@ -24,35 +24,29 @@ body,
     color: black;
     font-weight: bold;
   }
-  /* Create a Parallax Effect */
   
-  .bgimg-1,
-  .bgimg-2,
-  .bgimg-3 {
+  /* index view image (Logo. Full height) */
+  .bgimg-1 {
     opacity: 1;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-  }
-  /* First image (Logo. Full height) */
-  
-  .bgimg-1 {
     background-image: url('DSC_0397.JPG');
     min-height: 100%;
   }
-  /* Second image (Portfolio) */
-  
+
+  /* chef create view image (Logo. Full height) */
   .bgimg-2 {
-    /*background-image: url('DSC_0395.JPG');*/
-    min-height: 400px;
+    opacity: 1;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('DSC_1056.jpg');
+    min-height: 84%;
   }
-  /* Third image (Contact) */
   
-  .bgimg-3 {
-    background-image: url("DSC_0394.JPG");
-    min-height: 400px;
-  }
   /* Adjust the position of the parallax image text */
   
   .w3-display-middle {

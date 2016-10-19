@@ -7,5 +7,7 @@
 @endsection
 
 @section('content')
-this is chef index page
+    <div class="bgimg-2 w3-opacity">
+
+    </div>
 @endsection

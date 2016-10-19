@@ -32,7 +32,7 @@ class MainController extends Controller
             'chef_psw' => $request->input('chef_psw'),
         ])) {
             //set flash data with chef login
-            Session::flash('login', 'chef');
+            Session::put('login', 'chef');
 
             return redirect()->to('chef');
         }
