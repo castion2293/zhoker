@@ -9,9 +9,22 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ URL::to('css/main.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/component.css') }}">
+    <!--Add Jquery-UI CSS-->
+    <link rel="stylesheet" href="{{ URL::to('css/jquery-ui.css') }}">
+    <!--Select-2-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ URL::to('js/0609.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::to('js/JQ.js') }}"></script>
+    <script src="{{ URL::to('js/parsley.min.js') }}"></script> <!--Parsley Validation-->
+    <!--Add Jquery UI JS-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--Select-2-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <!--TinyMCE-->
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
     @yield('styles')
 </head>
@@ -23,9 +36,6 @@
 
     @include('desktop.partials.footer')
     
-    <script src="{{ URL::to('js/0609.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::to('js/JQ.js') }}"></script>
-    <script src="{{ URL::to('js/parsley.min.js') }}"></script> <!--Parsley Validation-->
     @yield('scripts')
 </body>
 </html>

@@ -3,7 +3,13 @@
 @section('title', '| Chef create')
 
 @section('styles')
-
+    <script>
+        tinymce.init({
+            selector:'textarea',
+            plugins: "link code",
+            menubar: false,
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -21,24 +27,78 @@
                     {!! Form::open(['route' => 'chef.store', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                         <div class="form-group">
                             <label for="name" class="w3-text-grey"> Name</label>
-                            {{ Form::text('name', null, ['class' => 'form-control w3-large', 'required' => '', 'maxlength' => '255']) }}              
+                            {{ Form::text('name', null, ['class' => 'form-control w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }}              
                         </div>
 
                         <div class="form-group">
                             <label for="price" class="w3-text-grey"> Price</label>
-                            {{ Form::text('price', null, ['class' => 'form-control w3-large', 'required' => '', 'maxlength' => '11']) }}              
+                            {{ Form::text('price', null, ['class' => 'form-control w3-large w3-text-grey', 'required' => '', 'maxlength' => '11']) }}              
                         </div>
 
                         <div class="form-group">
-                            <label for="date" class="w3-text-grey"><span class="fa fa-calendar-o w3-large"></span> Date</label>
-                            <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                <span class="input-group-addon inputbkg clickdown"><span class="glyphicon glyphicon-calendar"></span></span>
-                                {{ Form::text('date', null, ['class' => 'form-control w3-large w3-khaki w3-text-grey', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;']) }}
-                            </div>
+                            <label for="date" class="w3-text-grey"> Date</label>
+                            {{ Form::text('date', null, ['class' => 'form-control w3-large w3-text-grey w3-white', 'id' => 'datepicker', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;cursor:pointer;']) }}
                         </div>
+
+                        <div class="form-group">
+                            <label for="time" class="w3-text-grey"> Time</label>
+                            {{ Form::text('time', null, ['class' => 'form-control w3-large w3-text-grey w3-white', 'id' => 'datepicker', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;cursor:pointer;']) }}
+                        </div>
+
+                        <div class="form-group">
+                             <label for="shift" class="w3-text-grey"> Shift</label>
+                             <select class="form-control js-example-basic-multiple" name="shifts[]" multiple="multiple" required=""> 
+                                @foreach($shifts as $shift)
+                                    <option value='{{ $shift->id }}'>{{ $shift->shift }}</option>
+                                @endforeach
+                             </select>
+                        </div>
+
+                        <div class="form-group">
+                             <label for="category" class="w3-text-grey"> Category</label>
+                             <select class="form-control js-example-basic-multiple" name="categories[]" multiple="multiple" required=""> 
+                                @foreach($categories as $category)
+                                    <option value='{{ $category->id }}'>{{ $category->category }}</option>
+                                @endforeach
+                             </select>
+                        </div>
+
+                        <div class="form-group">
+                             <label for="method" class="w3-text-grey"> Mehtod</label>
+                             <select class="form-control js-example-basic-multiple" name="methods[]" multiple="multiple" required=""> 
+                                @foreach($methods as $method)
+                                    <option value='{{ $method->id }}'>{{ $method->method }}</option>
+                                @endforeach
+                             </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="img" class="w3-text-grey"> Upload Image</label>
+                            {{ Form::file('img', null, ['required' => '']) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ Form::label('description', 'Description') }}
+                            {{ Form::textarea('description', null, ['class' => 'form-control', 'required' => '']) }}
+                        </div>
+
+                        {{ Form::submit('Create Menu', ['class' => 'btn btn-success btn-lg btn-block']) }} 
+
                     {!! Form::close() !!}
                  </div>
             </div>
         </div>
     </div>    
+@endsection
+
+@section('scripts')
+    <script>
+    $(function () {
+        //datetimepicker
+        $( "#datepicker" ).datepicker();
+
+        //Select-2
+        $(".js-example-basic-multiple").select2();
+    });
+    </script>
 @endsection

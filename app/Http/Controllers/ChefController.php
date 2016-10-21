@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Chef;
+use App\Category;
+use App\Method;
+use App\Shift;
 
 class ChefController extends Controller
 {
@@ -29,7 +33,10 @@ class ChefController extends Controller
      */
     public function create()
     {
-        return view('desktop.chef.create');
+        $categories = Category::all();
+        $methods = Method::all();
+        $shifts = Shift::all();
+        return view('desktop.chef.create', ['categories' => $categories, 'methods' => $methods, 'shifts' => $shifts]);
     }
 
     /**

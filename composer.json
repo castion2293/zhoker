@@ -12,7 +12,9 @@
         "doctrine/dbal": "^2.5",
         "jenssegers/agent": "^2.3",
         "barryvdh/laravel-debugbar": "^2.3",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "intervention/image": "^2.3",
+        "mews/purifier": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
