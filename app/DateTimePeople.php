@@ -10,7 +10,7 @@ class DateTimePeople extends Model
         'meal_id', 'date', 'time', 'people_left', 'people_order',
     ];
 
-    public function meals()
+    public function meal()
     {
         return $this->belongsTo('App\Meal');
     }

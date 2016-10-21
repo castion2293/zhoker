@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\MealCreateRequest;
+use Auth;
 use App\Chef;
+use App\Meal;
+use App\DateTimePeople;
 use App\Category;
 use App\Method;
 use App\Shift;
+use Purifier;
+use Image;
 
 class ChefController extends Controller
 {
@@ -45,9 +51,41 @@ class ChefController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MealCreateRequest $request)
     {
-        //
+        $meal = new Meal();
+        
+        $meal->chef_id = Auth::user()->chef_id;
+        $meal->name = $request->input('name');
+        $meal->price = $request->input('price');
+        $meal->description = Purifier::clean($request->input('description'));
+
+        // save the image
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/'. $filename);
+            Image::make( $image)->resize(800, 400)->save($location);
+
+            $meal->img_path = $filename;
+        }
+
+        $meal->save();
+
+        $datetimepeople = new DateTimePeople();
+
+        $datetimepeople->date = $request->input('date');
+        $datetimepeople->time = $request->input('time');
+        $datetimepeople->people_left = $request->input('people');
+        $datetimepeople->meal()->associate($meal);
+
+        $datetimepeople->save();
+
+        $meal->shifts()->sync($request->shifts, false);
+        $meal->categories()->sync($request->categories, false);
+        $meal->methods()->sync($request->methods, false);
+
+        //echo('done');
     }
 
     /**

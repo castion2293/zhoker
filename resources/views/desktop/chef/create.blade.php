@@ -42,11 +42,36 @@
 
                         <div class="form-group">
                             <label for="time" class="w3-text-grey"> Time</label>
-                            {{ Form::text('time', null, ['class' => 'form-control w3-large w3-text-grey w3-white', 'id' => 'datepicker', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;cursor:pointer;']) }}
+                            <select class="form-control" name="time" required="">
+                                <option>11:00 AM</option>
+                                <option>11:30 AM</option>
+                                <option>12:00 PM</option>
+                                <option>12:30 PM</option>
+                                <option>05:00 PM</option>
+                                <option>05:30 PM</option>
+                                <option>06:00 PM</option>
+                                <option>06:30 PM</option>
+                            </select>
+                        </div>
+
+                        <div class="foreground">
+                            <label for="people" class="w3-text-grey"> People</label>
+                            <select class="form-control" name="people" required="">
+                                <option value='1'>1 Person</option>
+                                <option value='2'>2 People</option>
+                                <option value='3'>3 People</option>
+                                <option value='4'>4 People</option>
+                                <option value='5'>5 People</option>
+                                <option value='6'>6 People</option>
+                                <option value='7'>7 People</option>
+                                <option value='8'>8 People</option>
+                                <option value='9'>9 People</option>
+                                <option value='10'>10 People</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
-                             <label for="shift" class="w3-text-grey"> Shift</label>
+                             <label for="shifts" class="w3-text-grey"> Shift</label>
                              <select class="form-control js-example-basic-multiple" name="shifts[]" multiple="multiple" required=""> 
                                 @foreach($shifts as $shift)
                                     <option value='{{ $shift->id }}'>{{ $shift->shift }}</option>
@@ -55,7 +80,7 @@
                         </div>
 
                         <div class="form-group">
-                             <label for="category" class="w3-text-grey"> Category</label>
+                             <label for="categories" class="w3-text-grey"> Category</label>
                              <select class="form-control js-example-basic-multiple" name="categories[]" multiple="multiple" required=""> 
                                 @foreach($categories as $category)
                                     <option value='{{ $category->id }}'>{{ $category->category }}</option>
@@ -64,7 +89,7 @@
                         </div>
 
                         <div class="form-group">
-                             <label for="method" class="w3-text-grey"> Mehtod</label>
+                             <label for="methods" class="w3-text-grey"> Mehtod</label>
                              <select class="form-control js-example-basic-multiple" name="methods[]" multiple="multiple" required=""> 
                                 @foreach($methods as $method)
                                     <option value='{{ $method->id }}'>{{ $method->method }}</option>
@@ -79,7 +104,7 @@
 
                         <div class="form-group">
                             {{ Form::label('description', 'Description') }}
-                            {{ Form::textarea('description', null, ['class' => 'form-control', 'required' => '']) }}
+                            {{ Form::textarea('description', null, ['class' => 'form-control']) }}
                         </div>
 
                         {{ Form::submit('Create Menu', ['class' => 'btn btn-success btn-lg btn-block']) }} 
