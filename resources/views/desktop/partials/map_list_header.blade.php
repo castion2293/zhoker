@@ -56,10 +56,7 @@
                 </div>
                 <div class="form-group">
                   <label for="date" class="w3-text-grey"><span class="fa fa-calendar-o w3-large"></span> Date</label>
-                  <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                      <span class="input-group-addon inputbkg clickdown"><span class="glyphicon glyphicon-calendar"></span></span>
-                      {{ Form::text('date', null, ['class' => 'form-control w3-large w3-khaki w3-text-grey', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;']) }}
-                  </div>
+                  {{ Form::text('date', null, ['class' => 'form-control w3-large w3-khaki w3-text-grey', 'id' => 'datepicker', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;cursor:pointer;']) }}
                 </div>
                 <div class="form-group">
                   <label for="shift" class="w3-text-grey"><span class="fa fa-clock-o w3-large"></span> Time</label>
@@ -469,16 +466,6 @@
         });
 
         //datetimepicker
-        $('.form_date').datetimepicker({
-            language:  '',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });
-    
+        $( "#datepicker" ).datepicker();
   });
 </script>

@@ -9,7 +9,7 @@ use App\Http\Requests;
 class ChefController extends Controller
 {
     public function __construct() {
-        
+        $this->middleware('chef');
     }
 
     /**

@@ -9,14 +9,17 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
-    <!--Add DatetimePicker-->
-    <link rel="stylesheet" href="{{ URL::to('css/bootstrap-datetimepicker.min.css') }}">
+    <!--Add Jquery-UI CSS-->
+    <link rel="stylesheet" href="{{ URL::to('css/jquery-ui.css') }}">
     <!-- Animated Select Option -->
     <link rel="stylesheet" href="{{ URL::to('css/cs-select.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/cs-skin-elastic.css') }}">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--Add Jquery UI JS-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
 
     @yield('styles')
