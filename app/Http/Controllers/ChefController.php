@@ -29,7 +29,7 @@ class ChefController extends Controller
      */
     public function create()
     {
-        //
+        return view('desktop.chef.create');
     }
 
     /**

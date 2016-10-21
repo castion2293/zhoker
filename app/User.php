@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return ($this->role == 1);
     }
+
+    public function chefs()
+    {
+        return $this->belongsTo('App\Chef');
+    }
 }
