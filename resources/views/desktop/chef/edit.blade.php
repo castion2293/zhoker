@@ -108,7 +108,7 @@
     <script>
     $(function () {
         //datetimepicker
-        $( "#datepicker" ).datepicker();
+        // $( "#datepicker" ).datepicker();
 
         //Select-2
         $(".js-example-basic-multiple").select2();

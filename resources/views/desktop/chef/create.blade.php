@@ -36,22 +36,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="date" class="w3-text-grey"> Date</label>
-                            {{ Form::text('date', null, ['class' => 'form-control w3-large w3-text-grey w3-white', 'id' => 'datepicker', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;cursor:pointer;']) }}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="time" class="w3-text-grey"> Time</label>
-                            <select class="form-control" name="time" required="">
-                                <option>11:00 AM</option>
-                                <option>11:30 AM</option>
-                                <option>12:00 PM</option>
-                                <option>12:30 PM</option>
-                                <option>05:00 PM</option>
-                                <option>05:30 PM</option>
-                                <option>06:00 PM</option>
-                                <option>06:30 PM</option>
-                            </select>
+                            <label for="datetime" class="w3-text-grey"> Date/Time</label>
+                            {{ Form::text('datetime', null, ['class' => 'form-control w3-large w3-text-grey w3-white', 'id' => 'datetimepicker', 'required' => '', 'style' => 'cursor:pointer;']) }}
                         </div>
 
                         <div class="foreground">
@@ -120,7 +106,7 @@
     <script>
     $(function () {
         //datetimepicker
-        $( "#datepicker" ).datepicker();
+        $("#datetimepicker").datetimepicker();
 
         //Select-2
         $(".js-example-basic-multiple").select2();

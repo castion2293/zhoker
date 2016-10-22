@@ -16,8 +16,7 @@ class CreateDateTimePeoplesTable extends Migration
         Schema::create('date_time_peoples', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('meal_id')->unsigned();
-            $table->string('date');
-            $table->string('time');
+            $table->string('datetime');
             $table->tinyInteger('people_left');
             $table->tinyInteger('people_order')->default(0);
             $table->timestamps();
