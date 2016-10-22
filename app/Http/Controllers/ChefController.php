@@ -65,7 +65,7 @@ class ChefController extends Controller
             $image = $request->file('img');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $location = public_path('images/'. $filename);
-            Image::make( $image)->resize(800, 400)->save($location);
+            Image::make($image)->save($location);
 
             $meal->img_path = $filename;
         }
@@ -85,7 +85,7 @@ class ChefController extends Controller
         $meal->categories()->sync($request->categories, false);
         $meal->methods()->sync($request->methods, false);
 
-        //echo('done');
+        return redirect()->route('chef.show', $meal->id);
     }
 
     /**
@@ -96,7 +96,8 @@ class ChefController extends Controller
      */
     public function show($id)
     {
-        //
+        $meal = Meal::find($id);
+        return view('desktop.chef.show',['meal' => $meal]);
     }
 
     /**
@@ -107,7 +108,29 @@ class ChefController extends Controller
      */
     public function edit($id)
     {
-        //
+        $meal = Meal::find($id);
+
+        //$time = $meal->datetimepeoples()->first();
+
+        $shifts = Shift::all();
+        $shiftarray = [];
+        foreach($shifts as $shift) {
+            $shiftarray[$shift->id] = $shift->shift;
+        }
+
+        $categories = Category::all();
+        $categoryarray = [];
+        foreach($categories as $category) {
+            $categoryarray[$category->id] = $category->category;
+        }
+
+        $methods = Method::all();
+        $methodarray = [];
+        foreach($methods as $method) {
+            $methodarray[$method->id] = $method->method;
+        }
+
+        return view('desktop.chef.edit', ['meal' => $meal, 'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
     }
 
     /**
@@ -117,9 +140,9 @@ class ChefController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MealCreateRequest $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -131,10 +154,5 @@ class ChefController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getProfile()
-    {
-        return view('desktop.chef.profile');
     }
 }
