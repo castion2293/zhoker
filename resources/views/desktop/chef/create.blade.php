@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="datetime" class="w3-text-grey"> Date/Time/People</label>
+                            <label for="datetimepeople" class="w3-text-grey"> Date/Time/People</label>
                             <div class="input-group">
                                 <span class="input-group-addon" id="modal-picker" style="cursor:pointer;"><span class="glyphicon glyphicon-calendar"></span></span>   
                                 {{ Form::text('datetimepeople', null, ['class' => 'form-control w3-large w3-text-grey w3-white', 'id' => 'dtp-result', 'required' => '']) }}

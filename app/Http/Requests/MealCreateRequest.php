@@ -26,9 +26,7 @@ class MealCreateRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'price' => 'required|max:11',
-            'date' => 'required|date',
-            'time' => 'required',
-            'people' => 'required|numeric',
+            'datetimepeople' => 'required',
             'shifts' => 'required',
             'categories' => 'required',
             'methods' => 'required',

@@ -72,15 +72,22 @@ class ChefController extends Controller
 
         $meal->save();
 
-        $datetimepeople = new DateTimePeople();
+        $dtp_array = explode(";", $request->datetimepeople);
+        
+        for($i=0; $i < count($dtp_array) - 1; $i++)
+        {
+            $datetimepeople = new DateTimePeople();
+            
+            $dpt_split_array = explode(",", $dtp_array[$i]);
 
-        $datetimepeople->date = $request->input('date');
-        $datetimepeople->time = $request->input('time');
-        $datetimepeople->people_left = $request->input('people');
-        $datetimepeople->meal()->associate($meal);
+            $datetimepeople->date = $dpt_split_array[0];
+            $datetimepeople->time = $dpt_split_array[1];
+            $datetimepeople->people_left = $dpt_split_array[2];
+            $datetimepeople->meal()->associate($meal);
 
-        $datetimepeople->save();
-
+            $datetimepeople->save();
+        }
+        
         $meal->shifts()->sync($request->shifts, false);
         $meal->categories()->sync($request->categories, false);
         $meal->methods()->sync($request->methods, false);
