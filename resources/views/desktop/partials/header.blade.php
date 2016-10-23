@@ -11,7 +11,7 @@
               <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
+              <a href="{{ url('/chef_profile') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
             </li>
             <li class="w3-hide-small w3-right">
               <a href="{{url('/chef/create')}}" class="w3-padding-large w3-xlarge listcolor" id="chef_create" ><i class="fa fa-pencil-square-o"></i><span class="w3-large"> Create</span></a>
@@ -23,7 +23,7 @@
               <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="{{ url('/chef') }}" class="w3-padding-large w3-xlarge listcolor"><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
+              <a href="{{ url('/chef_content') }}" class="w3-padding-large w3-xlarge listcolor"><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
             </li>
           @else
             <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>

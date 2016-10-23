@@ -80,7 +80,13 @@
                           <p>{!! $meal->description !!}</p>
                     </div>
                     <hr>
-                     {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn btn-primary btn-block']) !!}
+                    {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn btn-primary btn-block']) !!}
+                     
+                    {!! Form::open(['route' => ['chef.destroy', $meal->id], 'method' => 'DELETE']) !!}
+
+                      {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block w3-margin-top']) !!}
+
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

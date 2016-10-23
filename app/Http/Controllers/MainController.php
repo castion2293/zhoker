@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Map;
+use App\Chef;
 use Jenssegers\Agent\Agent;
 use Auth;
 use Session;
@@ -34,10 +35,21 @@ class MainController extends Controller
             //set flash data with chef login
             Session::put('login', 'chef');
 
-            return redirect()->to('chef');
+            $id = Auth::user()->chef_id;
+            $chef = Chef::find($id);
+
+            return view('desktop.chef.chef', ['chef' => $chef]);
         }
         Session::flash('ChefError', 'These credentials do not match our records.');
         return redirect()->back();
+    }
+
+    public function getChefContent()
+    {
+        $id = Auth::user()->chef_id;
+        $chef = Chef::find($id);
+        
+        return view('desktop.chef.chef', ['chef' => $chef]);
     }
 
     public function getMaplist(Request $request)

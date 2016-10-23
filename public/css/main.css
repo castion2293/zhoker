@@ -79,6 +79,17 @@ body,
     background-image: url('DSC_1056.jpg');
     min-height: 84%;
   }
+
+  /* chef_profile edit view image (Logo. Full height) */
+  .bgimg-6 {
+    opacity: 1;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('DSC_1056.jpg');
+    min-height: 84%;
+  }
   
   /* Adjust the position of the parallax image text */
   

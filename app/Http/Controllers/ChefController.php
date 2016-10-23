@@ -15,6 +15,7 @@ use App\Method;
 use App\Shift;
 use Purifier;
 use Image;
+use Storage;
 
 class ChefController extends Controller
 {
@@ -149,7 +150,54 @@ class ChefController extends Controller
      */
     public function update(MealCreateRequest $request, $id)
     {
+        $meal = meal::find($id);
+
+        $meal->datetimepeoples()->delete();
+
+        $meal->name = $request->input('name');
+        $meal->price = $request->input('price');
+        $meal->description = Purifier::clean($request->input('description'));
+
+        if ($request->hasFile('img')) {
+
+            // Delete the old photo
+            $image = $request->file('img');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/'. $filename);
+            Image::make( $image)->save($location);
+
+            $oldFilename = $meal->img_path;
+
+            // add the new photo
+            $meal->img_path = $filename;
+
+            // update the database
+            Storage::delete($oldFilename);
+        }
+
+        $meal->save();
+
+        $dtp_array = explode(";", $request->datetimepeople);
         
+        for($i=0; $i < count($dtp_array) - 1; $i++)
+        {
+            $datetimepeople = new DateTimePeople();
+            
+            $dpt_split_array = explode(",", $dtp_array[$i]);
+
+            $datetimepeople->date = $dpt_split_array[0];
+            $datetimepeople->time = $dpt_split_array[1];
+            $datetimepeople->people_left = $dpt_split_array[2];
+            $datetimepeople->meal()->associate($meal);
+
+            $datetimepeople->save();
+        }
+
+        $meal->shifts()->sync($request->shifts);
+        $meal->categories()->sync($request->categories);
+        $meal->methods()->sync($request->methods);
+
+        return redirect()->route('chef.show', $meal->id);
     }
 
     /**
@@ -160,6 +208,17 @@ class ChefController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $meal = meal::find($id);
+
+        $meal->datetimepeoples()->delete();
+        $meal->shifts()->detach();
+        $meal->categories()->detach();
+        $meal->methods()->detach();
+
+        Storage::delete($meal->img_path);
+        
+        $meal->delete();
+
+        return redirect()->route('chef.index');
     }
 }

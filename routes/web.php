@@ -59,8 +59,8 @@ Route::post('/chef_login', [
 
 
 //Chef CRUD and profile
+Route::get('/chef_content', 'MainController@getChefContent');
 Route::resource('chef', 'ChefController');
-Route::get('/chef_profile', [
-    'uses' => 'ChefController@getProfile',
-    'as' => 'chef.profile'
+Route::resource('chef_profile', 'ChefProfileController', [
+    'only' => ['index', 'edit', 'update', 'destroy']
 ]);
