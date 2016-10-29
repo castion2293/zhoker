@@ -25,24 +25,55 @@
     <!--content-->
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-row" id="profile">
-            <div class="w3-col l4 m4">
-                <img src="{{ asset('images/' . $chef->profile_img) }}" alt="profile" width="250" height="300">
+            <div class="w3-padding-12">
+                <h1 class="w3-text-green w3-border-green w3-border-bottom">Profile<h1>
             </div>
-            <div class="w3-col l8 m8">
-                <div class="w3-padding-12">
-                    <h1 class="w3-text-green w3-border-green w3-border-bottom">Introduction<h1>
+            <div class="w3-display-container">
+                <div class="w3-display-topleft" style="width:40%;margin-top:5em;margin-left:1em;">
+                    <img src="{{ asset($chef->profile_img) }}" alt="profile" style="width:100%">
                 </div>
-                <p class="w3-tect-grey">{{ $chef->store_name }}</p>
+                <div class="w3-rest"></div>  
+                <div class="w3-col l8 m8 w3-right w3-panel w3-light-grey">
+                    <div style="padding-left:8em;padding-right:5em;">
+                        <p class="w3-text-grey w3-center w3-xxlarge w3-margin-top" style="font-family: cursive">{{ $chef->store_name }}</p>
+                        <p class="w3-text-grey w3-center" style="font-family: cursive">{!! $chef->store_description !!}</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div>
-            <div class="w3-padding-12 w3-margin-top">
-                <h1 class="w3-text-green w3-border-green w3-border-bottom">Store Description<h1>
-            </div>
-            <p>{!! $chef->store_description !!}</p>
-        </div>
+       
         <div class="w3-padding-12" id="menu">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Menu<h1>
+            @foreach ($meals->chunk(3) as $mealchunk)
+                <div class="w3-row">
+                @foreach($mealchunk as $meal)
+                    <div class="w3-col m4">
+                        <a href="{{ route('chef.show', $meal->id) }}" style="text-decoration:none;">
+                        <div class="thumbnail w3-border-0 w3-padding-tiny">
+                            <div class="w3-light-grey w3-padding-tiny">
+                                <span class="w3-text-grey w3-large" style="font-family: cursive">{{ $meal->name }}
+                                    @for ($i = 0; $i < 5; $i++)
+                                        <span class="w3-text-orange w3-right"><i class="fa fa-star"></i></span>
+                                    @endfor
+                                </span>
+                                <img src="{{ asset($meal->img_path) }}" alt="meal" style="width:100%;">
+                                <div class="caption w3-light-grey w3-row">
+                                    <div class="w3-col m8">
+                                        @foreach ($meal->methods as $method)
+                                            <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
+                                        @endforeach
+                                    </div>
+                                    <div class="w3-col m4">
+                                        <b class="w3-text-green w3-right w3-medium w3-margin-top">${{ $meal->price }}TWD</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                @endforeach
+                </div>
+            @endforeach
         </div>
         <div class="w3-padding-12" id="order">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Order<h1>

@@ -17,74 +17,82 @@
     <div class="bgimg-3 w3-opacity"></div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-64">
+    <div class="w3-content w3-container w3-padding-64" id="chef-create">
         <div>
             <div class="w3-padding-12 w3-margin-top">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">Create a Menu<h1>
             </div>
-            <div class="row">
-                 <div class="col-md-12">
-                    {!! Form::open(['route' => 'chef.store', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
-                        <div class="form-group">
-                            <label for="name" class="w3-text-grey"> Name</label>
-                            {{ Form::text('name', null, ['class' => 'form-control w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }}              
-                        </div>
-
-                        <div class="form-group">
-                            <label for="price" class="w3-text-grey"> Price</label>
-                            {{ Form::text('price', null, ['class' => 'form-control w3-large w3-text-grey', 'required' => '', 'maxlength' => '11']) }}              
-                        </div>
-
-                        <div class="form-group">
-                            <label for="datetimepeople" class="w3-text-grey"> Date/Time/People</label>
-                            <div class="input-group">
-                                <span class="input-group-addon" id="modal-picker" style="cursor:pointer;"><span class="glyphicon glyphicon-calendar"></span></span>   
-                                {{ Form::text('datetimepeople', null, ['class' => 'form-control w3-large w3-text-grey w3-white', 'id' => 'dtp-result', 'required' => '']) }}
+            {!! Form::open(['route' => 'chef.store', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
+                <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
+                    <div class="w3-col l5 m5">
+                        <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1026201601.png') }}" alt="profile" style="width:100%">
+                    </div>
+                    <div class="w3-col l7 m7" style="padding-left:2em;">
+                        <div class="w3-row">
+                            <div class="w3-col l6 m6" style="padding-right:0.5em;">
+                                {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Menu Name', 'required' => '', 'maxlength' => '255']) }}   
+                            </div>
+                            <div class="w3-col l6 m6" style="padding-left:0.5em;">
+                                {{ Form::text('price', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Menu Price', 'required' => '', 'maxlength' => '11']) }}              
                             </div>
                         </div>
+                                
+                        <div class="input-group w3-padding-8 w3-margin-top">
+                            <span class="input-group-addon" id="modal-picker" style="cursor:pointer;"><span class="glyphicon glyphicon-calendar"></span></span>   
+                            {{ Form::text('datetimepeople', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey w3-white', 'id' => 'dtp-result', 'placeholder' => 'Date', 'required' => '']) }}
+                        </div>
 
-                        <div class="form-group">
-                             <label for="shifts" class="w3-text-grey"> Shift</label>
-                             <select class="form-control js-example-basic-multiple" name="shifts[]" multiple="multiple" required=""> 
+                        <div class=" w3-padding-8">
+                            <label class="w3-text-gery" style="font-family:cursive">Venue</label>               
+                            <select id="sel2" class="w3-select js-example-basic-multiple" name="shifts[]" multiple="multiple" placeholder="Shift" required=""> 
                                 @foreach($shifts as $shift)
                                     <option value='{{ $shift->id }}'>{{ $shift->shift }}</option>
                                 @endforeach
-                             </select>
+                            </select>
                         </div>
-
-                        <div class="form-group">
-                             <label for="categories" class="w3-text-grey"> Category</label>
-                             <select class="form-control js-example-basic-multiple" name="categories[]" multiple="multiple" required=""> 
+                                
+                        <div class=" w3-padding-8">
+                            <label class="w3-text-gery" style="font-family:cursive">Category</label>  
+                            <select class="w3-select js-example-basic-multiple" name="categories[]" multiple="multiple" required=""> 
                                 @foreach($categories as $category)
                                     <option value='{{ $category->id }}'>{{ $category->category }}</option>
                                 @endforeach
-                             </select>
+                            </select>
                         </div>
-
-                        <div class="form-group">
-                             <label for="methods" class="w3-text-grey"> Mehtod</label>
-                             <select class="form-control js-example-basic-multiple" name="methods[]" multiple="multiple" required=""> 
+                               
+                        <div class=" w3-padding-8">
+                            <label class="w3-text-gery" style="font-family:cursive">Method</label>  
+                            <select class="w3-select js-example-basic-multiple" name="methods[]" multiple="multiple" required=""> 
                                 @foreach($methods as $method)
                                     <option value='{{ $method->id }}'>{{ $method->method }}</option>
                                 @endforeach
-                             </select>
+                            </select>
+                        </div> 
+                                   
+                        <div class="form-group w3-row">
+                            <div class="w3-col l2 m2 w3-padding-small">
+                                <img id="img_content" src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="image contetnt" style="width:100%">
+                            </div>
+                            <div class="w3-col l10 m10">
+                                <input type="file" id="myFile" name="img" onchange="readURL(this);" style="display:none;" required="" />
+                                <button type="button" class="w3-btn w3-white w3-border w3-border-grey w3-margin-top w3-margin-left w3-text-grey" style="font-family:cursive;" onclick="document.getElementById('myFile').click();">Upload a Photo</button>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="img" class="w3-text-grey"> Upload Image</label>
-                            {{ Form::file('img', null, ['required' => '']) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('description', 'Description') }}
-                            {{ Form::textarea('description', null, ['class' => 'form-control']) }}
-                        </div>
-
-                        {{ Form::submit('Create Menu', ['class' => 'btn btn-success btn-lg btn-block']) }} 
-
-                    {!! Form::close() !!}
-                 </div>
-            </div>
+                    </div>
+                </div>
+                <div class="w3-border-green w3-border-bottom w3-padding-12">
+                    <div class="form-group">
+                        <label class="w3-text-gery w3-large" style="font-family:cursive">Menu Description</label> 
+                        {{ Form::textarea('description', null, ['class' => 'form-control']) }}
+                    </div>
+                </div>
+                <div class="w3-row w3-margin-top">
+                    <div class="w3-rest"></div>
+                    <div class="w3-col l2 m2 w3-right">
+                        {!! Form::submit('Create Menu', ['class' => 'btn w3-green btn-block']) !!}
+                    </div>
+                </div>  
+            {!! Form::close() !!}
         </div>
     </div>  
 
@@ -167,6 +175,22 @@
 
         //Select-2
         $(".js-example-basic-multiple").select2();
+        
     });
+    </script>
+    <script>
+         //Upload Picture
+         function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img_content')
+                        .attr('src', e.target.result)
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 @endsection

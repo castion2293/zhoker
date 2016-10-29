@@ -17,54 +17,79 @@
     <div class="bgimg-6 w3-opacity"></div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-64">
+    <div class="w3-content w3-container w3-padding-64"  id="chef-create">
         <div>
              <div class="w3-padding-12 w3-margin-top">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Chef Profile<h1>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    {!! Form::model($chef, ['route' => ['chef_profile.update', $chef->id], 'method' => 'PUT', 'files' => true]) !!}
-                        <div class="form-group">
-                            <label for="address" class="w3-text-grey"> Address</label>
-                            {{ Form::text('address', null, ['class' => 'form-control w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }}              
+            {!! Form::model($chef, ['route' => ['chef_profile.update', $chef->id], 'method' => 'PUT', 'files' => true]) !!}
+                <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
+                    <div class="w3-col l7 m7">
+                        <div class="" style="padding-right:0.8em;">
+                            <label class="w3-text-gery" style="font-family:cursive">Address</label>   
+                            {{ Form::text('address', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
+                        </div> 
+                        <div class="" style="padding-right:0.8em;margin-top:10px;">
+                            <label class="w3-text-gery" style="font-family:cursive">City</label>  
+                            {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '30']) }}  
                         </div>
-
-                        <div class="form-group">
-                            <label for="city" class="w3-text-grey"> City</label>
-                            {{ Form::text('city', null, ['class' => 'form-control w3-large w3-text-grey', 'required' => '', 'maxlength' => '30']) }}              
+                        <div class="" style="padding-right:0.8em;margin-top:10px;">
+                            <label class="w3-text-gery" style="font-family:cursive">State</label>
+                            {{ Form::text('state', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '30']) }}  
                         </div>
-
-                        <div class="form-group">
-                            <label for="state" class="w3-text-grey"> State</label>
-                            {{ Form::text('state', null, ['class' => 'form-control w3-large w3-text-grey', 'required' => '', 'maxlength' => '30']) }}              
+                        <div class="" style="padding-right:0.8em;margin-top:10px;">
+                            <label class="w3-text-gery" style="font-family:cursive">Zip Code</label>
+                            {{ Form::text('zip_code', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '100']) }}
+                        </div> 
+                        <div class="" style="padding-right:0.8em;margin-top:10px;">
+                            <label class="w3-text-gery" style="font-family:cursive">Store Name</label>
+                            {{ Form::text('store_name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }}              
                         </div>
-
-                        <div class="form-group">
-                            <label for="zip_code" class="w3-text-grey"> Zip Code</label>
-                            {{ Form::text('zip_code', null, ['class' => 'form-control w3-large w3-text-grey', 'required' => '', 'maxlength' => '10']) }}              
+                        <div class="form-group w3-row">
+                            <div class="w3-col l2 m2 w3-padding-small">
+                                <img id="img_content" src="{{ asset($chef->profile_img) }}" alt="image contetnt" style="width:100%">
+                            </div>
+                            <div class="w3-col l10 m10">
+                                <input type="file" id="myFile" name="profile_img" onchange="readURL(this);" style="display:none;" required="" />
+                                <button type="button" class="w3-btn w3-white w3-border w3-border-grey w3-margin-top w3-margin-left w3-text-grey" style="font-family:cursive;" onclick="document.getElementById('myFile').click();">Upload a Photo</button>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="store_name" class="w3-text-grey"> Store Name</label>
-                            {{ Form::text('store_name', null, ['class' => 'form-control w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }}              
-                        </div>
-
-                        <div class="form-group">
-                            <label for="profile_img" class="w3-text-grey"> Upload Image</label>
-                            {{ Form::file('profile_img', null, ['required' => '']) }}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="store_description" class="w3-text-grey"> Store Description</label>
-                            {{ Form::textarea('store_description', null, ['class' => 'form-control']) }}
-                        </div>
-
-                        {{ Form::submit('Save Profile', ['class' => 'btn btn-success btn-lg btn-block']) }} 
-
-                    {!! Form::close() !!}
+                    </div>
+                    <div class="w3-col l5 m5">
+                        <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1028201602.jpg') }}" alt="profile" style="width:100%">
+                    </div>
                 </div>
-            </div>
+                <div class="w3-border-green w3-border-bottom w3-padding-12">
+                    <div class="form-group">
+                        <label class="w3-text-gery w3-large" style="font-family:cursive">Store Description</label> 
+                        {{ Form::textarea('store_description', null, ['class' => 'form-control']) }}
+                    </div>
+                </div>
+                <div class="w3-row w3-margin-top">
+                    <div class="w3-rest"></div>
+                    <div class="w3-col l2 m2 w3-right">
+                        {!! Form::submit('Save Profile', ['class' => 'btn w3-green btn-block']) !!}
+                    </div>
+                </div>  
+            {!! Form::close() !!}
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        //Upload Picture
+         function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img_content')
+                        .attr('src', e.target.result)
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

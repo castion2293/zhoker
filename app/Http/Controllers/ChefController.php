@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Filesystem\Filesystem;
 
 use App\Http\Requests;
 use App\Http\Requests\MealCreateRequest;
@@ -30,7 +31,10 @@ class ChefController extends Controller
      */
     public function index()
     {
-        return view('desktop.chef.index');
+        $id = Auth::user()->chef_id;
+        $meals = Chef::find($id)->meals()->paginate(6);
+
+        return view('desktop.chef.index', ['meals' => $meals]);
     }
 
     /**
@@ -65,10 +69,12 @@ class ChefController extends Controller
         if ($request->hasFile('img')) {
             $image = $request->file('img');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $location = public_path('images/'. $filename);
-            Image::make($image)->save($location);
 
-            $meal->img_path = $filename;
+            $s3 = Storage::disk('s3');
+            $filePath = '/images/' . $filename;
+            $s3->put($filePath, file_get_contents($image), 'public');
+
+            $meal->img_path = 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
         }
 
         $meal->save();
@@ -117,7 +123,7 @@ class ChefController extends Controller
     public function edit($id)
     {
         $meal = Meal::find($id);
-
+        
         //$time = $meal->datetimepeoples()->first();
 
         $shifts = Shift::all();
@@ -137,7 +143,7 @@ class ChefController extends Controller
         foreach($methods as $method) {
             $methodarray[$method->id] = $method->method;
         }
-
+        
         return view('desktop.chef.edit', ['meal' => $meal, 'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
     }
 
@@ -160,19 +166,20 @@ class ChefController extends Controller
 
         if ($request->hasFile('img')) {
 
-            // Delete the old photo
             $image = $request->file('img');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $location = public_path('images/'. $filename);
-            Image::make( $image)->save($location);
+
+            $s3 = Storage::disk('s3');
+            $filePath = '/images/' . $filename;
+            $s3->put($filePath, file_get_contents($image), 'public');
+
+            $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
 
             $oldFilename = $meal->img_path;
+            $oldpath = substr($oldFilename, $leng);
+            $s3->delete($oldpath);
 
-            // add the new photo
-            $meal->img_path = $filename;
-
-            // update the database
-            Storage::delete($oldFilename);
+            $meal->img_path = 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
         }
 
         $meal->save();

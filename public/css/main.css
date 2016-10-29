@@ -15,14 +15,28 @@ body,
     line-height: 1.8;
   }
 
-  body input::-webkit-input-placeholder {
-    color: black;
+  /*Index input Form placeholder*/
+  body #font input::-webkit-input-placeholder {
+    color: #000;
     font-weight: bold;
   }
 
-  body input::-moz-placeholder {
-    color: black;
+  body #font input::-moz-placeholder {
+    color: #000;
     font-weight: bold;
+  }
+
+  /*Chef create input Form placeholder*/
+  body #chef-createfont input::-webkit-input-placeholder {
+    color: #9e9e9e;
+    font-weight: bold;
+    font-family: cursive;
+  }
+
+  body #chef-create input::-moz-placeholder {
+    color: #9e9e9e;
+    font-weight: bold;
+    font-family: cursive;
   }
   
   /* index view image (Logo. Full height) */
@@ -36,7 +50,7 @@ body,
     min-height: 100%;
   }
 
-  /* chef create view image (Logo. Full height) */
+  /* chef view image (Logo. Full height) */
   .bgimg-2 {
     opacity: 1;
     background-attachment: fixed;
@@ -82,6 +96,17 @@ body,
 
   /* chef_profile edit view image (Logo. Full height) */
   .bgimg-6 {
+    opacity: 1;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('DSC_1056.jpg');
+    min-height: 84%;
+  }
+
+  /* chef ndex view image (Logo. Full height) */
+  .bgimg-7 {
     opacity: 1;
     background-attachment: fixed;
     background-position: center;

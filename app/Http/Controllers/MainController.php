@@ -37,8 +37,9 @@ class MainController extends Controller
 
             $id = Auth::user()->chef_id;
             $chef = Chef::find($id);
+            $meals = $chef->meals()->orderBy('updated_at', 'desc')->take(6)->get();
 
-            return view('desktop.chef.chef', ['chef' => $chef]);
+            return view('desktop.chef.chef', ['chef' => $chef, 'meals' => $meals]);
         }
         Session::flash('ChefError', 'These credentials do not match our records.');
         return redirect()->back();
@@ -48,8 +49,9 @@ class MainController extends Controller
     {
         $id = Auth::user()->chef_id;
         $chef = Chef::find($id);
+        $meals = $chef->meals()->orderBy('updated_at', 'desc')->take(6)->get();
         
-        return view('desktop.chef.chef', ['chef' => $chef]);
+        return view('desktop.chef.chef', ['chef' => $chef, 'meals' => $meals]);
     }
 
     public function getMaplist(Request $request)

@@ -17,7 +17,7 @@
               <a href="{{url('/chef/create')}}" class="w3-padding-large w3-xlarge listcolor" id="chef_create" ><i class="fa fa-pencil-square-o"></i><span class="w3-large"> Create</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_menu" ><i class="fa fa-th-list"></i><span class="w3-large"> Menu</span></a>
+              <a href="{{ url('/chef') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_menu" ><i class="fa fa-th-list"></i><span class="w3-large"> Menu</span></a>
             </li>
             <li class="w3-hide-small w3-right">
               <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>

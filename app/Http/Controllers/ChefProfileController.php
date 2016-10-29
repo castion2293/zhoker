@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Filesystem\Filesystem;
 
 use App\Http\Requests;
 use App\Http\Requests\ChefProfileEditRequest;
@@ -95,24 +96,26 @@ class ChefProfileController extends Controller
 
         if ($request->hasFile('profile_img')) {
 
-            // Delete the old photo
             $image = $request->file('profile_img');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $location = public_path('images/'. $filename);
-            Image::make( $image)->save($location);
+
+            $s3 = Storage::disk('s3');
+            $filePath = '/images/' . $filename;
+            $s3->put($filePath, file_get_contents($image), 'public');
+
+            $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
 
             $oldFilename = $chef->profile_img;
-
-            // add the new photo
-            $chef->profile_img = $filename;
-
-            // update the database
-            Storage::delete($oldFilename);
+            $oldpath = substr($oldFilename, $leng);
+            $s3->delete($oldpath);
+            
+            $chef->profile_img = 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
         }
 
         $chef->save();
+        $meals = $chef->meals()->orderBy('updated_at', 'desc')->take(6)->get();
 
-        return view('desktop.chef.chef', ['chef' => $chef]);
+        return view('desktop.chef.chef', ['chef' => $chef, 'meals' => $meals]);
     }
 
     /**

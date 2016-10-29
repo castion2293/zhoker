@@ -3,9 +3,6 @@
 @section('title', '| Home')
 
 @section('styles')
-    <!--Add DatetimePicker-->
-    <link rel="stylesheet" href="{{ URL::to('css/bootstrap-datetimepicker.min.css') }}">
-    <!-- Animated Select Option -->
     <link rel="stylesheet" href="{{ URL::to('css/cs-select.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/cs-skin-elastic.css') }}">
 @endsection
@@ -38,24 +35,10 @@
                         <option class="w3-text-black w3-white w3-large">Tea Time</option>
                     </select>
                 </div>
-                <div class="input-group w3-col l4 m4 date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <div class="input-group w3-col l4 m4">
                     <span class="input-group-addon inputbkg clickdown"><span class="glyphicon glyphicon-calendar"></span></span>
-                    {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'required' => '', 'placeholder' => 'Date', 'readonly' => '', 'style' => 'font-weight:bold;']) }}
+                    {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'id' => 'datepicker', 'required' => '', 'placeholder' => 'Date', 'style' => 'font-weight:bold;cursor:pointer;"']) }}
                 </div>
-                <!--div class="w3-col l2 m2">
-                    <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic" style="height:50px">
-                        <option class="w3-text-black w3-white w3-large">1 Person</option>
-                        <option class="w3-text-black w3-white w3-large">2 People</option>
-                        <option class="w3-text-black w3-white w3-large">3 People</option>
-                        <option class="w3-text-black w3-white w3-large">4 People</option>
-                        <option class="w3-text-black w3-white w3-large">5 People</option>
-                        <option class="w3-text-black w3-white w3-large">6 People</option>
-                        <option class="w3-text-black w3-white w3-large">7 People</option>
-                        <option class="w3-text-black w3-white w3-large">8 People</option>
-                        <option class="w3-text-black w3-white w3-large">9 People</option>
-                        <option class="w3-text-black w3-white w3-large">10 People</option>
-                    </select>
-                </div-->
                 <button class="w3-col l1 m1 w3-btn w3-border-green w3-large w3-green" style="height:50px">
                     <i class="w3-text-shadow fa fa-search"></i>
                 </button>
@@ -186,8 +169,6 @@
 @endsection
 
 @section('scripts')
-    <!--Add DatetimePicker-->
-    <script src="{{ URL::to('js/bootstrap-datetimepicker.js') }}" charset="UTF-8"></script>
     <!-- Animated Select Option -->
     <script src="{{ URL::to('js/classie.js') }}"></script>
     <script src="{{ URL::to('js/selectFx.js') }}"></script>
@@ -200,17 +181,10 @@
 			})();
 	</script>
     <script>
-    <!--DataTimePicker-->
+    // datepicker
     $(function () {
-        $('.form_date').datetimepicker({
-            language:  '',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
+        $("#datepicker").datetimepicker({
+            format: 'YYYY-MM-DD'
         });
     })
     </script>
