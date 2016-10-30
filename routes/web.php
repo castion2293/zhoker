@@ -57,6 +57,9 @@ Route::post('/chef_login', [
     'as' => 'main.cheflogin'
 ]);
 
+//Facebook login
+Route::get('auth/facebook', 'Auth\OAuthController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\OAuthController@handleProviderCallback');
 
 //Chef CRUD and profile
 Route::get('/chef_content', 'MainController@getChefContent');

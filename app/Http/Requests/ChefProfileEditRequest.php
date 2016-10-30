@@ -29,7 +29,7 @@ class ChefProfileEditRequest extends FormRequest
             'state' => 'required|max:30',
             'zip_code' => 'required|max:10',
             'store_name' => 'required|max:255',
-            'profile_img' => 'required|image',
+            'profile_img' => 'image',
             'store_description' => 'required',
             
         ];

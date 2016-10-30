@@ -124,7 +124,11 @@ class ChefController extends Controller
     {
         $meal = Meal::find($id);
         
-        //$time = $meal->datetimepeoples()->first();
+        $datetimepeoples = $meal->datetimepeoples()->get();
+        $old_datetimepeople = "";
+        foreach ($datetimepeoples as $datetimepeople) {
+            $old_datetimepeople .= $datetimepeople->date . ',' . $datetimepeople->time . ',' . $datetimepeople->people_left . ';';
+        }
 
         $shifts = Shift::all();
         $shiftarray = [];
@@ -144,7 +148,7 @@ class ChefController extends Controller
             $methodarray[$method->id] = $method->method;
         }
         
-        return view('desktop.chef.edit', ['meal' => $meal, 'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
+        return view('desktop.chef.edit', ['meal' => $meal, 'datetimepeople' => $old_datetimepeople, 'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
     }
 
     /**
@@ -221,6 +225,12 @@ class ChefController extends Controller
         $meal->shifts()->detach();
         $meal->categories()->detach();
         $meal->methods()->detach();
+
+        $s3 = Storage::disk('s3');
+        $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
+        $Filename = $meal->img_path;
+        $Filepath = substr($Filename, $leng);
+        $s3->delete($Filepath);
 
         Storage::delete($meal->img_path);
         

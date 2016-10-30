@@ -38,7 +38,7 @@
 
                     <div class="input-group w3-padding-8 w3-margin-top">
                         <span class="input-group-addon" id="modal-picker" style="cursor:pointer;"><span class="glyphicon glyphicon-calendar"></span></span>   
-                        {{ Form::text('datetimepeople', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey w3-white', 'id' => 'dtp-result', 'placeholder' => 'Date', 'required' => '']) }}
+                        {{ Form::text('datetimepeople', $datetimepeople, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey w3-white', 'id' => 'dtp-result', 'placeholder' => 'Date', 'required' => '']) }}
                     </div>
 
                     <div class=" w3-padding-8">
@@ -61,7 +61,7 @@
                             <img id="img_content" src="{{ asset($meal->img_path) }}" alt="image contetnt" style="width:100%">
                          </div>
                         <div class="w3-col l10 m10">
-                            <input type="file" id="myFile" name="img" onchange="readURL(this);" style="display:none;" required="" />
+                            <input type="file" id="myFile" name="img" onchange="readURL(this);" style="display:none;">
                             <button type="button" class="w3-btn w3-white w3-border w3-border-grey w3-margin-top w3-margin-left w3-text-grey" style="font-family:cursive;" onclick="document.getElementById('myFile').click();">Upload a Photo</button>
                         </div>
                     </div>

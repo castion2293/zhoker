@@ -50,7 +50,7 @@
                                 <img id="img_content" src="{{ asset($chef->profile_img) }}" alt="image contetnt" style="width:100%">
                             </div>
                             <div class="w3-col l10 m10">
-                                <input type="file" id="myFile" name="profile_img" onchange="readURL(this);" style="display:none;" required="" />
+                                <input type="file" id="myFile" name="profile_img" onchange="readURL(this);" style="display:none;">
                                 <button type="button" class="w3-btn w3-white w3-border w3-border-grey w3-margin-top w3-margin-left w3-text-grey" style="font-family:cursive;" onclick="document.getElementById('myFile').click();">Upload a Photo</button>
                             </div>
                         </div>
