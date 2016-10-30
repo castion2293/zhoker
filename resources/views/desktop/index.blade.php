@@ -22,7 +22,7 @@
 
         <!--Input Form large medium screen-->
         <div class="w3-content w3-container w3-hide-small" style="padding-top:9em">
-            {!! Form::open(['route' => 'main.maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
+            {!! Form::open(['route' => 'maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
                 <div class="w3-col l5 m5">
                     {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'required' => '', 'id' => 'eatlocation', 'style' => 'font-weight:bold;']) }}
                 </div>

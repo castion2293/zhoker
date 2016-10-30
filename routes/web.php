@@ -47,8 +47,8 @@ Route::post('password/reset', [
 ]);
 
 Route::post('/maplist', [
-    'uses' => 'MainController@getMaplist',
-    'as' => 'main.maplist'
+    'uses' => 'MapListController@postMaplist',
+    'as' => 'maplist'
 ]);
 
 //Chef login

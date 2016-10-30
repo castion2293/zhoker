@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\ChefSignInRequest;
+
 use App\Map;
 use App\Chef;
 use Jenssegers\Agent\Agent;
 use Auth;
 use Session;
-use App\Http\Requests\ChefSignInRequest;
+
 
 class MainController extends Controller
 {
@@ -52,14 +54,5 @@ class MainController extends Controller
         $meals = $chef->meals()->orderBy('updated_at', 'desc')->take(6)->get();
         
         return view('desktop.chef.chef', ['chef' => $chef, 'meals' => $meals]);
-    }
-
-    public function getMaplist(Request $request)
-    {
-        $city = $request->input('city');
-
-        $maps = Map::where('city', $city)->get();
-
-        return view('desktop.main.map_list', ['maps' => $maps]);
     }
 }
