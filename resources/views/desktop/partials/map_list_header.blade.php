@@ -46,7 +46,7 @@
           </ul>
         </div>
 
-        {!! Form::open(['route' => 'main.maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
+        {!! Form::open(['route' => 'maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
         <div class="modal-body" style="padding:10px 50px;">
             <div class="tab-content">
               <div id="basic" class="tab-pane fade in active">
@@ -149,7 +149,7 @@
          <h1 class="w3-xxlarge w3-text-green w3-center">Search</h1>
       </div>
       
-      {!! Form::open(['route' => 'main.maplist', null, 'method' => 'POST']) !!}
+      {!! Form::open(['route' => 'maplist', null, 'method' => 'POST']) !!}
         <div class="w3-row">
           <div class="w3-col l6 m6 w3-padding">
               <span class="w3-text-grey w3-large">City:</span>

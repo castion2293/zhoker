@@ -12,6 +12,6 @@ class DateTimePeople extends Model
 
     public function meal()
     {
-        return $this->belongsTo('App\Meal');
+        return $this->belongsTo('App\Meal', 'meal_id');
     }
 }

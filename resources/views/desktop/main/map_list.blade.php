@@ -18,18 +18,18 @@
             <div class="col-md-12 w3-light-grey">
                 <div class="w3-accordion">
                     <div class="w3-red"><h1>Zhoker</h1></div>
-                    @foreach($maps as $map)
-                      <a id="{{ $map->id }}" href="#{{ $map->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
+                    @foreach($meals as $meal)
+                      <a id="{{ $meal->id }}" href="#{{ $meal->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
                         <div class="row">
                           <div class="col-md-4" id="title_img">
-                              <img src="{{ URL::to('img/DSC_0395.JPG') }}" alt="Food1" style="width:100%">
+                              <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%">
                           </div>
                           <div class="col-md-5">
-                              <div><span class="w3-text-grey w3-xlarge" id="meal-name"><b>Chicken Rice<b></span></div>
+                              <div><span class="w3-text-grey w3-xlarge" id="meal-name"><b>{{ $meal->name }}<b></span></div>
                               <div style="padding-top:10px;">
                                 <section>
-                                  <span class="w3-text-green w3-large" id="meal-price">$50 TW</span>
-                                  <span class="w3-text-grey w3-slim w3-right" style="padding-top:2px" id="meal-people">3 people left</span>
+                                  <span class="w3-text-green w3-large" id="meal-price">${{ $meal->price }}</span>
+                                  <span class="w3-text-grey w3-slim w3-right" style="padding-top:2px" id="meal-people">{{ $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->people_left }} people left</span>
                                 </section>
                               </div>
                           </div>
@@ -42,25 +42,24 @@
                           </div>
                         </div>
                       </a>
-                      <!--button id="{{ $map->id }}" class="w3-btn-block w3-left-align dropDownList">Open Section 1</button-->
-                      <div id="drop_{{ $map->id }}" class="w3-accordion-content w3-container w3-display-container w3-white">
+                      <div id="drop_{{ $meal->id }}" class="w3-accordion-content w3-container w3-display-container w3-white">
                         <div class="row">
                             <div class="col-md-6 w3-padding-12">
                               <a href="#" class="w3-white">
                                 <div class="content-img" style="width:0">
-                                    <img src="{{ URL::to('img/DSC_0419.JPG') }}" alt="Food1" style="width:100%">
+                                    <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%">
                                 </div>
                                 <div class="content-img" style="margin-top:10px;width:0">
-                                    <img src="{{ URL::to('img/DSC_0417.JPG') }}" alt="Food1" style="width:100%;">
+                                    <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%;">
                                 </div>
                                 <div class="content-img" style="margin-top:10px;width:0">
-                                    <img src="{{ URL::to('img/DSC_0410.JPG') }}" alt="Food1" style="width:100%;">
+                                    <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%;">
                                 </div>
                               </div>
                             </a>
                             <div class="col-md-6 w3-content w3-container">
                               <div class="w3-padding-12 w3-text-grey w3-justify">
-                                 <p>Some women swear that castor oil works, but there's no proof that's true. Plus, the side effects of this gross tasting stuff are, well, pretty gross. Castor oil affects your bowels more than it affects your uterus (which could make the photos taken in the delivery room a bit…spotty). The Plus, the side effects of this gross tasting stuff are...</p>
+                                 <p class="w3-text-grey" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 400) !!}{{ strlen(strip_tags($meal->description)) > 400 ? '...' : "" }}</p>
                               </div>
                             </div>
                         </div>
@@ -71,14 +70,14 @@
                     @endforeach
                 </div>
 
-                <!--@foreach($maps as $map)
+                <!--@foreach($meals as $meal)
                   
-                  <div id="{{ $map->id }}" class="container-fluid">
+                  <div id="{{ $meal->id }}" class="container-fluid">
                     <div class="row">
                       <div class="col-sm-8">
-                        <h2>{{ $map->address }}</h2><br>
-                        <h2>{{ $map->city }}</h2><br>
-                        <h2>{{ $map->state }}</h2>
+                        <h2>{{ $meal->address }}</h2><br>
+                        <h2>{{ $meal->city }}</h2><br>
+                        <h2>{{ $meal->state }}</h2>
                       </div>
                     </div>
                   </div>
@@ -99,11 +98,12 @@
          type: "ROADMAP" // Map type (optional)
       });
       $("#map").addClass("scroll")
-      @foreach($maps as $map)
+      @foreach ($meals as $meal)
         $("#map").addMarker({
-    	     address: "{{ $map->address }} . ' ' . {{ $map->city }} . ' ' . {{ $map->state }}", // Postale Address
-           id: '{{ $map->id }}',
-           url: '#!{{ $map->id }}', // Link
+    	     address: "{{ $meal->chefs->address }} . ' ' . {{ $meal->chefs->city }} . ' ' . {{ $meal->chefs->state }} . ' ' . {{ $meal->chefs->zip_code }}", // Postale Address
+           //address: "751 S 300 E Salt Lake City Utah",
+           id: '{{ $meal->id }}',
+           url: '#!{{ $meal->id }}', // Link
            icon: new google.maps.MarkerImage("{{ URL::to('img/marker.png') }}"),
         });
       @endforeach

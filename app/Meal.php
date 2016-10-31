@@ -12,7 +12,7 @@ class Meal extends Model
 
     public function chefs()
     {
-        return $this->belongsTo('App\Chef');
+        return $this->belongsTo('App\Chef', 'chef_id');
     }
 
     public function datetimepeoples()

@@ -57,10 +57,33 @@ class MapListController extends Controller
             $l++;
         }
 
+        //find Meals
         $meal_id = array_intersect($chef_meal_id, $shift_meal_id, $date_meal_id);
 
         $meals = Meal::find($meal_id);
         
-        return view('desktop.main.map_list', ['meals' => $meals]);
+        //find chefs
+        // $chef_id = [];
+        // $m = 0;
+        // foreach ($meals as $meal) {
+        //     $chef_id[$m] = $meal->chef_id;
+        //     $m++;
+        // }
+        
+        // $chef_id = array_unique($chef_id);
+        
+        // $chef = Chef::find(1);
+        // $meal = Meal::find(8);
+        // $shift = Shift::find(1);
+        // $datetimepeople = DatetimePeople::find(49);
+        // dd($meal->chefs);
+        
+
+        //find dates
+        // $datetimepeoples = DateTimePeople::wherein('meal_id', $meal_id)
+        //                                   ->where('date', $date)
+        //                                   ->get();
+
+        return view('desktop.main.map_list', ['meals' => $meals, 'chefs' => $chefs, 'date' => $date]);
     }
 }
