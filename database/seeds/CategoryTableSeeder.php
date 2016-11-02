@@ -100,5 +100,10 @@ class CategoryTableSeeder extends Seeder
            'category' => 'Vegetarian' 
         ]);
         $category->save();
+
+        $category = new \App\Category([
+           'category' => 'indian' 
+        ]);
+        $category->save();
     }
 }

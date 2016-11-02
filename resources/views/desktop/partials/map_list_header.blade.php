@@ -28,118 +28,6 @@
     </ul>
   </div>
 
-  <!--Filter Modal -->
-  <!--div class="modal" id="filterModal" role="dialog">
-    <div class="modal-dialog" style="width:500px;">
-
-      <!Modal content>
-      <div class="modal-content">
-        <div>
-          <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
-        </div>
-        <div>
-          <h1 class="text-center w3-padding-8 w3-text-green">Search</h1>
-          <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a data-toggle="tab" href="#basic">Basic</a></li>
-            <li><a data-toggle="tab" href="#advanced">Advanced</a></li>
-            <li><a data-toggle="tab" href="#detailed">Detailed</a></li>
-          </ul>
-        </div>
-
-        {!! Form::open(['route' => 'maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
-        <div class="modal-body" style="padding:10px 50px;">
-            <div class="tab-content">
-              <div id="basic" class="tab-pane fade in active">
-                <div class="form-group">
-                  <label for="city" class="w3-text-grey"><span class="fa fa-map-marker w3-large"></span> City</label>
-                  {{ Form::text('city', null, ['class' => 'form-control w3-large w3-khaki', 'required' => '']) }}              
-                </div>
-                <div class="form-group">
-                  <label for="date" class="w3-text-grey"><span class="fa fa-calendar-o w3-large"></span> Date</label>
-                </div>
-                <div class="form-group">
-                  <label for="shift" class="w3-text-grey"><span class="fa fa-clock-o w3-large"></span> Time</label>
-                  <select class="w3-select w3-border w3-text-grey w3-khaki w3-large cs-select cs-skin-elastic" name="shift" style="height:50px;">
-                    <option class="w3-text-grey w3-large">All</option>
-                    <option class="w3-text-grey w3-large">Dinner</option>
-                    <option class="w3-text-grey w3-large">Lunch</option>
-                    <option class="w3-text-grey w3-large">Brunch</option>
-                    <option class="w3-text-grey w3-large">Breakfast</option>
-                    <option class="w3-text-grey w3-large">Tea Time</option>
-                  </select>              
-                </div>
-              </div>
-              <div id="advanced" class="tab-pane fade">
-                <div class="form-group">
-                  <label for="minPrice" class="w3-text-grey"><span class="fa fa-money w3-large"></span> Price</label>
-                  <div class="row">
-                    <div class="col-md-5">
-                      {{ Form::text('minPrice', null, ['class' => 'form-control w3-large w3-text-grey w3-khaki', 'placeholder' => 'Min', 'style' => 'font-weight:bold;']) }}
-                    </div>
-                    <div class="col-md-2">
-                      <span class="w3-large w3-center w3-text-grey"> TO </span>
-                    </div>
-                    <div class="col-md-5">
-                      {{ Form::text('maxPrice', null, ['class' => 'form-control w3-large w3-text-grey w3-khaki', 'placeholder' => 'Max', 'style' => 'font-weight:bold;']) }}
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group w3-padding-12">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label for="people" class="w3-text-grey"><span class="fa fa-users w3-large"></span> People left</label>
-                      <select class="w3-select w3-border w3-text-grey w3-khaki w3-large cs-select cs-skin-elastic" name="people">
-                        <option class="w3-text-grey w3-white w3-large">All</option>
-                        <option class="w3-text-grey w3-white w3-large">1 Person left</option>
-                        <option class="w3-text-grey w3-white w3-large">2 People left</option>
-                        <option class="w3-text-grey w3-white w3-large">3 People left</option>
-                        <option class="w3-text-grey w3-white w3-large">4 People left</option>
-                        <option class="w3-text-grey w3-white w3-large">5 People left</option>
-                        <option class="w3-text-grey w3-white w3-large">6 People left</option>
-                        <option class="w3-text-grey w3-white w3-large">7 People left</option>
-                        <option class="w3-text-grey w3-white w3-large">8 People left</option>
-                        <option class="w3-text-grey w3-white w3-large">9 People left</option>
-                        <option class="w3-text-grey w3-white w3-large">10 People left</option>
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="method" class="w3-text-grey"><span class="fa fa-reply w3-large"></span> Method</label>
-                      <select class="w3-select w3-border w3-text-grey w3-khaki w3-large cs-select cs-skin-elastic" name="method">
-                        <option class="w3-text-grey w3-white w3-large">All</option>
-                        <option class="w3-text-grey w3-white w3-large">In House</option>
-                        <option class="w3-text-grey w3-white w3-large">To Go</option>
-                        <option class="w3-text-grey w3-white w3-large">Delieve</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="detailed" class="tab-pane fade">
-                <div class="form-group">
-                  <label for="rank" class="w3-text-grey"><span class="fa fa-sort-numeric-asc w3-large"></span> Rank</label>
-                  <select class="w3-select w3-border w3-text-grey w3-khaki w3-large cs-select cs-skin-elastic" name="rank">
-                      <option class="w3-text-grey w3-white w3-large">Price Low->High</option>
-                      <option class="w3-text-grey w3-white w3-large">Price High->Low</option>
-                      <option class="w3-text-grey w3-white w3-large">Score High->Low</option>
-                      <option class="w3-text-grey w3-white w3-large">Score Low->Hight</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <div class="form-group">
-            <button class="btn w3-center w3-border-green w3-large w3-green form-control">
-              <span><i class="w3-text-shadow fa fa-search"></i>Search</span>
-            </button>
-          </div>
-        </div>
-        {!! Form::close() !!}
-      </div>
-
-    </div>
-  </div-->
-
   <!-- Sidebar (sit on top) in small screen -->
   <nav class="w3-sidenav w3-white w3-animate-left" style="display:none;z-index:5;left:0;width:60%">
 
@@ -149,7 +37,7 @@
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Detailed Search<h1>
         </div>
 
-        {!! Form::open(['route' => 'maplist', null, 'method' => 'POST']) !!}
+        {!! Form::open(['route' => 'maplist.detailed', 'data-parsley-validate' => '', null, 'method' => 'POST']) !!}
             <div class="w3-row">
                <div class="w3-col l4 m4">
                   <div class="w3-margin-top">
@@ -159,7 +47,8 @@
                 <div class="w3-col l8 m8" style="padding-left:2em;">
                   <div>
                       <label class="w3-text-grey w3-large" style="font-family:cursive">City</label>
-                      {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'City', 'required' => '', 'maxlength' => '255']) }}
+                      <input type="text" name="city" placeholder="City" value="{{ old('city') }}" required maxlength="255" class="w3-input w3-border w3-border-grey w3-large w3-text-grey">
+                      <!--{{ Form::text('city', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'City', 'required' => '', 'maxlength' => '255']) }}-->
                   </div>
                   <div class="" style="margin-top:2em;">
                       <label class="w3-text-grey w3-large" style="font-family:cursive">Date</label>
@@ -172,7 +61,7 @@
                       <label class="w3-text-grey w3-large" style="font-family:cursive">Price Range</label>
                       <div class="w3-row">
                         <div class="w3-col l3 m3">
-                            {{ Form::text('minPrice', null, ['class' => 'w3-input w3-border w3-large w3-text-grey', 'required' => '', 'placeholder' => 'MIN']) }}
+                            {{ Form::text('minPrice', null, ['class' => 'w3-input w3-border w3-large w3-text-grey', 'placeholder' => 'MIN']) }}
                         </div>
                         <div class="w3-col l2 m2">
                             <label class="w3-large w3-text-grey w3-padding-small" style="font-weight:bold;font-family:cursive;">TWD<label>
@@ -181,7 +70,7 @@
                           <span class="w3-xxlarge w3-text-grey" style="font-weight:bold;font-family:cursive;line-height: 1.2em;">~</span>
                         </div>
                         <div class="w3-col l3 m3">
-                          {{ Form::text('maxPrice', null, ['class' => 'w3-input w3-border w3-large w3-text-grey', 'required' => '', 'placeholder' => 'MAX']) }}
+                          {{ Form::text('maxPrice', null, ['class' => 'w3-input w3-border w3-large w3-text-grey', 'placeholder' => 'MAX']) }}
                         </div>
                         <div class="w3-col l2 m2">
                             <label class="w3-large w3-text-grey w3-padding-small" style="font-weight:bold;font-family:cursive;">TWD<label>
@@ -206,7 +95,6 @@
                   <div class="">
                      <label class="w3-text-grey w3-large" style="font-family:cursive">People Left</label>
                      <select class="form-control w3-text-grey w3-large" name="people">
-                        <option class="w3-text-grey w3-white w3-large">All</option>
                         <option class="w3-text-grey w3-white w3-large">1 Person left</option>
                         <option class="w3-text-grey w3-white w3-large">2 People left</option>
                         <option class="w3-text-grey w3-white w3-large">3 People left</option>
@@ -221,7 +109,7 @@
                   </div>
                   <div class="">
                       <label class="w3-text-grey w3-large" style="font-family:cursive">Method</label>
-                      <select class="form-control w3-text-grey w3-large" name="shift">
+                      <select class="form-control w3-text-grey w3-large" name="method">
                         <option class="w3-text-grey w3-white w3-large">All</option>
                         <option class="w3-text-grey w3-white w3-large">In House</option>
                         <option class="w3-text-grey w3-white w3-large">To Go</option>
@@ -231,8 +119,8 @@
                   <div class="">
                       <label class="w3-text-grey w3-large" style="font-family:cursive">Sorting</label>
                       <select class="form-control w3-text-grey w3-large" name="sort">
-                        <option class="w3-text-grey w3-white w3-large">Price Low->High</option>
-                        <option class="w3-text-grey w3-white w3-large">Price High->Low</option>
+                        <option class="w3-text-grey w3-white w3-large" value="1">Price Low->High</option>
+                        <option class="w3-text-grey w3-white w3-large" value="2">Price High->Low</option>
                       </select>
                   </div>
                 </div>
@@ -242,86 +130,90 @@
                       <div class="w3-row w3-padding-small w3-border w3-border-grey w3-round-large">
                         <div class="w3-col l3 m3">
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="1">
                               <label class="w3-validate">American</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="4">
                               <label class="w3-validate">Brazilian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="7">
                               <label class="w3-validate">French</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="12">
                               <label class="w3-validate">Korean</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="13">
                               <label class="w3-validate">Mexican</label>
                             </p>
                         </div>
                         <div class="w3-col l3 m3">
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="2">
                               <label class="w3-validate">Asian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="5">
                               <label class="w3-validate">Chinese</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="19">
                               <label class="w3-validate">Indian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="8">
                               <label class="w3-validate">Hawaiian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="11">
                               <label class="w3-validate">Japanese</label>
                             </p>
                         </div>
                         <div class="w3-col l3 m3">
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="3">
                               <label class="w3-validate">Barbecue</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="6">
                               <label class="w3-validate">European</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="9">
                               <label class="w3-validate">Italian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="10">
                               <label class="w3-validate">Indonesian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="17">
                               <label class="w3-validate">Thai</label>
                             </p>
                         </div>
                         <div class="w3-col l3 m3">
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="14">
                               <label class="w3-validate">Mediterr</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="16">
                               <label class="w3-validate">Seafood</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="18">
                               <label class="w3-validate">Vegatarian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]">
+                              <input class="w3-check" type="checkbox" name="type[]" value="15">
                               <label class="w3-validate">Middle East</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]" id="all-check">
+                              <label class="w3-validate">All</label>
                             </p>
                         </div>
                       </div>
@@ -336,88 +228,7 @@
             </div>  
         {!! Form::close() !!}
     </div>
-  
-    <!--div class="w3-container w3-content"style="">
-      <div>
-         <h1 class="w3-xxlarge w3-text-green w3-center">Search</h1>
-      </div>
-      
-      {!! Form::open(['route' => 'maplist', null, 'method' => 'POST']) !!}
-        <div class="w3-row">
-          <div class="w3-col l6 m6 w3-padding">
-              <span class="w3-text-grey w3-large">City:</span>
-              {{ Form::text('city', null, ['class' => 'form-control w3-large w3-text-black inputbkg clickdown', 'required' => '', 'id' => 'eatlocation', 'style' => 'font-weight:bold;']) }}
-          </div> 
-          <div class="w3-col l6 m6 w3-padding">
-              <span class="w3-text-grey w3-large">Date:</span>
-              <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                  <span class="input-group-addon inputbkg clickdown"><span class="glyphicon glyphicon-calendar"></span></span>
-                  {{ Form::text('date', null, ['class' => 'form-control w3-large w3-white w3-text-black inputbkg clickdown', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;']) }}
-              </div>
-          </div>
-        </div>
-        <div class="w3-row">
-            <div class="w3-col l4 m4 w3-padding">
-              <span class="w3-text-grey w3-large">Time:</span>
-              <select class="form-control w3-text-black w3-large inputbkg cs-select cs-skin-elastic clickdown" name="shift">
-                <option class="w3-text-black w3-white w3-large">All</option>
-                <option class="w3-text-black w3-white w3-large">Dinner</option>
-                <option class="w3-text-black w3-white w3-large">Lunch</option>
-                <option class="w3-text-black w3-white w3-large">Brunch</option>
-                <option class="w3-text-black w3-white w3-large">Breakfast</option>
-                <option class="w3-text-black w3-white w3-large">Tea Time</option>
-              </select>
-            </div>
-            <div class="w3-col l4 m4 w3-padding">
-                <span class="w3-text-grey w3-large">Max Price:</span>
-                {{ Form::text('maxPrice', null, ['class' => 'form-control w3-large w3-text-black clickdown', 'required' => '', 'style' => 'font-weight:bold;']) }}
-            </div>
-            <div class="w3-col l4 m4 w3-padding">
-                <span class="w3-text-grey w3-large">Min Price:</span>
-                {{ Form::text('minPrice', null, ['class' => 'form-control w3-large w3-text-black clickdown', 'required' => '', 'style' => 'font-weight:bold;']) }}
-            </div>
-        </div>
-        <div class="w3-row">
-            <div class="w3-col l4 m4 w3-padding">
-              <span class="w3-text-grey w3-large">People:</span>
-              <select class="form-control w3-text-black w3-large inputbkg cs-select cs-skin-elastic" name="people">
-                <option class="w3-text-black w3-white w3-large">All</option>
-                <option class="w3-text-black w3-white w3-large">1 Person left</option>
-                <option class="w3-text-black w3-white w3-large">2 People left</option>
-                <option class="w3-text-black w3-white w3-large">3 People left</option>
-                <option class="w3-text-black w3-white w3-large">4 People left</option>
-                <option class="w3-text-black w3-white w3-large">5 People left</option>
-                <option class="w3-text-black w3-white w3-large">6 People left</option>
-                <option class="w3-text-black w3-white w3-large">7 People left</option>
-                <option class="w3-text-black w3-white w3-large">8 People left</option>
-                <option class="w3-text-black w3-white w3-large">9 People left</option>
-                <option class="w3-text-black w3-white w3-large">10 People left</option>
-              </select>
-            </div>
-            <div class="w3-col l4 m4 w3-padding">
-                <span class="w3-text-grey w3-large">Method:</span>
-                <select class="form-control w3-text-black w3-large inputbkg cs-select cs-skin-elastic clickdown" name="shift">
-                  <option class="w3-text-black w3-white w3-large">All</option>
-                  <option class="w3-text-black w3-white w3-large">In House</option>
-                  <option class="w3-text-black w3-white w3-large">To Go</option>
-                  <option class="w3-text-black w3-white w3-large">Delieve</option>
-                </select>
-            </div>
-            <div class="w3-col l4 m4 w3-padding">
-                <span class="w3-text-grey w3-large">Rank:</span>
-                <select class="form-control w3-text-black w3-large inputbkg cs-select cs-skin-elastic clickdown" name="rank">
-                  <option class="w3-text-black w3-white w3-large">Price Low->High</option>
-                  <option class="w3-text-black w3-white w3-large">Price High->Low</option>
-                  <option class="w3-text-black w3-white w3-large">Score High->Low</option>
-                  <option class="w3-text-black w3-white w3-large">Score Low->Hight</option>
-                </select>
-            </div>
-        </div>
-        <button class="btn w3-right w3-border-green w3-large w3-green">
-              <span><i class="w3-text-shadow fa fa-search"></i>Search</span>
-        </button>
-      {!! Form::close() !!}
-    </div-->
+
   </nav>
 
   <div class="w3-overlay w3-animate-opacity" style="cursor:pointer"></div>
@@ -672,6 +483,15 @@
             $("#datepicker").datetimepicker({
                 format: 'YYYY-MM-DD'
             });
-        })
+        });
+
+        //Type check box
+        $("#all-check").change(function(){
+            if( $("#all-check").is(':checked') ) {
+              $('.w3-check').prop('checked', true);
+            } else {
+              $('.w3-check').prop('checked', false);
+            }
+        });
   });
 </script>

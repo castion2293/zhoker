@@ -46,9 +46,14 @@ Route::post('password/reset', [
     'as' => 'postPasswordReset'
 ]);
 
+//Map and menu lists search
 Route::post('/maplist', [
     'uses' => 'MapListController@postMaplist',
     'as' => 'maplist'
+]);
+Route::post('/maplist/detailed', [
+    'uses' => 'MapListController@postMaplistDetailed',
+    'as' => 'maplist.detailed'
 ]);
 
 //Chef login
