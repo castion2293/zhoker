@@ -29,10 +29,10 @@
   </div>
 
   <!--Filter Modal -->
-  <div class="modal" id="filterModal" role="dialog">
+  <!--div class="modal" id="filterModal" role="dialog">
     <div class="modal-dialog" style="width:500px;">
 
-      <!-- Modal content-->
+      <!Modal content>
       <div class="modal-content">
         <div>
           <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
@@ -56,7 +56,6 @@
                 </div>
                 <div class="form-group">
                   <label for="date" class="w3-text-grey"><span class="fa fa-calendar-o w3-large"></span> Date</label>
-                  {{ Form::text('date', null, ['class' => 'form-control w3-large w3-khaki w3-text-grey', 'id' => 'datepicker', 'required' => '', 'readonly' => '', 'style' => 'font-weight:bold;cursor:pointer;']) }}
                 </div>
                 <div class="form-group">
                   <label for="shift" class="w3-text-grey"><span class="fa fa-clock-o w3-large"></span> Time</label>
@@ -139,12 +138,206 @@
       </div>
 
     </div>
-  </div>
+  </div-->
 
   <!-- Sidebar (sit on top) in small screen -->
-  <nav class="w3-sidenav w3-white w3-animate-left " style="display:none;z-index:5;left:0;width:50%">
+  <nav class="w3-sidenav w3-white w3-animate-left" style="display:none;z-index:5;left:0;width:60%">
+
+    <!--content-->
+    <div class="w3-content w3-container w3-padding-8" id="chef-create">
+        <div class="">
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">Detailed Search<h1>
+        </div>
+
+        {!! Form::open(['route' => 'maplist', null, 'method' => 'POST']) !!}
+            <div class="w3-row">
+               <div class="w3-col l4 m4">
+                  <div class="w3-margin-top">
+                    <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1026201601.png') }}" alt="profile" style="width:100%">
+                  </div>
+                </div>
+                <div class="w3-col l8 m8" style="padding-left:2em;">
+                  <div>
+                      <label class="w3-text-grey w3-large" style="font-family:cursive">City</label>
+                      {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'City', 'required' => '', 'maxlength' => '255']) }}
+                  </div>
+                  <div class="" style="margin-top:2em;">
+                      <label class="w3-text-grey w3-large" style="font-family:cursive">Date</label>
+                      <div class="input-group">
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                          {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-large w3-text-grey', 'id' => 'datepicker', 'required' => '', 'placeholder' => 'Date', 'style' => 'font-weight:bold;cursor:pointer;"']) }}
+                      </div>
+                  </div>
+                  <div class="" style="margin-top:2em;">
+                      <label class="w3-text-grey w3-large" style="font-family:cursive">Price Range</label>
+                      <div class="w3-row">
+                        <div class="w3-col l3 m3">
+                            {{ Form::text('minPrice', null, ['class' => 'w3-input w3-border w3-large w3-text-grey', 'required' => '', 'placeholder' => 'MIN']) }}
+                        </div>
+                        <div class="w3-col l2 m2">
+                            <label class="w3-large w3-text-grey w3-padding-small" style="font-weight:bold;font-family:cursive;">TWD<label>
+                        </div>
+                        <div class="w3-col l2 m2 w3-center">
+                          <span class="w3-xxlarge w3-text-grey" style="font-weight:bold;font-family:cursive;line-height: 1.2em;">~</span>
+                        </div>
+                        <div class="w3-col l3 m3">
+                          {{ Form::text('maxPrice', null, ['class' => 'w3-input w3-border w3-large w3-text-grey', 'required' => '', 'placeholder' => 'MAX']) }}
+                        </div>
+                        <div class="w3-col l2 m2">
+                            <label class="w3-large w3-text-grey w3-padding-small" style="font-weight:bold;font-family:cursive;">TWD<label>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="w3-row w3-border-green w3-border-bottom w3-padding-12" style="margin-top:2em;">
+                <div class="w3-col l3 m3" style="padding-left:2em;">
+                  <div class="">
+                      <label class="w3-text-grey w3-large" style="font-family:cursive">Venue</label>
+                      <select class="form-control w3-text-grey w3-large" name="shift">
+                        <option class="w3-text-grey w3-white w3-large">All</option>
+                        <option class="w3-text-grey w3-white w3-large">Dinner</option>
+                        <option class="w3-text-grey w3-white w3-large">Lunch</option>
+                        <option class="w3-text-grey w3-white w3-large">Brunch</option>
+                        <option class="w3-text-grey w3-white w3-large">Breakfast</option>
+                        <option class="w3-text-grey w3-white w3-large">Tea Time</option>
+                      </select>
+                  </div>
+                  <div class="">
+                     <label class="w3-text-grey w3-large" style="font-family:cursive">People Left</label>
+                     <select class="form-control w3-text-grey w3-large" name="people">
+                        <option class="w3-text-grey w3-white w3-large">All</option>
+                        <option class="w3-text-grey w3-white w3-large">1 Person left</option>
+                        <option class="w3-text-grey w3-white w3-large">2 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">3 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">4 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">5 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">6 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">7 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">8 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">9 People left</option>
+                        <option class="w3-text-grey w3-white w3-large">10 People left</option>
+                    </select>
+                  </div>
+                  <div class="">
+                      <label class="w3-text-grey w3-large" style="font-family:cursive">Method</label>
+                      <select class="form-control w3-text-grey w3-large" name="shift">
+                        <option class="w3-text-grey w3-white w3-large">All</option>
+                        <option class="w3-text-grey w3-white w3-large">In House</option>
+                        <option class="w3-text-grey w3-white w3-large">To Go</option>
+                        <option class="w3-text-grey w3-white w3-large">Delieve</option>
+                      </select>
+                  </div>
+                  <div class="">
+                      <label class="w3-text-grey w3-large" style="font-family:cursive">Sorting</label>
+                      <select class="form-control w3-text-grey w3-large" name="sort">
+                        <option class="w3-text-grey w3-white w3-large">Price Low->High</option>
+                        <option class="w3-text-grey w3-white w3-large">Price High->Low</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="w3-col l9 m9" style="padding-left:2em;">
+                  <div class="">
+                      <label class="w3-text-grey w3-large" style="font-family:cursive">Type</label>
+                      <div class="w3-row w3-padding-small w3-border w3-border-grey w3-round-large">
+                        <div class="w3-col l3 m3">
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">American</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Brazilian</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">French</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Korean</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Mexican</label>
+                            </p>
+                        </div>
+                        <div class="w3-col l3 m3">
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Asian</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Chinese</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Indian</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Hawaiian</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Japanese</label>
+                            </p>
+                        </div>
+                        <div class="w3-col l3 m3">
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Barbecue</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">European</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Italian</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Indonesian</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Thai</label>
+                            </p>
+                        </div>
+                        <div class="w3-col l3 m3">
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Mediterr</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Seafood</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Vegatarian</label>
+                            </p>
+                            <p>
+                              <input class="w3-check" type="checkbox" name="type[]">
+                              <label class="w3-validate">Middle East</label>
+                            </p>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="w3-row w3-margin-top">
+                <div class="w3-rest"></div>
+                <div class="w3-col l2 m2 w3-right">
+                    {!! Form::submit('Search', ['class' => 'btn w3-green btn-block']) !!}
+                </div>
+            </div>  
+        {!! Form::close() !!}
+    </div>
   
-    <div class="w3-container w3-content"style="">
+    <!--div class="w3-container w3-content"style="">
       <div>
          <h1 class="w3-xxlarge w3-text-green w3-center">Search</h1>
       </div>
@@ -224,7 +417,7 @@
               <span><i class="w3-text-shadow fa fa-search"></i>Search</span>
         </button>
       {!! Form::close() !!}
-    </div>
+    </div-->
   </nav>
 
   <div class="w3-overlay w3-animate-opacity" style="cursor:pointer"></div>
@@ -370,13 +563,13 @@
   </div>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+  <!--script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script-->
   <script type="text/javascript">
         $(".js-example-basic-multiple").select2();
   </script>
 
 <!--Add DatetimePicker-->
-<script src="{{ URL::to('js/bootstrap-datetimepicker.js') }}" charset="UTF-8"></script>
+<!--script src="{{ URL::to('js/bootstrap-datetimepicker.js') }}" charset="UTF-8"></script-->
 <!-- Animated Select Option -->
 <script src="{{ URL::to('js/classie.js') }}"></script>
 <script src="{{ URL::to('js/selectFx.js') }}"></script>
@@ -461,11 +654,24 @@
         @endif
 
         //Filter click
+        // $("#filter").click(function(){
+        //   $("#filterModal").modal();
+        // });
+
         $("#filter").click(function(){
-          $("#filterModal").modal();
+          $(".w3-sidenav").css("display","block");
+          $(".w3-overlay").css("display","block"); 
+        });
+        $(".w3-overlay").click(function(){
+          $(".w3-sidenav").css("display","none");
+          $(".w3-overlay").css("display","none");
         });
 
-        //datetimepicker
-        $( "#datepicker" ).datepicker();
+        // datepicker
+        $(function () {
+            $("#datepicker").datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+        })
   });
 </script>

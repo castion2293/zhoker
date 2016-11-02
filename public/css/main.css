@@ -49,72 +49,6 @@ body,
     background-image: url('DSC_0397.JPG');
     min-height: 100%;
   }
-
-  /* chef view image (Logo. Full height) */
-  .bgimg-2 {
-    opacity: 1;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url('DSC_1056.jpg');
-    min-height: 84%;
-  }
-
-  /* chef create view image (Logo. Full height) */
-  .bgimg-3 {
-    opacity: 1;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url('DSC_1056.jpg');
-    min-height: 84%;
-  }
-
-  /* chef show view image (Logo. Full height) */
-  .bgimg-4 {
-    opacity: 1;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url('DSC_1056.jpg');
-    min-height: 84%;
-  }
-
-  /* chef edit view image (Logo. Full height) */
-  .bgimg-5 {
-    opacity: 1;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url('DSC_1056.jpg');
-    min-height: 84%;
-  }
-
-  /* chef_profile edit view image (Logo. Full height) */
-  .bgimg-6 {
-    opacity: 1;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url('DSC_1056.jpg');
-    min-height: 84%;
-  }
-
-  /* chef ndex view image (Logo. Full height) */
-  .bgimg-7 {
-    opacity: 1;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url('DSC_1056.jpg');
-    min-height: 84%;
-  }
   
   /* Adjust the position of the parallax image text */
   
@@ -177,8 +111,8 @@ body,
   /* fixed-circle-navbar */
   .fixed-circle-nav {
     position: fixed;
-    right: 3em;
-    margin-top: 15em;
+    right: 0em;
+    margin-top: 17em;
   }
 
   .fixed-circle-nav .section--nav a {

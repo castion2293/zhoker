@@ -8,7 +8,9 @@
 
 @section('content')
     <!--header picture-->
-    <div class="bgimg-4 w3-opacity"></div>
+    <div class="" id="top-pic">
+        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1031201603.JPG" alt="profile" style="width:100%">
+    </div>
 
     <!--content-->
     <div class="w3-content w3-container w3-padding-64">
