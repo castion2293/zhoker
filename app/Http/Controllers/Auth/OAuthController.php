@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
 use Socialite;
 use Session;
 
@@ -28,8 +30,12 @@ class OAuthController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
 
-        dd($user);
-        
-        //return redirect()->route('home.index', ['user' => $user]);
+        if ( $local_user = User::where('email', $user->email)->first() ) {
+            Auth::loginUsingId($local_user->id);
+        } else {
+            
+        }
+
+        return redirect()->route('home.index', ['user' => $user]);
     }
 }
