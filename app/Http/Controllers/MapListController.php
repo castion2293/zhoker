@@ -88,7 +88,12 @@ class MapListController extends Controller
             $methods = Method::where('method', $method_way)->first();
         }
 
-        $categories = Category::wherein('id', $type)->get();
+        if ($type == null) {
+            $categories = Category::all();
+        } else {
+            $categories = Category::wherein('id', $type)->get();
+        }
+        
 
         //find chef_meal_id
         $chef_id = $this->ToArrayId($chefs);

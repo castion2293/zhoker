@@ -28,11 +28,8 @@ class OAuthController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
 
-        //dd($user);
+        dd($user);
         
-        //set flash data with chef login
-        Session::put('OAuthlogin', 'login');
-
-        return redirect()->route('home.index', ['user' => $user]);
+        //return redirect()->route('home.index', ['user' => $user]);
     }
 }

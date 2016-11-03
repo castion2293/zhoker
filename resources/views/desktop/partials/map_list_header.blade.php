@@ -83,7 +83,7 @@
                 <div class="w3-col l3 m3" style="padding-left:2em;">
                   <div class="">
                       <label class="w3-text-grey w3-large" style="font-family:cursive">Venue</label>
-                      <select class="form-control w3-text-grey w3-large" name="shift">
+                      <select class="form-control w3-text-grey w3-large" name="shift" id="shift">
                         <option class="w3-text-grey w3-white w3-large">All</option>
                         <option class="w3-text-grey w3-white w3-large">Dinner</option>
                         <option class="w3-text-grey w3-white w3-large">Lunch</option>
@@ -94,7 +94,7 @@
                   </div>
                   <div class="">
                      <label class="w3-text-grey w3-large" style="font-family:cursive">People Left</label>
-                     <select class="form-control w3-text-grey w3-large" name="people">
+                     <select class="form-control w3-text-grey w3-large" name="people" id="people">
                         <option class="w3-text-grey w3-white w3-large">1 Person left</option>
                         <option class="w3-text-grey w3-white w3-large">2 People left</option>
                         <option class="w3-text-grey w3-white w3-large">3 People left</option>
@@ -109,7 +109,7 @@
                   </div>
                   <div class="">
                       <label class="w3-text-grey w3-large" style="font-family:cursive">Method</label>
-                      <select class="form-control w3-text-grey w3-large" name="method">
+                      <select class="form-control w3-text-grey w3-large" name="method" id="method">
                         <option class="w3-text-grey w3-white w3-large">All</option>
                         <option class="w3-text-grey w3-white w3-large">In House</option>
                         <option class="w3-text-grey w3-white w3-large">To Go</option>
@@ -118,7 +118,7 @@
                   </div>
                   <div class="">
                       <label class="w3-text-grey w3-large" style="font-family:cursive">Sorting</label>
-                      <select class="form-control w3-text-grey w3-large" name="sort">
+                      <select class="form-control w3-text-grey w3-large" name="sort" id="sort">
                         <option class="w3-text-grey w3-white w3-large" value="1">Price Low->High</option>
                         <option class="w3-text-grey w3-white w3-large" value="2">Price High->Low</option>
                       </select>
@@ -130,89 +130,89 @@
                       <div class="w3-row w3-padding-small w3-border w3-border-grey w3-round-large">
                         <div class="w3-col l3 m3">
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="1">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select1" value="1">
                               <label class="w3-validate">American</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="4">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select4" value="4">
                               <label class="w3-validate">Brazilian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="7">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select7" value="7">
                               <label class="w3-validate">French</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="12">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select12" value="12">
                               <label class="w3-validate">Korean</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="13">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select13" value="13">
                               <label class="w3-validate">Mexican</label>
                             </p>
                         </div>
                         <div class="w3-col l3 m3">
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="2">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select2" value="2">
                               <label class="w3-validate">Asian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="5">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select5" value="5">
                               <label class="w3-validate">Chinese</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="19">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select19" value="19">
                               <label class="w3-validate">Indian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="8">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select8" value="8">
                               <label class="w3-validate">Hawaiian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="11">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select11" value="11">
                               <label class="w3-validate">Japanese</label>
                             </p>
                         </div>
                         <div class="w3-col l3 m3">
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="3">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select3" value="3">
                               <label class="w3-validate">Barbecue</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="6">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select6" value="6">
                               <label class="w3-validate">European</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="9">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select9" value="9">
                               <label class="w3-validate">Italian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="10">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select10" value="10">
                               <label class="w3-validate">Indonesian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="17">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select17" value="17">
                               <label class="w3-validate">Thai</label>
                             </p>
                         </div>
                         <div class="w3-col l3 m3">
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="14">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select14" value="14">
                               <label class="w3-validate">Mediterr</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="16">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select16" value="16">
                               <label class="w3-validate">Seafood</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="18">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select18" value="18">
                               <label class="w3-validate">Vegatarian</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" value="15">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select15" value="15">
                               <label class="w3-validate">Middle East</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" id="all-check">
+                              <input class="w3-check" type="checkbox" name="type[]" id="select0" value="0">
                               <label class="w3-validate">All</label>
                             </p>
                         </div>
@@ -464,11 +464,6 @@
           });
         @endif
 
-        //Filter click
-        // $("#filter").click(function(){
-        //   $("#filterModal").modal();
-        // });
-
         $("#filter").click(function(){
           $(".w3-sidenav").css("display","block");
           $(".w3-overlay").css("display","block"); 
@@ -486,12 +481,25 @@
         });
 
         //Type check box
-        $("#all-check").change(function(){
-            if( $("#all-check").is(':checked') ) {
+        $("#select0").change(function(){
+            if( $("#select0").is(':checked') ) {
               $('.w3-check').prop('checked', true);
             } else {
               $('.w3-check').prop('checked', false);
             }
         });
+
+        //set default value
+        $("#shift").val("{{ old('shift') }}");
+        $("#people").val("{{ old('people') }}");
+        $("#method").val("{{ old('method') }}");
+        $("#sort").val("{{ old('sort') }}");
+        
+        @if (old('type') != null) 
+          @foreach (old('type') as $type)
+            $('#select{{ $type }}').prop('checked', true);
+          @endforeach
+        @endif
+        
   });
 </script>
