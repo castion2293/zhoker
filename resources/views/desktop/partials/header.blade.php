@@ -34,13 +34,16 @@
               <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
+              <a href="{{ url('/user_profile/create') }}" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
+              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>
             </li>
             <li class="w3-hide-small w3-right">
               <a href="#" class="w3-padding-large w3-xlarge listcolor" id="shoppingCart" ><i class="fa fa-shopping-cart"></i><span class="w3-large"> Shopping Cart</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="profile" ><i class="fa fa-user"></i><span class="w3-large"> Profile</span></a>
+              <a href="{{ url('/user_profile') }}" class="w3-padding-large w3-xlarge listcolor" id="profile" ><i class="fa fa-user"></i><span class="w3-large"> Profile</span></a>
             </li>
             <li class="w3-hide-large w3-hide-medium">
               <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
@@ -164,7 +167,7 @@
             <span class="w3-medium w3-text-black w3-center">Please sign up to keep track of your favorites and saved searches.</span>
           </div>
           <!--form role="form" style="margin:10px"-->
-          {!! Form::open(['route' => 'register', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
+          {!! Form::open(['route' => 'register.sendconfrimemail', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
             <div class=" form-group ">
               <div style="margin-top:1px">
                 {{ Form::text('first_name', null, ['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'First Name ']) }}

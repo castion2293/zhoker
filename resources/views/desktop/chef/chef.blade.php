@@ -25,7 +25,7 @@
     </div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-64" style="position: static;">
+    <div class="w3-content w3-container w3-padding-64">
         <div class="w3-row" id="profile">
             <div class="w3-padding-12">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">Profile<h1>

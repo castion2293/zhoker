@@ -18,9 +18,17 @@ Route::get('/', [
 
 // Registration Routes
 Route::post('auth/register', [
-    'uses' => 'Auth\RegisterController@register',
-    'as' => 'register'
+    'uses' => 'Auth\EmailConfirmController@sendConfirmEmail',
+    'as' => 'register.sendconfrimemail'
 ]);
+Route::get('/auth/register/activate/{token}', [
+    'uses' => 'Auth\EmailConfirmController@confirmEmail',
+    'as' => 'register.confrimemail'
+]);
+// Route::post('auth/register', [
+//     'uses' => 'Auth\RegisterController@register',
+//     'as' => 'register'
+// ]);
 
 //Authentication Routes
 Route::post('auth/login', [ 
@@ -71,4 +79,9 @@ Route::get('/chef_content', 'MainController@getChefContent');
 Route::resource('chef', 'ChefController');
 Route::resource('chef_profile', 'ChefProfileController', [
     'only' => ['index', 'edit', 'update', 'destroy']
+]);
+
+//User CRUD and profile
+Route::resource('user_profile', 'UserProfileController', [
+    'except' => ['store', 'show']
 ]);
