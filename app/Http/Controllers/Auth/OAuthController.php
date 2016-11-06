@@ -29,15 +29,14 @@ class OAuthController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('facebook')->user();
+        
+        if ( !($local_user = User::where('email', $user->email)->first()) ) {
+            $local_user = $user->email;
+            $local_user->first_name = $user->name;
+            $local_user->password = bcrypt($user->id);
 
-        $local_user = User::firstorNew([
-            'email' => $user->email,
-        ]);
-
-        $local_user->first_name = $user->name;
-        $local_user->password = bcrypt($user->id);
-
-        $local_user->save();
+            $local_user->save(); 
+        }
 
         Auth::login($local_user);
 

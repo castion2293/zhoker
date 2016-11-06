@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserProfileEditRequest;
 
 use Auth;
+use App\User;
+use Storage;
 
 class UserProfileController extends Controller
 {
@@ -19,7 +22,9 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        return view('desktop.user.profile');
+        $user = Auth::user();
+
+        return view('desktop.user.profile', ['user' => $user]);
     }
 
     /**
@@ -64,7 +69,9 @@ class UserProfileController extends Controller
      */
     public function edit($id)
     {
-        return view('desktop.user.setting');
+        $user = User::find($id);
+
+        return view('desktop.user.setting', ['user' => $user]);
     }
 
     /**
@@ -74,9 +81,36 @@ class UserProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserProfileEditRequest $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+        
+        if ($request->hasFile('user_profile_img')) {
+
+            $image = $request->file('user_profile_img');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
+            $s3 = Storage::disk('s3');
+            $filePath = '/profile_images/' . $filename;
+            $s3->put($filePath, file_get_contents($image), 'public');
+
+            $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
+
+            $oldFilename = $user->user_profile_img;
+            $oldpath = substr($oldFilename, $leng);
+            $s3->delete($oldpath);
+            
+            $user->user_profile_img = 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
+        }
+
+        $user->save();
+
+        return redirect()->route('user_profile.index');
     }
 
     /**

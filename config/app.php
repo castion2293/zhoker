@@ -180,7 +180,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         'Jenssegers\Agent\AgentServiceProvider',
-        Barryvdh\Debugbar\ServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,

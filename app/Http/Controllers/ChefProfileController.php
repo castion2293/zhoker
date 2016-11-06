@@ -100,7 +100,7 @@ class ChefProfileController extends Controller
             $filename = time() . '.' . $image->getClientOriginalExtension();
 
             $s3 = Storage::disk('s3');
-            $filePath = '/images/' . $filename;
+            $filePath = '/profile_images/' . $filename;
             $s3->put($filePath, file_get_contents($image), 'public');
 
             $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');

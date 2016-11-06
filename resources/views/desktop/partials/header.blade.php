@@ -28,6 +28,13 @@
           @else 
             <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
             <li class="w3-hide-small w3-right">
+              @if (Auth::user()->user_profile_img != null)
+                <img src="{{ asset(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
+              @else
+                <img src="{{ URL::to('img\default-user-icon-profile.PNG') }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
+              @endif
+            </li>
+            <li class="w3-hide-small w3-right">
               <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
             </li>
             <li class="w3-hide-small w3-right">
@@ -44,9 +51,6 @@
             </li>
             <li class="w3-hide-small w3-right">
               <a href="{{ url('/user_profile') }}" class="w3-padding-large w3-xlarge listcolor" id="profile" ><i class="fa fa-user"></i><span class="w3-large"> Profile</span></a>
-            </li>
-            <li class="w3-hide-large w3-hide-medium">
-              <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
             </li>
           @endif
       @else
@@ -281,6 +285,7 @@
 <!--SignIn and SignUp Error show-->
 <script>
   $(function () {
+      @if (!Auth::check())
         var error_show = '';
         
         @if (count($errors) > 0)
@@ -360,6 +365,8 @@
             $("#chefModal").modal();
           });
         @endif
+
+      @endif
     
   });
 </script>

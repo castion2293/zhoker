@@ -24,7 +24,7 @@
              <div class="w3-padding-12 w3-margin-top">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Chef Profile<h1>
             </div>
-            {!! Form::model($chef, ['route' => ['chef_profile.update', $chef->id], 'method' => 'PUT', 'files' => true]) !!}
+            {!! Form::model($chef, ['route' => ['chef_profile.update', $chef->id], 'method' => 'PUT', 'data-parsley-validate' => '', 'files' => true]) !!}
                 <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
                     <div class="w3-col l7 m7">
                         <div class="" style="padding-right:0.8em;">
