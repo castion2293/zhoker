@@ -30,12 +30,13 @@ class OAuthController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
         
-        if ( !($local_user = User::where('email', $user->email)->first()) ) {
-            $local_user = $user->email;
-            $local_user->first_name = $user->name;
-            $local_user->password = bcrypt($user->id);
-
-            $local_user->save(); 
+        if ( empty($local_user = User::where('email', $user->email)->first()) ) {
+            
+            $local_user = User::firstorCreate([
+                'first_name' => $user->name,
+                'email' => $user->email,
+                'password' => $user->id,
+            ]);
         }
 
         Auth::login($local_user);

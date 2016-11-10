@@ -36,7 +36,7 @@
                           <div class="col-md-3">
                               <div style="margin-top:8px;">
                                 @for ($i = 0; $i < 5; $i++)
-                                  <span class="w3-text-white"><i class="fa fa-star"></i></span>
+                                  <span class="w3-text-deep-orange star"><i class="fa fa-star"></i></span>
                                 @endfor
                               </div>
                           </div>
@@ -59,12 +59,12 @@
                             </a>
                             <div class="col-md-6 w3-content w3-container">
                               <div class="w3-padding-12 w3-text-grey w3-justify">
-                                 <p class="w3-text-grey" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 400) !!}{{ strlen(strip_tags($meal->description)) > 400 ? '...' : "" }}</p>
+                                 <p class="w3-text-grey" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 300) !!}{{ strlen(strip_tags($meal->description)) > 300 ? '...' : "" }}</p>
                               </div>
                             </div>
                         </div>
 
-                        <a href="#" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">Read More</a>
+                        <a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->id])}}" target="_blank" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">Read More</a>
                         
                        </div>
                     @endforeach
@@ -162,6 +162,7 @@
           var meal_name = $(hash).find("#meal-name");
           var meal_price = $(hash).find("#meal-price");
           var meal_people = $(hash).find("#meal-people");
+          var star = $(hash).find(".star");
           var title_img = $(hash).find("#title_img");
           var content_img = $(contentID).find(".content-img");
 
@@ -171,6 +172,7 @@
             meal_name.removeClass("w3-text-white").addClass("w3-text-grey");
             meal_price.removeClass("w3-text-white").addClass("w3-text-green");
             meal_people.removeClass("w3-text-white").addClass("w3-text-grey");
+            star.removeClass("w3-text-white").addClass("w3-text-deep-orange");
             title_img.animate({width: '33%'}, 500);
             content_img.animate({width: '0'}, 500);
           } else {
@@ -179,6 +181,7 @@
             meal_name.removeClass("w3-text-grey").addClass("w3-text-white");
             meal_price.removeClass("w3-text-green").addClass("w3-text-white");
             meal_people.removeClass("w3-text-grey").addClass("w3-text-white");
+            star.removeClass("w3-text-deep-orange").addClass("w3-text-white");
             title_img.animate({width: '0'}, 500);
             content_img.animate({width: '100%'}, 500);
           }

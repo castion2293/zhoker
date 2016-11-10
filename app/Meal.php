@@ -34,4 +34,9 @@ class Meal extends Model
     {
         return $this->belongsToMany('App\Category', 'meal_category');
     }
+
+    public function carts()
+    {
+        return $this->hasOne('App\Cart');
+    }
 }

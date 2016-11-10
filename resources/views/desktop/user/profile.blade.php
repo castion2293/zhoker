@@ -37,7 +37,9 @@
                 <div class="w3-col l8 m8 w3-right w3-panel w3-light-grey">
                     <div style="padding-left:8em;padding-right:5em;">
                         <h2 class="w3-text-grey">Hello, {{ $user->first_name }}</h2>
-                        <span class="w3-text-grey">Member since {{ date('F d, Y', strtotime($user->created_at)) }}</span>
+                        <span class="w3-text-grey">Member since {{ date('F d, Y', strtotime($user->created_at)) }}</span><br>
+                        <span class="w3-text-grey">Email: {{ $user->email }}</span><br>
+                        <span class="w3-text-grey">Phone Number:: {{ $user->phone_number }}</span>
                     </div>
                 </div>
             </div>

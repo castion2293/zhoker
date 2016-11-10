@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserProfileEditRequest;
+use App\Http\Requests\UserResetPasswordRequest;
 
 use Auth;
+use Hash;
 use App\User;
 use Storage;
 
@@ -122,5 +124,22 @@ class UserProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function resetPassword(UserResetPasswordRequest $request)
+    {
+        $data = $request->all();
+
+        $user = User::find(Auth::user()->id);
+
+        if (password_verify($data['old_password'], $user->password)) {
+            $user->password = bcrypt($data['password']);
+            $user->save();
+
+            return view('desktop.user.setting', ['user' => $user]);
+        } else {
+            return back()->withErrors('The specified password does not match the database password');
+        }
+        
     }
 }

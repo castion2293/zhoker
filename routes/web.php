@@ -64,6 +64,16 @@ Route::post('/maplist/detailed', [
     'as' => 'maplist.detailed'
 ]);
 
+//shopping cart and check out
+Route::get('product/{id}/{datetime_id}', [
+    'uses' => 'ProductController@getProductShow',
+    'as' => 'product.show'
+]);
+Route::post('product/cart/{id}', [
+    'uses' => 'ProductController@postAddToCart',
+    'as' => 'product.cart'
+]);
+
 //Chef login
 Route::post('/chef_login', [
     'uses' => 'MainController@chefLogin',
@@ -84,4 +94,8 @@ Route::resource('chef_profile', 'ChefProfileController', [
 //User CRUD and profile
 Route::resource('user_profile', 'UserProfileController', [
     'except' => ['store', 'show']
+]);
+Route::post('user_reset_password', [
+    'uses' => 'UserProfileController@resetPassword',
+    'as' => 'user.resetpassword'
 ]);

@@ -20,7 +20,10 @@
         
         <div class="w3-row" style="padding-bottom: 2em;">
             {!! Form::model($user, ['route' => ['user_profile.update', $user->id], 'method' => 'PUT', 'data-parsley-validate' => '', 'files' => true]) !!}
-               <div class="w3-col l7 m7">
+               <div class="w3-col l7 m7 w3-padding-small">
+                    <div class="w3-border-grey w3-border-bottom w3-margin-bottom">
+                        <span class="w3-text-grey w3-xlarge">Public Info<span>
+                    </div>
                     <div class="w3-row">
                         <div class="w3-col l6 m6" style="padding-right:0.8em;">
                             <label class="w3-text-gery" style="font-family:cursive">First Name</label>   
@@ -59,6 +62,32 @@
                         </div>
                     </div>  
                </div>
+            {!! Form::close() !!}
+
+            {!! Form::open(['route' => 'user.resetpassword', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
+                <div class="w3-col l5 m5 w3-padding-small">
+                    <div class="w3-border-grey w3-border-bottom w3-margin-bottom">
+                        <span class="w3-text-grey w3-xlarge">Reset Password<span>
+                    </div>
+                    <div class="w3-margin-top" style="padding-right:0.8em;">
+                        <label class="w3-text-gery" style="font-family:cursive">Old Password</label> 
+                        {{ Form::password('old_password', ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'minlength' => '6']) }}  
+                    </div>
+                    <div class="w3-margin-top" style="padding-right:0.8em;">
+                        <label class="w3-text-gery" style="font-family:cursive">New Password</label> 
+                        {{ Form::password('password', ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'minlength' => '6']) }}  
+                    </div>
+                    <div class="w3-margin-top" style="padding-right:0.8em;">
+                        <label class="w3-text-gery" style="font-family:cursive">Verify Password</label> 
+                        {{ Form::password('password_confirmation', ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'minlength' => '6']) }}  
+                    </div>
+                     <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
+                        <div class="w3-rest"></div> 
+                        <div class="w3-col l5 m5 w3-right w3-margin-top">
+                            {!! Form::submit('Change Password', ['class' => 'btn w3-green btn-block']) !!}
+                        </div>
+                    </div>  
+                </div>
             {!! Form::close() !!}
         </div>
     </div>
