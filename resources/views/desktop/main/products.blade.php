@@ -47,7 +47,7 @@
                             </div>
                             <div class="w3-col l5 m5">
                                 <label class="w3-text-grey w3-large" style="font-family:cursive">How Many?</label>
-                                <select class="w3-select w3-border w3-text-grey w3-large cs-select cs-skin-elastic" name="peopel_order" required=""> 
+                                <select class="w3-select w3-border w3-text-grey w3-large cs-select cs-skin-elastic" id="people_order" name="people_order" required="" > 
                                     @for ($i = 0;$i < $datetimepeople->people_left;$i++)
                                         <option value='{{ $i + 1 }}'>{{ $i+1 }} people</option>
                                     @endfor
@@ -249,7 +249,14 @@
               @endforeach
             @endif
 
-            @if (Session::has('re-post'))
+            @if (Session::has('repost'))
+                
+                //set default value
+                $("#people_order").val("{{ Session::get('people_order') }}");
+                
+                {{ Session::forget('people_order') }}
+                //{{ Session::forget('report') }}
+
                 $("#add-to-cart").trigger("click");
                 return false;
             @endif

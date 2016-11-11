@@ -23,6 +23,9 @@ class ProductController extends Controller
 
     public function postAddToCart(Request $request, $id)
     {
+        //Session::forget('repost');
+
+        dd(Session::get('repost'), Session::get('people_num'));
         dd($request, $id);
     }
 }
