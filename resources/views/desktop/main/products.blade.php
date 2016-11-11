@@ -37,12 +37,12 @@
                     <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
                 </div>
                 <div class="w3-margin-top w3-border-grey w3-border-top w3-border-bottom w3-padding-12">
-                    {!! Form::open(['route' => ['product.cart', $meal->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['product.cart', $meal->id, $datetimepeople->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                         <div class="w3-row w3-padding-small">
                             <div class="w3-col l7 m7">
                                 <label class="w3-text-grey w3-large" style="font-family:cursive">Date/time</label><br>
                                 <div class="" style="margin-top:0.5em;">
-                                    <span class="w3-text-grey w3-xlarge">{{ $datetimepeople->date }} / {{ $datetimepeople->time }}</span>
+                                    <span class="w3-text-grey w3-large">{{ $datetimepeople->date }} / {{ $datetimepeople->time }}</span>
                                 </div>
                             </div>
                             <div class="w3-col l5 m5">

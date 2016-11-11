@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Meal;
+use App\DateTimePeople;
+use App\Cart;
+use Auth;
 use Session;
 
 class ProductController extends Controller
@@ -17,15 +20,25 @@ class ProductController extends Controller
     {    
         $meal = Meal::findOrFail($id);
         $datetimepeople = $meal->datetimepeoples()->findOrFail($datetime_id);
+        $methods = $meal->methods()->get();
 
-        return view('desktop.main.products', ['meal' => $meal, 'datetimepeople' => $datetimepeople]);
+        return view('desktop.main.products', ['meal' => $meal, 'datetimepeople' => $datetimepeople, 'methods' => $methods]);
     }
 
-    public function postAddToCart(Request $request, $id)
+    public function postAddToCart(Request $request, $meal_id, $datetime_id)
     {
-        //Session::forget('repost');
+        $meal = Meal::findOrFail($meal_id);
+        $datetime = DateTimePeople::findorFail($datetime_id);
+        $cart = new Cart;
 
-        dd(Session::get('repost'), Session::get('people_num'));
-        dd($request, $id);
+        $cart->user_id = Auth::user()->id;
+        $cart->meal_id = $meal->id;
+        $cart->unite_price = $meal->price;
+        $cart->people_order = $request->input('people_order');
+        $cart->date = $datetime->date;
+        $cart->time = $datetime->time;
+        $cart->method =  
+
+        dd($cart);
     }
 }

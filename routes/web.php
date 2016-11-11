@@ -69,7 +69,7 @@ Route::get('product/{id}/{datetime_id}', [
     'uses' => 'ProductController@getProductShow',
     'as' => 'product.show'
 ]);
-Route::post('product/cart/{id}', [
+Route::post('product/cart/{meal_id}/{datetime_id}', [
     'uses' => 'ProductController@postAddToCart',
     'as' => 'product.cart'
 ]);
