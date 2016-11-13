@@ -75,7 +75,7 @@
                             <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
                         </div>
                         <div class="" style="margin-top:3em;">
-                            <a id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
+                            <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
                         </div>
                     </div>
                 </div>
@@ -87,6 +87,7 @@
                     <span class="w3-text-grey w3-large" style="padding-left:5em;">Subtotal: <span class="w3-text-green w3-large">$<span id="total_price">{{ $totalPrice }}</span></span></span>
                     <!--for totalPrice post use, not shown-->
                     <input type="text" name="totalPrice" id="totalPrice" style="display:none;" value="{{ $totalPrice }}">
+                    
                     {!! Form::submit('Checkout', ['class' => 'btn w3-deep-orange btn-block']) !!}
                 </div>
             </div>
@@ -97,7 +98,7 @@
 @section('scripts')
 <script>
     $(function () {
-        var cartPrices = {!! json_encode($cartPrices) !!}; 
+        var Qtys = {!! json_encode($Qtys) !!}; 
        
         //people_order add or deduct
         $(".sub").click(function(){
@@ -165,12 +166,15 @@
 
             $(price).text(price_val.toString());
 
-            //update cartPrices array date and change total price
-            cartPrices[id.substring(1)] = price_val;
+            //update Qty array date and change total price
+            Qtys[id.substring(1)] = meal_quantity_val;
 
             var totalPrice = 0;
-            for (var value in cartPrices) {
-               totalPrice += cartPrices[value];
+            for (var index in Qtys) {
+               var unite_price_id = "#".concat(index.concat("united_price"));
+               var unite_price_value = parseInt($(unite_price_id).text());
+
+               totalPrice += (Qtys[index] * unite_price_value);
             }
 
             $("#total_price").text(totalPrice.toString());
@@ -183,28 +187,22 @@
 
             var token = '{{ Session::token() }}';
             var url = '{{ route('product.cart.remove') }}';
-            // var url = '{{ url('/product/cart/remove') }}';
-           
+            
             $.ajax({
                 method: 'POST',
                 url: url,
-                data: {id: id, _token: token},
-                success : function(data){
-                    alert('success');
-                },
-                error : function(data){
-                    alert('fail');
-                },
-            })
-            .done(function (msg) {
-                alert(msg['message']);
+                data: {id: id, qty: Qtys, _token: token},
+                // success : function(data){
+                //     alert('success');
+                // },
+                // error : function(data){
+                //     alert('fail');
+                // },
             });
-
-            alert(url);
-
-            
+            // .done(function (msg) {
+            //     alert(msg['message']);
+            // });
         });
-        
     });
 </script>
 @endsection

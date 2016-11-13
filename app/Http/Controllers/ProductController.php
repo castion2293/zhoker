@@ -55,19 +55,27 @@ class ProductController extends Controller
 
         $carts = $user->carts()->where('checked', '0')->get();
         
-        $cartPriceArray = [];
+        $cartQtyArray = [];
         $totalPrice = 0;
         foreach ($carts as $cart) {
-            $cartPriceArray[$cart->id] = $cart->price;
+            $cartQtyArray[$cart->id] = $cart->people_order;
             $totalPrice += $cart->price;
         }
 
-        return view('desktop.main.shoppingCart', ['carts' => $carts, 'cartPrices' => $cartPriceArray, 'totalPrice' => $totalPrice] );
+        return view('desktop.main.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice] );
     }
 
     public function postCartRemove(Request $request)
     {
-        $request['id'] = 2;
-        return response()->json(['message' => $request['id']]);
+        $carts = Auth::user()->carts()->where('checked', '0')->get();
+
+        foreach ($carts as $cart) {
+            $cart->people_order = $request->qty[$cart->id];
+            $cart->price = $cart->unite_price * $cart->people_order;
+            $cart->save();
+        }
+
+        $item = Cart::findOrFail($request->id);
+        $item->delete();
     }
 }
