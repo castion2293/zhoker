@@ -39,6 +39,11 @@
                                   <span class="w3-text-deep-orange star"><i class="fa fa-star"></i></span>
                                 @endfor
                               </div>
+                              <div id="method-label" style="padding-top:20px;display: none">
+                                @foreach ($meal->methods as $method)
+                                  <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
+                                @endforeach
+                              </div>
                           </div>
                         </div>
                       </a>
@@ -159,10 +164,11 @@
           $(contentID).toggle();
 
           var v = $(hash).hasClass("w3-deep-orange");
-          var meal_name = $(hash).find("#meal-name");
+          var meal_name = $(hash).find("#meal-name"); 
           var meal_price = $(hash).find("#meal-price");
           var meal_people = $(hash).find("#meal-people");
           var star = $(hash).find(".star");
+          var method_label = $(hash).find("#method-label");
           var title_img = $(hash).find("#title_img");
           var content_img = $(contentID).find(".content-img");
 
@@ -173,6 +179,7 @@
             meal_price.removeClass("w3-text-white").addClass("w3-text-green");
             meal_people.removeClass("w3-text-white").addClass("w3-text-grey");
             star.removeClass("w3-text-white").addClass("w3-text-deep-orange");
+            method_label.hide();
             title_img.animate({width: '33%'}, 500);
             content_img.animate({width: '0'}, 500);
           } else {
@@ -182,6 +189,7 @@
             meal_price.removeClass("w3-text-green").addClass("w3-text-white");
             meal_people.removeClass("w3-text-grey").addClass("w3-text-white");
             star.removeClass("w3-text-deep-orange").addClass("w3-text-white");
+            method_label.show();
             title_img.animate({width: '0'}, 500);
             content_img.animate({width: '100%'}, 500);
           }

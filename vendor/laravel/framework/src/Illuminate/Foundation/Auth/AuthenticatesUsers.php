@@ -99,7 +99,6 @@ trait AuthenticatesUsers
             return $this->authenticated($request, $this->guard()->user())
                   ?: redirect()->to($oldUrl);
         } else {
-            dd('wrong');
             return $this->authenticated($request, $this->guard()->user())
                 ?: redirect()->intended(url()->previous());
         }

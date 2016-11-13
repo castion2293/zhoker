@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
 use App\Meal;
 use App\DateTimePeople;
+use App\Method;
 use App\Cart;
 use Auth;
 use Session;
@@ -29,16 +31,43 @@ class ProductController extends Controller
     {
         $meal = Meal::findOrFail($meal_id);
         $datetime = DateTimePeople::findorFail($datetime_id);
+        $method = Method::findorFail($request->method_way);
         $cart = new Cart;
 
         $cart->user_id = Auth::user()->id;
         $cart->meal_id = $meal->id;
+        $cart->datetimepeople_id = $datetime_id;
         $cart->unite_price = $meal->price;
         $cart->people_order = $request->input('people_order');
+        $cart->price = $meal->price * $request->people_order;
         $cart->date = $datetime->date;
         $cart->time = $datetime->time;
-        $cart->method =  
+        $cart->method =  $method->method;
+        
+        $cart->save();
 
-        dd($cart);
+        return redirect()->route('product.cart.show', $cart->user_id);
+    }
+
+    public function getCartShow($id)
+    {
+        $user = User::findOrFail($id);
+
+        $carts = $user->carts()->where('checked', '0')->get();
+        
+        $cartPriceArray = [];
+        $totalPrice = 0;
+        foreach ($carts as $cart) {
+            $cartPriceArray[$cart->id] = $cart->price;
+            $totalPrice += $cart->price;
+        }
+
+        return view('desktop.main.shoppingCart', ['carts' => $carts, 'cartPrices' => $cartPriceArray, 'totalPrice' => $totalPrice] );
+    }
+
+    public function postCartRemove(Request $request)
+    {
+        $request['id'] = 2;
+        return response()->json(['message' => $request['id']]);
     }
 }

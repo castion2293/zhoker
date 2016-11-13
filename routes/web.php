@@ -73,6 +73,18 @@ Route::post('product/cart/{meal_id}/{datetime_id}', [
     'uses' => 'ProductController@postAddToCart',
     'as' => 'product.cart'
 ]);
+Route::get('product/cart/show/{id}', [
+    'uses' => 'ProductController@getCartShow',
+    'as' => 'product.cart.show'
+]);
+Route::post('product/cart/remove', [
+    'uses' => 'ProductController@postCartRemove',
+    'as' => 'product.cart.remove'
+]);
+// Route::post('product/cart/remove', function(\Illuminate\Http\Request $request) {
+//     return response()->json(['message' => $request['id']]);
+// });
+
 
 //Chef login
 Route::post('/chef_login', [

@@ -53,6 +53,7 @@ class Authenticate
             } else {
                 Session::put('oldUrl', url()->previous());
                 Session::put('people_order', $request->people_order);
+                Session::put('method_way', $request->method_way);
                 
                 return redirect()->guest(url()->previous())->withErrors('Not Authicated');
             }

@@ -1,30 +1,21 @@
 <!-- Navbar (sit on top) -->
   <div class="w3-top w3-white w3-border-bottom w3-border-grey" style="height:10%;">
     <ul class="w3-navbar" id="myNavbar">
-      @if (Auth::check())
-        <li>
-            <a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left w3-text-grey" id="hometag">Zhoker</a>
-        </li>
-        <li class="w3-hide-small w3-right">
-            <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge w3-text-grey" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
-        </li>
-      @else
-        <li>
-            <a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left w3-text-grey" id="hometag">Zhoker</a>
-        </li>
-        <li class="w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge w3-text-grey" id="sign-in-bar" ><i class="fa fa-sign-in"></i><span class="w3-large"> SignIn</span></a>
-        </li>
-        <li class="w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge w3-text-grey" id="sign-up-bar"><i class="fa fa-user"></i><span class="w3-large"> SignUp</span></a>
-        </li>
-        <li class="w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge w3-text-grey" id=""><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
-        </li>
-        <li class="w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge w3-text-grey" id="filter"><i class="fa fa-sliders"></i><span class="w3-large"> Filter</span></a>
-        </li>
-      @endif
+      <li>
+          <a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left w3-text-grey" id="hometag">Zhoker</a>
+      </li>
+      <!--li class="w3-right">
+          <a href="#" class="w3-padding-large w3-xlarge w3-text-grey" id="sign-in-bar" ><i class="fa fa-sign-in"></i><span class="w3-large"> SignIn</span></a>
+      </li>
+      <li class="w3-right">
+          <a href="#" class="w3-padding-large w3-xlarge w3-text-grey" id="sign-up-bar"><i class="fa fa-user"></i><span class="w3-large"> SignUp</span></a>
+      </li>
+      <li class="w3-right">
+          <a href="#" class="w3-padding-large w3-xlarge w3-text-grey" id=""><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
+      </li-->
+      <li class="w3-right">
+          <a href="#" class="w3-padding-large w3-xlarge w3-text-grey" id="filter"><i class="fa fa-sliders"></i><span class="w3-large"> Filter</span></a>
+      </li>
     </ul>
   </div>
 

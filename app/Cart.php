@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     protected $fillable = [
-        'user_id', 'meal_id', 'unite_price', 'people_order', 'price', 'date', 'time', 'method', 'checked', 'user_order_id', 'chef_order_id',
+        'user_id', 'meal_id', 'datetimepeople_id', 'unite_price', 'people_order', 'price', 'date', 'time', 'method', 'checked', 'user_order_id', 'chef_order_id',
     ];
 
     public function users()
@@ -18,6 +18,11 @@ class Cart extends Model
     public function meals()
     {
         return $this->belongsTo('App\Meal', 'meal_id');
+    }
+
+    public function datetimepeoples()
+    {
+        return $this->belongsTo('App\DateTimePeople', 'datetimepeople_id');
     }
 
     public function userorders()

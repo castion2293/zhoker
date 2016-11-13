@@ -415,6 +415,7 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
 
     public static $classMap = array (
         'AddChefToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_15_210436_add_chef_to_users_table.php',
+        'AddDatetimepeopleIdToCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_12_032205_add_datetimepeople_id_to_carts_table.php',
         'AddProfileToChefsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_22_225229_add_profile_to_chefs_table.php',
         'AddProfileToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_05_235245_add_profile_to_users_table.php',
         'AddRoleToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_17_162731_add_role_to_users_table.php',

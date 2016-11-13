@@ -14,4 +14,9 @@ class DateTimePeople extends Model
     {
         return $this->belongsTo('App\Meal', 'meal_id');
     }
+
+    public function carts()
+    {
+        return $this->hasOne('App\Cart');
+    }
 }

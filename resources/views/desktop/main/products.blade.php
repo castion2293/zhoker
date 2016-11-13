@@ -39,18 +39,26 @@
                 <div class="w3-margin-top w3-border-grey w3-border-top w3-border-bottom w3-padding-12">
                     {!! Form::open(['route' => ['product.cart', $meal->id, $datetimepeople->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                         <div class="w3-row w3-padding-small">
-                            <div class="w3-col l7 m7">
+                            <div class="w3-col l5 m5">
                                 <label class="w3-text-grey w3-large" style="font-family:cursive">Date/time</label><br>
                                 <div class="" style="margin-top:0.5em;">
                                     <span class="w3-text-grey w3-large">{{ $datetimepeople->date }} / {{ $datetimepeople->time }}</span>
                                 </div>
                             </div>
-                            <div class="w3-col l5 m5">
+                            <div class="w3-col l3 m3">
                                 <label class="w3-text-grey w3-large" style="font-family:cursive">How Many?</label>
                                 <select class="w3-select w3-border w3-text-grey w3-large cs-select cs-skin-elastic" id="people_order" name="people_order" required="" > 
                                     @for ($i = 0;$i < $datetimepeople->people_left;$i++)
-                                        <option value='{{ $i + 1 }}'>{{ $i+1 }} people</option>
+                                       <option value='{{ $i + 1 }}'>{{ $i+1 }} people</option>
                                     @endfor
+                                </select>
+                            </div>
+                            <div class="w3-col l4 m4 w3-padding-left">
+                                <label class="w3-text-grey w3-large" style="font-family:cursive">Method?</label>
+                                <select class="w3-select w3-border w3-text-grey w3-large cs-select cs-skin-elastic" id="method_way" name="method_way" required="" > 
+                                   @foreach ($methods as $method)
+                                       <option value='{{ $method->id }}'>{{ $method->method }}</option>
+                                   @endforeach
                                 </select>
                             </div>
                         </div>
@@ -243,19 +251,67 @@
         $(function () {
             @if (count($errors) > 0)
               @foreach($errors->all() as $error)
-                @if ($error == 'Not Authicated')
-                  $("#myModal").modal();
-                @endif
+                var status = '{{ $error }}';
+                var form_name = "";
+
+                // get the error message
+                switch(status) {
+                  case 'These credentials do not match our records.':
+                      error_show = error_show.concat(status).concat('<br>');
+                      form_name = "SignIn Form";
+                      break;
+                  case 'The email has already been taken.':
+                      error_show = error_show.concat(status).concat('<br>');
+                      form_name = "SignUp Form";
+                      break;
+                  case 'The phone number must be a number.':
+                      error_show = error_show.concat(status).concat('<br>');
+                      form_name = "SignUp Form";
+                      break;
+                  case 'The password confirmation does not match.':
+                      error_show = error_show.concat(status).concat('<br>');
+                      form_name = "SignUp Form";
+                      break;
+                  case 'We can&#039;t find a user with that e-mail address.':
+                      error_show = error_show.concat(status).concat('<br>');
+                      form_name = "Forgot Form";
+                      break;
+                  case 'Not Authicated':
+                      $("#myModal").modal();
+                  default:
+                      break;
+                }
               @endforeach
+
+              //show the error message
+              switch(form_name) {
+                  case "SignIn Form":
+                    $("#sign_in_wmsg").html(error_show);
+                    $("#myModal").modal();//失敗後的顯示
+                    break;
+                  case "SignUp Form":
+                    $("#sign_up_wmsg").html(error_show);
+                    $("#signupModal").modal();//失敗後的顯示
+                    break;
+                  case "Forgot Form":
+                    $("#Forgot_pwd_wmsg").html(error_show);
+                    $("#forgotModal").modal();//失敗後的顯示
+                    break;
+                  default:
+                    break;
+              }
+
             @endif
 
+            //re post to shopping cart
             @if (Session::has('repost'))
                 
                 //set default value
                 $("#people_order").val("{{ Session::get('people_order') }}");
+                $("#method_way").val("{{ Session::get('method_way') }}")
                 
                 {{ Session::forget('people_order') }}
-                //{{ Session::forget('report') }}
+                {{ Session::forget('method_way') }}
 
                 $("#add-to-cart").trigger("click");
                 return false;
