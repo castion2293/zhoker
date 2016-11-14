@@ -24,7 +24,7 @@ class ProductController extends Controller
         $datetimepeople = $meal->datetimepeoples()->findOrFail($datetime_id);
         $methods = $meal->methods()->get();
 
-        return view('desktop.main.products', ['meal' => $meal, 'datetimepeople' => $datetimepeople, 'methods' => $methods]);
+        return view('desktop.products.products', ['meal' => $meal, 'datetimepeople' => $datetimepeople, 'methods' => $methods]);
     }
 
     public function postAddToCart(Request $request, $meal_id, $datetime_id)
@@ -62,7 +62,7 @@ class ProductController extends Controller
             $totalPrice += $cart->price;
         }
 
-        return view('desktop.main.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice] );
+        return view('desktop.products.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice] );
     }
 
     public function postCartRemove(Request $request)
@@ -77,5 +77,36 @@ class ProductController extends Controller
 
         $item = Cart::findOrFail($request->id);
         $item->delete();
+    }
+
+    public function postCartStore(Request $request)
+    {
+        $carts = Auth::user()->carts()->where('checked', '0')->get();
+
+        foreach ($carts as $cart) {
+            $cart->people_order = $request->qty[$cart->id];
+            $cart->price = $cart->unite_price * $cart->people_order;
+            $cart->save();
+        }
+    }
+
+    public function getCheckout($id)
+    {
+        $user = User::findOrFail($id);
+
+        $carts = $user->carts()->where('checked', '0')->get();
+
+        if ($carts->isEmpty()) {
+            dd("empty");
+        }
+
+        $cartQtyArray = [];
+        $totalPrice = 0;
+        foreach ($carts as $cart) {
+            $cartQtyArray[$cart->id] = $cart->people_order;
+            $totalPrice += $cart->price;
+        }
+
+        return view('desktop.products.checkout', ['carts'=> $carts, 'totalPrice' => $totalPrice] );
     }
 }

@@ -81,9 +81,14 @@ Route::post('product/cart/remove', [
     'uses' => 'ProductController@postCartRemove',
     'as' => 'product.cart.remove'
 ]);
-// Route::post('product/cart/remove', function(\Illuminate\Http\Request $request) {
-//     return response()->json(['message' => $request['id']]);
-// });
+Route::post('product/cart/store', [
+    'uses' => 'ProductController@postCartStore',
+    'as' => 'product.cart.store'
+]);
+Route::get('product/cart/checkout/{id}', [
+    'uses' => 'ProductController@getCheckout',
+    'as' => 'product.cart.checkout'
+]);
 
 
 //Chef login
