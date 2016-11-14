@@ -27,11 +27,11 @@ class Cart extends Model
 
     public function userorders()
     {
-        return $this->belongsTo('App\Userorder', 'user_order_id');
+        return $this->belongsTo('App\UserOrder', 'user_order_id');
     }
 
     public function cheforders()
     {
-        return $this->belongsTo('App\Cheforder', 'chef_order_id');
+        return $this->belongsTo('App\ChefOrder', 'chef_order_id');
     }
 }

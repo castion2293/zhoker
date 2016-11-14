@@ -9,8 +9,12 @@ use App\Meal;
 use App\DateTimePeople;
 use App\Method;
 use App\Cart;
+use App\UserOrder;
 use Auth;
 use Session;
+use Stripe\Stripe;
+use Stripe\Charge;
+use Stripe\Customer;
 
 class ProductController extends Controller
 {
@@ -107,6 +111,53 @@ class ProductController extends Controller
             $totalPrice += $cart->price;
         }
 
-        return view('desktop.products.checkout', ['carts'=> $carts, 'totalPrice' => $totalPrice] );
+        return view('desktop.products.checkout', ['user' => $user, 'carts'=> $carts, 'totalPrice' => $totalPrice] );
+    }
+
+    public function postCheckout(Request $request)
+    {
+        $user = Auth::user();
+
+        $carts = $user->carts()->where('checked', '0')->get();
+
+        $totalPrice = 0;
+        foreach ($carts as $cart) {
+            $totalPrice += $cart->price;
+
+            // $cart->checked = true;
+            // $cart->save();
+        }
+
+        $userOrder = UserOrder::create([
+            'user_id' => $user->id,
+            'total_price' => $totalPrice,
+            'paid_token' => encrypt($request->input('stripeToken')),
+            'pay_way' => '',
+            'contact_first_name' => $request->input('first_name'),
+            'contact_last_name' => $request->input('last_name'),
+            'contact_phone_number' => $request->input('phone_number'),
+            'contact_email' => $request->input('email'),
+            'contact_address' => '',
+        ]);
+
+        foreach ($carts as $cart) {
+            $cart->userorders()->associate($userOrder);
+            $cart->checked = true;
+            $cart->save();
+        }
+        //$userOrder->carts()->associate($carts); 
+
+        dd($userOrder);
+        // Stripe::setApiKey(config('services.stripe.secret'));
+        // try {
+        //     $charge = Charge::create(array(
+        //         "amount" => $totalPrice * 100,
+        //         "currency" => "twd",
+        //         "source" => $request->input('stripeToken'), 
+        //         "description" => "Testing"
+        //     ));
+        // } catch (\Exception $e) {
+        //     return redirect()->back()->with('error', $e->getMessage());
+        // }
     }
 }

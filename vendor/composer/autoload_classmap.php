@@ -23,6 +23,7 @@ return array(
     'CreateMethodsTable' => $baseDir . '/database/migrations/2016_10_21_013316_create_methods_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateShiftsTable' => $baseDir . '/database/migrations/2016_10_21_011321_create_shifts_table.php',
+    'CreateUserOrdersTable' => $baseDir . '/database/migrations/2016_11_14_204135_create_user_orders_table.php',
     'CreateUserTokensTable' => $baseDir . '/database/migrations/2016_11_03_210631_create_user_tokens_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

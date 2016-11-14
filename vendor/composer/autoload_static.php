@@ -59,6 +59,7 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'SuperClosure\\' => 13,
+            'Stripe\\' => 7,
         ),
         'R' => 
         array (
@@ -213,6 +214,10 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         'SuperClosure\\' => 
         array (
             0 => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -431,6 +436,7 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         'CreateMethodsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_013316_create_methods_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateShiftsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_011321_create_shifts_table.php',
+        'CreateUserOrdersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_14_204135_create_user_orders_table.php',
         'CreateUserTokensTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_03_210631_create_user_tokens_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',

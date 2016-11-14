@@ -9,7 +9,7 @@
 @section('content')
     <!--header picture-->
     <div class="" id="top-pic">
-        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1031201604.JPG" alt="profile" style="width:100%">
+        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/110401.JPG" alt="profile" style="width:100%">
     </div>
 
     <!--content-->
@@ -22,13 +22,13 @@
             <div class="w3-col l5 m5">
                 <div class="w3-row w3-margin-top w3-padding-12 w3-border-grey w3-border-bottom">
                     <div class="w3-col l5 m5">
-                        <label class="w3-text-grey" style="font-family:cursive;">MEAL</label>
+                        <label class="w3-text-dark-grey" style="font-family:cursive;">MEAL</label>
                     </div>
                     <div class="w3-col l5 m5">
-                        <label class="w3-text-grey" style="font-family:cursive;">ITEM</label>
+                        <label class="w3-text-dark-grey" style="font-family:cursive;">ITEM</label>
                     </div>
                     <div class="w3-col l2 m2">
-                        <label class="w3-text-grey" style="font-family:cursive;">TOTAL</label>
+                        <label class="w3-text-dark-grey" style="font-family:cursive;">TOTAL</label>
                     </div>
                 </div>
 
@@ -64,8 +64,66 @@
                 </div>
             </div>
 
-            <div class="w3-col l7 m7">
-                
+            <div class="w3-col l7 m7 w3-content w3-container">
+                {!! Form::open(['route' => 'product.cart.payment', 'data-parsley-validate' => '', 'id' => 'checkout-form', 'files' => true, 'method' => 'POST']) !!}
+                    <div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
+                        <label class="w3-text-dark-grey" style="font-family:cursive;">CONTACT</label>
+                    </div>
+                    <div class="w3-margin-left">
+                        <div class="w3-row" style="margin-top:1em;">
+                            <div class="w3-col l6 m6" style="padding-right:0.8em;">
+                                <label class="w3-text-gery" style="font-family:cursive">First Name</label>   
+                                {{ Form::text('first_name', $user->first_name, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
+                            </div>
+                            <div class="w3-col l6 m6" style="padding-right:0.8em;">
+                                <label class="w3-text-gery" style="font-family:cursive">Last Name</label>   
+                                {{ Form::text('last_name', $user->last_name, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
+                            </div> 
+                        </div>
+                            <div class="" style="padding-right:0.8em;margin-top:0.5em;">
+                            <label class="w3-text-gery" style="font-family:cursive">Contact Phone Number</label>   
+                            {{ Form::text('phone_number', $user->phone_number, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
+                        </div>
+                            <div class="" style="padding-right:0.8em;margin-top:0.5em;">
+                            <label class="w3-text-gery" style="font-family:cursive">Contact Email</label>   
+                            {{ Form::text('email', $user->email, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
+                        </div>
+                    </div>
+
+                    <div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
+                        <label class="w3-text-dark-grey" style="font-family:cursive;">PAYMENT</label>
+                    </div>
+                    <div class="w3-margin-left">
+                        <div class="" style="padding-right:0.8em;margin-top:1em;">
+                            <label class="w3-text-gery" style="font-family:cursive">Card Number</label>   
+                            {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-number']) }} 
+                        </div>
+                        <div class="w3-row" style="margin-top:0.5em;">
+                            <div class="w3-col l4 m4" style="padding-right:1em;">
+                                <label class="w3-text-gery" style="font-family:cursive">Exp. Date</label>   
+                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-month', 'placeholder' => 'MM']) }} 
+                            </div>
+                            <div class="w3-col l4 m4" style="padding-right:1em;">
+                                <label class="w3-text-gery" style="font-family:cursive">Exp. Year</label>   
+                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-year', 'placeholder' => 'YYYY']) }} 
+                            </div>
+                             <div class="w3-col l4 m4" style="padding-right:0.8em;">
+                                <label class="w3-text-gery" style="font-family:cursive">CVC</label>   
+                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-cvc']) }} 
+                            </div>
+                        </div>
+                        <div class="w3-border-grey w3-border-bottom" style="padding-right:0.8em;padding-bottom:1em;margin-top:0.5em;">
+                            <label class="w3-text-gery" style="font-family:cursive">Card Holder Name</label>   
+                            {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-name']) }} 
+                        </div>
+                    </div> 
+                    <div class="w3-row">
+                        <div class="w3-rest"></div> 
+                        <div class="w3-col l4 m4 w3-right w3-margin-top">
+                            {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange btn-block w3-large']) !!}
+                        </div>
+                    </div>  
+                {!! Form::close() !!}
             </div>
         </div>
 
@@ -73,5 +131,37 @@
 @endsection
 
 @section('scripts')
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script>
+        Stripe.setPublishableKey('{{ config('services.stripe.key') }}');
 
+        var $form = $('#checkout-form');
+
+        $form.submit(function(event) {
+            //$('#charge-error').addClass('hidden');
+            $form.find('button').prop('disabled', true);
+            Stripe.card.createToken({
+                number: $('#card-number').val(),
+                cvc: $('#card-cvc').val(),
+                exp_month: $('#card-expiry-month').val(),
+                exp_year: $('#card-expiry-year').val(),
+                name: $('#card-name').val()
+            }, stripeResponseHandler);
+            return false;
+        });
+
+        function stripeResponseHandler(status, response) {
+            if (response.error) {
+                //$('#charge-error').removeClass('hidden');
+                //$('#charge-error').text(response.error.message);
+                $form.find('button').prop('disabled', false);
+            } else {
+                var token = response.id;
+                $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+
+                //Submit the form
+                $form.get(0).submit();
+            }
+        }
+    </script>
 @endsection
