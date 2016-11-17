@@ -9,7 +9,10 @@ use App\Http\Requests\UserResetPasswordRequest;
 use Auth;
 use Hash;
 use App\User;
+use App\CreditCard;
 use Storage;
+use Stripe\Stripe;
+use Stripe\Customer;
 
 class UserProfileController extends Controller
 {
@@ -72,6 +75,8 @@ class UserProfileController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+
+        //dd($user->creditcards()->get()->isEmpty());
 
         return view('desktop.user.setting', ['user' => $user]);
     }
@@ -141,5 +146,77 @@ class UserProfileController extends Controller
             return back()->withErrors('The specified password does not match the database password');
         }
         
+    }
+
+    public function postPaymentCreate(Request $request)
+    {
+        $user = Auth::user();
+
+        Stripe::setApiKey(config('services.stripe.secret'));
+        try {
+            $customer = Customer::create([
+                "email" => $user->email,
+                "source" => $request->input('stripeToken'),
+                "description" => $user->first_name,
+            ]);
+            
+            $credit_card = CreditCard::firstOrCreate([
+                'user_id' => $user->id,
+                'customer_id' => encrypt($customer->id),
+                'brand' => $customer->sources->data[0]->brand,
+                'cvc_check' => $customer->sources->data[0]->cvc_check,
+                'last4' => $customer->sources->data[0]->last4,
+                'exp_month' => $customer->sources->data[0]->exp_month,
+                'exp_year' => $customer->sources->data[0]->exp_year,
+                'card_name' => $customer->sources->data[0]->name,
+                'funding' => $customer->sources->data[0]->funding,
+            ]);
+
+            $url = url()->previous() . "#payment";
+            return redirect($url);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function postPaymentEdit(Request $request)
+    {
+        $user = Auth::user();
+        
+        Stripe::setApiKey(config('services.stripe.secret'));
+        try {
+            $customer = Customer::create([
+                "email" => $user->email,
+                "source" => $request->input('stripeToken'),
+                "description" => $user->first_name,
+            ]);
+            
+            $credit_card = $user->creditcards()->first();
+            
+            $credit_card->customer_id = encrypt($customer->id);
+            $credit_card->brand =  $customer->sources->data[0]->brand;
+            $credit_card->cvc_check = $customer->sources->data[0]->cvc_check;
+            $credit_card->exp_month = $customer->sources->data[0]->exp_month;
+            $credit_card->exp_year = $customer->sources->data[0]->exp_year;
+            $credit_card->card_name = $customer->sources->data[0]->name;
+            $credit_card->funding = $customer->sources->data[0]->funding;
+            $credit_card->last4 = $customer->sources->data[0]->last4;
+            $user->creditcards()->save($credit_card);
+
+            $url = url()->previous() . "#payment";
+            return redirect($url);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function getPaymentDelete($id)
+    {
+        $credit_card = CreditCard::where('user_id', $id)->first();
+
+        $credit_card->delete();
+
+        $url = url()->previous() . "#payment";
+        return redirect($url);
     }
 }

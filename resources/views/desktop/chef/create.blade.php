@@ -91,7 +91,7 @@
                 <div class="w3-row w3-margin-top">
                     <div class="w3-rest"></div>
                     <div class="w3-col l2 m2 w3-right">
-                        {!! Form::submit('Create Menu', ['class' => 'btn w3-green btn-block']) !!}
+                        {!! Form::submit('Create Menu', ['class' => 'btn w3-green btn-block zk-shrink-hover']) !!}
                     </div>
                 </div>  
             {!! Form::close() !!}

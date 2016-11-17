@@ -10,6 +10,7 @@ use App\DateTimePeople;
 use App\Method;
 use App\Cart;
 use App\UserOrder;
+use App\ChefOrder;
 use Auth;
 use Session;
 use Stripe\Stripe;
@@ -118,46 +119,67 @@ class ProductController extends Controller
     {
         $user = Auth::user();
 
+        Stripe::setApiKey(config('services.stripe.secret'));
+        try {
+            
+            $customer = Customer::create([
+                "email" => $user->email,
+                "source" => $request->input('stripeToken'),
+                "description" => $user->first_name,
+            ]);
+            // $last4 = $customer->sources->data[0]->last4;
+            // dd($customer->sources->data[0]);
+            $this->order($user, $request, $customer->id);
+
+            return redirect()->route('product.cart.order', $user->id);
+
+            // $charge = Charge::create(array(
+            //     "amount" => $totalPrice * 100,
+            //     "currency" => "twd",
+            //     "customer" => "cus_9ZSZmHziuSwSS3",
+            // ));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function getOrder($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('desktop.user.order', ['user', $user]);
+    }
+
+    private function order($user, $contact_info, $cashier_id)
+    {
         $carts = $user->carts()->where('checked', '0')->get();
 
         $totalPrice = 0;
         foreach ($carts as $cart) {
             $totalPrice += $cart->price;
-
-            // $cart->checked = true;
-            // $cart->save();
         }
 
         $userOrder = UserOrder::create([
             'user_id' => $user->id,
             'total_price' => $totalPrice,
-            'paid_token' => encrypt($request->input('stripeToken')),
             'pay_way' => '',
-            'contact_first_name' => $request->input('first_name'),
-            'contact_last_name' => $request->input('last_name'),
-            'contact_phone_number' => $request->input('phone_number'),
-            'contact_email' => $request->input('email'),
+            'contact_first_name' => $contact_info->first_name,
+            'contact_last_name' => $contact_info->last_name,
+            'contact_phone_number' => $contact_info->phone_number,
+            'contact_email' => $contact_info->email,
             'contact_address' => '',
+            'cashier_id' => $cashier_id,
         ]);
 
         foreach ($carts as $cart) {
+            $chefOrder = ChefOrder::create([
+                'chef_id' => $cart->meals()->first()->chef_id,
+            ]);
+
             $cart->userorders()->associate($userOrder);
+            $cart->cheforders()->associate($chefOrder);
             $cart->checked = true;
             $cart->save();
         }
-        //$userOrder->carts()->associate($carts); 
-
-        dd($userOrder);
-        // Stripe::setApiKey(config('services.stripe.secret'));
-        // try {
-        //     $charge = Charge::create(array(
-        //         "amount" => $totalPrice * 100,
-        //         "currency" => "twd",
-        //         "source" => $request->input('stripeToken'), 
-        //         "description" => "Testing"
-        //     ));
-        // } catch (\Exception $e) {
-        //     return redirect()->back()->with('error', $e->getMessage());
-        // }
     }
 }

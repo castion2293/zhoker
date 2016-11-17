@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="w3-margin-top">
-                            {!! Form::submit('ADD TO CART', ['id' => 'add-to-cart', 'class' => 'btn w3-deep-orange btn-block w3-large', 'style' => '']) !!}
+                            {!! Form::submit('ADD TO CART', ['id' => 'add-to-cart', 'class' => 'btn w3-deep-orange btn-block w3-large zk-shrink-hover', 'style' => '']) !!}
                         </div>
                     {!! Form::close() !!}
                 </div>

@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\UserOrder');
     }
+
+    public function creditcards()
+    {
+        return $this->hasOne('App\CreditCard');
+    }
 }

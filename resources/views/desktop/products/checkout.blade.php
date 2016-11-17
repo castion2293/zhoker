@@ -120,7 +120,7 @@
                     <div class="w3-row">
                         <div class="w3-rest"></div> 
                         <div class="w3-col l4 m4 w3-right w3-margin-top">
-                            {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange btn-block w3-large']) !!}
+                            {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange btn-block w3-large zk-shrink-hover']) !!}
                         </div>
                     </div>  
                 {!! Form::close() !!}

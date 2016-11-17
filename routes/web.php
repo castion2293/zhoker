@@ -93,6 +93,10 @@ Route::post('product/cart/payment', [
     'uses' => 'ProductController@postCheckout',
     'as' => 'product.cart.payment'
 ]);
+Route::get('product/cart/order/{id}', [
+    'uses' => 'ProductController@getOrder',
+    'as' => 'product.cart.order'
+]);
 
 
 //Chef login
@@ -119,4 +123,16 @@ Route::resource('user_profile', 'UserProfileController', [
 Route::post('user_reset_password', [
     'uses' => 'UserProfileController@resetPassword',
     'as' => 'user.resetpassword'
+]);
+Route::post('user_payment_create', [
+    'uses' => 'UserProfileController@postPaymentCreate',
+    'as' => 'user.payment.create'
+]);
+Route::post('user_payment_edit', [
+    'uses' => 'UserProfileController@postPaymentEdit',
+    'as' => 'user.payment.edit'
+]);
+Route::get('user_payment_delete/{id}', [
+    'uses' => 'UserProfileController@getPaymentDelete',
+    'as' => 'user.payment.delete'
 ]);

@@ -19,4 +19,9 @@ class Chef extends Model
     {
         return $this->hasMany('App\Meal');
     }
+
+    public function cheforders()
+    {
+        return $this->hasMany('App\ChefOrder');
+    }
 }

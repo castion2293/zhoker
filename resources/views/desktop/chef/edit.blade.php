@@ -78,7 +78,7 @@
             <div class="w3-row w3-margin-top">
                 <div class="w3-rest"></div>
                 <div class="w3-col l2 m2 w3-right">
-                    {!! Form::submit('Save Menu', ['class' => 'btn w3-green btn-block']) !!}
+                    {!! Form::submit('Save Menu', ['class' => 'btn w3-green btn-block zk-shrink-hover']) !!}
                 </div>
             </div>  
          {!! Form::close() !!}
@@ -124,7 +124,7 @@
                 </select>
             </div>
 
-            <a href="#modal-picker" class="btn btn-success form-control w3-margin-top" id="confirm-btn" data-dismiss="modal"><span class="w3-large"></span>Confirm</a>
+            <a href="#modal-picker" class="btn btn-success form-control w3-margin-top " id="confirm-btn" data-dismiss="modal"><span class="w3-large"></span>Confirm</a>
             
           {!! Form::close() !!}
         </div>

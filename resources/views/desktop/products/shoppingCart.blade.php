@@ -88,7 +88,7 @@
                 <!--for totalPrice post use, not shown-->
                 <input type="text" name="totalPrice" id="totalPrice" style="display:none;" value="{{ $totalPrice }}">
                 <!--button id="test">checkout</button-->
-                <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt" class="btn w3-deep-orange btn-block">Checkout</a>
+                <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt" class="btn w3-deep-orange btn-block zk-shrink-hover">Checkout</a>
             </div>
         </div>
     </div>

@@ -17,15 +17,13 @@ class CreateUserOrdersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('total_price');
-            $table->text('paid_token')->nullable();
             $table->string('pay_way')->nullable();
             $table->string('contact_first_name');
             $table->string('contact_last_name');
             $table->string('contact_phone_number');
             $table->string('contact_email');
             $table->string('contact_address')->nullable();
-            $table->boolean('checked')->default(false);
-            $table->boolean('paid')->default(false);
+            $table->text('cashier_id');
             $table->timestamps();
         });
     }
