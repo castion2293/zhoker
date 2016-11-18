@@ -89,6 +89,10 @@ Route::get('product/cart/checkout/{id}', [
     'uses' => 'ProductController@getCheckout',
     'as' => 'product.cart.checkout'
 ]);
+Route::get('product/cart/bindingcard/{id}', [
+    'uses' => 'ProductController@getBindingCard',
+    'as' => 'product.cart.bindingcard'
+]);
 Route::post('product/cart/payment', [
     'uses' => 'ProductController@postCheckout',
     'as' => 'product.cart.payment'

@@ -115,6 +115,17 @@ class ProductController extends Controller
         return view('desktop.products.checkout', ['user' => $user, 'carts'=> $carts, 'totalPrice' => $totalPrice] );
     }
 
+    public function getBindingCard($id)
+    {
+        $user = User::findOrFail($id);
+
+        Session::put('oldUrl', url()->previous());
+
+        //for binding credit card
+        $url = "user_profile/" . $user->id . "/edit#payment";
+        return redirect($url);
+    }
+
     public function postCheckout(Request $request)
     {
         $user = Auth::user();
@@ -127,8 +138,7 @@ class ProductController extends Controller
                 "source" => $request->input('stripeToken'),
                 "description" => $user->first_name,
             ]);
-            // $last4 = $customer->sources->data[0]->last4;
-            // dd($customer->sources->data[0]);
+            
             $this->order($user, $request, $customer->id);
 
             return redirect()->route('product.cart.order', $user->id);

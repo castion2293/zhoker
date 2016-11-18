@@ -11,6 +11,7 @@ use Hash;
 use App\User;
 use App\CreditCard;
 use Storage;
+use Session;
 use Stripe\Stripe;
 use Stripe\Customer;
 
@@ -75,8 +76,6 @@ class UserProfileController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
-        //dd($user->creditcards()->get()->isEmpty());
 
         return view('desktop.user.setting', ['user' => $user]);
     }
@@ -171,6 +170,13 @@ class UserProfileController extends Controller
                 'card_name' => $customer->sources->data[0]->name,
                 'funding' => $customer->sources->data[0]->funding,
             ]);
+
+            if (Session::has('oldUrl')) {
+                $oldUrl = Session::get('oldUrl');
+                Session::forget('oldUrl');
+                
+                return redirect($oldUrl);
+            }
 
             $url = url()->previous() . "#payment";
             return redirect($url);

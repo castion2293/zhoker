@@ -215,7 +215,6 @@
                 <div class="w3-rest"></div>
                 <div class="w3-col l4 m4 w3-right">
                     <a href="{!! route('user.payment.delete', ['id' => $user->id]) !!}" class="btn btn-danger btn-block w3-small zk-shrink-hover">Delete Credit Card</a>
-                    <!--{!! Form::submit('Delete Credit Card', ['class' => 'btn btn-danger btn-block w3-small zk-shrink-hover']) !!}-->
                 </div>
                 <div class="w3-col l4 m4 w3-right w3-padding-right">
                     <div class="btn w3-light-grey btn-block w3-small zk-shrink-hover" data-dismiss="modal" style="cursor:pointer;">Cancel</div>

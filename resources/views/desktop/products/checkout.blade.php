@@ -93,36 +93,69 @@
                     <div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
                         <label class="w3-text-dark-grey" style="font-family:cursive;">PAYMENT</label>
                     </div>
-                    <div class="w3-margin-left">
-                        <div class="" style="padding-right:0.8em;margin-top:1em;">
-                            <label class="w3-text-gery" style="font-family:cursive">Card Number</label>   
-                            {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-number']) }} 
+                    <div class="w3-row w3-padding-12">
+                        <div class="w3-col l6 m6 w3-padding-left">
+                            <input class="w3-radio" type="radio" id="bind-card" name="payment_choice" checked>
+                            <label class="w3-validate" style="font-family:cursive;">Using Binding Card</label>
                         </div>
-                        <div class="w3-row" style="margin-top:0.5em;">
-                            <div class="w3-col l4 m4" style="padding-right:1em;">
-                                <label class="w3-text-gery" style="font-family:cursive">Exp. Date</label>   
-                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-month', 'placeholder' => 'MM']) }} 
+                        <div class="w3-col l6 m6">
+                            <input class="w3-radio" type="radio" id="no-card" name="payment_choice">
+                            <label class="w3-validate" style="font-family:cursive;">One Time Payment</label>
+                        </div>
+                    </div>
+                    <div id="bindcardpayment" class="w3-center">
+                        @if ($user->creditcards()->get()->isEmpty())
+                            <span class="w3-text-grey" style="font-family:cursive;">Sorry! you are not binding your credit card yet!<span><br>
+                            <span class="w3-text-grey" style="font-family:cursive;">You can binding your card in the link below:<span>
+                            <div class="w3-padding-large">
+                                <a href="{{ route('product.cart.bindingcard', ['id' => $user->id]) }}" class="btn w3-green btn-block w3-large zk-shrink-hover">Binding Credit Card</a>
                             </div>
-                            <div class="w3-col l4 m4" style="padding-right:1em;">
-                                <label class="w3-text-gery" style="font-family:cursive">Exp. Year</label>   
-                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-year', 'placeholder' => 'YYYY']) }} 
+                        @else 
+                            <div id="dropdown" class=" w3-row w3-btn-block w3-white w3-left-align w3-border-grey w3-border">
+                                <span class="w3-col l8 m8 w3-xlarge w3-text-grey">
+                                    <i class="fa fa-cc-visa w3-text-green"></i>
+                                    .... .... .... {{ $user->creditcards()->first()->last4 }}
+                                    {{ $user->creditcards()->first()->exp_month}}/{{ $user->creditcards()->first()->exp_year}}
+                                       {{ $user->creditcards()->first()->card_name}}
+                                </span>
                             </div>
-                             <div class="w3-col l4 m4" style="padding-right:0.8em;">
-                                <label class="w3-text-gery" style="font-family:cursive">CVC</label>   
-                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-cvc']) }} 
+                            <div class="w3-accordion-content w3-container">
+
                             </div>
-                        </div>
-                        <div class="w3-border-grey w3-border-bottom" style="padding-right:0.8em;padding-bottom:1em;margin-top:0.5em;">
-                            <label class="w3-text-gery" style="font-family:cursive">Card Holder Name</label>   
-                            {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-name']) }} 
-                        </div>
-                    </div> 
-                    <div class="w3-row">
-                        <div class="w3-rest"></div> 
-                        <div class="w3-col l4 m4 w3-right w3-margin-top">
-                            {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange btn-block w3-large zk-shrink-hover']) !!}
-                        </div>
-                    </div>  
+                        @endif
+                    </div>
+                    <div id="onetimepayment" style="display:none;">
+                        <div class="w3-margin-left">
+                            <div class="" style="padding-right:0.8em;margin-top:1em;">
+                                <label class="w3-text-gery" style="font-family:cursive">Card Number</label>   
+                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-number']) }} 
+                            </div>
+                            <div class="w3-row" style="margin-top:0.5em;">
+                                <div class="w3-col l4 m4" style="padding-right:1em;">
+                                    <label class="w3-text-gery" style="font-family:cursive">Exp. Date</label>   
+                                    {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-month', 'placeholder' => 'MM']) }} 
+                                </div>
+                                <div class="w3-col l4 m4" style="padding-right:1em;">
+                                    <label class="w3-text-gery" style="font-family:cursive">Exp. Year</label>   
+                                    {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-year', 'placeholder' => 'YYYY']) }} 
+                                </div>
+                                <div class="w3-col l4 m4" style="padding-right:0.8em;">
+                                    <label class="w3-text-gery" style="font-family:cursive">CVC</label>   
+                                    {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-cvc']) }} 
+                                </div>
+                            </div>
+                            <div class="w3-border-grey w3-border-bottom" style="padding-right:0.8em;padding-bottom:1em;margin-top:0.5em;">
+                                <label class="w3-text-gery" style="font-family:cursive">Card Holder Name</label>   
+                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-name']) }} 
+                            </div>
+                        </div> 
+                        <div class="w3-row">
+                            <div class="w3-rest"></div> 
+                            <div class="w3-col l4 m4 w3-right w3-margin-top">
+                                {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange btn-block w3-large zk-shrink-hover']) !!}
+                            </div>
+                        </div>  
+                    </div>
                 {!! Form::close() !!}
             </div>
         </div>
@@ -163,5 +196,18 @@
                 $form.get(0).submit();
             }
         }
+    </script>
+    <script>
+        $(function () {
+            $(".w3-radio").change(function(){
+                if($("#no-card").is(":checked")) {
+                    $("#onetimepayment").show();
+                    $("#bindcardpayment").hide();
+                } else if ($("#bind-card").is(":checked")) {
+                    $("#onetimepayment").hide();
+                    $("#bindcardpayment").show();
+                }
+            });
+        });
     </script>
 @endsection
