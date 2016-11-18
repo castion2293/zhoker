@@ -14,83 +14,85 @@
 
     <!--content-->
     <div class="w3-content w3-container w3-padding-64">
-        <!--div class="w3-padding-12">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Shopping Cart<h1>
-        </div-->
-        
-        <div class="w3-row w3-margin-top w3-padding-medium w3-border-grey w3-border-bottom">
-            <div class="w3-col l3 m3">
-                <label class="w3-text-grey" style="font-family:cursive;">MEAL</label>
+        @if ($carts->isEmpty())
+            <div class="w3-center">
+                <h1 style="font-family:cursive;">Sorry! Please Add Your Items first!</h1>
             </div>
-            <div class="w3-col l5 m5" style="padding-left:0.5em;">
-                <label class="w3-text-grey" style="font-family:cursive;">ITEM</label>
-            </div>
-            <div class="w3-col l3 m3" style="padding-left:1.5em;">
-                <label class="w3-text-grey" style="font-family:cursive;">QUANTITY</label>
-            </div>
-            <div class="w3-col l1 m1" style="padding-left:0.5em;">
-                <label class="w3-text-grey" style="font-family:cursive;">TOTAL</label>
-            </div>
-        </div>
-
-        @foreach ($carts as $cart)
-            <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
-                <div class="w3-col l3 m3 w3-padding-right">
-                    <img src="{{ asset($cart->meals->img_path) }}" alt="meal photo" style="width:100%">
+        @else
+            <div class="w3-row w3-margin-top w3-padding-medium w3-border-grey w3-border-bottom">
+                <div class="w3-col l3 m3">
+                    <label class="w3-text-grey" style="font-family:cursive;">MEAL</label>
                 </div>
-                <div class="w3-col l5 m5 w3-padding-left">
-                    <div class="w3-row">
-                        <div class="w3-col l5 m5">
-                            <div class="">
-                                <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                <div class="w3-col l5 m5" style="padding-left:0.5em;">
+                    <label class="w3-text-grey" style="font-family:cursive;">ITEM</label>
+                </div>
+                <div class="w3-col l3 m3" style="padding-left:1.5em;">
+                    <label class="w3-text-grey" style="font-family:cursive;">QUANTITY</label>
+                </div>
+                <div class="w3-col l1 m1" style="padding-left:0.5em;">
+                    <label class="w3-text-grey" style="font-family:cursive;">TOTAL</label>
+                </div>
+            </div>
+
+            @foreach ($carts as $cart)
+                <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
+                    <div class="w3-col l3 m3 w3-padding-right">
+                        <img src="{{ asset($cart->meals->img_path) }}" alt="meal photo" style="width:100%">
+                    </div>
+                    <div class="w3-col l5 m5 w3-padding-left">
+                        <div class="w3-row">
+                            <div class="w3-col l5 m5">
+                                <div class="">
+                                    <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                                </div>
+                                <div class="">
+                                    <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span></span>
+                                </div>
+                                <div class="">
+                                    <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                                </div>
                             </div>
-                            <div class="">
-                                <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span></span>
-                            </div>
-                            <div class="">
-                                <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                            <div class="w3-col l7 m7">
+                                <div class="">
+                                    <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
+                                </div>
+                                <div class="w3-margin-top">
+                                    <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="w3-col l7 m7">
-                            <div class="">
-                                <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
-                            </div>
-                            <div class="w3-margin-top">
-                                <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
-                            </div>
+                    </div>
+                    <div class="w3-col l3 m3 form-input">
+                        <div class="w3-row">
+                            <a href="#{{ $cart->id }}" id="sub{{ $cart->id }}" class="sub w3-btn w3-transparent w3-text-green" style="text-decoration:none;">-</a>
+                            <input type="text" name="people_order" class="meal_qty w3-border-grey w3-border w3-large" id="{{ $cart->id }}qty" required value="{{ $cart->people_order }}" style="width:37px;height:37px;text-align:center">
+                            <a href="#{{ $cart->id }}" id="add{{ $cart->id }}" class="add w3-btn w3-transparent w3-text-green" style="text-decoration:none;">+</a>
+                            <!--for datetimepeople->people_left use, not shown-->
+                            <input type="text" id="{{ $cart->id }}people_left" style="display:none;" value="{{ $cart->datetimepeoples->people_left }}">
+                        </div>
+                    </div>
+                    <div class="w3-col l1 m1">
+                        <div class="">
+                            <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
+                        </div>
+                        <div class="" style="margin-top:3em;">
+                            <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
                         </div>
                     </div>
                 </div>
-                <div class="w3-col l3 m3 form-input">
-                    <div class="w3-row">
-                        <a href="#{{ $cart->id }}" id="sub{{ $cart->id }}" class="sub w3-btn w3-transparent w3-text-green" style="text-decoration:none;">-</a>
-                        <input type="text" name="people_order" class="meal_qty w3-border-grey w3-border w3-large" id="{{ $cart->id }}qty" required value="{{ $cart->people_order }}" style="width:37px;height:37px;text-align:center">
-                        <a href="#{{ $cart->id }}" id="add{{ $cart->id }}" class="add w3-btn w3-transparent w3-text-green" style="text-decoration:none;">+</a>
-                        <!--for datetimepeople->people_left use, not shown-->
-                        <input type="text" id="{{ $cart->id }}people_left" style="display:none;" value="{{ $cart->datetimepeoples->people_left }}">
-                    </div>
-                </div>
-                <div class="w3-col l1 m1">
-                    <div class="">
-                        <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
-                    </div>
-                    <div class="" style="margin-top:3em;">
-                        <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
-                    </div>
-                </div>
-            </div>
-        @endforeach
+            @endforeach
 
-        <div class="w3-row">
-            <div class="w3-rest"></div>
-            <div class="w3-col l3 m3 w3-right w3-margin-top">
-                <span class="w3-text-grey w3-large" style="padding-left:5em;">Subtotal: <span class="w3-text-green w3-large">$<span id="total_price">{{ $totalPrice }}</span></span></span>
-                <!--for totalPrice post use, not shown-->
-                <input type="text" name="totalPrice" id="totalPrice" style="display:none;" value="{{ $totalPrice }}">
-                <!--button id="test">checkout</button-->
-                <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt" class="btn w3-deep-orange btn-block zk-shrink-hover">Checkout</a>
+            <div class="w3-row">
+                <div class="w3-rest"></div>
+                <div class="w3-col l3 m3 w3-right w3-margin-top">
+                    <span class="w3-text-grey w3-large" style="padding-left:5em;">Subtotal: <span class="w3-text-green w3-large">$<span id="total_price">{{ $totalPrice }}</span></span></span>
+                    <!--for totalPrice post use, not shown-->
+                    <input type="text" name="totalPrice" id="totalPrice" style="display:none;" value="{{ $totalPrice }}">
+                    <!--button id="test">checkout</button-->
+                    <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt" class="btn w3-deep-orange btn-block zk-shrink-hover">Checkout</a>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 @endsection
 

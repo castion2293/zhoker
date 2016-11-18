@@ -64,7 +64,7 @@ Route::post('/maplist/detailed', [
     'as' => 'maplist.detailed'
 ]);
 
-//shopping cart and check out
+//shopping cart
 Route::get('product/{id}/{datetime_id}', [
     'uses' => 'ProductController@getProductShow',
     'as' => 'product.show'
@@ -85,21 +85,29 @@ Route::post('product/cart/store', [
     'uses' => 'ProductController@postCartStore',
     'as' => 'product.cart.store'
 ]);
+
+//check out
 Route::get('product/cart/checkout/{id}', [
-    'uses' => 'ProductController@getCheckout',
+    'uses' => 'CashierController@getCheckout',
     'as' => 'product.cart.checkout'
 ]);
 Route::get('product/cart/bindingcard/{id}', [
-    'uses' => 'ProductController@getBindingCard',
+    'uses' => 'CashierController@getBindingCard',
     'as' => 'product.cart.bindingcard'
 ]);
-Route::post('product/cart/payment', [
-    'uses' => 'ProductController@postCheckout',
-    'as' => 'product.cart.payment'
+Route::post('product/cart/bindingpayment', [
+    'uses' => 'CashierController@postBindingCheckout',
+    'as' => 'product.cart.bindingpayment'
 ]);
-Route::get('product/cart/order/{id}', [
-    'uses' => 'ProductController@getOrder',
-    'as' => 'product.cart.order'
+Route::post('product/cart/onetimepayment', [
+    'uses' => 'CashierController@postOneTimeCheckout',
+    'as' => 'product.cart.onetimepayment'
+]);
+
+//order
+Route::get('order/user_order/{id}', [
+    'uses' => 'OrderController@getUserOrder',
+    'as' => 'order.userorder'
 ]);
 
 

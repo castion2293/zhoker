@@ -8,7 +8,7 @@ class UserOrder extends Model
 {
     protected $fillable = [
         'user_id', 'total_price', 'pay_way', 'contact_first_name', 'contact_last_name', 'contact_phone_number', 
-        'contact_email', 'contact_address',
+        'contact_email', 'contact_address', 'cashier_id',
     ];
 
     public function users()

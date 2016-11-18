@@ -65,8 +65,8 @@
             </div>
 
             <div class="w3-col l7 m7 w3-content w3-container">
-                {!! Form::open(['route' => 'product.cart.payment', 'data-parsley-validate' => '', 'id' => 'checkout-form', 'files' => true, 'method' => 'POST']) !!}
-                    <div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
+                
+                    <!--div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
                         <label class="w3-text-dark-grey" style="font-family:cursive;">CONTACT</label>
                     </div>
                     <div class="w3-margin-left">
@@ -88,22 +88,23 @@
                             <label class="w3-text-gery" style="font-family:cursive">Contact Email</label>   
                             {{ Form::text('email', $user->email, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
                         </div>
+                    </div-->
+                <div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
+                    <label class="w3-text-dark-grey" style="font-family:cursive;">PAYMENT</label>
+                </div>
+                <div class="w3-row w3-padding-12">
+                    <div class="w3-col l6 m6 w3-padding-left">
+                        <input class="w3-radio" type="radio" id="bind-card" name="payment_choice" checked>
+                        <label class="w3-validate" style="font-family:cursive;">Using Binding Card</label>
                     </div>
+                    <div class="w3-col l6 m6">
+                        <input class="w3-radio" type="radio" id="no-card" name="payment_choice">
+                        <label class="w3-validate" style="font-family:cursive;">One Time Payment</label>
+                    </div>
+                </div>
 
-                    <div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
-                        <label class="w3-text-dark-grey" style="font-family:cursive;">PAYMENT</label>
-                    </div>
-                    <div class="w3-row w3-padding-12">
-                        <div class="w3-col l6 m6 w3-padding-left">
-                            <input class="w3-radio" type="radio" id="bind-card" name="payment_choice" checked>
-                            <label class="w3-validate" style="font-family:cursive;">Using Binding Card</label>
-                        </div>
-                        <div class="w3-col l6 m6">
-                            <input class="w3-radio" type="radio" id="no-card" name="payment_choice">
-                            <label class="w3-validate" style="font-family:cursive;">One Time Payment</label>
-                        </div>
-                    </div>
-                    <div id="bindcardpayment" class="w3-center">
+                {!! Form::open(['route' => 'product.cart.bindingpayment', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
+                    <div id="bindcardpayment" class="w3-center  w3-padding-left">
                         @if ($user->creditcards()->get()->isEmpty())
                             <span class="w3-text-grey" style="font-family:cursive;">Sorry! you are not binding your credit card yet!<span><br>
                             <span class="w3-text-grey" style="font-family:cursive;">You can binding your card in the link below:<span>
@@ -112,18 +113,27 @@
                             </div>
                         @else 
                             <div id="dropdown" class=" w3-row w3-btn-block w3-white w3-left-align w3-border-grey w3-border">
-                                <span class="w3-col l8 m8 w3-xlarge w3-text-grey">
-                                    <i class="fa fa-cc-visa w3-text-green"></i>
+                                <span class="w3-col l8 m8 w3-large w3-text-grey">
+                                    <i class="fa fa-cc-visa w3-text-green w3-xlarge"></i>
                                     .... .... .... {{ $user->creditcards()->first()->last4 }}
-                                    {{ $user->creditcards()->first()->exp_month}}/{{ $user->creditcards()->first()->exp_year}}
-                                       {{ $user->creditcards()->first()->card_name}}
+                                    {{ $user->creditcards()->first()->exp_month}}/{{ $user->creditcards()->first()->exp_year}}       
+                                    <span class="w3-text-grey" style="font-family:cursive;">{{ $user->creditcards()->first()->card_name}}</sapn>
                                 </span>
                             </div>
                             <div class="w3-accordion-content w3-container">
 
                             </div>
+                            <div class="w3-row">
+                                <div class="w3-rest"></div> 
+                                <div class="w3-col l4 m4 w3-right w3-margin-top">
+                                    {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange btn-block w3-large zk-shrink-hover']) !!}
+                                </div>
+                            </div>  
                         @endif
                     </div>
+                {!! Form::close() !!}
+
+                {!! Form::open(['route' => 'product.cart.onetimepayment', 'data-parsley-validate' => '', 'id' => 'checkout-form', 'files' => true, 'method' => 'POST']) !!}
                     <div id="onetimepayment" style="display:none;">
                         <div class="w3-margin-left">
                             <div class="" style="padding-right:0.8em;margin-top:1em;">
