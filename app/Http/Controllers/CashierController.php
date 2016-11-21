@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\UserOrder;
 use App\ChefOrder;
+use App\Events\UserOrderEvent;
+use App\Events\ChefOrderEvent;
 use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Customer;
@@ -57,7 +59,7 @@ class CashierController extends Controller
 
         $this->order($user, $user->creditcards()->first()->customer_id);
 
-        return redirect()->route('product.cart.order', $user->id);
+        return redirect()->route('order.userorder', $user->id);
     }
 
     public function postOneTimeCheckout(Request $request)
@@ -79,11 +81,6 @@ class CashierController extends Controller
 
             return redirect()->route('order.userorder', $user->id);
 
-            // $charge = Charge::create(array(
-            //     "amount" => $totalPrice * 100,
-            //     "currency" => "twd",
-            //     "customer" => "cus_9ZSZmHziuSwSS3",
-            // ));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -119,6 +116,19 @@ class CashierController extends Controller
             $cart->cheforders()->associate($chefOrder);
             $cart->checked = true;
             $cart->save();
+
+            //update meal people left number
+            $datetimepeople = $cart->datetimepeoples()->first();
+            $datetimepeople->people_order = $cart->people_order;
+            $datetimepeople->people_left = $datetimepeople->people_left - $cart->people_order;
+            $datetimepeople->save();
+            
+            //send chef order email
+            $chef_user = $chefOrder->chefs()->first()->users()->first();
+            event(new ChefOrderEvent($chef_user));
         }
+
+        //send user order email
+        event(new UserOrderEvent($user, $carts));
     }
 }

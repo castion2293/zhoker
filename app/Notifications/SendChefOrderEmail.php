@@ -7,20 +7,20 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SendAccountActiveEmail extends Notification
+class SendChefOrderEmail extends Notification
 {
     use Queueable;
 
-    public $token;
+    public $chef_id;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($chef_id)
     {
-        $this->token = $token->token;
+        $this->chef_id = $chef_id;
     }
 
     /**
@@ -44,10 +44,10 @@ class SendAccountActiveEmail extends Notification
     {
         return (new MailMessage)
                     ->success()
-                    ->subject('Registered Email Confirmation')
-                    ->line('Please click the link below to activate your account')
-                    ->action('Activate', url('/auth/register/activate/'.$this->token))
-                    ->line('Thank you for using our application!');
+                    ->subject('Zhoker.com Chef Order Confirmation')
+                    ->line('You have couple meals need to approve. please click the link below and approve that.')
+                    ->action('Approval', url('/order/chef_order/'.$this->chef_id))
+                    ->line('Thanks choose Zhoker.com and please feel free to ask if you have any question.');
     }
 
     /**

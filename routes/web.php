@@ -109,6 +109,18 @@ Route::get('order/user_order/{id}', [
     'uses' => 'OrderController@getUserOrder',
     'as' => 'order.userorder'
 ]);
+Route::get('order/chef_order/{id}', [
+    'uses' => 'OrderController@getChefOrder',
+    'as' => 'order.cheforder'
+]);
+Route::get('order/accept/{id}', [
+    'uses' => 'OrderController@getAccept',
+    'as' => 'order.accept'
+]);
+Route::get('order/reject/{id}', [
+    'uses' => 'OrderController@getReject',
+    'as' => 'order.reject'
+]);
 
 
 //Chef login

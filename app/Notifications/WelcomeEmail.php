@@ -41,6 +41,8 @@ class WelcomeEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->success()
+                    ->subject('Welcome you to use Zhoker.com')
                     ->line('Welcome to Zhoker.com')
                     ->line('Thank you for using our application service!');
     }
