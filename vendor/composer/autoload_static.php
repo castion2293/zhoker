@@ -9,9 +9,9 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
     public static $files = array (
         '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
@@ -31,6 +31,10 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'Z' => 
+        array (
+            'Zend\\Diactoros\\' => 15,
         ),
         'X' => 
         array (
@@ -72,6 +76,11 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
             'Psr\\Http\\Message\\' => 17,
             'PhpParser\\' => 10,
         ),
+        'N' => 
+        array (
+            'Nexmo\\Laravel\\' => 14,
+            'Nexmo\\' => 6,
+        ),
         'M' => 
         array (
             'Monolog\\' => 8,
@@ -82,6 +91,7 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
             'League\\OAuth1\\' => 14,
             'League\\Flysystem\\AwsS3v3\\' => 25,
             'League\\Flysystem\\' => 17,
+            'Lcobucci\\JWT\\' => 13,
             'Laravel\\Socialite\\' => 18,
         ),
         'J' => 
@@ -93,6 +103,12 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         array (
             'Intervention\\Image\\' => 19,
             'Illuminate\\' => 11,
+        ),
+        'H' => 
+        array (
+            'Http\\Promise\\' => 13,
+            'Http\\Client\\' => 12,
+            'Http\\Adapter\\Guzzle6\\' => 21,
         ),
         'G' => 
         array (
@@ -138,6 +154,10 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'Zend\\Diactoros\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-diactoros/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -239,6 +259,14 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'Nexmo\\Laravel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nexmo/laravel/src',
+        ),
+        'Nexmo\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nexmo/client/src',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -259,6 +287,10 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
+        'Lcobucci\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
+        ),
         'Laravel\\Socialite\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/socialite/src',
@@ -278,6 +310,18 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
+        ),
+        'Http\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/promise/src',
+        ),
+        'Http\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/httplug/src',
+        ),
+        'Http\\Adapter\\Guzzle6\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/guzzle6-adapter/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -424,6 +468,8 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         'AddProfileToChefsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_22_225229_add_profile_to_chefs_table.php',
         'AddProfileToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_05_235245_add_profile_to_users_table.php',
         'AddRoleToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_17_162731_add_role_to_users_table.php',
+        'AddSoftDeleteToCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_22_173600_add_softDelete_to_carts_table.php',
+        'AddSoftDeleteToChefordersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_22_174212_add_softDelete_to_cheforders_table.php',
         'CategoryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoryTableSeeder.php',
         'CreateCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_08_030915_create_carts_table.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_024229_create_categories_table.php',

@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function chefs()
     {
-        return $this->belongsTo('App\Chef');
+        return $this->belongsTo('App\Chef', 'chef_id');
     }
 
     public function carts()

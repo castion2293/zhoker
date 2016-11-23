@@ -11,6 +11,8 @@ return array(
     'AddProfileToChefsTable' => $baseDir . '/database/migrations/2016_10_22_225229_add_profile_to_chefs_table.php',
     'AddProfileToUsersTable' => $baseDir . '/database/migrations/2016_11_05_235245_add_profile_to_users_table.php',
     'AddRoleToUsersTable' => $baseDir . '/database/migrations/2016_10_17_162731_add_role_to_users_table.php',
+    'AddSoftDeleteToCartsTable' => $baseDir . '/database/migrations/2016_11_22_173600_add_softDelete_to_carts_table.php',
+    'AddSoftDeleteToChefordersTable' => $baseDir . '/database/migrations/2016_11_22_174212_add_softDelete_to_cheforders_table.php',
     'CategoryTableSeeder' => $baseDir . '/database/seeds/CategoryTableSeeder.php',
     'CreateCartsTable' => $baseDir . '/database/migrations/2016_11_08_030915_create_carts_table.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_10_21_024229_create_categories_table.php',

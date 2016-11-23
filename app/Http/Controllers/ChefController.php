@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Filesystem\Filesystem;
 
+use App\Services\ChefCRUDService;
+
 use App\Http\Requests;
 use App\Http\Requests\MealCreateRequest;
 use Auth;
@@ -20,8 +22,12 @@ use Storage;
 
 class ChefController extends Controller
 {
-    public function __construct() {
+    protected $chefCRUDService;
+
+    public function __construct(ChefCRUDService $chefCRUDService) {
         $this->middleware('chef');
+        
+        $this->chefCRUDService = $chefCRUDService;
     }
 
     /**
@@ -31,8 +37,7 @@ class ChefController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->chef_id;
-        $meals = Chef::find($id)->meals()->paginate(6);
+        $meals = $this->chefCRUDService->getChefMealsPaginate(6);
 
         return view('desktop.chef.index', ['meals' => $meals]);
     }

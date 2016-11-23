@@ -57,7 +57,7 @@ class SendUserOrderEmail extends Notification
         });
 
         return (new MailMessage)
-                    ->subject('Zhoker.com Meal Order Confirmation')
+                    ->subject('Zhoker.com User Meal Order Confirmation')
                     ->line('Welcome use Zhoker.com')
                     ->line('This is the meal you order:')
                     ->line($this->message)

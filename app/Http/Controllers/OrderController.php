@@ -8,8 +8,11 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Chef;
 use App\ChefOrder;
+use App\Events\ChefConfirmEvent;
+use App\Events\ChefRejectEvent;
 use Stripe\Stripe;
 use Stripe\Charge;
+
 
 class OrderController extends Controller
 {
@@ -43,9 +46,10 @@ class OrderController extends Controller
     public function getAccept($id)
     {
         $cheforder = ChefOrder::findOrFail($id);
+        $cart = $cheforder->carts()->first();
 
-        $price = $cheforder->carts()->first()->price;
-        $customer_id = decrypt($cheforder->carts()->first()->userorders()->first()->cashier_id);
+        $price = $cart->price;
+        $customer_id = decrypt($cart->userorders()->first()->cashier_id);
 
         Stripe::setApiKey(config('services.stripe.secret'));
         try {
@@ -59,6 +63,17 @@ class OrderController extends Controller
 
                 $cheforder->update(['paid' => true]);
 
+                //send user meal confirmed email
+                $user = $cart->users()->first();
+                event(new ChefConFirmEvent($user, $cart));
+
+                // $nexmo = app('Nexmo\Client');
+                // Nexmo::message()->send([
+                //     'to' => '18018823718',
+                //     'from' => '18018823718',
+                //     'text' => 'Using the facad to send a mesage.'
+                // ]);
+
                 return redirect()->route('order.cheforder', ['id' => $cheforder->chef_id]);
             }
 
@@ -69,6 +84,22 @@ class OrderController extends Controller
 
     public function getReject($id)
     {
-        dd($id);
+        $cheforder = ChefOrder::findOrFail($id);
+        $cart = $cheforder->carts()->first();
+        $datetimepeople = $cart->datetimepeoples()->first();
+
+        $datetimepeople->update([
+            'people_left' => $datetimepeople->people_left + $cart->people_order,
+            'people_order' => $datetimepeople->people_order - $cart->people_order,
+        ]);
+
+        $cheforder->delete();
+        $cart->delete();
+
+        //send user meal Rejected email
+        $user = $cart->users()->first();
+        event(new ChefRejectEvent($user, $cart));
+
+        return redirect()->route('order.cheforder', ['id' => $cheforder->chef_id]);
     }
 }

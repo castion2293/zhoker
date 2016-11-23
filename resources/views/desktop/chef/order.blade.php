@@ -93,6 +93,10 @@
                                     <div class="">
                                         <span class="w3-text-grey w3-large">Approved</span>
                                     </div>
+                                    <div class="w3-margin-top">
+                                        @inject('OrderPresenter', 'App\Presenters\OrderPresenter')
+                                        <span class="w3-text-grey w3-large">{{ $OrderPresenter->paidCheck($cheforder->paid) }}</span>
+                                    </div>
                                 @else
                                     <div class="">
                                         <a href="{!! route('order.accept', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>

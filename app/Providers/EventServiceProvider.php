@@ -22,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ChefOrderEvent' => [
             'App\Listeners\ChefOrderListener',
         ],
+        'App\Events\ChefConfirmEvent' => [
+            'App\Listeners\ChefConfirmListener',
+        ],
+        'App\Events\ChefRejectEvent' => [
+            'App\Listeners\ChefRejectListener',
+        ],
     ];
 
     /**

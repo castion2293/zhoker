@@ -119,8 +119,8 @@ class CashierController extends Controller
 
             //update meal people left number
             $datetimepeople = $cart->datetimepeoples()->first();
-            $datetimepeople->people_order = $cart->people_order;
-            $datetimepeople->people_left = $datetimepeople->people_left - $cart->people_order;
+            $datetimepeople->people_order += $cart->people_order;
+            $datetimepeople->people_left -= $cart->people_order;
             $datetimepeople->save();
             
             //send chef order email

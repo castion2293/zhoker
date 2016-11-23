@@ -41,4 +41,10 @@ return [
         'redirect' => env('FACEBOOK_REDIRECT')
     ],
 
+    'nexmo' => [
+        'key' => env('NEXMO_KEY'),
+        'secret' => env('NEXMO_SECRET'),
+        'sms_from' => '18018823718',
+    ],
+
 ];

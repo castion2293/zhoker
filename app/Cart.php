@@ -3,12 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cart extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'user_id', 'meal_id', 'datetimepeople_id', 'unite_price', 'people_order', 'price', 'date', 'time', 'method', 'checked', 'user_order_id', 'chef_order_id',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function users()
     {
