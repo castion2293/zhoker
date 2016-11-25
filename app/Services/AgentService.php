@@ -27,7 +27,7 @@ class AgentService
         if ($agent->isMobile()) {
           dd("mobile"); 
         } else {
-          return 'desktop.index';
+          return 'desktop';
         }
     }
 }

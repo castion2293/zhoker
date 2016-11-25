@@ -58,7 +58,7 @@
                     <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
                         <div class="w3-rest"></div> 
                         <div class="w3-col l3 m3 w3-right w3-margin-top">
-                            {!! Form::submit('Save Profile', ['class' => 'btn w3-green btn-block zk-shrink-hover']) !!}
+                            {!! Form::submit('Save Profile', ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
                         </div>
                     </div>  
                </div>
@@ -84,7 +84,7 @@
                      <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
                         <div class="w3-rest"></div> 
                         <div class="w3-col l5 m5 w3-right w3-margin-top">
-                            {!! Form::submit('Change Password', ['class' => 'btn w3-green btn-block zk-shrink-hover']) !!}
+                            {!! Form::submit('Change Password', ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
                         </div>
                     </div>  
                 </div>
@@ -133,17 +133,22 @@
                     {!! Form::close() !!}
                 @else
                     <div class="w3-accordion">
-                        <div id="dropdown" class=" w3-row w3-btn-block w3-white w3-left-align w3-border-grey w3-border">
-                            <span class="w3-col l8 m8 w3-xlarge w3-text-grey">
-                                <i class="fa fa-cc-visa w3-text-green"></i>
-                                .... .... .... {{ $user->creditcards()->first()->last4 }}
-                                  {{ $user->creditcards()->first()->exp_month}}/{{ $user->creditcards()->first()->exp_year}}
-                            </span>
-                            <div class="w3-col l2 m2 w3-padding-tiny">
-                                <button id="del-visa" class="w3-btn-block w3-green w3-medium w3-hover-dark-grey">Delete</button>
+                        <div id="dropdown"  class="w3-row">
+                            <div class="w3-col l11 m11 w3-row w3-btn-block w3-white w3-left-align w3-border-grey w3-border">
+                                <span class="w3-col l10 m10 w3-xlarge w3-text-grey">
+                                    <i class="fa fa-cc-visa w3-text-green"></i>
+                                    .... .... .... {{ $user->creditcards()->first()->last4 }}
+                                    {{ $user->creditcards()->first()->exp_month}}/{{ $user->creditcards()->first()->exp_year}}
+                                </span>
+                                <!--div class="w3-col l2 m2 w3-padding-tiny">
+                                    <button id="del-visa" class="w3-btn-block w3-green w3-medium w3-hover-dark-grey">Delete</button>
+                                </div-->
+                                <div class="w3-col l2 m2 w3-padding-tiny">
+                                    <button id="edit-visa" class="btn w3-green btn-block w3-large zk-shrink-hover">Edit</button>
+                                </div>
                             </div>
-                            <div class="w3-col l2 m2 w3-padding-tiny">
-                                <button id="edit-visa" class="w3-btn-block w3-green w3-medium w3-hover-dark-grey">Edit</button>
+                            <div class="">
+                                <span id="del-visa" class="glyphicon glyphicon-remove zk-shrink-hover" style="cursor:pointer;margin-top:1.5em;padding-left:1em;"></span>
                             </div>
                         </div>
                         <div class="w3-accordion-content w3-container">

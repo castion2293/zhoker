@@ -83,12 +83,12 @@
               <div class="w3-col l2 m2 w3-right w3-padding-small">
                  {!! Form::open(['route' => ['chef.destroy', $meal->id], 'method' => 'DELETE']) !!}
 
-                    {!! Form::submit('Delete', ['class' => 'btn w3-red btn-block w3-margin-top zk-shrink-hover']) !!}
+                    {!! Form::submit('Delete', ['class' => 'btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block w3-margin-top zk-shrink-hover']) !!}
 
                  {!! Form::close() !!}
               </div>
               <div class="w3-col l2 m2 w3-right w3-margin-top w3-padding-small">
-                {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-green btn-block zk-shrink-hover']) !!}
+                {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-white w3-large w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
               </div>
             </div>
     </div>

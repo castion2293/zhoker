@@ -19,6 +19,13 @@
                 <h1 style="font-family:cursive;">Sorry! Please Add Your Items first!</h1>
             </div>
         @else
+            <div class="w3-row">
+                <div class="w3-rest"></div>
+                <div class="w3-col l3 m3 w3-right w3-margin-top">
+                    <a href="#" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Keep Shopping</b></a>
+                </div>
+            </div>
+
             <div class="w3-row w3-margin-top w3-padding-medium w3-border-grey w3-border-bottom">
                 <div class="w3-col l3 m3">
                     <label class="w3-text-grey" style="font-family:cursive;">MEAL</label>

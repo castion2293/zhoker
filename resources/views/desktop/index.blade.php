@@ -124,44 +124,44 @@
     </div>
 
     <!-- Container (Portfolio Section) -->
-    <div class="w3-content w3-container w3-padding-64 ">
+    <div class="w3-padding-jumbo w3-margin-top">
         <h3 class="w3-center ">MY WORK</h3>
         <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
 
         <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
-        <div class="w3-row-padding w3-center ">
-        <div class="w3-col m4 ">
-            <a href="#pic1" data-toggle="collapse">
-            <img src="https://c7.staticflickr.com/8/7665/28175883150_44dac7229f_z.jpg " alt="picture1" style="width:100% " class="w3-hover-shadow ">
-            </a>
-            <div id="pic1" class="collapse">
-            <p>韓國出生的金大叔從小</p>
-            <p>就喜愛下廚，從母親手</p>
-            <p>中傳承了地道的韓國傳</p>
+        <div class="w3-row-padding">
+            <div class="w3-col l4 m4">
+                <a href="#">
+                    <div class="w3-display-container img-wrapper">
+                        <img src="{{ URL::to('img/DSC_0394.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
+                            <h3 class="w3-xxlarge"><b>Mashed Potato</b></h3>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
 
-        <div class="w3-col m4 ">
-            <a href="#pic2" data-toggle="collapse">
-            <img src="https://c6.staticflickr.com/9/8736/28380400941_f64a8560b5_z.jpg" alt="picture2" style="width:100% " class="w3-hover-shadow ">
-            </a>
-            <div id="pic2" class="collapse">
-            <p>小的時候姥姥經常給我</p>
-            <p>做純正的炸醬麵和各重</p>
-            <p>點心，所以我也學會</p>
+            <div class="w3-col l4 m4">
+                <a href="#">
+                    <div class="w3-display-container img-wrapper">
+                        <img src="{{ URL::to('img/DSC_0395.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
+                            <h3 class="w3-xxlarge"><b>Chicken Rice</b></h3>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
 
-        <div class="w3-col m4 ">
-            <a href="#pic3" data-toggle="collapse">
-            <img src="https://c4.staticflickr.com/9/8611/28380421891_67a0c3fbdb_z.jpg" alt="picture3" style="width:100% " class="w3-hover-shadow ">
-            </a>
-            <div id="pic3" class="collapse">
-            <p>大塊大塊的帶肉羊骨，</p>
-            <p>塞得滿滿的孜然羊肉肉</p>
-            <p>夾饃，好客的草原名族</p>
+            <div class="w3-col l4 m4">
+                <a href="#">
+                    <div class="w3-display-container img-wrapper">
+                        <img src="{{ URL::to('img/DSC_0416.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
+                            <h3 class="w3-xxlarge"><b>Fried Noodle</b></h3>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
         </div>
 
     </div>

@@ -3,55 +3,60 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Services\MainService;
 use App\Services\AgentService;
-use App\services\ChefCRUDService;
 use App\services\AuthenticateService;
+use App\services\SessionService;
 
 use App\Http\Requests;
 use App\Http\Requests\ChefSignInRequest;
 
-use Session;
-
-
 class MainController extends Controller
 {
+    protected $mainService;
     protected $agentService;
-    protected $chefCRUDService;
     protected $authenticateService;
+    protected $sessionService;
 
-    public function __construct(AgentService $agentService, ChefCRUDService $chefCRUDService, AuthenticateService $authenticateService)
+    public function __construct(MainService $mainService, AgentService $agentService, AuthenticateService $authenticateService, SessionService $sessionService)
     {
+        $this->mainService = $mainService;
         $this->agentService = $agentService;
-        $this->chefCRUDService = $chefCRUDService;
         $this->authenticateService = $authenticateService;
+        $this->sessionService = $sessionService;
     }
 
     public function getIndex()
     {
         $agent = $this->agentService->agent();
-        return view($agent);
+        return view($agent . '/index');
     }
 
     public function chefLogin(ChefSignInRequest $request)
     {
         if ($this->authenticateService->chefLogin($request->all())) {
             //set flash data with chef login
-            Session::put('login', 'chef');
+            $this->sessionService->put('login', 'chef');
 
-            $chef = $this->chefCRUDService->getChef();
-            $meals = $this->chefCRUDService->getChefMeals(6);
+            $chef = $this->mainService->getChef();
+            $meals = $this->mainService->getMeals($chef, 6);
+            $cheforders = $this->mainService->getChefOrders($chef, 3);
 
-            return view('desktop.chef.chef', ['chef' => $chef, 'meals' => $meals]);
+            $agent = $this->agentService->agent();
+            return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);
         }
-        Session::flash('ChefError', 'These credentials do not match our records.');
+        $this->sessionService->flash('ChefError', 'These credentials do not match our records.');
         return redirect()->back();
     }
 
     public function getChefContent()
     {
-        $chef = $this->chefCRUDService->getChef();
-        $meals = $this->chefCRUDService->getChefMeals(6);
+        $chef = $this->mainService->getChef();
+        $meals = $this->mainService->getMeals($chef, 6);
+        $cheforders = $this->mainService->getChefOrders($chef, 3);
 
-        return view('desktop.chef.chef', ['chef' => $chef, 'meals' => $meals]);
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);
     }
 }

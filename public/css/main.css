@@ -107,6 +107,22 @@ body,
      -webkit-transform: scale(0.95);
      transform: scale(0.95);
   }
+
+  /*enlarge when hover it*/
+  .zk-enlarge-hover:hover {
+     -moz-transform: scale(1.5);
+     -ms-transform: scale(1.5);
+     -o-transform: scale(1.5);
+     -webkit-transform: scale(1.5);
+     transform: scale(1.5);
+     transition: all 0.5s;
+  }
+
+  /* wrap image */
+  .img-wrapper {
+    display: inline-block; /* change the default display type to inline-block */
+    overflow: hidden;      /* hide the overflow */
+  }
   
   /* fixed-circle-navbar */
   .fixed-circle-nav {
@@ -125,4 +141,8 @@ body,
     font-size: 12px;
     line-height: 1.428571429;
     border-radius: 15px;*/
+  }
+
+  .bg-grey {
+    background: rgba(34, 37, 51, 0.8);
   }

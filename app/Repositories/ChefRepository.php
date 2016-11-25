@@ -19,30 +19,46 @@ class ChefRepository
     }
 
     /**
-     * @return chef_id
-     */
-     public function getChef_id()
-     {
-        return Auth::user()->chef_id;
-     }
-
-     /**
+     * @param $id
      * @return chef
      */
-     public function getChef($id = null)
+     public function findChefById($id)
      {
-         if ($id)
-            return $this->chef->findOrFail($id);
-         else
-            return Auth::user()->chefs()->first();
+        return $this->chef->finOrFail($id);
      }
 
      /**
-     * @param $id
+     * @param $chef
      * @return meals
      */
-     public function getChefMeals($id)
+     public function forMeals(Chef $chef, $qty = null)
      {
-         return $this->chef->findOrFail($id)->meals();
+         if ($qty) {
+             return $chef->meals()->orderBy('updated_at', 'desc')->take($qty)->get();
+         } else {
+             return $chef->meals()->orderBy('updated_at', 'desc')->get();
+         }
+     }
+
+     /**
+     * @param $chef
+     * @return meals
+     */
+     public function forMealsPaginate(Chef $chef, $qty)
+     {
+         return $chef->meals()->orderBy('updated_at', 'desc')->paginate($qty);
+     }
+
+     /**
+     * @param $chef
+     * @return meals
+     */
+     public function forChefOrders(Chef $chef, $qty = null)
+     {
+         if ($qty) {
+             return $chef->cheforders()->orderBy('id', 'desc')->take($qty)->get();
+         } else {
+             return $chef->cheforders()->orderBy('updated_at', 'desc')->get();
+         }
      }
 }

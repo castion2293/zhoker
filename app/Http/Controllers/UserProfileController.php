@@ -29,8 +29,10 @@ class UserProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $carts = $user->carts()->where('checked', '0')->get();
+        $userorders = $user->userorders()->orderBy('id', 'desc')->get();
 
-        return view('desktop.user.profile', ['user' => $user]);
+        return view('desktop.user.profile', ['user' => $user, 'carts' => $carts, 'userorders' => $userorders]);
     }
 
     /**

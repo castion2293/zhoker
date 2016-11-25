@@ -126,7 +126,7 @@
                             <div class="w3-row">
                                 <div class="w3-rest"></div> 
                                 <div class="w3-col l4 m4 w3-right w3-margin-top">
-                                    {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange btn-block w3-large zk-shrink-hover']) !!}
+                                    {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange btn-block zk-shrink-hover']) !!}
                                 </div>
                             </div>  
                         @endif

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Filesystem\Filesystem;
 
-use App\Services\ChefCRUDService;
+use App\Services\ChefService;
+use App\Services\AgentService;
 
 use App\Http\Requests;
 use App\Http\Requests\MealCreateRequest;
@@ -22,12 +23,15 @@ use Storage;
 
 class ChefController extends Controller
 {
-    protected $chefCRUDService;
+    protected $chefService;
+    protected $agentService;
 
-    public function __construct(ChefCRUDService $chefCRUDService) {
+    public function __construct(ChefService $chefService, AgentService $agentService) 
+    {
         $this->middleware('chef');
         
-        $this->chefCRUDService = $chefCRUDService;
+        $this->chefService = $chefService;
+        $this->agentService = $agentService;
     }
 
     /**
@@ -37,9 +41,10 @@ class ChefController extends Controller
      */
     public function index()
     {
-        $meals = $this->chefCRUDService->getChefMealsPaginate(6);
+        $meals = $this->chefService->index();
 
-        return view('desktop.chef.index', ['meals' => $meals]);
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.index', ['meals' => $meals]);
     }
 
     /**
@@ -49,10 +54,12 @@ class ChefController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $methods = Method::all();
-        $shifts = Shift::all();
-        return view('desktop.chef.create', ['categories' => $categories, 'methods' => $methods, 'shifts' => $shifts]);
+        $categories = $this->chefService->createCategory();
+        $methods = $this->chefService->createMethod();
+        $shifts = $this->chefService->createShift();
+
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.create', ['categories' => $categories, 'methods' => $methods, 'shifts' => $shifts]);
     }
 
     /**
@@ -63,46 +70,7 @@ class ChefController extends Controller
      */
     public function store(MealCreateRequest $request)
     {
-        $meal = new Meal();
-        
-        $meal->chef_id = Auth::user()->chef_id;
-        $meal->name = $request->input('name');
-        $meal->price = $request->input('price');
-        $meal->description = Purifier::clean($request->input('description'));
-
-        // save the image
-        if ($request->hasFile('img')) {
-            $image = $request->file('img');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-
-            $s3 = Storage::disk('s3');
-            $filePath = '/images/' . $filename;
-            $s3->put($filePath, file_get_contents($image), 'public');
-
-            $meal->img_path = 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
-        }
-
-        $meal->save();
-
-        $dtp_array = explode(";", $request->datetimepeople);
-        
-        for($i=0; $i < count($dtp_array) - 1; $i++)
-        {
-            $datetimepeople = new DateTimePeople();
-            
-            $dpt_split_array = explode(",", $dtp_array[$i]);
-
-            $datetimepeople->date = $dpt_split_array[0];
-            $datetimepeople->time = $dpt_split_array[1];
-            $datetimepeople->people_left = $dpt_split_array[2];
-            $datetimepeople->meal()->associate($meal);
-
-            $datetimepeople->save();
-        }
-        
-        $meal->shifts()->sync($request->shifts, false);
-        $meal->categories()->sync($request->categories, false);
-        $meal->methods()->sync($request->methods, false);
+        $meal = $this->chefService->store($request);
 
         return redirect()->route('chef.show', $meal->id);
     }
@@ -115,8 +83,10 @@ class ChefController extends Controller
      */
     public function show($id)
     {
-        $meal = Meal::find($id);
-        return view('desktop.chef.show',['meal' => $meal]);
+        $meal = $this->chefService->show($id);
+
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.show',['meal' => $meal]);
     }
 
     /**
@@ -127,33 +97,14 @@ class ChefController extends Controller
      */
     public function edit($id)
     {
-        $meal = Meal::find($id);
+        $meal = $this->chefService->editMeal($id);
+        $old_datetimepeople = $this->chefService->editDatetimePeople($meal);
+        $shiftarray = $this->chefService->editShift();
+        $categoryarray = $this->chefService->editCategory();
+        $methodarray = $this->chefService->editMethod();
         
-        $datetimepeoples = $meal->datetimepeoples()->get();
-        $old_datetimepeople = "";
-        foreach ($datetimepeoples as $datetimepeople) {
-            $old_datetimepeople .= $datetimepeople->date . ',' . $datetimepeople->time . ',' . $datetimepeople->people_left . ';';
-        }
-
-        $shifts = Shift::all();
-        $shiftarray = [];
-        foreach($shifts as $shift) {
-            $shiftarray[$shift->id] = $shift->shift;
-        }
-
-        $categories = Category::all();
-        $categoryarray = [];
-        foreach($categories as $category) {
-            $categoryarray[$category->id] = $category->category;
-        }
-
-        $methods = Method::all();
-        $methodarray = [];
-        foreach($methods as $method) {
-            $methodarray[$method->id] = $method->method;
-        }
-        
-        return view('desktop.chef.edit', ['meal' => $meal, 'datetimepeople' => $old_datetimepeople, 'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.edit', ['meal' => $meal, 'datetimepeople' => $old_datetimepeople, 'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
     }
 
     /**
@@ -165,54 +116,8 @@ class ChefController extends Controller
      */
     public function update(MealCreateRequest $request, $id)
     {
-        $meal = meal::find($id);
-
-        $meal->datetimepeoples()->delete();
-
-        $meal->name = $request->input('name');
-        $meal->price = $request->input('price');
-        $meal->description = Purifier::clean($request->input('description'));
-
-        if ($request->hasFile('img')) {
-
-            $image = $request->file('img');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-
-            $s3 = Storage::disk('s3');
-            $filePath = '/images/' . $filename;
-            $s3->put($filePath, file_get_contents($image), 'public');
-
-            $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
-
-            $oldFilename = $meal->img_path;
-            $oldpath = substr($oldFilename, $leng);
-            $s3->delete($oldpath);
-
-            $meal->img_path = 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
-        }
-
-        $meal->save();
-
-        $dtp_array = explode(";", $request->datetimepeople);
+        $meal = $this->chefService->update($request, $id);
         
-        for($i=0; $i < count($dtp_array) - 1; $i++)
-        {
-            $datetimepeople = new DateTimePeople();
-            
-            $dpt_split_array = explode(",", $dtp_array[$i]);
-
-            $datetimepeople->date = $dpt_split_array[0];
-            $datetimepeople->time = $dpt_split_array[1];
-            $datetimepeople->people_left = $dpt_split_array[2];
-            $datetimepeople->meal()->associate($meal);
-
-            $datetimepeople->save();
-        }
-
-        $meal->shifts()->sync($request->shifts);
-        $meal->categories()->sync($request->categories);
-        $meal->methods()->sync($request->methods);
-
         return redirect()->route('chef.show', $meal->id);
     }
 
@@ -224,23 +129,8 @@ class ChefController extends Controller
      */
     public function destroy($id)
     {
-        $meal = meal::find($id);
-
-        $meal->datetimepeoples()->delete();
-        $meal->shifts()->detach();
-        $meal->categories()->detach();
-        $meal->methods()->detach();
-
-        $s3 = Storage::disk('s3');
-        $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
-        $Filename = $meal->img_path;
-        $Filepath = substr($Filename, $leng);
-        $s3->delete($Filepath);
-
-        Storage::delete($meal->img_path);
+        $this->chefService->destroy($id);
         
-        $meal->delete();
-
         return redirect()->route('chef.index');
     }
 }
