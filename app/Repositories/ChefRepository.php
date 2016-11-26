@@ -24,7 +24,16 @@ class ChefRepository
      */
      public function findChefById($id)
      {
-        return $this->chef->finOrFail($id);
+        return $this->chef->findOrFail($id);
+     }
+
+     /**
+     * @param $city
+     * @return chef
+     */
+     public function findChefByCity($city)
+     {
+         return $this->chef->where('city', $city)->get();
      }
 
      /**
@@ -60,5 +69,10 @@ class ChefRepository
          } else {
              return $chef->cheforders()->orderBy('updated_at', 'desc')->get();
          }
+     }
+
+     public function save(Chef $chef)
+     {
+         return $chef->save();
      }
 }

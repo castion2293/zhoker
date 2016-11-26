@@ -23,4 +23,9 @@ class SessionService
     {
         Session::flash($key, $value);
     }
+
+    public function requestFlash($request)
+    {
+        return $request->flash();
+    }
 }

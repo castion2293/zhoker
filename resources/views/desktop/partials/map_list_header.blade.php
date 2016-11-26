@@ -203,7 +203,7 @@
                               <label class="w3-validate">Middle East</label>
                             </p>
                             <p>
-                              <input class="w3-check" type="checkbox" name="type[]" id="select0" value="0">
+                              <input class="w3-check" type="checkbox" id="select0" value="0">
                               <label class="w3-validate">All</label>
                             </p>
                         </div>

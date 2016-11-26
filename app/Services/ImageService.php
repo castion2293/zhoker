@@ -14,23 +14,23 @@ class ImageService
         
     }
 
-    public function save($image)
+    public function save($image, $path)
     {
         $filename = time() . '.' . $image->getClientOriginalExtension();
 
         $s3 = Storage::disk('s3');
-        $filePath = '/images/' . $filename;
+        $filePath = $path . $filename;
         $s3->put($filePath, file_get_contents($image), 'public');
 
         return 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
     }
 
-    public function update($image, $oldFilename)
+    public function update($image, $oldFilename, $path)
     {
         $filename = time() . '.' . $image->getClientOriginalExtension();
 
         $s3 = Storage::disk('s3');
-        $filePath = '/images/' . $filename;
+        $filePath = $path . $filename;
         $s3->put($filePath, file_get_contents($image), 'public');
 
         $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');

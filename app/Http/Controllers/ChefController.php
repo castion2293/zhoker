@@ -10,16 +10,6 @@ use App\Services\AgentService;
 
 use App\Http\Requests;
 use App\Http\Requests\MealCreateRequest;
-use Auth;
-use App\Chef;
-use App\Meal;
-use App\DateTimePeople;
-use App\Category;
-use App\Method;
-use App\Shift;
-use Purifier;
-use Image;
-use Storage;
 
 class ChefController extends Controller
 {

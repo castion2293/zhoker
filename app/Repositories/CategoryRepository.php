@@ -23,7 +23,7 @@ class CategoryRepository
      */
      public function findCategoryById($id)
      {
-        return $this->category->finOrFail($id);
+        return $this->category->findOrFail($id);
      }
 
      /**

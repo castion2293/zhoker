@@ -26,6 +26,15 @@ class ShiftRepository
         return $this->shift->finOrFail($id);
      }
 
+    /**
+     * @param $shift_name
+     * @return shift
+     */
+     public function findShiftByShiftName($shift_name)
+     {
+         return $this->shift->where('shift', $shift_name)->first();
+     }
+
      /**
      * @param null
      * @return shift
@@ -33,5 +42,18 @@ class ShiftRepository
      public function findShiftAll()
      {
         return $this->shift->all();
+     }
+
+     /**
+     * @param shift
+     * @return meal
+     */
+     public function forMeals(Shift $shift, $qty = null)
+     {
+         if ($qty) {
+             return $shift->meals()->take($qty)->get();
+         } else {
+             return $shift->meals()->get();
+         }
      }
 }

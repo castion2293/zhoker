@@ -31,6 +31,26 @@ class DateTimePeopleRepository
      }
 
      /**
+     * @param $date
+     * @return datetimepeople
+     */
+     public function findDateTimePeopleByDate($date)
+     {
+         return $this->datetimepeople->where('date', $date)->get();
+     }
+
+     /**
+     * @param $date, $people
+     * @return datetimepeople
+     */
+     public function findDateTimePeopleByDateAndPeople($date, $people)
+     {
+         return $this->datetimepeople->where('date', $date)
+                                     ->where('people_left', '>=', $people)
+                                     ->get();
+     }
+
+     /**
      * @param $datetimepeople
      * @return 
      */

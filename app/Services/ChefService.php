@@ -94,7 +94,7 @@ class ChefService
 
         // save the image
         if ($request->hasFile('img')) {
-            $meal->img_path = $this->imageService->save($request->file('img'));
+            $meal->img_path = $this->imageService->save($request->file('img'), '/images/');
         }
 
         $this->mealRepo->save($meal);
@@ -214,7 +214,7 @@ class ChefService
         $meal->description = Purifier::clean($request->input('description'));
 
         if ($request->hasFile('img')) {
-            $meal->img_path = $this->imageService->update($request->file('img'), $meal->img_padth);
+            $meal->img_path = $this->imageService->update($request->file('img'), $meal->img_padth, '/images/');
         }
 
         $this->mealRepo->save($meal);

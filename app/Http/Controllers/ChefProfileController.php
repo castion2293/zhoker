@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Filesystem\Filesystem;
 
+use App\Services\ChefProfileService;
+use App\Services\MainService;
+use App\Services\AgentService;
+
 use App\Http\Requests;
 use App\Http\Requests\ChefProfileEditRequest;
-use Auth;
-use App\Chef;
-use Purifier;
-use Image;
-use Storage;
 
 class ChefProfileController extends Controller
 {
-    public function __construct() {
+    protected $chefProfileService;
+    protected $mainService;
+    protected $agentService;
+
+    public function __construct(ChefProfileService $chefProfileService, MainService $mainService, AgentService $agentService) {
         $this->middleware('chef');
+
+        $this->chefProfileService = $chefProfileService;
+        $this->mainService = $mainService;
+        $this->agentService = $agentService;
     }
 
     /**
@@ -26,7 +33,7 @@ class ChefProfileController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->chef_id;
+        $id = $this->chefProfileService->index();
         
         return redirect()->route('chef_profile.edit', $id);
     }
@@ -71,7 +78,7 @@ class ChefProfileController extends Controller
      */
     public function edit($id)
     {
-        $chef = Chef::find($id);
+        $chef = $this->chefProfileService->edit($id);
 
         return view('desktop.chef.edit_profile', ['chef' => $chef]);
     }
@@ -85,37 +92,13 @@ class ChefProfileController extends Controller
      */
     public function update(ChefProfileEditRequest $request, $id)
     {
-        $chef = Chef::find($id);
+        $chef = $this->chefProfileService->update($request, $id);
 
-        $chef->address = $request->input('address');
-        $chef->city = $request->input('city');
-        $chef->state = $request->input('state');
-        $chef->zip_code = $request->input('zip_code');
-        $chef->store_name = $request->input('store_name');
-        $chef->store_description = $request->input('store_description');
+        $meals = $this->mainService->getMeals($chef, 6);
+        $cheforders = $this->mainService->getChefOrders($chef, 3);
 
-        if ($request->hasFile('profile_img')) {
-
-            $image = $request->file('profile_img');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-
-            $s3 = Storage::disk('s3');
-            $filePath = '/profile_images/' . $filename;
-            $s3->put($filePath, file_get_contents($image), 'public');
-
-            $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
-
-            $oldFilename = $chef->profile_img;
-            $oldpath = substr($oldFilename, $leng);
-            $s3->delete($oldpath);
-            
-            $chef->profile_img = 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
-        }
-
-        $chef->save();
-        $meals = $chef->meals()->orderBy('updated_at', 'desc')->take(6)->get();
-
-        return view('desktop.chef.chef', ['chef' => $chef, 'meals' => $meals]);
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);
     }
 
     /**

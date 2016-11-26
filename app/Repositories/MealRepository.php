@@ -34,6 +34,47 @@ class MealRepository
         return $this->meal->findOrFail($id);
      }
 
+    /**
+    * @param $id, $rank
+    * @return meals
+    */
+    public function findMealByIdAndPriceOrder($id, $order)
+    {
+        return $this->meal->wherein('id', $id)->orderBy('price', $order)->get();
+    }
+
+    /**
+     * @param $chef_id
+     * @return meal
+     */
+     public function findMealByChefId($chef_id)
+     {
+         return $this->meal->wherein('chef_id', $chef_id)->get();
+     }
+
+     /**
+     * @param $minPrice, $maxPrice
+     * @return meals
+     */
+     public function findMealByPriceRange($minPrice, $maxPrice)
+     {
+         if ($minPrice == "" && $maxPrice != "")
+            return $this->meal->where('price', '<=', $maxPrice)->get();
+         else if ($minPrice != "" && $maxPrice == "")
+            return $this->meal->where('price', '>=', $minPrice)->get();
+         else if ($minPrice != "" && $maxPrice != "")
+            return $this->meal->whereBetween('price', [$minPrice, $maxPrice])->get();
+     }
+
+     /**
+     * @param null
+     * @return meal
+     */
+     public function findMealAll()
+     {
+         return $this->meal->all();
+     }
+
      /**
      * @param $meal
      * @return datetimepeople
