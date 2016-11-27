@@ -21,7 +21,7 @@ class UserRepository
     public function findUserById($id = null)
     {
         if($id)
-            return $this->user->finOrFail($id);
+            return $this->user->findOrFail($id);
         else
             return Auth::user();
     }
@@ -38,5 +38,50 @@ class UserRepository
     public function forChef(User $user)
     {
         return $user->chefs()->first();
+    }
+
+    /**
+     * @param $user
+     * @return cart
+     */
+    public function forCartNotCheck(User $user)
+    {
+        return $user->carts()->where('checked', '0')->get();
+    }
+
+    /**
+     * @param $user, $seq
+     * @return userorder
+     */
+    public function forUserOrder($user, $seq)
+    {
+        return $user->userorders()->orderBy('id', $seq)->get();
+    }
+
+    /**
+     * @param $user
+     * @return carditcard
+     */
+    public function forCreditCard(User $user)
+    {
+        return $user->creditcards()->first();
+    }
+
+    /**
+     * @param $user
+     * @return 
+     */
+    public function save(User $user)
+    {
+        return $user->save();
+    }
+
+    /**
+     * @param $user, $credit_card
+     * @return 
+     */
+    public function saveCreditCard(User $user, $credit_card)
+    {
+        return $user->creditcards()->save($credit_card);
     }
 }

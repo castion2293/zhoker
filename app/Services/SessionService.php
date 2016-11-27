@@ -24,6 +24,21 @@ class SessionService
         Session::flash($key, $value);
     }
 
+    public function has($key)
+    {
+        return Session::has($key);
+    }
+
+    public function get($key)
+    {
+        return Session::get($key);
+    }
+
+    public function forget($key)
+    {
+        return Session::forget($key);
+    }
+
     public function requestFlash($request)
     {
         return $request->flash();

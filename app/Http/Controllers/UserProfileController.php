@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserProfileEditRequest;
 use App\Http\Requests\UserResetPasswordRequest;
 
+use App\Services\UserProfileService;
+use App\Services\CreditCardService;
+use App\Services\AgentService;
+use App\Services\SessionService;
+
 use Auth;
 use Hash;
 use App\User;
@@ -17,8 +22,19 @@ use Stripe\Customer;
 
 class UserProfileController extends Controller
 {
-    public function __construct() {
+    protected $userProfileService;
+    protected $creditCardService;
+    protected $agentService;
+    protected $sessionService;
+
+    public function __construct(UserProfileService $userProfileService, AgentService $agentService, CreditCardService $creditCardService, SessionService $sessionService) 
+    {
         $this->middleware('auth');
+
+        $this->userProfileService = $userProfileService;
+        $this->creditCardService = $creditCardService;
+        $this->agentService = $agentService;
+        $this->sessionService = $sessionService;
     }
 
     /**
@@ -28,11 +44,12 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $carts = $user->carts()->where('checked', '0')->get();
-        $userorders = $user->userorders()->orderBy('id', 'desc')->get();
+        $user = $this->userProfileService->indexUser();
+        $carts = $this->userProfileService->indexCart($user);
+        $userorders = $this->userProfileService->indexUserOrder($user, 'desc');
 
-        return view('desktop.user.profile', ['user' => $user, 'carts' => $carts, 'userorders' => $userorders]);
+        $agent = $this->agentService->agent();
+        return view($agent . '.user.profile', ['user' => $user, 'carts' => $carts, 'userorders' => $userorders]);
     }
 
     /**
@@ -42,9 +59,9 @@ class UserProfileController extends Controller
      */
     public function create()
     {
-        $id = Auth::user()->id;
-
-        return redirect()->route('user_profile.edit', $id);
+        $user = $this->userProfileService->indexUser();
+        
+        return redirect()->route('user_profile.edit', $user->id);
     }
 
     /**
@@ -77,9 +94,10 @@ class UserProfileController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = $this->userProfileService->indexUser($id);
 
-        return view('desktop.user.setting', ['user' => $user]);
+        $agent = $this->agentService->agent();
+        return view($agent . '.user.setting', ['user' => $user]);
     }
 
     /**
@@ -91,32 +109,9 @@ class UserProfileController extends Controller
      */
     public function update(UserProfileEditRequest $request, $id)
     {
-        $user = User::find($id);
+        $user = $this->userProfileService->indexUser($id);
 
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->email = $request->input('email');
-        $user->phone_number = $request->input('phone_number');
-        
-        if ($request->hasFile('user_profile_img')) {
-
-            $image = $request->file('user_profile_img');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-
-            $s3 = Storage::disk('s3');
-            $filePath = '/profile_images/' . $filename;
-            $s3->put($filePath, file_get_contents($image), 'public');
-
-            $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
-
-            $oldFilename = $user->user_profile_img;
-            $oldpath = substr($oldFilename, $leng);
-            $s3->delete($oldpath);
-            
-            $user->user_profile_img = 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
-        }
-
-        $user->save();
+        $this->userProfileService->update($user, $request);
 
         return redirect()->route('user_profile.index');
     }
@@ -134,48 +129,29 @@ class UserProfileController extends Controller
 
     public function resetPassword(UserResetPasswordRequest $request)
     {
-        $data = $request->all();
+        $user = $this->userProfileService->indexUser();
 
-        $user = User::find(Auth::user()->id);
-
-        if (password_verify($data['old_password'], $user->password)) {
-            $user->password = bcrypt($data['password']);
-            $user->save();
-
-            return view('desktop.user.setting', ['user' => $user]);
+        if ($this->userProfileService->resetPassword($user, $request)) {
+            $agent = $this->agentService->agent();
+            return view($agent . '.user.setting', ['user' => $user]);
         } else {
             return back()->withErrors('The specified password does not match the database password');
         }
-        
     }
 
     public function postPaymentCreate(Request $request)
     {
-        $user = Auth::user();
+        $user = $this->userProfileService->indexUser();
 
-        Stripe::setApiKey(config('services.stripe.secret'));
+        $this->creditCardService->setAPIKey(config('services.stripe.secret'));
         try {
-            $customer = Customer::create([
-                "email" => $user->email,
-                "source" => $request->input('stripeToken'),
-                "description" => $user->first_name,
-            ]);
+            $customer = $this->creditCardService->createCustomer($user, $request);
             
-            $credit_card = CreditCard::firstOrCreate([
-                'user_id' => $user->id,
-                'customer_id' => encrypt($customer->id),
-                'brand' => $customer->sources->data[0]->brand,
-                'cvc_check' => $customer->sources->data[0]->cvc_check,
-                'last4' => $customer->sources->data[0]->last4,
-                'exp_month' => $customer->sources->data[0]->exp_month,
-                'exp_year' => $customer->sources->data[0]->exp_year,
-                'card_name' => $customer->sources->data[0]->name,
-                'funding' => $customer->sources->data[0]->funding,
-            ]);
+            $this->creditCardService->createCreditCard($user, $customer);
 
-            if (Session::has('oldUrl')) {
-                $oldUrl = Session::get('oldUrl');
-                Session::forget('oldUrl');
+            if ($this->sessionService->has('oldUrl')) {
+                $oldUrl = $this->sessionService->get('oldUrl');
+                $this->sessionService->forget('oldUrl');
                 
                 return redirect($oldUrl);
             }
@@ -189,27 +165,14 @@ class UserProfileController extends Controller
 
     public function postPaymentEdit(Request $request)
     {
-        $user = Auth::user();
+        $user = $this->userProfileService->indexUser();
         
-        Stripe::setApiKey(config('services.stripe.secret'));
+        $this->creditCardService->setAPIKey(config('services.stripe.secret'));
         try {
-            $customer = Customer::create([
-                "email" => $user->email,
-                "source" => $request->input('stripeToken'),
-                "description" => $user->first_name,
-            ]);
+            $customer = $this->creditCardService->createCustomer($user, $request);
             
-            $credit_card = $user->creditcards()->first();
-            
-            $credit_card->customer_id = encrypt($customer->id);
-            $credit_card->brand =  $customer->sources->data[0]->brand;
-            $credit_card->cvc_check = $customer->sources->data[0]->cvc_check;
-            $credit_card->exp_month = $customer->sources->data[0]->exp_month;
-            $credit_card->exp_year = $customer->sources->data[0]->exp_year;
-            $credit_card->card_name = $customer->sources->data[0]->name;
-            $credit_card->funding = $customer->sources->data[0]->funding;
-            $credit_card->last4 = $customer->sources->data[0]->last4;
-            $user->creditcards()->save($credit_card);
+            $creditCard = $this->creditCardService->findCreditCard($user);
+            $this->creditCardService->updateCreditCard($creditCard, $user, $customer);
 
             $url = url()->previous() . "#payment";
             return redirect($url);
@@ -220,9 +183,10 @@ class UserProfileController extends Controller
 
     public function getPaymentDelete($id)
     {
-        $credit_card = CreditCard::where('user_id', $id)->first();
+        $user = $this->userProfileService->indexUser($id);
+        $credit_card = $this->creditCardService->findCreditCard($user);
 
-        $credit_card->delete();
+        $this->creditCardService->deleteCreditCard($credit_card);
 
         $url = url()->previous() . "#payment";
         return redirect($url);

@@ -9,13 +9,6 @@ use App\Services\MapListService;
 use App\Services\SessionService;
 use App\Services\AgentService;
 
-use App\Chef;
-use App\Meal;
-use App\DateTimePeople;
-use App\Shift;
-use App\Method;
-use App\Category;
-
 class MapListController extends Controller
 {
     protected $mapListService;

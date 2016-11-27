@@ -127,7 +127,7 @@
                         <div class="w3-row">
                             <div class="w3-rest"></div> 
                             <div class="w3-col l4 m4 w3-right w3-margin-top">
-                                {!! Form::submit('Confirm & Set', ['class' => 'btn w3-green btn-block w3-large zk-shrink-hover']) !!}
+                                {!! Form::submit('Confirm & Set', ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
                             </div>
                         </div> 
                     {!! Form::close() !!}
@@ -197,7 +197,7 @@
                 {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-name']) }} 
             </div>
             <div class="w3-margin-top" style="padding-right:0.8em;">
-                {!! Form::submit('Confirm & Set', ['class' => 'btn w3-green btn-block w3-large zk-shrink-hover']) !!}
+                {!! Form::submit('Confirm & Set', ['class' => 'btn w3-green btn-block zk-shrink-hover']) !!}
             </div>
           {!! Form::close() !!}
         </div>
@@ -219,10 +219,10 @@
             <div class="modal-footer w3-row">
                 <div class="w3-rest"></div>
                 <div class="w3-col l4 m4 w3-right">
-                    <a href="{!! route('user.payment.delete', ['id' => $user->id]) !!}" class="btn btn-danger btn-block w3-small zk-shrink-hover">Delete Credit Card</a>
+                    <a href="{!! route('user.payment.delete', ['id' => $user->id]) !!}" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-small zk-shrink-hover">Delete Credit Card</a>
                 </div>
                 <div class="w3-col l4 m4 w3-right w3-padding-right">
-                    <div class="btn w3-light-grey btn-block w3-small zk-shrink-hover" data-dismiss="modal" style="cursor:pointer;">Cancel</div>
+                    <div class="btn w3-white w3-text-grey w3-border w3-border-grey btn-block w3-small zk-shrink-hover" data-dismiss="modal" style="cursor:pointer;">Cancel</div>
                 </div>
                 </div>
             </div>
