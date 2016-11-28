@@ -5,97 +5,87 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\User;
-use App\Chef;
-use App\ChefOrder;
-use App\Events\ChefConfirmEvent;
-use App\Events\ChefRejectEvent;
-use Stripe\Stripe;
-use Stripe\Charge;
-
+use App\Services\OrderService;
+use App\Services\CreditCardService;
+use App\Services\EventService;
+use App\Services\AgentService;
 
 class OrderController extends Controller
 {
-    public function __construct() {
+    protected $orderService;
+    protected $creditCardService;
+    protected $eventService;
+    protected $agentService;
+
+    public function __construct(OrderService $orderService, CreditCardService $creditCardService, AgentService $agentService, EventService $eventService) {
         $this->middleware('auth', ['only' => ['getUserOrder']]);
         $this->middleware('chef', ['except' => ['getUserOrder']]);
+
+        $this->orderService = $orderService;
+        $this->creditCardService = $creditCardService;
+        $this->eventService = $eventService;
+        $this->agentService = $agentService;
     }
 
     public function getUserOrder($id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->orderService->getUser($id);
+        $userorders = $this->orderService->getUserOrderByUser($user, 'desc');
 
-        $userorders = $user->userorders()->orderBy('id', 'desc')->get();
-
-        return view('desktop.user.order', ['userorders' => $userorders]);
+        $agent = $this->agentService->agent();
+        return view($agent . '.user.order', ['userorders' => $userorders]);
     }
 
     public function getChefOrder($id)
     {
-        $chef = Chef::findOrFail($id);
-
-        $cheforders = $chef->cheforders()->orderBy('id', 'desc')->paginate(6);
-        
-        return view('desktop.chef.order', ['cheforders'=> $cheforders]);
+        $chef = $this->orderService->getChef($id);
+        $cheforders = $this->orderService->getChefOrder($chef, 6);
+       
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.order', ['cheforders'=> $cheforders]);
     }
 
     public function getAccept($id)
     {
-        $cheforder = ChefOrder::findOrFail($id);
-        $cart = $cheforder->carts()->first();
+        $chefOrder = $this->orderService->getChefOrderById($id);
+        $cart = $this->orderService->getCart($chefOrder);
+        $userOrder = $this->orderService->getUserOrderByCart($cart);
 
-        $price = $cart->price;
-        $customer_id = decrypt($cart->userorders()->first()->cashier_id);
+        $this->creditCardService->setAPIKey(config('services.stripe.secret'));
 
-        Stripe::setApiKey(config('services.stripe.secret'));
         try {
+            if ($this->orderService->updateChefOrderCheck($chefOrder)) {
 
-            if ($cheforder->update(['checked' => true])) {
-                $charge = Charge::create(array(
-                    "amount" => $price * 100,
-                    "currency" => "twd",
-                    "customer" => $customer_id,
-                ));
+                $this->creditCardService->charge($cart->price, "twd", decrypt($userOrder->cashier_id));
 
-                $cheforder->update(['paid' => true]);
+                $this->orderService->updateChefOrderPaid($chefOrder);
 
                 //send user meal confirmed email
-                $user = $cart->users()->first();
-                event(new ChefConFirmEvent($user, $cart));
+                $user = $this->orderService->getUserByCart($cart);
+                $this->eventService->chefConFirmEvent($user, $cart);
 
-                // $nexmo = app('Nexmo\Client');
-                // Nexmo::message()->send([
-                //     'to' => '18018823718',
-                //     'from' => '18018823718',
-                //     'text' => 'Using the facad to send a mesage.'
-                // ]);
-
-                return redirect()->route('order.cheforder', ['id' => $cheforder->chef_id]);
+                return redirect()->route('order.cheforder', ['id' => $chefOrder->chef_id]);
             }
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
-        }   
+        }    
     }
 
     public function getReject($id)
     {
-        $cheforder = ChefOrder::findOrFail($id);
-        $cart = $cheforder->carts()->first();
-        $datetimepeople = $cart->datetimepeoples()->first();
+        $chefOrder = $this->orderService->getChefOrderById($id);
+        $cart = $this->orderService->getCart($chefOrder);
+        $datetimepeople = $this->orderService->getDateTimePeopleByCart($cart);
+        $this->orderService->updatePeopleOrder($datetimepeople, $cart, true);
 
-        $datetimepeople->update([
-            'people_left' => $datetimepeople->people_left + $cart->people_order,
-            'people_order' => $datetimepeople->people_order - $cart->people_order,
-        ]);
-
-        $cheforder->delete();
-        $cart->delete();
+        $this->orderService->deleteChefOrder($chefOrder);
+        $this->orderService->deleteCart($cart);
 
         //send user meal Rejected email
-        $user = $cart->users()->first();
-        event(new ChefRejectEvent($user, $cart));
+        $user = $this->orderService->getUserByCart($cart);
+        $this->eventService->chefRejectEvent($user, $cart);
 
-        return redirect()->route('order.cheforder', ['id' => $cheforder->chef_id]);
+        return redirect()->route('order.cheforder', ['id' => $chefOrder->chef_id]);
     }
 }

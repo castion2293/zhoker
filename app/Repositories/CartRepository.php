@@ -79,6 +79,15 @@ class CartRepository
 
     /**
      * @param $cart
+     * @return user
+     */
+    public function forUser(Cart $cart)
+    {
+        return $cart->users()->first();
+    }
+
+    /**
+     * @param $cart
      * @return $meal
      */
     public function forMeal(Cart $cart)
@@ -93,6 +102,15 @@ class CartRepository
     public function forDateTimePeople(Cart $cart)
     {
         return $cart->datetimepeoples()->first();
+    }
+
+    /**
+     * @param $cart
+     * @return userorder
+     */
+    public function forUserOrder(Cart $cart)
+    {
+        return $cart->userorders()->first();
     }
 
     /**

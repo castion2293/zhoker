@@ -69,7 +69,7 @@ class ChefRepository
 
      /**
      * @param $chef
-     * @return meals
+     * @return cheforder
      */
      public function forChefOrders(Chef $chef, $qty = null)
      {
@@ -78,6 +78,15 @@ class ChefRepository
          } else {
              return $chef->cheforders()->orderBy('updated_at', 'desc')->get();
          }
+     }
+
+     /**
+     * @param $chef
+     * @return cheforder
+     */
+     public function forChefOrdersPaginate(Chef $chef, $qty)
+     {
+         return $chef->cheforders()->orderBy('id', 'desc')->paginate($qty);
      }
 
      public function save(Chef $chef)

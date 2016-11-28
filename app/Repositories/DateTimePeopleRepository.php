@@ -54,12 +54,19 @@ class DateTimePeopleRepository
      * @param $datetimepeople, $cart
      * @return 
      */
-    public function updatePeople(DatetimePeople $datetimepeople, $cart)
+    public function updatePeople(DatetimePeople $datetimepeople, $cart, $rcv = null)
     {
-        return $datetimepeople->update([
-            'people_order' => $datetimepeople->people_order += $cart->people_order,
-            'people_left' => $datetimepeople->people_left -= $cart->people_order,
-        ]);
+        if ($rcv) {
+            return $datetimepeople->update([
+                'people_order' => $datetimepeople->people_order - $cart->people_order,
+                'people_left' => $datetimepeople->people_left + $cart->people_order,
+            ]);
+        } else {
+            return $datetimepeople->update([
+                'people_order' => $datetimepeople->people_order + $cart->people_order,
+                'people_left' => $datetimepeople->people_left - $cart->people_order,
+            ]);
+        }
     }
 
      /**

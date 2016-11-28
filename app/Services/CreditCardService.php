@@ -37,13 +37,24 @@ class CreditCardService
     */
     public function createCustomer($user, $request)
     {
-        $customer = Customer::create([
+        return Customer::create([
             "email" => $user->email,
             "source" => $request->stripeToken,
             "description" => $user->first_name,
         ]);
+    }
 
-        return $customer;
+    /**
+    * @param $price, $currency, $customer_id
+    * @return 
+    */
+    public function charge($price, $currency, $customer_id)
+    {
+        return Charge::create([
+            "amount" => $price * 100,
+            "currency" => $currency,
+            "customer" => $customer_id,
+        ]);
     }
 
     /**
@@ -90,4 +101,6 @@ class CreditCardService
     {
         return $this->creditCardRepo->delete($credit_card);
     }
+
+    
 }
