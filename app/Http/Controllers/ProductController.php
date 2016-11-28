@@ -4,88 +4,84 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User;
-use App\Meal;
-use App\DateTimePeople;
-use App\Method;
-use App\Cart;
-use Auth;
+use App\Services\ProductService;
+use App\Services\AgentService;
 
 class ProductController extends Controller
 {
-    public function __construct() {
+    protected $productService;
+    protected $agentService;
+
+    public function __construct(ProductService $productService, AgentService $agentService) 
+    {
         $this->middleware('auth', ['except' => ['getProductShow']]);
+
+        $this->productService = $productService;
+        $this->agentService = $agentService;
     }
 
     public function getProductShow($id, $datetime_id) 
     {    
-        $meal = Meal::findOrFail($id);
-        $datetimepeople = $meal->datetimepeoples()->findOrFail($datetime_id);
-        $methods = $meal->methods()->get();
-
-        return view('desktop.products.products', ['meal' => $meal, 'datetimepeople' => $datetimepeople, 'methods' => $methods]);
+        $meal = $this->productService->getMeal($id);
+        $datetimepeople = $this->productService->getDateTimePeople($meal, $datetime_id);
+        $methods = $this->productService->getMethod($meal);
+    
+        $agent = $this->agentService->agent();
+        return view($agent . '.products.products', ['meal' => $meal, 'datetimepeople' => $datetimepeople, 'methods' => $methods]);
     }
 
-    public function postAddToCart(Request $request, $meal_id, $datetime_id)
+    public function postAddToCart(Request $request, $id, $datetime_id)
     {
-        $meal = Meal::findOrFail($meal_id);
-        $datetime = DateTimePeople::findorFail($datetime_id);
-        $method = Method::findorFail($request->method_way);
-        $cart = new Cart;
-
-        $cart->user_id = Auth::user()->id;
-        $cart->meal_id = $meal->id;
-        $cart->datetimepeople_id = $datetime_id;
-        $cart->unite_price = $meal->price;
-        $cart->people_order = $request->input('people_order');
-        $cart->price = $meal->price * $request->people_order;
-        $cart->date = $datetime->date;
-        $cart->time = $datetime->time;
-        $cart->method =  $method->method;
+        $user = $this->productService->getUser();
+        $meal = $this->productService->getMeal($id);
+        $datetime = $this->productService->getDateTimePeople($meal, $datetime_id);
+        $method = $this->productService->getMethod($meal, $request->method_way);
         
-        $cart->save();
-
+        $cart = $this->productService->createCart($user, $meal, $datetime, $method, $request);
+        
         return redirect()->route('product.cart.show', $cart->user_id);
     }
 
     public function getCartShow($id)
     {
-        $user = User::findOrFail($id);
-
-        $carts = $user->carts()->where('checked', '0')->get();
+        $user = $this->productService->getUser($id);
+        $carts = $this->productService->getCart($user);
+        $cartQtyArray = $this->productService->getCartQtyArray($carts);
+        $totalPrice = $this->productService->getTotalPrice($carts);
         
-        $cartQtyArray = [];
-        $totalPrice = 0;
-        foreach ($carts as $cart) {
-            $cartQtyArray[$cart->id] = $cart->people_order;
-            $totalPrice += $cart->price;
-        }
-
-        return view('desktop.products.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice] );
+        $agent = $this->agentService->agent();
+        return view($agent . '.products.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice] );
     }
 
     public function postCartRemove(Request $request)
     {
-        $carts = Auth::user()->carts()->where('checked', '0')->get();
-
-        foreach ($carts as $cart) {
-            $cart->people_order = $request->qty[$cart->id];
-            $cart->price = $cart->unite_price * $cart->people_order;
-            $cart->save();
-        }
-
-        $item = Cart::findOrFail($request->id);
-        $item->delete();
+        $user = $this->productService->getUser();
+        $carts = $this->productService->getCart($user);
+        $this->productService->updateEachCart($carts, $request);
+        
+        $item = $this->productService->getCartById($request->id);
+        $this->productService->deleteCart($item);
     }
 
     public function postCartStore(Request $request)
     {
-        $carts = Auth::user()->carts()->where('checked', '0')->get();
+        $user = $this->productService->getUser();
+        $carts = $this->productService->getCart($user);
+        $this->productService->updateEachCart($carts, $request);
+    }
 
-        foreach ($carts as $cart) {
-            $cart->people_order = $request->qty[$cart->id];
-            $cart->price = $cart->unite_price * $cart->people_order;
-            $cart->save();
+    public function getCheckout($id)
+    {
+        $user = $this->productService->getUser($id);
+        $carts = $this->productService->getCart($user);
+
+        if ($carts->isEmpty()) {
+            dd("empty");
         }
+
+        $totalPrice = $this->productService->getTotalPrice($carts);
+
+        $agent = $this->agentService->agent();
+        return view($agent . '.products.checkout', ['user' => $user, 'carts'=> $carts, 'totalPrice' => $totalPrice] );
     }
 }

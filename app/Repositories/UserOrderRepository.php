@@ -9,8 +9,8 @@ class UserOrderRepository
     protected $userOrder;
 
     /**
-    * CartRepository constructor.
-    * @param Cart $cart
+    * UserOrderRepository constructor.
+    * @param UserOrder $userOrder
     */
     public function __construct(UserOrder $userOrder)
     {
@@ -18,6 +18,21 @@ class UserOrderRepository
     }
 
     /**
-     * @return meal
+     * @param $user, $creditCard, $totalPrice
+     * @return userorder
      */
+    public function create($user, $cashier_id, $totalPrice)
+    {
+        return $this->userOrder->create([
+            'user_id' => $user->id,
+            'total_price' => $totalPrice,
+            'pay_way' => '',
+            'contact_first_name' => $user->first_name,
+            'contact_last_name' => $user->last_name,
+            'contact_phone_number' => $user->phone_number,
+            'contact_email' => $user->email,
+            'contact_address' => '',
+            'cashier_id' => $cashier_id,
+        ]);
+    }
 }

@@ -38,6 +38,15 @@ class ChefRepository
 
      /**
      * @param $chef
+     * @return user
+     */
+     public function forUser(Chef $chef)
+     {
+         return $chef->users()->first();
+     }
+
+     /**
+     * @param $chef
      * @return meals
      */
      public function forMeals(Chef $chef, $qty = null)

@@ -11,15 +11,6 @@ use App\Services\CreditCardService;
 use App\Services\AgentService;
 use App\Services\SessionService;
 
-use Auth;
-use Hash;
-use App\User;
-use App\CreditCard;
-use Storage;
-use Session;
-use Stripe\Stripe;
-use Stripe\Customer;
-
 class UserProfileController extends Controller
 {
     protected $userProfileService;

@@ -85,12 +85,39 @@ class MealRepository
      }
 
      /**
+     * @param $meal, $id
+     * @return datetimepeople
+     */
+     public function forDateTimePeopleById(Meal $meal, $id)
+     {
+         return $meal->datetimepeoples()->findOrFail($id);
+     }
+
+     /**
      * @param $meal
      * @return 
      */
      public function forDateTimePeopleDelete(Meal $meal)
      {
          return $meal->datetimepeoples()->delete();
+     }
+
+     /**
+     * @param $meal
+     * @return method
+     */
+     public function forMethod(Meal $meal)
+     {
+         return $meal->methods()->get();
+     }
+
+     /**
+     * @param $meal, $id
+     * @return method
+     */
+     public function forMethodById(Meal $meal, $id)
+     {
+         return $meal->methods()->findorFail($id);
      }
 
      public function save(Meal $meal)

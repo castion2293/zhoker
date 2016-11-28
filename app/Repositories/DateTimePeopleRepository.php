@@ -50,6 +50,18 @@ class DateTimePeopleRepository
                                      ->get();
      }
 
+      /**
+     * @param $datetimepeople, $cart
+     * @return 
+     */
+    public function updatePeople(DatetimePeople $datetimepeople, $cart)
+    {
+        return $datetimepeople->update([
+            'people_order' => $datetimepeople->people_order += $cart->people_order,
+            'people_left' => $datetimepeople->people_left -= $cart->people_order,
+        ]);
+    }
+
      /**
      * @param $datetimepeople
      * @return 

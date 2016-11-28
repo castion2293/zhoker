@@ -36,10 +36,6 @@ class OrderController extends Controller
 
         $cheforders = $chef->cheforders()->orderBy('id', 'desc')->paginate(6);
         
-        // $cheforders->each(function($cheforder) {
-        //     $cart = $cheforder->carts()->first();
-        // });
-
         return view('desktop.chef.order', ['cheforders'=> $cheforders]);
     }
 
