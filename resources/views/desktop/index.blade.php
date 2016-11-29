@@ -87,29 +87,23 @@
         <div class="carousel-inner" role="listbox">
 
         <div class="item w3-display-container active">
-            <img src="{{ URL::to('img/DSC_0395.JPG') }}" alt="Food1" style="width:100%">
+            <img src="{{ URL::to('img/1128201601.JPG') }}" alt="Food1" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="{{ URL::to('img/DSC_0394.JPG') }}" alt="Food3" style="width:100%">
+            <img src="{{ URL::to('img/1128201605.JPG') }}" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="{{ URL::to('img/DSC_0416.JPG') }}" alt="Food3" style="width:100%">
+            <img src="{{ URL::to('img/1128201602.JPG') }}" alt="Food2" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="{{ URL::to('img/DSC_0417.JPG') }}" alt="Food3" style="width:100%">
+            <img src="{{ URL::to('img/1128201604.JPG') }}" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="{{ URL::to('img/DSC_0410.JPG') }}" alt="Food3" style="width:100%">
-        </div>
-
-        <div class="item w3-display-container">
-            <img src="{{ URL::to('img/DSC_0419.JPG') }}" alt="Food3" style="width:100%">
-        </div>
-
+            <img src="{{ URL::to('img/1128201603.JPG') }}" alt="Food3" style="width:100%">
         </div>
 
         <!-- Left and right controls -->
@@ -124,8 +118,72 @@
     </div>
 
     <!-- Container (Portfolio Section) -->
-    <div class="w3-padding-jumbo w3-margin-top">
-        <h3 class="w3-center ">MY WORK</h3>
+    <div class="w3-padding64 w3-content w3-container" style="margin-top:5em;">
+        <h3 class="w3-center ">OUR CHEF</h3>
+        <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
+
+        <!--div class="w3-row-padding">
+            <div class="w3-col l4 m4">
+                <a href="#">
+                    <div class="w3-display-container">
+                        <img src="{{ URL::to('img/1128201612.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;">
+                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
+                            <h3 class="w3-xxlarge"><b>Mr. Smith</b></h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="w3-col l4 m4">
+                <a href="#">
+                    <div class="w3-display-container">
+                        <img src="{{ URL::to('img/1128201613.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;">
+                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
+                            <h3 class="w3-xxlarge"><b>Mr. Smith</b></h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="w3-col l4 m4">
+                <a href="#">
+                    <div class="w3-display-container">
+                        <img src="{{ URL::to('img/1128201614.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;">
+                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
+                            <h3 class="w3-xxlarge"><b>Mr. Smith</b></h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div-->
+    </div>
+
+    <!-- Container (Portfolio Section) -->
+    <div class="w3-padding64 w3-content w3-container" style="margin-top:5em;">
+        <h3 class="w3-center ">HOW TO WORK</h3>
+        <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
+
+        <div class="w3-row-padding">
+            <div class="w3-col l4 m4 w3-center">
+                <i class="fa fa-television w3-text-green" style="font-size:100px;"></i>
+                <p class="w3-text-green w3-large"><b>1. Search online</b></p>
+            </div>
+
+            <div class="w3-col l4 m4 w3-center">
+                <i class="fa fa-credit-card w3-text-green" style="font-size:100px;"></i>
+                <p class="w3-text-green w3-large"><b>2. pay online</b></p>
+            </div>
+
+            <div class="w3-col l4 m4 w3-center">
+                <i class="fa fa-cutlery w3-text-green" style="font-size:100px;"></i>
+                <p class="w3-text-green w3-large"><b>3. Enjoy in House</b></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container (Portfolio Section) -->
+    <div class="w3-padding-jumbo" style="margin-top:5em;margin-bottom:5em;">
+        <h3 class="w3-center ">WHAT WE SERVE</h3>
         <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
 
         <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
@@ -133,9 +191,9 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="{{ URL::to('img/DSC_0394.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="{{ URL::to('img/1128201606.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Mashed Potato</b></h3>
+                            <h3 class="w3-xxlarge"><b>Chinese</b></h3>
                         </div>
                     </div>
                 </a>
@@ -144,9 +202,9 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="{{ URL::to('img/DSC_0395.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="{{ URL::to('img/1128201607.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Chicken Rice</b></h3>
+                            <h3 class="w3-xxlarge"><b>French</b></h3>
                         </div>
                     </div>
                 </a>
@@ -155,9 +213,42 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="{{ URL::to('img/DSC_0416.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="{{ URL::to('img/1128201608.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Fried Noodle</b></h3>
+                            <h3 class="w3-xxlarge"><b>Barbecu</b></h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="w3-col l4 m4">
+                <a href="#">
+                    <div class="w3-display-container img-wrapper">
+                        <img src="{{ URL::to('img/1128201609.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
+                            <h3 class="w3-xxlarge"><b>Seafood</b></h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="w3-col l4 m4">
+                <a href="#">
+                    <div class="w3-display-container img-wrapper">
+                        <img src="{{ URL::to('img/1128201610.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
+                            <h3 class="w3-xxlarge"><b>Japanese</b></h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="w3-col l4 m4">
+                <a href="#">
+                    <div class="w3-display-container img-wrapper">
+                        <img src="{{ URL::to('img/1128201611.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
+                            <h3 class="w3-xxlarge"><b>Korean</b></h3>
                         </div>
                     </div>
                 </a>

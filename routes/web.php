@@ -160,3 +160,13 @@ Route::get('user_payment_delete/{id}', [
     'uses' => 'UserProfileController@getPaymentDelete',
     'as' => 'user.payment.delete'
 ]);
+
+//contact Form
+Route::get('contact', [
+    'uses' => 'PageController@getContact',
+    'as' => 'contact.get'
+]);
+Route::post('contact', [
+    'uses' => 'PageController@postContact',
+    'as' => 'contact.post'
+]);

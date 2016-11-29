@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_DRIVER', 'sync'),
+    'default' => env('QUEUE_DRIVER', 'sqs'),
 
     /*
     |--------------------------------------------------------------------------
@@ -50,10 +50,10 @@ return [
 
         'sqs' => [
             'driver' => 'sqs',
-            'key' => 'your-public-key',
-            'secret' => 'your-secret-key',
-            'prefix' => 'https://sqs.us-east-1.amazonaws.com/your-account-id',
-            'queue' => 'your-queue-name',
+            'key' => env('S3_KEY'),
+            'secret' => env('S3_SECRET'),
+            'prefix' => 'https://sqs.us-east-1.amazonaws.com/932962671544',
+            'queue' => 'zhoker',
             'region' => 'us-east-1',
         ],
 
