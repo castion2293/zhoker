@@ -16,11 +16,16 @@ class CreateMealMethodTable extends Migration
         Schema::create('meal_method', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('meal_id')->unsigned();
-            $table->foreign('meal_id')->references('id')->on('meals');
+            //$table->foreign('meal_id')->references('id')->on('meals');
 
             $table->integer('method_id')->unsigned();
-            $table->foreign('method_id')->references('id')->on('methods');
+            //$table->foreign('method_id')->references('id')->on('methods');
         });
+
+        Schema::table('meal_method', function(Blueprint $table) {
+             $table->foreign('meal_id')->references('id')->on('meals');
+             $table->foreign('method_id')->references('id')->on('methods');
+         });
     }
 
     /**

@@ -16,11 +16,16 @@ class CreateMealCategoryTable extends Migration
         Schema::create('meal_category', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('meal_id')->unsigned();
-            $table->foreign('meal_id')->references('id')->on('meals');
+            // $table->foreign('meal_id')->references('id')->on('meals');
 
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
+            // $table->foreign('category_id')->references('id')->on('categories');
         });
+
+        Schema::table('meal_category', function(Blueprint $table) {
+             $table->foreign('meal_id')->references('id')->on('meals');
+             $table->foreign('category_id')->references('id')->on('categories');
+         });
     }
 
     /**
