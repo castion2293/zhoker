@@ -24,7 +24,7 @@ class CreateMealShiftTable extends Migration
 
          Schema::table('meal_shift', function(Blueprint $table) {
              $table->foreign('meal_id')->references('id')->on('meals');
-             $table->foreign('shift_id')->references('id')->on('shitfs');
+             //$table->foreign('shift_id')->references('id')->on('shitfs');
          });
     }
 
