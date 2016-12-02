@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Services\MainService;
 use App\Services\AgentService;
-use App\services\AuthenticateService;
-use App\services\SessionService;
+use App\Services\AuthenticateService;
+use App\Services\SessionService;
 
 use App\Http\Requests;
 use App\Http\Requests\ChefSignInRequest;
