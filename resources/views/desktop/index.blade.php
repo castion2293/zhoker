@@ -87,23 +87,23 @@
         <div class="carousel-inner" role="listbox">
 
         <div class="item w3-display-container active">
-            <img src="{{ URL::to('img/1128201601.JPG') }}" alt="Food1" style="width:100%">
+            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201601.JPG" alt="Food1" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="{{ URL::to('img/1128201605.JPG') }}" alt="Food3" style="width:100%">
+            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201605.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="{{ URL::to('img/1128201602.JPG') }}" alt="Food2" style="width:100%">
+            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201602.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="{{ URL::to('img/1128201604.JPG') }}" alt="Food3" style="width:100%">
+            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201604.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="{{ URL::to('img/1128201603.JPG') }}" alt="Food3" style="width:100%">
+            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201603.JPG" alt="Food3" style="width:100%">
         </div>
 
         <!-- Left and right controls -->
@@ -213,7 +213,7 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="{{ URL::to('img/1128201608.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201608.JPG" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>Barbecu</b></h3>
                         </div>
@@ -224,7 +224,7 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="{{ URL::to('img/1128201609.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201609.JPG" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>Seafood</b></h3>
                         </div>
@@ -235,7 +235,7 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="{{ URL::to('img/1128201610.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201610.JPG" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>Japanese</b></h3>
                         </div>
@@ -246,7 +246,7 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="{{ URL::to('img/1128201611.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201611.JPG" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>Korean</b></h3>
                         </div>
