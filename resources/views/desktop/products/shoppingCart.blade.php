@@ -22,7 +22,7 @@
             <div class="w3-row">
                 <div class="w3-rest"></div>
                 <div class="w3-col l3 m3 w3-right w3-margin-top">
-                    <a href="#" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Keep Shopping</b></a>
+                    <a href="{{ route('maplist.search.get')}}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Keep Shopping</b></a>
                 </div>
             </div>
 

@@ -50,9 +50,9 @@ class UserProfileService
     * @param $user, $seq
     * @return userorder
     */
-    public function indexUserOrder($user, $seq)
+    public function indexUserOrder($user, $seq, $qty=null)
     {
-        return $this->userRepo->forUserOrder($user, $seq);
+        return $this->userRepo->forUserOrder($user, $seq, $qty);
     }
 
     /**

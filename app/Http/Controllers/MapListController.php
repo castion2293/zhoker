@@ -41,4 +41,10 @@ class MapListController extends Controller
         $agent = $this->agentService->agent();
         return view($agent . '.main.map_list', ['meals' => $meals, 'date' => $request->input('date')]);
     }
+
+    public function getMaplistSearch()
+    {
+         $agent = $this->agentService->agent();
+         return view($agent . '.main.MapListSearch');
+    }
 }

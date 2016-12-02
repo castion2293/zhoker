@@ -86,7 +86,7 @@ class ChefRepository
      */
      public function forChefOrdersPaginate(Chef $chef, $qty)
      {
-         return $chef->cheforders()->orderBy('id', 'desc')->paginate($qty);
+         return $chef->cheforders()->withTrashed()->orderBy('id', 'desc')->paginate($qty);
      }
 
      public function save(Chef $chef)

@@ -62,33 +62,16 @@
                         <span class="w3-text-grey w3-xlarge" style="padding-left:0.5em;">Subtotal: <span class="w3-text-green w3-xlarge">${{ $totalPrice }}</span></span>
                     </div>
                 </div>
+
+                <div class="w3-row">
+                    <div class="w3-rest"></div>
+                    <div class="w3-col l6 m6 w3-right w3-margin-top">
+                        <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover" style="padding-left:0.5em;"><b>Back to Shopping Cart</b></a>
+                    </div>
+                </div>
             </div>
 
             <div class="w3-col l7 m7 w3-content w3-container">
-                
-                    <!--div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
-                        <label class="w3-text-dark-grey" style="font-family:cursive;">CONTACT</label>
-                    </div>
-                    <div class="w3-margin-left">
-                        <div class="w3-row" style="margin-top:1em;">
-                            <div class="w3-col l6 m6" style="padding-right:0.8em;">
-                                <label class="w3-text-gery" style="font-family:cursive">First Name</label>   
-                                {{ Form::text('first_name', $user->first_name, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
-                            </div>
-                            <div class="w3-col l6 m6" style="padding-right:0.8em;">
-                                <label class="w3-text-gery" style="font-family:cursive">Last Name</label>   
-                                {{ Form::text('last_name', $user->last_name, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
-                            </div> 
-                        </div>
-                            <div class="" style="padding-right:0.8em;margin-top:0.5em;">
-                            <label class="w3-text-gery" style="font-family:cursive">Contact Phone Number</label>   
-                            {{ Form::text('phone_number', $user->phone_number, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
-                        </div>
-                            <div class="" style="padding-right:0.8em;margin-top:0.5em;">
-                            <label class="w3-text-gery" style="font-family:cursive">Contact Email</label>   
-                            {{ Form::text('email', $user->email, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
-                        </div>
-                    </div-->
                 <div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
                     <label class="w3-text-dark-grey" style="font-family:cursive;">PAYMENT</label>
                 </div>

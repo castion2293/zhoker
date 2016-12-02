@@ -15,9 +15,9 @@
             <span class="w3-center w3-padding-xlarge w3-text-white w3-xxlarge w3-wide w3-text-shadow w3-animate-opacity w3-hide-small
                 ">Tasty and Fresh</span><br>
             <!--<span class="w3-center w3-text-white w3-xlarge w3-animate-opacity">-->
-            <button class="w3-btn w3-transparent w3-border w3-round w3-xlarge w3-card-16 w3-hover-green w3-hover-border-green" id="orderbtn">
+            <a href="{{ route('maplist.search.get') }}" class="w3-btn w3-transparent w3-border w3-round w3-xlarge w3-card-16 w3-hover-green w3-hover-border-green" id="orderbtn">
                 <span class="w3-text-shadow">Order Now</span>
-            </button>
+            </a>
         </div>
 
         <!--Input Form large medium screen-->
@@ -176,7 +176,7 @@
 
             <div class="w3-col l4 m4 w3-center">
                 <i class="fa fa-cutlery w3-text-green" style="font-size:100px;"></i>
-                <p class="w3-text-green w3-large"><b>3. Enjoy in House</b></p>
+                <p class="w3-text-green w3-large"><b>3. Enjoy the meal</b></p>
             </div>
         </div>
     </div>

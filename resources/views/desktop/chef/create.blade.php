@@ -117,12 +117,12 @@
                 {{ Form::text('date', null, ['class' => 'form-control w3-large w3-text-grey', 'id' => 'datepicker', 'required' => '']) }}
             </div>
 
-            <div class="form-group">
+            <div id="time-form" class="form-group">
                 <label for="time" class="w3-text-grey"> Time</label>
                 {{ Form::text('time', null, ['class' => 'form-control w3-large w3-text-grey', 'id' => 'timepicker', 'required' => '']) }}
             </div>
 
-            <div class="form-ground">
+            <div id="people-form" class="form-ground">
                 <label for="people" class="w3-text-grey"> People</label>
                 <select class="form-control" id="peoplepicker" name="people" required="">
                     <option value='1'>1 Person</option>
@@ -161,7 +161,7 @@
 
         //datetimepicker
         $("#datepicker").datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD',
         });
         $("#timepicker").datetimepicker({
             format: 'LT'

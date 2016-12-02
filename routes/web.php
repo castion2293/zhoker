@@ -63,6 +63,10 @@ Route::post('/maplist/detailed', [
     'uses' => 'MapListController@postMaplistDetailed',
     'as' => 'maplist.detailed'
 ]);
+Route::get('/maplist/search', [
+    'uses' => 'MapListController@getMaplistSearch',
+    'as' => 'maplist.search.get'
+]);
 
 //shopping cart
 Route::get('product/{id}/{datetime_id}', [

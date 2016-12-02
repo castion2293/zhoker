@@ -53,10 +53,15 @@ class UserRepository
      * @param $user, $seq
      * @return userorder
      */
-    public function forUserOrder($user, $seq)
+    public function forUserOrder($user, $seq, $qty = null)
     {
-        return $user->userorders()->orderBy('id', $seq)->get();
+        if ($qty) {
+            return $user->userorders()->orderBy('id', $seq)->take($qty)->get();
+        } else {
+            return $user->userorders()->orderBy('id', $seq)->get();
+        }
     }
+
 
     /**
      * @param $user
