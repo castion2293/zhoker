@@ -31,7 +31,7 @@
               @if (Auth::user()->user_profile_img != null)
                 <img src="{{ asset(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
               @else
-                <img src="{{ URL::to('img\default-user-icon-profile.PNG') }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
+                <img src="{{ URL::to('img\default-user-icon-profile.png') }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
               @endif
             </li>
             <li class="w3-hide-small w3-right">
