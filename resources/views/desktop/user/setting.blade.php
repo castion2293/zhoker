@@ -47,7 +47,7 @@
                             @if ($user->user_profile_img != null)
                                 <img id="img_content" src="{{ asset($user->user_profile_img) }}" alt="image contetnt" style="width:100%">
                             @else
-                                <img id="img_content" src="{{ URL::to('img\default-user-icon-profile.PNG') }}" alt="image contetnt" style="width:100%">
+                                <img id="img_content" src="{{ URL::to('img\default-user-icon-profile.png') }}" alt="image contetnt" style="width:100%">
                             @endif
                         </div>
                         <div class="w3-col l10 m10">
