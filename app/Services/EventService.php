@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Events\UserOrderEvent;
 use App\Events\ChefOrderEvent;
-use App\Events\ChefConFirmEvent;
+use App\Events\ChefConfirmEvent;
 use App\Events\ChefRejectEvent;
 
 class EventService
@@ -33,7 +33,7 @@ class EventService
      */
     public function chefConFirmEvent($user, $cart)
     {
-        return event(new ChefConFirmEvent($user, $cart));
+        return event(new ChefConfirmEvent($user, $cart));
     }
 
     /**
