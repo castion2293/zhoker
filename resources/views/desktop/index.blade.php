@@ -5,6 +5,7 @@
 @section('styles')
     <link rel="stylesheet" href="{{ URL::to('css/cs-select.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/cs-skin-elastic.css') }}">
+    <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
 @endsection
 
 @section('content')

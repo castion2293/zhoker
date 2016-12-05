@@ -5,6 +5,7 @@
 @section('styles')
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIow86AS8K94ezmJPzrm-yjyIbTPAUkG8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.googlemap/1.5/jquery.googlemap.min.js"></script>
+    <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
 @endsection
 
 @section('content')

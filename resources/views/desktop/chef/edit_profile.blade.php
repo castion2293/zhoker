@@ -10,6 +10,7 @@
             menubar: false,
         });
     </script>
+    <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
 @endsection
 
 @section('content')

@@ -3,7 +3,7 @@
 @section('title', '| Chef index')
 
 @section('styles')
-
+    <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Menu Lists<h1>
         </div>
         @foreach ($meals as $meal)
-            <div class="w3-row w3-light-grey w3-margin-top w3-padding-medium">
+            <div class="w3-row w3-white w3-border w3-border-green w3-round-large w3-margin-top w3-padding-medium">
                 <div class="w3-col l4 m4 w3-padding-12">
                      <img src="{{ asset($meal->img_path) }}" alt="meal photo" style="width:100%">
                 </div>
@@ -46,10 +46,10 @@
                             @endforeach
                         </div>
                         <div class="w3-col l2 m2 w3-padding-small w3-right">
-                            {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-red btn-block zk-shrink-hover']) !!}
+                            {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-white w3-text-red w3-border w3-border-red btn-block zk-shrink-hover']) !!}
                         </div>
                         <div class="w3-col l2 m2 w3-padding-small w3-right">
-                            {!! Html::linkRoute('chef.show', 'View', [$meal->id], ['class' => 'btn w3-green btn-block zk-shrink-hover']) !!}
+                            {!! Html::linkRoute('chef.show', 'View', [$meal->id], ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
                         </div>
                     </div>
                 </div>

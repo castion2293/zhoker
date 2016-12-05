@@ -3,7 +3,7 @@
 @section('title', '| Map List Search')
 
 @section('styles')
-
+  <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
 @endsection
 
 @section('content')
