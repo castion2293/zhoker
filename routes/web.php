@@ -165,7 +165,7 @@ Route::get('user_payment_delete/{id}', [
     'as' => 'user.payment.delete'
 ]);
 
-//contact Form
+// Page Control
 Route::get('contact', [
     'uses' => 'PageController@getContact',
     'as' => 'contact.get'
@@ -173,4 +173,20 @@ Route::get('contact', [
 Route::post('contact', [
     'uses' => 'PageController@postContact',
     'as' => 'contact.post'
+]);
+Route::get('about', [
+    'uses' => 'PageController@getAbout',
+    'as' => 'about.get'
+]);
+Route::get('press', [
+    'uses' => 'PageController@getPress',
+    'as' => 'press.get'
+]);
+Route::get('career', [
+    'uses' => 'PageController@getCareer',
+    'as' => 'career.get'
+]);
+Route::get('help', [
+    'uses' => 'PageController@getHelp',
+    'as' => 'help.get'
 ]);

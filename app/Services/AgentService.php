@@ -25,7 +25,9 @@ class AgentService
         $agent = new Agent();
 
         if ($agent->isMobile()) {
-          dd("mobile"); 
+          return 'mobile';
+        } else if ($agent->isTablet()) {
+          dd('tablet');
         } else {
           return 'desktop';
         }

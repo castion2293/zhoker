@@ -33,4 +33,28 @@ class PageController extends Controller
 
         return redirect('/');
     }
+
+    public function getAbout()
+    {
+        $agent = $this->agentService->agent();
+        return view($agent . '.others.about');
+    }
+
+    public function getPress()
+    {
+        $agent = $this->agentService->agent();
+        return view($agent . '.others.press');
+    }
+
+    public function getCareer()
+    {
+        $agent = $this->agentService->agent();
+        return view($agent . '.others.career');
+    }
+
+    public function getHelp()
+    {
+        $agent = $this->agentService->agent();
+        return view($agent . '.others.help');
+    }
 }
