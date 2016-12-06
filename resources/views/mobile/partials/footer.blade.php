@@ -1,5 +1,5 @@
 <!-- Footer small screen-->
-  <footer class="w3-center w3-green w3-padding-48 w3-hide-large w3-hide-medium">
+  <footer class="w3-center w3-green w3-padding-48">
 
     <div class="w3-content w3-container">
       <div class="w3-row">

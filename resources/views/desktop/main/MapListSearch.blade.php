@@ -63,7 +63,7 @@
             <div class="w3-row w3-border-green w3-border-bottom w3-padding-12" style="margin-top:2em;">
                 <div class="w3-col l4 m4" style="padding-left:0em;">
                   <div class="">
-                      <label class="w3-text-grey w3-large" style="font-family:cursive">Venue</label>
+                      <label class="w3-text-grey w3-large" style="font-family:cursive">Time</label>
                       <select class="form-control w3-text-grey w3-large" name="shift" id="shift">
                         <option class="w3-text-grey w3-white w3-large">All</option>
                         <option class="w3-text-grey w3-white w3-large">Dinner</option>
