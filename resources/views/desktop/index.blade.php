@@ -46,18 +46,6 @@
             {!! Form::close() !!}
         </div>
 
-         <!--Input Form small screen-->
-        <div class="w3-content w3-container w3-hide-large w3-hide-medium" style="padding-top:9em">
-            <form class="w3-row  w3-card-14">
-                <div class="w3-col s10">
-                <input class="w3-input w3-border w3-large w3-text-black inputbkg" type="text" value="Where to eat?" id="eatlocationSmall">
-                </div>
-                <button class="w3-col s2 w3-btn w3-border-green w3-large w3-green" style="height:50px">
-                <i class="w3-text-shadow fa fa-search"></i>
-                </button>
-            </form>
-        </div>
-
     </div>
 
      <!-- Container (About Section) -->

@@ -1,82 +1,49 @@
 <!-- Navbar (sit on top) -->
   <div class="w3-top">
     <ul class="w3-navbar" id="myNavbar">
-      @if (Auth::check())
-          @if (Auth::user()->isChef() && Session::get('login') == 'chef')
-            <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
-            <li class="w3-hide-small w3-right">
-              <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{{ url('/chef_profile') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{{url('/chef/create')}}" class="w3-padding-large w3-xlarge listcolor" id="chef_create" ><i class="fa fa-pencil-square-o"></i><span class="w3-large"> Create</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{{ url('/chef') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_menu" ><i class="fa fa-th-list"></i><span class="w3-large"> Menu</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="w3-padding-large w3-xlarge listcolor" id="chef_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{{ url('/chef_content') }}" class="w3-padding-large w3-xlarge listcolor"><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
-            </li>
-          @else 
-            <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
-            <li class="w3-hide-small w3-right">
-              @if (Auth::user()->user_profile_img != null)
-                <img src="{{ asset(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
-              @else
-                <img src="{{ URL::to('img\default-user-icon-profile.png') }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
-              @endif
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{{ url('/user_profile/create') }}" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{!! route('order.userorder', ['id' => Auth::user()->id]) !!}" class="w3-padding-large w3-xlarge listcolor" id="chef_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="w3-padding-large w3-xlarge listcolor" id="shoppingCart" ><i class="fa fa-shopping-cart"></i><span class="w3-large"> Shopping Cart</span></a>
-            </li>
-            <li class="w3-hide-small w3-right">
-              <a href="{{ url('/user_profile') }}" class="w3-padding-large w3-xlarge listcolor" id="profile" ><i class="fa fa-user"></i><span class="w3-large"> Profile</span></a>
-            </li>
-          @endif
-      @else
-          <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="sign-in-bar" ><i class="fa fa-sign-in"></i><span class="w3-large"> SignIn</span></a>
-          </li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="sign-up-bar"><i class="fa fa-pencil"></i><span class="w3-large"> SignUp</span></a>
-          </li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
-          </li>
-          <li class="w3-hide-small w3-right">
-            <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef-bar"><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
-          </li>
-          <li class="w3-hide-large w3-hide-medium">
-            <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
-          </li>
-       @endif
+        <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
+        <li class="">
+          <a href="#" class="w3-padding-large w3-xlarge w3-right w3-opennav listcolor"><i class="fa fa-bars"></i></a>
+        </li>
     </ul>
   </div>
 
+<!-- Sidebar (sit on top) in small screen -->
+  <nav class="w3-sidenav w3-white w3-animate-right" style="display:none;z-index:5;right:0;width:50%">
+    @if (Auth::check())
+       @if (Auth::user()->isChef() && Session::get('login') == 'chef')
+          <a href="{{ route('home.index') }}" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>
+          <a href="{{ url('/chef_content') }}" class="w3-hover-green w3-large"><i class="fa fa-cutlery"></i> Chef</a>
+          <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="w3-hover-green w3-large"><i class="fa fa-credit-card"></i> Order</a>
+          <a href="{{ url('/chef') }}" class="w3-hover-green w3-large"><i class="fa fa-th-list"></i> Menu</a>
+          <a href="{{url('/chef/create')}}" class="w3-hover-green w3-large"><i class="fa fa-pencil-square-o"></i> Create</a>
+          <a href="{{ url('/chef_profile') }}" class="w3-hover-green w3-large"><i class="fa fa-cog"></i> Seting</a>
+          <a href="#" class="w3-hover-green w3-large"><i class="fa fa-book"></i> Help</a>
+          <hr>
+          <a href="{{ route('logout') }}" class="w3-hover-green w3-large"><i class="fa fa-sign-out"></i> LogOut</a>
+       @else
+          <a href="{{ route('home.index') }}" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>
+          <a href="{{ url('/user_profile') }}" class="w3-hover-green w3-large"><i class="fa fa-user"></i> Profile</a>
+          <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="w3-hover-green w3-large"><i class="fa fa-shopping-cart"></i> Shopping Cart</a>
+          <a href="{!! route('order.userorder', ['id' => Auth::user()->id]) !!}" class="w3-hover-green w3-large"><i class="fa fa-credit-card"></i> Order</a>
+          <a href="{{ url('/user_profile/create') }}" class="w3-hover-green w3-large"><i class="fa fa-cog"></i> Seting</a>
+          <a href="#" class="w3-hover-green w3-large"><i class="fa fa-book"></i> Help</a>
+          <hr>
+          <a href="{{ route('logout') }}" class="w3-hover-green w3-large"><i class="fa fa-sign-out"></i> LogOut</a>
+       @endif
+    @else
+      <a href="{{ route('home.index') }}" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>
+      <a href="#" class="w3-hover-green w3-large" id="chef-bar"><i class="fa fa-cutlery"></i> Chef</a>
+      <a href="#" class="w3-hover-green w3-large"><i class="fa fa-book"></i> Help</a>
+      <hr>
+      <a href="#" class="w3-hover-green w3-large" id="sign-up-bar"><i class="fa fa-pencil"></i> Sign Up</a>
+      <a href="#" class="w3-hover-green w3-large" id="sign-in-bar"><i class="fa fa-sign-in"></i> Sign In</a>
+    @endif
+  </nav>
+
 <!--Sign In Modal -->
-  <div class="modal" id="myModal" role="dialog">
-    <div class="modal-dialog" style="width:500px;">
+  <div class="modal" id="myModal" role="dialog" style="width:100%;">
+    <div class="modal-dialog">
 
       <!-- Modal content-->
       <div class="modal-content">
@@ -121,8 +88,8 @@
   </div>
 
 <!--forgot Password modal-->
-  <div class="modal" id="forgotModal" role="dialog">
-    <div class="modal-dialog" style="width:600px;">
+  <div class="modal" id="forgotModal" role="dialog" style="width:100%;">
+    <div class="modal-dialog">
 
       <!-- Modal content-->
       <div class="modal-content">
@@ -132,22 +99,24 @@
         <div>
           <h1 class="w3-xxlarge w3-text-green w3-center">Forgot Password</h1>
         </div>
-        <div class="modal-body" style="padding:10px 50px;">
+        <div class="modal-body" style="">
           <div class="w3-center">
             <span class="w3-medium w3-text-black w3-center">To reset your password, please enter the email address you sign in before</span>
           </div>
           {!! Form::open(['route' => 'postPasswordEmail', 'class' => 'form-horizontal', 'style' => 'margin:10px', 'method' => 'POST']) !!}
-            <div class=" form-group ">
-              <div class="col-sm-10" style="margin-top:1px">
-                {{ Form::email('email', null, ['class' => 'form-control w3-large', 'placeholder' => 'Email Address']) }}
+            <div class="w3-row">
+              <div class="w3-col s10" style="margin-top:1px; padding-right:3px;">
+                {{ Form::email('email', null, ['class' => 'form-control w3-medium', 'placeholder' => 'Email Address']) }}
                 <label class="w3-text-red w3-large" id="Forgot_pwd_wmsg"></label>
               </div>
-              {{ Form::submit('Send', ['class' => 'w3-btn w3-green w3-round w3-medium col-sm-2 w3-hover-dark-grey', 'style' => 'height:35px']) }}
+              <div class="w3-col s2">
+                {{ Form::submit('Send', ['class' => 'w3-btn w3-green w3-round w3-medium col-sm-2 w3-hover-dark-grey', 'style' => 'height:35px']) }}
+              </div>
+              <div class="w3-col s12">
+                <span class="w3-large w3-text-green" data-dismiss="modal" data-toggle="modal" data-target="#myModal" style="cursor:pointer;">Back to Sign in</span>
+              </div>
             </div>
           {!! Form::close() !!}
-          <div style="margin-left:10px">
-            <span class="w3-large w3-text-green" data-dismiss="modal" data-toggle="modal" data-target="#myModal" style="cursor:pointer;">Back to Sign in</span>
-          </div>
         </div>
       </div>
 
@@ -155,8 +124,8 @@
   </div>
 
 <!--Sign up Modal-->
-  <div class="modal" id="signupModal" role="dialog">
-    <div class="modal-dialog" style="width:530px;">
+  <div class="modal" id="signupModal" role="dialog" style="width:100%;">
+    <div class="modal-dialog">
 
       <!-- Modal content-->
       <div class="modal-content">
@@ -192,9 +161,9 @@
                   <span class="w3-text-green" style="cursor:pointer;">Term of Use.</span>
                 </p>
                 <div class="form-group">
-                  <span class="w3-text-grey w3-large">Sing up with
+                  <span class="w3-text-grey w3-medium"><b>Sign up with</b>
                    <i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i>
-                   <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:10px;"></i>
+                   <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:5px;"></i>
                   </span>
                   <button type="submit" class="btn btn-success pull-right"><span class="glyphicon glyphicon-user w3-large"></span> Sign Up</button>
                 </div>
@@ -215,8 +184,8 @@
   </div>
 
 <!--Chef Sign In Modal -->
-  <div class="modal" id="chefModal" role="dialog">
-    <div class="modal-dialog" style="width:500px;">
+  <div class="modal" id="chefModal" role="dialog" style="width:100%;">
+    <div class="modal-dialog">
 
       <!-- Modal content-->
       <div class="modal-content">
@@ -263,22 +232,6 @@
 
     </div>
   </div>
-
-
-<!-- Sidebar (sit on top) in small screen -->
-  <nav class="w3-sidenav w3-white w3-animate-right w3-hide-large w3-hide-medium" style="display:none;z-index:5;right:0;width:50%">
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-android"></i> App</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-cutlery"></i> Become a Chef</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-bell-o"></i> Alert</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-folder-open-o"></i> Inbox</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-cart-arrow-down"></i> Discover</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-search"></i> Search</a>
-    <br>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-book"></i> Help</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-share-alt"></i> Invite Friends</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-sign-in"></i> Log In</a>
-  </nav>
 
   <div class="w3-overlay w3-animate-opacity" style="cursor:pointer"></div>
 

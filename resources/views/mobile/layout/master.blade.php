@@ -27,11 +27,11 @@
 </head>
 
 <body>
-    @include('desktop.partials.header')
+    @include('mobile.partials.header')
     
     @yield('content')
 
-    @include('desktop.partials.footer')
+    @include('mobile.partials.footer')
     
     @yield('scripts')
 </body>

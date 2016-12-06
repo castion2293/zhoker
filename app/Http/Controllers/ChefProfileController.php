@@ -80,7 +80,8 @@ class ChefProfileController extends Controller
     {
         $chef = $this->chefProfileService->edit($id);
 
-        return view('desktop.chef.edit_profile', ['chef' => $chef]);
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.edit_profile', ['chef' => $chef]);
     }
 
     /**

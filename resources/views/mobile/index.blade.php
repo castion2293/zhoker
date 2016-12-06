@@ -1,4 +1,4 @@
-@extends('desktop.layout.master')
+@extends('mobile.layout.master')
 
 @section('title', '| Home')
 
@@ -11,9 +11,9 @@
 @section('content')
     <!-- First Parallax Image with Logo Text -->
     <div id="font" class="bgimg-1 w3-opacity w3-display-container">
-        <div class="w3-center" style="padding-top:16em">
-            <span class="w3-center w3-padding-xlarge w3-text-white w3-xxlarge w3-wide w3-text-shadow w3-animate-opacity">EATING</span><br>
-            <span class="w3-center w3-padding-xlarge w3-text-white w3-xxlarge w3-wide w3-text-shadow w3-animate-opacity w3-hide-small
+        <div class="w3-center" style="padding-top:14em">
+            <span class="w3-center w3-padding-xlarge w3-text-white w3-xlarge w3-wide w3-text-shadow w3-animate-opacity">EATING</span><br>
+            <span class="w3-center w3-padding-xlarge w3-text-white w3-xlarge w3-wide w3-text-shadow w3-animate-opacity
                 ">Tasty and Fresh</span><br>
             <!--<span class="w3-center w3-text-white w3-xlarge w3-animate-opacity">-->
             <a href="{{ route('maplist.search.get') }}" class="w3-btn w3-transparent w3-border w3-round w3-xlarge w3-card-16 w3-hover-green w3-hover-border-green" id="orderbtn">
@@ -21,41 +21,23 @@
             </a>
         </div>
 
-        <!--Input Form large medium screen-->
-        <div class="w3-content w3-container w3-hide-small" style="padding-top:9em">
-            {!! Form::open(['route' => 'maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
-                <div class="w3-col l5 m5">
-                    {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'required' => '', 'id' => 'eatlocation', 'style' => 'font-weight:bold;']) }}
-                </div>
-                <div class="w3-col l2 m2">
-                    <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic clickdown" name="shift" style="height:50px">
-                        <option class="w3-text-black w3-white w3-large">Dinner</option>
-                        <option class="w3-text-black w3-white w3-large">Lunch</option>
-                        <option class="w3-text-black w3-white w3-large">Brunch</option>
-                        <option class="w3-text-black w3-white w3-large">Breakfast</option>
-                        <option class="w3-text-black w3-white w3-large">Tea Time</option>
-                    </select>
-                </div>
-                <div class="input-group w3-col l4 m4">
-                    <span class="input-group-addon inputbkg clickdown"><span class="glyphicon glyphicon-calendar"></span></span>
-                    {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'id' => 'datepicker', 'required' => '', 'placeholder' => 'Date', 'style' => 'font-weight:bold;cursor:pointer;"']) }}
-                </div>
-                <button class="w3-col l1 m1 w3-btn w3-border-green w3-large w3-green" style="height:50px">
-                    <i class="w3-text-shadow fa fa-search"></i>
-                </button>
-            {!! Form::close() !!}
-        </div>
-
-         <!--Input Form small screen-->
+        <!--Input Form small screen-->
         <div class="w3-content w3-container w3-hide-large w3-hide-medium" style="padding-top:9em">
-            <form class="w3-row  w3-card-14">
-                <div class="w3-col s10">
-                <input class="w3-input w3-border w3-large w3-text-black inputbkg" type="text" value="Where to eat?" id="eatlocationSmall">
+            {!! Form::open(['route' => 'maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
+                <div class="w3-row">
+                    <div class="w3-col s10">
+                        {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'required' => '', 'id' => 'eatlocation', 'style' => 'font-weight:bold;']) }}
+                    </div>
+                    <!--date and shift not display-->
+                    <div style="display:none;">
+                        {{ Form::text('shift', 'Dinner', ['required' => '']) }}
+                        {{ Form::text('date', null, ['id' => 'default_date', 'required' => '']) }}
+                    </div>
+                    <button class="w3-col s2 w3-btn w3-border-green w3-large w3-green" style="height:50px">
+                        <i class="w3-text-shadow fa fa-search"></i>
+                    </button>
                 </div>
-                <button class="w3-col s2 w3-btn w3-border-green w3-large w3-green" style="height:50px">
-                <i class="w3-text-shadow fa fa-search"></i>
-                </button>
-            </form>
+            {!! Form::close() !!}
         </div>
 
     </div>
@@ -164,18 +146,18 @@
         <h3 class="w3-center ">HOW TO WORK</h3>
         <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
 
-        <div class="w3-row-padding">
-            <div class="w3-col l4 m4 w3-center">
+        <div class="w3-row">
+            <div class="w3-col s12 w3-center">
                 <i class="fa fa-television w3-text-green" style="font-size:100px;"></i>
                 <p class="w3-text-green w3-large"><b>1. Search online</b></p>
             </div>
 
-            <div class="w3-col l4 m4 w3-center">
+            <div class="w3-col s12 w3-center" style="margin-top:5em;">
                 <i class="fa fa-credit-card w3-text-green" style="font-size:100px;"></i>
                 <p class="w3-text-green w3-large"><b>2. pay online</b></p>
             </div>
 
-            <div class="w3-col l4 m4 w3-center">
+            <div class="w3-col s12 w3-center" style="margin-top:5em;">
                 <i class="fa fa-cutlery w3-text-green" style="font-size:100px;"></i>
                 <p class="w3-text-green w3-large"><b>3. Enjoy the meal</b></p>
             </div>
@@ -183,13 +165,13 @@
     </div>
 
     <!-- Container (Portfolio Section) -->
-    <div class="w3-padding-jumbo" style="margin-top:5em;margin-bottom:5em;">
+    <div class="w3-padding-small" style="margin-top:5em;margin-bottom:5em;">
         <h3 class="w3-center ">WHAT WE SERVE</h3>
         <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
 
         <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
         <div class="w3-row-padding">
-            <div class="w3-col l4 m4">
+            <div class="w3-col s12">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201606.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
@@ -200,9 +182,9 @@
                 </a>
             </div>
 
-            <div class="w3-col l4 m4">
+            <div class="w3-col s12">
                 <a href="#">
-                    <div class="w3-display-container img-wrapper">
+                    <div class="w3-display-container img-wrapper w3-margin-top">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201607.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>French</b></h3>
@@ -211,9 +193,9 @@
                 </a>
             </div>
 
-            <div class="w3-col l4 m4">
+            <div class="w3-col s12">
                 <a href="#">
-                    <div class="w3-display-container img-wrapper">
+                    <div class="w3-display-container img-wrapper w3-margin-top">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201608.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>Barbecu</b></h3>
@@ -222,9 +204,9 @@
                 </a>
             </div>
 
-            <div class="w3-col l4 m4">
+            <div class="w3-col s12">
                 <a href="#">
-                    <div class="w3-display-container img-wrapper">
+                    <div class="w3-display-container img-wrapper w3-margin-top">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201609.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>Seafood</b></h3>
@@ -233,9 +215,9 @@
                 </a>
             </div>
 
-            <div class="w3-col l4 m4">
+            <div class="w3-col s12">
                 <a href="#">
-                    <div class="w3-display-container img-wrapper">
+                    <div class="w3-display-container img-wrapper w3-margin-top">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201610.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>Japanese</b></h3>
@@ -244,9 +226,9 @@
                 </a>
             </div>
 
-            <div class="w3-col l4 m4">
+            <div class="w3-col s12">
                 <a href="#">
-                    <div class="w3-display-container img-wrapper">
+                    <div class="w3-display-container img-wrapper w3-margin-top">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201611.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>Korean</b></h3>
@@ -273,11 +255,9 @@
 			})();
 	</script>
     <script>
-    // datepicker
+    // date
     $(function () {
-        $("#datepicker").datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
+        $("#default_date").val("{{ date("Y-m-d" , strtotime(\Carbon\Carbon::now()) ) }}");
     })
     </script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('desktop.layout.master')
+@extends('mobile.layout.master')
 
 @section('title', '| Chef Order')
 

@@ -1,4 +1,4 @@
-@extends('desktop.layout.map_list_layout')
+@extends('mobile.layout.map_list_layout')
 
 @section('title', '| List')
 

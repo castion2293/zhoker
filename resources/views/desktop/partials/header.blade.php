@@ -264,22 +264,6 @@
     </div>
   </div>
 
-
-<!-- Sidebar (sit on top) in small screen -->
-  <nav class="w3-sidenav w3-white w3-animate-right w3-hide-large w3-hide-medium" style="display:none;z-index:5;right:0;width:50%">
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-android"></i> App</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-cutlery"></i> Become a Chef</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-bell-o"></i> Alert</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-folder-open-o"></i> Inbox</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-cart-arrow-down"></i> Discover</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-search"></i> Search</a>
-    <br>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-book"></i> Help</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-share-alt"></i> Invite Friends</a>
-    <a href="#" class="w3-hover-green w3-large"><i class="fa fa-sign-in"></i> Log In</a>
-  </nav>
-
   <div class="w3-overlay w3-animate-opacity" style="cursor:pointer"></div>
 
 <!--SignIn and SignUp Error show-->
