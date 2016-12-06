@@ -9,87 +9,72 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-md-7">
-            <div  id="fixed" class="w3-display-container" style="position:fixed;height:90%;width:60%;margin-top:4%;">
+    <div class="w3-row">
+        <!--div class="col-xs-12">
+            <div  class="w3-display-container" style="height:90%;width:60%;margin-top:4%;">
                 <div id="map" style="height:100%"></div>
             </div>      
-        </div>
-        <div class="col-md-5">
-            <div class="col-md-12 w3-light-grey">
-                <div class="w3-accordion">
-                    <div class="w3-red"><h1>Zhoker</h1></div>
-                    @foreach($meals as $meal)
-                      <a id="{{ $meal->id }}" href="#{{ $meal->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
-                        <div class="row">
-                          <div class="col-md-4" id="title_img">
-                              <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%">
-                          </div>
-                          <div class="col-md-5">
-                              <div><span class="w3-text-grey w3-xlarge" id="meal-name"><b>{{ $meal->name }}<b></span></div>
-                              <div style="padding-top:10px;">
-                                <section>
-                                  <span class="w3-text-green w3-large" id="meal-price">${{ $meal->price }}</span>
-                                  <span class="w3-text-grey w3-slim w3-right" style="padding-top:2px" id="meal-people">{{ $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->people_left }} people left</span>
-                                </section>
-                              </div>
-                          </div>
-                          <div class="col-md-3">
-                              <div style="margin-top:8px;">
-                                @for ($i = 0; $i < 5; $i++)
-                                  <span class="w3-text-deep-orange star"><i class="fa fa-star"></i></span>
-                                @endfor
-                              </div>
-                              <div id="method-label" style="padding-top:20px;display: none">
-                                @foreach ($meal->methods as $method)
-                                  <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
-                                @endforeach
-                              </div>
-                          </div>
+        </div-->
+          <div class="w3-col s12 w3-light-grey">
+              <div class="w3-accordion">
+                  <div class="w3-red"><h2>Zhoker</h2></div>
+                  @foreach($meals as $meal)
+                    <a id="{{ $meal->id }}" href="#{{ $meal->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
+                      <div class="w3-row">
+                        <div class="w3-col s4" id="title_img">
+                            <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%">
                         </div>
-                      </a>
-                      <div id="drop_{{ $meal->id }}" class="w3-accordion-content w3-container w3-display-container w3-white">
-                        <div class="row">
-                            <div class="col-md-6 w3-padding-12">
-                              <a href="#" class="w3-white">
-                                <div class="content-img" style="width:0">
-                                    <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%">
-                                </div>
-                                <div class="content-img" style="margin-top:10px;width:0">
-                                    <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%;">
-                                </div>
-                                <div class="content-img" style="margin-top:10px;width:0">
-                                    <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%;">
-                                </div>
-                              </div>
-                            </a>
-                            <div class="col-md-6 w3-content w3-container">
-                              <div class="w3-padding-12 w3-text-grey w3-justify">
-                                 <p class="w3-text-grey" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 300) !!}{{ strlen(strip_tags($meal->description)) > 300 ? '...' : "" }}</p>
-                              </div>
+                        <div class="w3-col s5" style="padding-left:10px;">
+                            <div><span class="w3-text-grey w3-medium" id="meal-name"><b>{{ $meal->name }}<b></span></div>
+                            <div>
+                              <section>
+                                <span class="w3-text-green w3-small" id="meal-price">${{ $meal->price }}</span>
+                                <span class="w3-text-grey w3-small w3-right" style="padding-top:2px;padding-left:2px;" id="meal-people">{{ $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->people_left }} people left</span>
+                              </section>
                             </div>
                         </div>
-
-                        <a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->id])}}" target="_blank" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">Read More</a>
-                        
-                       </div>
-                    @endforeach
-                </div>
-
-                <!--@foreach($meals as $meal)
-                  
-                  <div id="{{ $meal->id }}" class="container-fluid">
-                    <div class="row">
-                      <div class="col-sm-8">
-                        <h2>{{ $meal->address }}</h2><br>
-                        <h2>{{ $meal->city }}</h2><br>
-                        <h2>{{ $meal->state }}</h2>
+                        <div class="w3-col s3 w3-padding-left">
+                            <div style="margin-top:0px;">
+                              @for ($i = 0; $i < 5; $i++)
+                                <span class="w3-text-deep-orange star w3-tiny"><i class="fa fa-star"></i></span>
+                              @endfor
+                            </div>
+                            <div id="method-label" style="padding-top:0px;display: none">
+                              @foreach ($meal->methods as $method)
+                                <p class="w3-tag w3-teal" style="font-size:6px;">{{ $method->method }}</p>
+                              @endforeach
+                            </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                @endforeach-->
-            </div>
-        </div>
+                    </a>
+                    <div id="drop_{{ $meal->id }}" class="w3-accordion-content w3-container w3-display-container w3-white">
+                      <div class="w3-row">
+                          <div class="w3-col s12 w3-padding-12">
+                            <a href="#" class="w3-white">
+                              <div class="content-img" style="width:0">
+                                  <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%">
+                              </div>
+                              <div class="content-img" style="margin-top:10px;width:0">
+                                  <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%;">
+                              </div>
+                              <div class="content-img" style="margin-top:10px;width:0">
+                                  <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%;">
+                              </div>
+                            </div>
+                          </a>
+                          <div class="w3-col s12 w3-content w3-container">
+                            <div class="w3-padding-12 w3-text-grey w3-justify">
+                                <p class="w3-text-grey" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 300) !!}{{ strlen(strip_tags($meal->description)) > 300 ? '...' : "" }}</p>
+                            </div>
+                          </div>
+                      </div>
+
+                      <a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->id])}}" target="_blank" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">Read More</a>
+                      
+                      </div>
+                  @endforeach
+              </div>
+          </div>
     </div>
 @endsection
 
