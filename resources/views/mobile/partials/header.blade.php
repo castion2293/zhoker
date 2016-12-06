@@ -9,7 +9,7 @@
   </div>
 
 <!-- Sidebar (sit on top) in small screen -->
-  <nav class="w3-sidenav w3-white w3-animate-right" style="display:none;z-index:5;right:0;width:50%">
+  <nav class="w3-sidenav w3-white w3-animate-right" style="display:none;z-index:5;right:0;width:70%">
     @if (Auth::check())
        @if (Auth::user()->isChef() && Session::get('login') == 'chef')
           <a href="{{ route('home.index') }}" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>
@@ -77,13 +77,13 @@
               <label class="w3-text-grey"><input type="checkbox" value="" checked>Remember me</label>
             </div>
             <div class="w3-row">
-              <div class="w3-col s8">
+              <div class="w3-col s12">
                   <span class="w3-text-grey w3-medium">Sing in with
                     <a href="{{ url('/auth/facebook') }}"><i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i></a>
                     <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:10px;"></i>
                   </span>
               </div>
-              <div class="w3-col s4" style="">
+              <div class="w3-col s12 w3-margin-top" style="">
                   <button type="submit" class="btn w3-green btn-block"><span class="glyphicon glyphicon-off w3-medium"></span> Sign In</button>
               </div>
             </div>
@@ -161,7 +161,7 @@
                 {{ Form::text('phone_number', null, ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'placeholder' => 'Phone Number ']) }}
                 {{ Form::password('password', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Password ']) }}
                 {{ Form::password('password_confirmation', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Verify Password ']) }}
-                <div class="w3-margin-top">
+                <div class="w3-margin-top" style="transform:scale(0.63);-webkit-transform:scale(0.63);transform-origin:0 0;-webkit-transform-origin:0 0;">
                   {!! app('captcha')->display()!!}
                   {!! $errors->first('g-recaptcha-response','<p class="alert alert-danger">:message</p>')!!}
                 </div>
@@ -173,13 +173,13 @@
                   <span class="w3-text-green" style="cursor:pointer;">Term of Use.</span>
                 </p>
                 <div class="w3-row">
-                  <div class="w3-col s8">
+                  <div class="w3-col s12">
                       <span class="w3-text-grey w3-medium">Sign up with
                       <i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i>
                       <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:5px;"></i>
                       </span>
                   </div>
-                  <div class="w3-col s4">
+                  <div class="w3-col s12 w3-margin-top">
                       <button type="submit" class="btn w3-green btn-block w3-left"><span class="glyphicon glyphicon-user w3-medium"></span> Sign Up</button>
                   </div>
                 </div>

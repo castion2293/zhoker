@@ -16,7 +16,7 @@
                 <span class="w3-center w3-padding-xlarge w3-text-white w3-xlarge w3-wide w3-text-shadow w3-animate-opacity">EATING</span>
             </div>
             <div class="w3-col s12">
-                <span class="w3-center w3-padding-xlarge w3-text-white w3-xlarge w3-wide w3-text-shadow w3-animate-opacity">Tasty & fresh</span>
+                <span class="w3-center w3-padding-large w3-text-white w3-medium w3-wide w3-text-shadow w3-animate-opacity">Tasty & fresh</span>
             </div>
             <a href="{{ route('maplist.search.get') }}" class="w3-btn w3-transparent w3-border w3-round w3-xlarge w3-card-16 w3-hover-green w3-hover-border-green" id="orderbtn">
                 <span class="w3-text-shadow">Order Now</span>
@@ -24,7 +24,7 @@
         </div>
 
         <!--Input Form small screen-->
-        <div class="w3-content w3-container w3-hide-large w3-hide-medium" style="padding-top:9em">
+        <div class="w3-content w3-container w3-hide-large w3-hide-medium" style="padding-top:5em">
             {!! Form::open(['route' => 'maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
                 <div class="w3-row">
                     <div class="w3-col s10">
