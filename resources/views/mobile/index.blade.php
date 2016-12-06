@@ -10,12 +10,14 @@
 
 @section('content')
     <!-- First Parallax Image with Logo Text -->
-    <div id="font" class="bgimg-1 w3-opacity w3-display-container">
-        <div class="w3-center" style="padding-top:14em">
-            <span class="w3-center w3-padding-xlarge w3-text-white w3-xlarge w3-wide w3-text-shadow w3-animate-opacity">EATING</span><br>
-            <span class="w3-center w3-padding-xlarge w3-text-white w3-xlarge w3-wide w3-text-shadow w3-animate-opacity
-                ">Tasty and Fresh</span><br>
-            <!--<span class="w3-center w3-text-white w3-xlarge w3-animate-opacity">-->
+    <div id="font" class="bgimg-1 w3-opacity">
+        <div class="w3-center w3-row" style="padding-top:14em">
+            <div class="w3-col s12">
+                <span class="w3-center w3-padding-xlarge w3-text-white w3-xlarge w3-wide w3-text-shadow w3-animate-opacity">EATING</span>
+            </div>
+            <div class="w3-col s12">
+                <span class="w3-center w3-padding-xlarge w3-text-white w3-xlarge w3-wide w3-text-shadow w3-animate-opacity">Tasty & fresh</span>
+            </div>
             <a href="{{ route('maplist.search.get') }}" class="w3-btn w3-transparent w3-border w3-round w3-xlarge w3-card-16 w3-hover-green w3-hover-border-green" id="orderbtn">
                 <span class="w3-text-shadow">Order Now</span>
             </a>

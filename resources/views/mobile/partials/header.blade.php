@@ -13,31 +13,39 @@
     @if (Auth::check())
        @if (Auth::user()->isChef() && Session::get('login') == 'chef')
           <a href="{{ route('home.index') }}" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>
-          <a href="{{ url('/chef_content') }}" class="w3-hover-green w3-large"><i class="fa fa-cutlery"></i> Chef</a>
-          <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="w3-hover-green w3-large"><i class="fa fa-credit-card"></i> Order</a>
-          <a href="{{ url('/chef') }}" class="w3-hover-green w3-large"><i class="fa fa-th-list"></i> Menu</a>
-          <a href="{{url('/chef/create')}}" class="w3-hover-green w3-large"><i class="fa fa-pencil-square-o"></i> Create</a>
-          <a href="{{ url('/chef_profile') }}" class="w3-hover-green w3-large"><i class="fa fa-cog"></i> Seting</a>
-          <a href="#" class="w3-hover-green w3-large"><i class="fa fa-book"></i> Help</a>
+          <a href="{{ url('/chef_content') }}" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-cutlery"></i> Chef</a>
+          <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-credit-card"></i> Order</a>
+          <a href="{{ url('/chef') }}" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-th-list"></i> Menu</a>
+          <a href="{{url('/chef/create')}}" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-pencil-square-o"></i> Create</a>
+          <a href="{{ url('/chef_profile') }}" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-cog"></i> Seting</a>
+          <a href="#" class="w3-hover-green w3-large"><i class="fa fa-book w3-margin-top"></i> Help</a>
           <hr>
           <a href="{{ route('logout') }}" class="w3-hover-green w3-large"><i class="fa fa-sign-out"></i> LogOut</a>
        @else
+          <div class="w3-margin-left">
+            @if (Auth::user()->user_profile_img != null)
+              <img src="{{ asset(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
+            @else
+              <img src="{{ URL::to('img\default-user-icon-profile.png') }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
+            @endif
+          </div>
+          <hr>
           <a href="{{ route('home.index') }}" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>
-          <a href="{{ url('/user_profile') }}" class="w3-hover-green w3-large"><i class="fa fa-user"></i> Profile</a>
-          <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="w3-hover-green w3-large"><i class="fa fa-shopping-cart"></i> Shopping Cart</a>
-          <a href="{!! route('order.userorder', ['id' => Auth::user()->id]) !!}" class="w3-hover-green w3-large"><i class="fa fa-credit-card"></i> Order</a>
-          <a href="{{ url('/user_profile/create') }}" class="w3-hover-green w3-large"><i class="fa fa-cog"></i> Seting</a>
-          <a href="#" class="w3-hover-green w3-large"><i class="fa fa-book"></i> Help</a>
+          <a href="{{ url('/user_profile') }}" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-user"></i> Profile</a>
+          <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-shopping-cart"></i> Shopping Cart</a>
+          <a href="{!! route('order.userorder', ['id' => Auth::user()->id]) !!}" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-credit-card"></i> Order</a>
+          <a href="{{ url('/user_profile/create') }}" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-cog"></i> Seting</a>
+          <a href="#" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-book"></i> Help</a>
           <hr>
           <a href="{{ route('logout') }}" class="w3-hover-green w3-large"><i class="fa fa-sign-out"></i> LogOut</a>
        @endif
     @else
       <a href="{{ route('home.index') }}" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>
-      <a href="#" class="w3-hover-green w3-large" id="chef-bar"><i class="fa fa-cutlery"></i> Chef</a>
-      <a href="#" class="w3-hover-green w3-large"><i class="fa fa-book"></i> Help</a>
+      <a href="#" class="w3-hover-green w3-large w3-margin-top" id="chef-bar"><i class="fa fa-cutlery"></i> Chef</a>
+      <a href="#" class="w3-hover-green w3-large w3-margin-top"><i class="fa fa-book"></i> Help</a>
       <hr>
       <a href="#" class="w3-hover-green w3-large" id="sign-up-bar"><i class="fa fa-pencil"></i> Sign Up</a>
-      <a href="#" class="w3-hover-green w3-large" id="sign-in-bar"><i class="fa fa-sign-in"></i> Sign In</a>
+      <a href="#" class="w3-hover-green w3-large w3-margin-top" id="sign-in-bar"><i class="fa fa-sign-in"></i> Sign In</a>
     @endif
   </nav>
 
@@ -68,12 +76,16 @@
             <div class="checkbox">
               <label class="w3-text-grey"><input type="checkbox" value="" checked>Remember me</label>
             </div>
-            <div class="form-group">
-              <span class="w3-text-grey w3-large">Sing in with
-                <a href="{{ url('/auth/facebook') }}"><i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i></a>
-                <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:10px;"></i>
-              </span>
-              <button type="submit" class="btn btn-success pull-right"><span class="glyphicon glyphicon-off w3-large"></span> Sign In</button>
+            <div class="w3-row">
+              <div class="w3-col s8">
+                  <span class="w3-text-grey w3-medium">Sing in with
+                    <a href="{{ url('/auth/facebook') }}"><i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i></a>
+                    <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:10px;"></i>
+                  </span>
+              </div>
+              <div class="w3-col s4" style="">
+                  <button type="submit" class="btn w3-green btn-block"><span class="glyphicon glyphicon-off w3-medium"></span> Sign In</button>
+              </div>
             </div>
           {!! Form::close() !!}
         </div>
@@ -149,7 +161,7 @@
                 {{ Form::text('phone_number', null, ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'placeholder' => 'Phone Number ']) }}
                 {{ Form::password('password', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Password ']) }}
                 {{ Form::password('password_confirmation', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Verify Password ']) }}
-                <div class="form-group w3-margin-top">
+                <div class="w3-margin-top">
                   {!! app('captcha')->display()!!}
                   {!! $errors->first('g-recaptcha-response','<p class="alert alert-danger">:message</p>')!!}
                 </div>
@@ -160,12 +172,16 @@
                 <p class="w3-large">By registering, I accept the zhoker.com
                   <span class="w3-text-green" style="cursor:pointer;">Term of Use.</span>
                 </p>
-                <div class="form-group">
-                  <span class="w3-text-grey w3-medium"><b>Sign up with</b>
-                   <i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i>
-                   <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:5px;"></i>
-                  </span>
-                  <button type="submit" class="btn btn-success pull-right"><span class="glyphicon glyphicon-user w3-large"></span> Sign Up</button>
+                <div class="w3-row">
+                  <div class="w3-col s8">
+                      <span class="w3-text-grey w3-medium">Sign up with
+                      <i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i>
+                      <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:5px;"></i>
+                      </span>
+                  </div>
+                  <div class="w3-col s4">
+                      <button type="submit" class="btn w3-green btn-block w3-left"><span class="glyphicon glyphicon-user w3-medium"></span> Sign Up</button>
+                  </div>
                 </div>
               </div>
             </div>
