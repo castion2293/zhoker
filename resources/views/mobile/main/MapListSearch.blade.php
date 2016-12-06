@@ -33,8 +33,8 @@
                   <div class="" style="margin-top:1em;">
                       <label class="w3-text-grey w3-large" style="font-family:cursive">Date</label>
                       <div class="input-group">
-                          <!--span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span-->
-                          {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-large w3-text-grey', 'id' => 'datepicker', 'required' => '', 'placeholder' => 'Date', 'style' => 'font-weight:bold;cursor:pointer;"']) }}
+                          {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-block w3-large w3-text-grey', 'id' => 'datepicker', 'required' => '', 'placeholder' => 'Date', 'style' => 'font-weight:bold;cursor:pointer;"']) }}
+                          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                       </div>
                   </div>
                   <div class="" style="margin-top:1em;">
