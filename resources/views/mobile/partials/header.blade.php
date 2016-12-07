@@ -61,30 +61,30 @@
         <div>
           <h1 class="text-center w3-padding-8 w3-text-green">Sign In</h1>
         </div>
-        <div class="modal-body" style="padding:10px 50px;">
+        <div class="modal-body" style="padding:10px 30px;">
           {!! Form::open(['route' => 'login', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
             <div class="form-group">
-              <label for="email" class="w3-text-grey"><span class="fa fa-envelope w3-large"></span> Email</label>
-              {{ Form::email('email', null, ['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Email']) }}              
+              <label for="email" class="w3-text-grey w3-large"><span class="fa fa-envelope w3-xlarge"></span> Email</label>
+              {{ Form::email('email', null, ['class' => 'form-control w3-xlarge', 'required' => '', 'placeholder' => 'Enter Email']) }}              
             </div>
             <div class="form-group">
-              <label for="password" class="w3-text-grey"><span class="glyphicon glyphicon-eye-open w3-large"></span> Password</label>
-              {{ Form::password('password',['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Password']) }}
+              <label for="password" class="w3-text-grey w3-large"><span class="glyphicon glyphicon-eye-open w3-xlarge"></span> Password</label>
+              {{ Form::password('password',['class' => 'form-control w3-xlarge', 'required' => '', 'placeholder' => 'Enter Password']) }}
               <label class="w3-text-red w3-large" id="sign_in_wmsg"></label>
-              <span class="w3-text-green" data-dismiss="modal" data-toggle="modal" data-target="#forgotModal" style="cursor:pointer;">Forgot Password?</span>
+              <span class="w3-text-green w3-large" data-dismiss="modal" data-toggle="modal" data-target="#forgotModal" style="cursor:pointer;">Forgot Password?</span>
             </div>
             <div class="checkbox">
-              <label class="w3-text-grey"><input type="checkbox" value="" checked>Remember me</label>
+              <label class="w3-text-grey w3-large"><input type="checkbox" value="" checked>Remember me</label>
             </div>
             <div class="w3-row">
               <div class="w3-col s12">
-                  <span class="w3-text-grey w3-medium">Sing in with
+                  <span class="w3-text-grey w3-large">Sing in with
                     <a href="{{ url('/auth/facebook') }}"><i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i></a>
                     <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:10px;"></i>
                   </span>
               </div>
               <div class="w3-col s12 w3-margin-top" style="">
-                  <button type="submit" class="btn w3-green btn-block"><span class="glyphicon glyphicon-off w3-medium"></span> Sign In</button>
+                  <button type="submit" class="btn w3-green btn-block w3-xlarge"><span class="glyphicon glyphicon-off w3-xlarge"></span> Sign In</button>
               </div>
             </div>
           {!! Form::close() !!}
@@ -147,7 +147,7 @@
         <div>
           <h1 class="w3-xxlarge w3-text-green w3-center">Sign up</h1>
         </div>
-        <div class="modal-body" style="padding:10px 50px;">
+        <div class="modal-body" style="padding:10px 30px;">
           <div class="w3-center">
             <span class="w3-medium w3-text-black w3-center">Please sign up to keep track of your favorites and saved searches.</span>
           </div>
@@ -155,13 +155,13 @@
           {!! Form::open(['route' => 'register.sendconfrimemail', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
             <div class=" form-group ">
               <div style="margin-top:1px">
-                {{ Form::text('first_name', null, ['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'First Name ']) }}
-                {{ Form::text('last_name', null, ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'placeholder' => 'Last Name ']) }}
-                {{ Form::email('email', null, ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'placeholder' => 'Email Address ']) }}
-                {{ Form::text('phone_number', null, ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'placeholder' => 'Phone Number ']) }}
-                {{ Form::password('password', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Password ']) }}
-                {{ Form::password('password_confirmation', ['class' => 'form-control w3-large w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Verify Password ']) }}
-                <div class="w3-margin-top" style="transform:scale(0.63);-webkit-transform:scale(0.63);transform-origin:0 0;-webkit-transform-origin:0 0;">
+                {{ Form::text('first_name', null, ['class' => 'form-control w3-xlarge', 'required' => '', 'placeholder' => 'First Name ']) }}
+                {{ Form::text('last_name', null, ['class' => 'form-control w3-xlarge w3-margin-top', 'required' => '', 'placeholder' => 'Last Name ']) }}
+                {{ Form::email('email', null, ['class' => 'form-control w3-xlarge w3-margin-top', 'required' => '', 'placeholder' => 'Email Address ']) }}
+                {{ Form::text('phone_number', null, ['class' => 'form-control w3-xlarge w3-margin-top', 'required' => '', 'placeholder' => 'Phone Number ']) }}
+                {{ Form::password('password', ['class' => 'form-control w3-xlarge w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Password ']) }}
+                {{ Form::password('password_confirmation', ['class' => 'form-control w3-xlarge w3-margin-top', 'required' => '', 'minlength' => '6', 'placeholder' => 'Verify Password ']) }}
+                <div class="w3-margin-top" style="transform:scale(0.75);-webkit-transform:scale(0.75);transform-origin:0 0;-webkit-transform-origin:0 0;">
                   {!! app('captcha')->display()!!}
                   {!! $errors->first('g-recaptcha-response','<p class="alert alert-danger">:message</p>')!!}
                 </div>
@@ -174,13 +174,13 @@
                 </p>
                 <div class="w3-row">
                   <div class="w3-col s12">
-                      <span class="w3-text-grey w3-medium">Sign up with
+                      <span class="w3-text-grey w3-large">Sign up with
                       <i class="fa fa-facebook-square w3-xxlarge w3-text-indigo" style="margin-left:5px;"></i>
                       <i class="fa fa-google-plus-square w3-xxlarge w3-text-red" style="margin-left:5px;"></i>
                       </span>
                   </div>
                   <div class="w3-col s12 w3-margin-top">
-                      <button type="submit" class="btn w3-green btn-block w3-left"><span class="glyphicon glyphicon-user w3-medium"></span> Sign Up</button>
+                      <button type="submit" class="btn w3-green btn-block w3-left w3-xlarge"><span class="glyphicon glyphicon-user w3-xlarge"></span> Sign Up</button>
                   </div>
                 </div>
               </div>
@@ -211,27 +211,27 @@
         <div>
           <h1 class="text-center w3-padding-8 w3-text-green">Chef Sign In</h1>
         </div>
-        <div class="modal-body" style="padding:10px 50px;">
+        <div class="modal-body" style="padding:10px 30px;">
           {!! Form::open(['route' => 'main.cheflogin', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
             <div class="form-group">
-              <label for="email" class="w3-text-grey"><span class="fa fa-envelope w3-large"></span> Email</label>
-              {{ Form::email('email', null, ['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Email']) }}              
+              <label for="email" class="w3-text-grey w3-large"><span class="fa fa-envelope w3-large"></span> Email</label>
+              {{ Form::email('email', null, ['class' => 'form-control w3-xlarge', 'required' => '', 'placeholder' => 'Enter Email']) }}              
             </div>
             <div class="form-group">
-              <label for="password" class="w3-text-grey"><span class="glyphicon glyphicon-eye-open w3-large"></span> User Password</label>
-              {{ Form::password('password',['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Password']) }}
-              <span class="w3-text-green" data-dismiss="modal" data-toggle="modal" data-target="#forgotModal" style="cursor:pointer;">Forgot Password?</span>
+              <label for="password" class="w3-text-grey w3-large"><span class="glyphicon glyphicon-eye-open w3-large"></span> User Password</label>
+              {{ Form::password('password',['class' => 'form-control w3-xlarge', 'required' => '', 'placeholder' => 'Enter Password']) }}
+              <span class="w3-text-green w3-large" data-dismiss="modal" data-toggle="modal" data-target="#forgotModal" style="cursor:pointer;">Forgot Password?</span>
             </div>
             <div class="form-group">
-              <label for="chef_psw" class="w3-text-grey"><span class="glyphicon glyphicon-cutlery w3-large"></span> Chef Password</label>
-              {{ Form::password('chef_psw',['class' => 'form-control w3-large', 'required' => '', 'placeholder' => 'Enter Password']) }}
-              <a href="#" style="text-decoration:none;"><span class="w3-text-green">Forgot Chef Password?</span></a>
+              <label for="chef_psw" class="w3-text-grey w3-large"><span class="glyphicon glyphicon-cutlery w3-large"></span> Chef Password</label>
+              {{ Form::password('chef_psw',['class' => 'form-control w3-xlarge', 'required' => '', 'placeholder' => 'Enter Password']) }}
+              <a href="#" style="text-decoration:none;"><span class="w3-text-green w3-large">Forgot Chef Password?</span></a>
               <label class="w3-text-red w3-large" id="chef_wmsg"></label>
             </div>
             <div class="checkbox">
-              <label class="w3-text-grey"><input type="checkbox" value="" checked>Remember me</label>
-              <button type="submit" class="btn btn-success pull-right"><span class="glyphicon glyphicon-off w3-large"></span> Sign In</button>
+              <label class="w3-text-grey w3-large"><input type="checkbox" value="" checked>Remember me</label>
             </div>
+            <button type="submit" class="btn w3-green btn-block w3-xlarge"><span class="glyphicon glyphicon-off w3-xlarge"></span> Sign In</button>
           {!! Form::close() !!}
         </div>
         <div class="modal-footer">

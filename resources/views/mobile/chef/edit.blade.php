@@ -66,7 +66,7 @@
                         <div class="w3-rest"></div>
                         <div class="w3-col s7 w3-right">
                             <input type="file" id="myFile" name="img" onchange="readURL(this);" style="display:none;">
-                            <button type="button" class="w3-btn w3-white w3-border w3-border-grey w3-margin-top w3-margin-left w3-text-grey" style="font-family:cursive;" onclick="document.getElementById('myFile').click();">Upload a Photo</button>
+                            <button type="button" class="w3-btn w3-white w3-border w3-border-grey w3-large w3-margin-top w3-margin-left w3-text-grey" style="font-family:cursive;" onclick="document.getElementById('myFile').click();">Upload a Photo</button>
                         </div>
                     </div>
                 </div>

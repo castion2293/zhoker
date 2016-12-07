@@ -7,18 +7,6 @@
 @endsection
 
 @section('content')
-    <!--div class="fixed-circle-nav w3-transparent">
-        <section class="section section--nav">
-		    <nav class="nav nav--shamso">
-				<a href="#top-pic" class="nav__item nav__item--current" aria-label="Item 1"><span class="nav__item-title">Top</span></a>
-				<a href="#profile" class="nav__item " aria-label="Item 2"><span class="nav__item-title">Profile</span></a>
-				<a href="#menu" class="nav__item" aria-label="Item 3"><span class="nav__item-title">Menu</span></a>
-				<a href="#order" class="nav__item" aria-label="Item 4"><span class="nav__item-title">Order</span></a>
-				<a href="#account" class="nav__item" aria-label="Item 5"><span class="nav__item-title">Account</span></a>
-			</nav>
-		</section>
-    </div-->
-
     <!--header picture-->
     <div class="" id="top-pic">
         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1031201601.JPG" alt="profile" style="width:100%">
@@ -39,9 +27,11 @@
                 @endif
             </div>
             <div class="w3-col s12 w3-panel w3-light-grey">
-                <div style="">
+                <div class="">
                     <p class="w3-text-grey w3-center w3-xxlarge w3-margin-top" style="font-family: cursive">{{ $chef->store_name }}</p>
-                    <p class="w3-text-grey w3-center" style="font-family: cursive">{!! $chef->store_description !!}</p>
+                    <div class="w3-padding-small">
+                        <p class="w3-text-grey w3-center" style="font-family: cursive">{!! $chef->store_description !!}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,7 +48,7 @@
                                 <div class="w3-white w3-border w3-border-green w3-round-large w3-padding-tiny">
                                     <span class="w3-text-grey w3-xlarge" style="font-family: cursive">{{ $meal->name }}
                                         @for ($i = 0; $i < 5; $i++)
-                                            <span class="w3-text-orange w3-right"><i class="fa fa-star"></i></span>
+                                            <span class="w3-text-orange w3-right w3-large"><i class="fa fa-star"></i></span>
                                         @endfor
                                     </span>
                                     <div class="img-wrapper">
@@ -84,7 +74,7 @@
 
             <div class="w3-row w3-border-grey w3-border-top"> 
                 <div class="w3-col s12 w3-margin-top">
-                    <a href="{{ url('/chef') }}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Menu</b></a>
+                    <a href="{{ url('/chef') }}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover"><b>Go To Menu</b></a>
                 </div>
             </div> 
 
@@ -168,7 +158,7 @@
 
                 <div class="w3-row">
                     <div class="w3-col s12 w3-margin-top">
-                        <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Order</b></a>
+                        <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover"><b>Go To Order</b></a>
                     </div>
                 </div> 
             @endif
