@@ -20,46 +20,44 @@
     </div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-64"  id="chef-create">
+    <div class="w3-content w3-container w3-padding-32"  id="chef-create">
         <div>
-             <div class="w3-padding-12 w3-margin-top">
+             <div class="">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Chef Profile<h1>
             </div>
             {!! Form::model($chef, ['route' => ['chef_profile.update', $chef->id], 'method' => 'PUT', 'data-parsley-validate' => '', 'files' => true]) !!}
                 <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
-                    <div class="w3-col l7 m7">
-                        <div class="" style="padding-right:0.8em;">
+                    <div class="w3-col s12">
+                        <div class="">
                             <label class="w3-text-gery" style="font-family:cursive">Address</label>   
                             {{ Form::text('address', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
                         </div> 
-                        <div class="" style="padding-right:0.8em;margin-top:10px;">
+                        <div class="" style="margin-top:10px;">
                             <label class="w3-text-gery" style="font-family:cursive">City</label>  
                             {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '30']) }}  
                         </div>
-                        <div class="" style="padding-right:0.8em;margin-top:10px;">
+                        <div class="" style="margin-top:10px;">
                             <label class="w3-text-gery" style="font-family:cursive">State</label>
                             {{ Form::text('state', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '30']) }}  
                         </div>
-                        <div class="" style="padding-right:0.8em;margin-top:10px;">
+                        <div class="" style="margin-top:10px;">
                             <label class="w3-text-gery" style="font-family:cursive">Zip Code</label>
                             {{ Form::text('zip_code', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '100']) }}
                         </div> 
-                        <div class="" style="padding-right:0.8em;margin-top:10px;">
+                        <div class="" style="margin-top:10px;">
                             <label class="w3-text-gery" style="font-family:cursive">Store Name</label>
                             {{ Form::text('store_name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }}              
                         </div>
-                        <div class="form-group w3-row">
-                            <div class="w3-col l2 m2 w3-padding-small">
+                        <div class="form-group w3-row" style="margin-top:10px;">
+                            <div class="w3-col s12 w3-padding-small">
                                 <img id="img_content" src="{{ asset($chef->profile_img) }}" alt="image contetnt" style="width:100%">
                             </div>
-                            <div class="w3-col l10 m10">
+                            <div class="w3-rest"></div>
+                            <div class="w3-col s7 w3-right">
                                 <input type="file" id="myFile" name="profile_img" onchange="readURL(this);" style="display:none;">
                                 <button type="button" class="w3-btn w3-white w3-border w3-border-grey w3-margin-top w3-margin-left w3-text-grey" style="font-family:cursive;" onclick="document.getElementById('myFile').click();">Upload a Photo</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="w3-col l5 m5">
-                        <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1028201602.jpg') }}" alt="profile" style="width:100%">
                     </div>
                 </div>
                 <div class="w3-border-green w3-border-bottom w3-padding-12">

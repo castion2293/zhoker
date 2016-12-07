@@ -13,21 +13,22 @@
     </div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-64">
-            <div class="w3-row w3-margin-top w3-border-green w3-border-bottom">
-                <div class="w3-col l10 m10">
+    <div class="w3-content w3-container w3-padding-32">
+            <div class="w3-row w3-border-green w3-border-bottom">
+                <div class="w3-col s12 w3-center">
                     <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}<h1>
                 </div>
-                <div class="w3-col l2 m2">
-                    <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}TWD</b>
+                <div class="w3-rest"></div>
+                <div class="w3-col s4 w3-right">
+                    <b class="w3-text-green w3-large w3-right w3-margin-right" style="margin-top:1em;">${{ $meal->price }}TWD</b>
                 </div>
             </div>
-            <div class="w3-row w3-padding-12 w3-border-green w3-border-bottom">
-              <div class="w3-col l7 m7 w3-padding-large">
+            <div class="w3-row w3-padding-8 w3-border-green w3-border-bottom">
+              <div class="w3-col s12 w3-padding-large">
                   <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
                   <p>{!! $meal->description !!}</p>
               </div>
-              <div class="w3-col l5 m5 w3-padding-large">
+              <div class="w3-col s12 w3-padding-large">
                   <div class="w3-border-bottom w3-border-grey w3-padding-12">
                     <table class="w3-table w3-small">
                         <thead>
@@ -56,7 +57,7 @@
                     </label>
                   </div>
                   <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Venue:
+                    <label>Time:
                       @foreach ($meal->shifts as $shift)
                           <p class="w3-tag w3-teal w3-tiny">{{ $shift->shift }}</p>
                       @endforeach
@@ -79,15 +80,14 @@
               </div>  
             </div>
             <div class="w3-row">
-              <div class="w3-rest"></div> 
-              <div class="w3-col l2 m2 w3-right w3-padding-small">
+              <div class="w3-col s6 w3-padding-small">
                  {!! Form::open(['route' => ['chef.destroy', $meal->id], 'method' => 'DELETE']) !!}
 
                     {!! Form::submit('Delete', ['class' => 'btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block w3-margin-top zk-shrink-hover']) !!}
 
                  {!! Form::close() !!}
               </div>
-              <div class="w3-col l2 m2 w3-right w3-margin-top w3-padding-small">
+              <div class="w3-col s6 w3-margin-top w3-padding-small">
                 {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-white w3-large w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
               </div>
             </div>
