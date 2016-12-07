@@ -32,7 +32,11 @@
             </div>
             <div class="w3-display-container">
                 <div class="w3-display-topleft" style="width:40%;margin-top:5em;margin-left:1em;">
-                    <img src="{{ asset($chef->profile_img) }}" alt="profile" style="width:100%">
+                    @if ($chef->profile_img)
+                        <img src="{{ asset($chef->profile_img) }}" alt="profile" style="width:100%">
+                    @else
+                        <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="profile" style="width:100%">
+                    @endif
                 </div>
                 <div class="w3-rest"></div>  
                 <div class="w3-col l8 m8 w3-right w3-panel w3-light-grey">

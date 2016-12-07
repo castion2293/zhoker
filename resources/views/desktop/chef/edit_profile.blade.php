@@ -50,7 +50,11 @@
                         </div>
                         <div class="form-group w3-row">
                             <div class="w3-col l2 m2 w3-padding-small">
-                                <img id="img_content" src="{{ asset($chef->profile_img) }}" alt="image contetnt" style="width:100%">
+                                @if ($chef->profile_img)
+                                    <img id="img_content" src="{{ asset($chef->profile_img) }}" alt="image contetnt" style="width:100%">
+                                @else
+                                    <img id="img_content" src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="image contetnt" style="width:100%">
+                                @endif
                             </div>
                             <div class="w3-col l10 m10">
                                 <input type="file" id="myFile" name="profile_img" onchange="readURL(this);" style="display:none;">
