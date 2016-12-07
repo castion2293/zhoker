@@ -28,7 +28,7 @@
                     <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
                         <div class="w3-col s8" style="margin-top:0.2em;">
                             <div class="">
-                                <span class="w3-text-grey w3-medium"><b>{{ $cart->meals->name }}</b></span>
+                                <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
                             </div>
                             <div class="">
                                 <span class="w3-text-green w3-medium"><b>${{ $cart->meals->price }}TWD</b></span>

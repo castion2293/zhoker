@@ -29,28 +29,32 @@
                 <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
                     <div class="w3-col s12">
                         <div class="">
-                            <label class="w3-text-gery" style="font-family:cursive">Address</label>   
+                            <label class="w3-text-gery w3-large" style="font-family:cursive">Address</label>   
                             {{ Form::text('address', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }} 
                         </div> 
                         <div class="" style="margin-top:10px;">
-                            <label class="w3-text-gery" style="font-family:cursive">City</label>  
+                            <label class="w3-text-gery w3-large" style="font-family:cursive">City</label>  
                             {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '30']) }}  
                         </div>
                         <div class="" style="margin-top:10px;">
-                            <label class="w3-text-gery" style="font-family:cursive">State</label>
+                            <label class="w3-text-gery w3-large" style="font-family:cursive">State</label>
                             {{ Form::text('state', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '30']) }}  
                         </div>
                         <div class="" style="margin-top:10px;">
-                            <label class="w3-text-gery" style="font-family:cursive">Zip Code</label>
+                            <label class="w3-text-gery w3-large" style="font-family:cursive">Zip Code</label>
                             {{ Form::text('zip_code', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '100']) }}
                         </div> 
                         <div class="" style="margin-top:10px;">
-                            <label class="w3-text-gery" style="font-family:cursive">Store Name</label>
+                            <label class="w3-text-gery w3-large" style="font-family:cursive">Store Name</label>
                             {{ Form::text('store_name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'maxlength' => '255']) }}              
                         </div>
                         <div class="form-group w3-row" style="margin-top:10px;">
                             <div class="w3-col s12 w3-padding-small">
-                                <img id="img_content" src="{{ asset($chef->profile_img) }}" alt="image contetnt" style="width:100%">
+                                @if ($chef->profile_img)
+                                    <img id="img_content" src="{{ asset($chef->profile_img) }}" alt="image contetnt" style="width:100%">
+                                @else
+                                    <img id="img_content" src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="image contetnt" style="width:100%">
+                                @endif
                             </div>
                             <div class="w3-rest"></div>
                             <div class="w3-col s7 w3-right">

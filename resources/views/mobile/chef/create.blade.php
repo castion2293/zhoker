@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="" style="margin-top:1em;">
-                            <label class="w3-text-gery" style="font-family:cursive">Time</label>               
+                            <label class="w3-text-gery w3-large" style="font-family:cursive">Time</label>               
                             <select id="sel2" class="w3-select js-example-basic-multiple" name="shifts[]" multiple="multiple" placeholder="Shift" required=""> 
                                 @foreach($shifts as $shift)
                                     <option value='{{ $shift->id }}'>{{ $shift->shift }}</option>
@@ -55,7 +55,7 @@
                         </div>
                                 
                         <div class="" style="margin-top:1em;">
-                            <label class="w3-text-gery" style="font-family:cursive">Category</label>  
+                            <label class="w3-text-gery w3-large" style="font-family:cursive">Category</label>  
                             <select class="w3-select js-example-basic-multiple" name="categories[]" multiple="multiple" required=""> 
                                 @foreach($categories as $category)
                                     <option value='{{ $category->id }}'>{{ $category->category }}</option>
@@ -64,7 +64,7 @@
                         </div>
                                
                         <div class="" style="margin-top:1em;">
-                            <label class="w3-text-gery" style="font-family:cursive">Method</label>  
+                            <label class="w3-text-gery w3-large" style="font-family:cursive">Method</label>  
                             <select class="w3-select js-example-basic-multiple" name="methods[]" multiple="multiple" required=""> 
                                 @foreach($methods as $method)
                                     <option value='{{ $method->id }}'>{{ $method->method }}</option>

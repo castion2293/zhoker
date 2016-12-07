@@ -32,7 +32,11 @@
             </div>
             
             <div class="w3-col s12" style="">
-                <img src="{{ asset($chef->profile_img) }}" alt="profile" style="width:100%">
+                @if ($chef->profile_img)
+                    <img src="{{ asset($chef->profile_img) }}" alt="profile" style="width:100%">
+                @else
+                    <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="profile" style="width:100%">
+                @endif
             </div>
             <div class="w3-col s12 w3-panel w3-light-grey">
                 <div style="">
@@ -52,7 +56,7 @@
                             <a href="{{ route('chef.show', $meal->id) }}" style="text-decoration:none;">
                             <div class="thumbnail w3-border-0 w3-padding-tiny">
                                 <div class="w3-white w3-border w3-border-green w3-round-large w3-padding-tiny">
-                                    <span class="w3-text-grey w3-large" style="font-family: cursive">{{ $meal->name }}
+                                    <span class="w3-text-grey w3-xlarge" style="font-family: cursive">{{ $meal->name }}
                                         @for ($i = 0; $i < 5; $i++)
                                             <span class="w3-text-orange w3-right"><i class="fa fa-star"></i></span>
                                         @endfor
@@ -67,7 +71,7 @@
                                             @endforeach
                                         </div>
                                         <div class="w3-col s3 w3-right" style="padding-top:9px;">
-                                            <b class="w3-text-green w3-right w3-medium w3-margin-top">${{ $meal->price }}TWD</b>
+                                            <b class="w3-text-green w3-right w3-large w3-margin-top">${{ $meal->price }}TWD</b>
                                         </div>
                                     </div>
                                 </div>
@@ -78,9 +82,8 @@
                 </div>
             @endforeach
 
-            <div class="w3-row w3-border-grey w3-border-top">
-                <div class="w3-rest"></div> 
-                <div class="w3-col l3 m3 w3-right w3-margin-top">
+            <div class="w3-row w3-border-grey w3-border-top"> 
+                <div class="w3-col s12 w3-margin-top">
                     <a href="{{ url('/chef') }}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Menu</b></a>
                 </div>
             </div> 
@@ -99,7 +102,7 @@
                             
                             <div class="w3-col s9 w3-margin-top">
                                 <div class="">
-                                    <p class="w3-text-grey w3-medium"><b>{{ $cart->meals->name }}</b></p>
+                                    <p class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></p>
                                 </div>
                                 <div class="">
                                     <p class="w3-text-green w3-medium"><b>${{ $cart->meals->price }}TWD</b></p>
@@ -164,8 +167,7 @@
                 @endforeach
 
                 <div class="w3-row">
-                    <div class="w3-rest"></div> 
-                    <div class="w3-col l3 m3 w3-right w3-margin-top">
+                    <div class="w3-col s12 w3-margin-top">
                         <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Order</b></a>
                     </div>
                 </div> 

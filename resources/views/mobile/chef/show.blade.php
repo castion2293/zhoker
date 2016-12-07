@@ -26,11 +26,11 @@
             <div class="w3-row w3-padding-8 w3-border-green w3-border-bottom">
               <div class="w3-col s12 w3-padding-large">
                   <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
-                  <p>{!! $meal->description !!}</p>
+                  <p class="w3-large">{!! $meal->description !!}</p>
               </div>
               <div class="w3-col s12 w3-padding-large">
                   <div class="w3-border-bottom w3-border-grey w3-padding-12">
-                    <table class="w3-table w3-small">
+                    <table class="w3-table w3-medium">
                         <thead>
                           <th>Date</th>
                           <th>Time</th>
