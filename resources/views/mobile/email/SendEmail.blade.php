@@ -13,8 +13,8 @@
     </div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-64">
-        <div class="w3-padding-12 w3-margin-top">
+    <div class="w3-content w3-container w3-padding-32">
+        <div class="">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Confrim Your Email<h1>
         </div>
         <div class="w3-content w3-container w3-center w3-border-green w3-border-bottom">
@@ -26,8 +26,7 @@
             </div>
         </div>
         <div class="w3-row w3-margin-top">
-            <div class="w3-rest"></div>
-            <div class="w3-col l2 m2 w3-right">
+            <div class="w3-col s12 w3-right">
                 <a href="{{ route('home.index') }}" class="btn w3-green btn-block">Continue Shopping</a>
             </div>
         </div>  

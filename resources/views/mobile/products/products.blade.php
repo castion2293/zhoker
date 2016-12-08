@@ -11,52 +11,53 @@
 @section('content')
     <!--header picture-->
     <div class="w3-row" id="top-pic">
-        <div class="w3-col l4 m4">
+        <div class="w3-col s12">
+            <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
+        </div>
+        <!--div class="w3-col l4 m4">
             <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
         </div>
         <div class="w3-col l4 m4">
             <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
-        </div>
-        <div class="w3-col l4 m4">
-            <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
-        </div>
+        </div-->
     </div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-64">
-        <div class="w3-row w3-margin-top w3-border-green w3-border-bottom">
-            <div class="w3-col l10 m10">
+    <div class="w3-padding-32">
+        <div class="w3-row w3-border-green w3-border-bottom">
+            <div class="w3-col s12 w3-center">
                 <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}<h1>
             </div>
-            <div class="w3-col l2 m2">
-                <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}TWD</b>
+            <div class="w3-rest"></div>
+            <div class="w3-col s4 w3-right">
+                <b class="w3-text-green w3-large w3-right w3-margin-right" style="margin-top:1em;">${{ $meal->price }}TWD</b>
             </div>
         </div>
         <div class="w3-row w3-padding-12">
-            <div class="w3-col l7 m7 w3-padding-large">
-                <div class="w3-padding-12">
+            <div class="w3-col s12 w3-padding-small">
+                <div class="w3-padding-4">
                     <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
                 </div>
                 <div class="w3-margin-top w3-border-grey w3-border-top w3-border-bottom w3-padding-12">
                     {!! Form::open(['route' => ['product.cart', $meal->id, $datetimepeople->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                         <div class="w3-row w3-padding-small">
-                            <div class="w3-col l5 m5">
+                            <div class="w3-col s12">
                                 <label class="w3-text-grey w3-large" style="font-family:cursive">Date/time</label><br>
                                 <div class="" style="margin-top:0.5em;">
                                     <span class="w3-text-grey w3-large">{{ $datetimepeople->date }} / {{ $datetimepeople->time }}</span>
                                 </div>
                             </div>
-                            <div class="w3-col l3 m3">
+                            <div class="w3-col s12" style="margin-top:1em;">
                                 <label class="w3-text-grey w3-large" style="font-family:cursive">How Many?</label>
-                                <select class="w3-select w3-border w3-text-grey w3-large cs-select cs-skin-elastic" id="people_order" name="people_order" required="" > 
+                                <select class="w3-select w3-border w3-text-grey w3-large" id="people_order" name="people_order" required="" > 
                                     @for ($i = 0;$i < $datetimepeople->people_left;$i++)
                                        <option value='{{ $i + 1 }}'>{{ $i+1 }} people</option>
                                     @endfor
                                 </select>
                             </div>
-                            <div class="w3-col l4 m4 w3-padding-left">
+                            <div class="w3-col s12" style="margin-top:1em;">
                                 <label class="w3-text-grey w3-large" style="font-family:cursive">Method?</label>
-                                <select class="w3-select w3-border w3-text-grey w3-large cs-select cs-skin-elastic" id="method_way" name="method_way" required="" > 
+                                <select class="w3-select w3-border w3-text-grey w3-large" id="method_way" name="method_way" required="" > 
                                    @foreach ($methods as $method)
                                        <option value='{{ $method->id }}'>{{ $method->method }}</option>
                                    @endforeach
@@ -69,7 +70,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-            <div class="w3-col l5 m5 w3-padding-large">
+            <div class="w3-col s12 w3-padding-large">
                 <div class="w3-margin-top w3-border-bottom w3-border-grey">
                     <label>Evaluation:  
                         @for ($i = 0; $i < 5; $i++)

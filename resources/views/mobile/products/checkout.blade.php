@@ -13,76 +13,63 @@
     </div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-64">
-        <div class="w3-padding-12">
+    <div class="w3-content w3-container w3-padding-32">
+        <div class="">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Checkout<h1>
         </div>
 
-        <div class="w3-row w3-content w3-container">
-            <div class="w3-col l5 m5">
-                <div class="w3-row w3-margin-top w3-padding-12 w3-border-grey w3-border-bottom">
-                    <div class="w3-col l5 m5">
-                        <label class="w3-text-dark-grey" style="font-family:cursive;">MEAL</label>
-                    </div>
-                    <div class="w3-col l5 m5">
-                        <label class="w3-text-dark-grey" style="font-family:cursive;">ITEM</label>
-                    </div>
-                    <div class="w3-col l2 m2">
-                        <label class="w3-text-dark-grey" style="font-family:cursive;">TOTAL</label>
-                    </div>
-                </div>
-
+        <div class="w3-row">
+            <div class="w3-col s12">
                 @foreach ($carts as $cart)
-                    <div class="w3-row w3-padding-16 w3-border-grey w3-border-bottom">
-                        <div class="w3-col l5 m5 w3-padding-right" style="margin-top:0.5em;">
+                    <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
+                        <div class="w3-col s8" style="margin-top:0.5em;padding-left:0.5em;">
+                            <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                        </div>
+                        <div class="w3-col s4" style="margin-top:0.5em;">
+                            <span class="w3-text-green w3-large">${{ $cart->unite_price }}TWD</span>
+                        </div>
+                        <div class="w3-col s12">
                             <img src="{{ asset($cart->meals->img_path) }}" alt="meal photo" style="width:100%">
                         </div>
-                        <div class="w3-col l5 m5 w3-padding-right">
-                            <div class="">
-                                <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
-                            </div>
-                            <div class="">
-                                <span class="w3-text-green w3-large">${{ $cart->unite_price }}</span>
-                            </div>
-                            <div class="">
-                                <span class="w3-text-grey w3-large">{{ $cart->people_order }} people</span>
-                            </div>
+                        <div class="w3-col s12" style="margin-top:1em;padding-left:0.5em;">
+                            <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
                         </div>
-                        <div class="w3-col l2 m2">
-                            <div class="" style="margin-top:4.5em;">
+
+                        <div class="w3-row">
+                            <div class="w3-rest"></div>
+                            <div class="w3-col s5 w3-right" style="margin-top:0.5em;">
                                 <span class="w3-text-green w3-large"><b>${{ $cart->price }}</b></span>
                             </div>
+                            <div class="w3-col s4 w3-center w3-right" style="margin-top:0.5em;">
+                                <span class="w3-text-grey w3-large">TOTAL:</span>
+                            </div>
                         </div>
+                        
                     </div>
                 @endforeach
 
-                <div class="w3-row">
-                    <div class="w3-rest"></div>
-                    <div class="w3-col l6 m6 w3-right w3-margin-top">
-                        <span class="w3-text-grey w3-xlarge" style="padding-left:0.5em;">Subtotal: <span class="w3-text-green w3-xlarge">${{ $totalPrice }}</span></span>
-                    </div>
+                <div class="w3-col s12 w3-center w3-margin-top">
+                    <span class="w3-text-grey w3-xlarge" style="padding-left:0.5em;">Subtotal: <span class="w3-text-green w3-xlarge">${{ $totalPrice }}</span></span>
                 </div>
-
-                <div class="w3-row">
-                    <div class="w3-rest"></div>
-                    <div class="w3-col l6 m6 w3-right w3-margin-top">
-                        <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover" style="padding-left:0.5em;"><b>Back to Shopping Cart</b></a>
-                    </div>
+               
+                <div class="w3-col s12 w3-center w3-margin-top">
+                    <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover" style="padding-left:0.5em;">Back to Shopping Cart</a>
                 </div>
+                
             </div>
 
-            <div class="w3-col l7 m7 w3-content w3-container">
-                <div class="w3-margin-top w3-margin-left w3-padding-12 w3-border-grey w3-border-bottom">
-                    <label class="w3-text-dark-grey" style="font-family:cursive;">PAYMENT</label>
+            <div class="w3-col s12" style="margin-top:3em;">
+                <div class="w3-padding-12 w3-border-grey w3-border-bottom">
+                    <label class="w3-text-dark-grey w3-large" style="font-family:cursive;">PAYMENT</label>
                 </div>
-                <div class="w3-row w3-padding-12">
-                    <div class="w3-col l6 m6 w3-padding-left">
+                <div class="w3-row w3-padding-12 w3-center">
+                    <div class="w3-col s12">
                         <input class="w3-radio" type="radio" id="bind-card" name="payment_choice" checked>
-                        <label class="w3-validate" style="font-family:cursive;">Using Binding Card</label>
+                        <label class="w3-validate w3-large" style="font-family:cursive;">Using Binding Card</label>
                     </div>
-                    <div class="w3-col l6 m6">
+                    <div class="w3-col s12">
                         <input class="w3-radio" type="radio" id="no-card" name="payment_choice">
-                        <label class="w3-validate" style="font-family:cursive;">One Time Payment</label>
+                        <label class="w3-validate w3-large" style="font-family:cursive;">One Time Payment</label>
                     </div>
                 </div>
 
@@ -96,9 +83,9 @@
                             </div>
                         @else 
                             <div id="dropdown" class=" w3-row w3-btn-block w3-white w3-left-align w3-border-grey w3-border">
-                                <span class="w3-col l8 m8 w3-large w3-text-grey">
+                                <span class="w3-col s12 w3-medium w3-text-grey">
                                     <i class="fa fa-cc-visa w3-text-green w3-xlarge"></i>
-                                    .... .... .... {{ $user->creditcards()->first()->last4 }}
+                                    .... {{ $user->creditcards()->first()->last4 }}
                                     {{ $user->creditcards()->first()->exp_month}}/{{ $user->creditcards()->first()->exp_year}}       
                                     <span class="w3-text-grey" style="font-family:cursive;">{{ $user->creditcards()->first()->card_name}}</sapn>
                                 </span>
@@ -109,7 +96,7 @@
                             <div class="w3-row">
                                 <div class="w3-rest"></div> 
                                 <div class="w3-col l4 m4 w3-right w3-margin-top">
-                                    {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange btn-block zk-shrink-hover']) !!}
+                                    {!! Form::submit('Confirm & Pay', ['class' => 'btn w3-deep-orange w3-large btn-block zk-shrink-hover']) !!}
                                 </div>
                             </div>  
                         @endif
@@ -118,27 +105,25 @@
 
                 {!! Form::open(['route' => 'product.cart.onetimepayment', 'data-parsley-validate' => '', 'id' => 'checkout-form', 'files' => true, 'method' => 'POST']) !!}
                     <div id="onetimepayment" style="display:none;">
-                        <div class="w3-margin-left">
-                            <div class="" style="padding-right:0.8em;margin-top:1em;">
-                                <label class="w3-text-gery" style="font-family:cursive">Card Number</label>   
+                        <div class="">
+                            <div class="w3-col s12" style="margin-top:1em;">
+                                <label class="w3-text-gery w3-large">Card Number</label>   
                                 {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-number']) }} 
                             </div>
-                            <div class="w3-row" style="margin-top:0.5em;">
-                                <div class="w3-col l4 m4" style="padding-right:1em;">
-                                    <label class="w3-text-gery" style="font-family:cursive">Exp. Date</label>   
-                                    {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-month', 'placeholder' => 'MM']) }} 
-                                </div>
-                                <div class="w3-col l4 m4" style="padding-right:1em;">
-                                    <label class="w3-text-gery" style="font-family:cursive">Exp. Year</label>   
-                                    {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-year', 'placeholder' => 'YYYY']) }} 
-                                </div>
-                                <div class="w3-col l4 m4" style="padding-right:0.8em;">
-                                    <label class="w3-text-gery" style="font-family:cursive">CVC</label>   
-                                    {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-cvc']) }} 
-                                </div>
+                            <div class="w3-col s12" style="margin-top:1em;">
+                                <label class="w3-text-gery w3-large">Exp. Date</label>   
+                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-month', 'placeholder' => 'MM']) }} 
                             </div>
-                            <div class="w3-border-grey w3-border-bottom" style="padding-right:0.8em;padding-bottom:1em;margin-top:0.5em;">
-                                <label class="w3-text-gery" style="font-family:cursive">Card Holder Name</label>   
+                            <div class="w3-col s12" style="margin-top:1em;">
+                                <label class="w3-text-gery w3-large">Exp. Year</label>   
+                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-expiry-year', 'placeholder' => 'YYYY']) }} 
+                            </div>
+                            <div class="w3-col s12" style="margin-top:1em;">
+                                <label class="w3-text-gery w3-large">CVC</label>   
+                                {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-cvc']) }} 
+                            </div>
+                            <div class="w3-col s12 w3-border-grey w3-border-bottom" style="padding-bottom:1em;margin-top:1em;">
+                                <label class="w3-text-gery w3-large">Card Holder Name</label>   
                                 {{ Form::text(null, null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'required' => '', 'id' => 'card-name']) }} 
                             </div>
                         </div> 
