@@ -27,18 +27,18 @@
                 </div>
                 <div class="w3-col s12">
                   <div style="margin-top:1em;">
-                      <label class="w3-text-grey w3-large" style="font-family:cursive">City</label>
+                      <label class="w3-text-grey w3-large">City</label>
                       <input type="text" name="city" placeholder="City" value="{{ old('city') }}" required maxlength="255" class="w3-input w3-border w3-border-grey w3-large w3-text-grey">
                   </div>
                   <div class="" style="margin-top:1em;">
-                      <label class="w3-text-grey w3-large" style="font-family:cursive">Date</label>
+                      <label class="w3-text-grey w3-large">Date</label>
                       <div class="input-group">
                           {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-block w3-large w3-text-grey', 'id' => 'datepicker', 'required' => '', 'placeholder' => 'Date', 'style' => 'font-weight:bold;cursor:pointer;"']) }}
                           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                       </div>
                   </div>
                   <div class="" style="margin-top:1em;">
-                      <label class="w3-text-grey w3-large" style="font-family:cursive">Price Range</label>
+                      <label class="w3-text-grey w3-large">Price Range</label>
                       <div class="w3-row">
                         <div class="w3-col s4">
                             {{ Form::text('minPrice', null, ['class' => 'w3-input w3-border w3-medium w3-text-grey', 'placeholder' => 'MIN']) }}
@@ -58,7 +58,7 @@
                       </div>
                   </div>
                   <div class="" style="">
-                      <label class="w3-text-grey w3-large" style="font-family:cursive">Time</label>
+                      <label class="w3-text-grey w3-large">Time</label>
                       <select class="form-control w3-text-grey w3-large" name="shift" id="shift">
                         <option class="w3-text-grey w3-white w3-large">All</option>
                         <option class="w3-text-grey w3-white w3-large">Dinner</option>
@@ -69,7 +69,7 @@
                       </select>
                   </div>
                   <div class="" style="margin-top:1em;">
-                     <label class="w3-text-grey w3-large" style="font-family:cursive">People Left</label>
+                     <label class="w3-text-grey w3-large">People Left</label>
                      <select class="form-control w3-text-grey w3-large" name="people" id="people">
                         <option class="w3-text-grey w3-white w3-large">1 Person left</option>
                         <option class="w3-text-grey w3-white w3-large">2 People left</option>
@@ -84,7 +84,7 @@
                      </select>
                   </div>
                   <div class="" style="margin-top:1em;">
-                     <label class="w3-text-grey w3-large" style="font-family:cursive">Method</label>
+                     <label class="w3-text-grey w3-large">Method</label>
                      <select class="form-control w3-text-grey w3-large" name="method" id="method">
                         <option class="w3-text-grey w3-white w3-large">All</option>
                         <option class="w3-text-grey w3-white w3-large">In House</option>
@@ -93,14 +93,14 @@
                      </select>
                   </div>
                   <div class="" style="margin-top:1em;">
-                     <label class="w3-text-grey w3-large" style="font-family:cursive">Sorting</label>
+                     <label class="w3-text-grey w3-large">Sorting</label>
                      <select class="form-control w3-text-grey w3-large" name="sort" id="sort">
                         <option class="w3-text-grey w3-white w3-large" value="1">Price Low->High</option>
                         <option class="w3-text-grey w3-white w3-large" value="2">Price High->Low</option>
                      </select>
                   </div>
                   <div class="" style="margin-top:1em;">
-                     <label class="w3-text-grey w3-large" style="font-family:cursive">Type</label>
+                     <label class="w3-text-grey w3-large">Type</label>
                      <div class="w3-row w3-padding-small w3-border w3-border-grey w3-round-large">
                         <div class="w3-col s6">
                             <p>

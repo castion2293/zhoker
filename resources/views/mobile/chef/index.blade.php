@@ -25,7 +25,7 @@
                 <div class="w3-col s12">
                     <div class="w3-row">
                         <div class="w3-col s7">
-                            <span class="w3-text-grey w3-xxlarge" style="font-family:cursive;"><b>{{ $meal->name }}<b></span>
+                            <span class="w3-text-grey w3-xxlarge"><b>{{ $meal->name }}<b></span>
                         </div>
                         <div class="w3-col s5" style="padding-top:5px;">
                             @for ($i = 0; $i < 5; $i++)
