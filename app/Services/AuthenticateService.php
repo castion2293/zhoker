@@ -12,6 +12,6 @@ class AuthenticateService
             'email' => $request['email'], 
             'password' => $request['password'],
             'chef_psw' => $request['chef_psw'],
-        ]);
+        ], true);
     }
 }

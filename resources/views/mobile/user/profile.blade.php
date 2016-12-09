@@ -7,94 +7,67 @@
 @endsection
 
 @section('content')
-    <div class="fixed-circle-nav w3-transparent"style="right:2em;">
-        <section class="section section--nav">
-		    <nav class="nav nav--shamso">
-				<a href="#top-pic" class="nav__item nav__item--current" aria-label="Item 1"><span class="nav__item-title">Top</span></a>
-				<a href="#user-profile" class="nav__item " aria-label="Item 2"><span class="nav__item-title">Profile</span></a>
-				<a href="#shopping-cart" class="nav__item" aria-label="Item 3"><span class="nav__item-title">Shopping Cart</span></a>
-				<a href="#order-history" class="nav__item" aria-label="Item 4"><span class="nav__item-title">Order History</span></a>
-			</nav>
-		</section>
-    </div>
-
     <!--header picture-->
     <div class="" id="top-pic">
         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1104201603.JPG" alt="profile" style="width:100%">
     </div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-64">
+    <div class="w3-content w3-container w3-padding-32">
         <div class="w3-row" id="user-profile">
-            <div class="w3-padding-12">
+            <div class="">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">User Profile<h1>
             </div>
-            <div class="w3-display-container">
-                <div class="w3-col l3 m3">
+            <div class="w3-col s12">
+                @if ($user->user_profile_img)
                     <img src="{{ asset($user->user_profile_img) }}" alt="profile" style="width:100%">
-                </div>
-                <div class="w3-rest"></div>  
-                <div class="w3-col l8 m8 w3-right w3-panel w3-light-grey">
-                    <div style="padding-left:8em;padding-right:5em;">
-                        <h2 class="w3-text-grey">Hello, {{ $user->first_name }}</h2>
-                        <span class="w3-text-grey">Member since {{ date('F d, Y', strtotime($user->created_at)) }}</span><br>
-                        <span class="w3-text-grey">Email: {{ $user->email }}</span><br>
-                        <span class="w3-text-grey">Phone Number:: {{ $user->phone_number }}</span>
-                    </div>
-                </div>
+                @else
+                    <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="profile" style="width:100%">
+                @endif
+            </div> 
+            <div class="w3-col s12 w3-center w3-panel w3-light-grey w3-padding-small w3-margin-top">
+                <h2 class="w3-text-grey">Hello, {{ $user->first_name }}</h2>
+                <span class="w3-text-grey">Member since {{ date('F d, Y', strtotime($user->created_at)) }}</span><br>
+                <span class="w3-text-grey">Email: {{ $user->email }}</span><br>
+                <span class="w3-text-grey">Phone Number:: {{ $user->phone_number }}</span>
             </div>
         </div>
 
-        <div class="w3-padding-12" id="shopping-cart" style="margin-top:6em;">
+        <div class="w3-padding-12" id="shopping-cart" style="margin-top:3em;">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Shopping Cart<h1>
             @if ($carts->isEmpty())
                 <div class="w3-center">
                     <h1 style="font-family:cursive;">Sorry! Please Add Your Items first!</h1>
                 </div>
             @else
-                <div class="w3-row w3-margin-top w3-padding-medium w3-border-grey w3-border-bottom">
-                    <div class="w3-col l3 m3">
-                        <label class="w3-text-grey w3-medium" style="font-family:cursive;">MEAL</label>
-                    </div>
-                    <div class="w3-col l7 m7" style="padding-left:2em;">
-                        <label class="w3-text-grey w3-medium" style="font-family:cursive;">ITEM</label>
-                    </div>
-                    <div class="w3-col l2 m2" style="padding-left:1.5em;">
-                        <label class="w3-text-grey w3-medium" style="font-family:cursive;">TOTAL</label>
-                    </div>
-                </div>
-
                 @foreach ($carts as $cart)
-                    <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
-                        <div class="w3-col l3 m3 w3-padding-right">
+                    <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
+                         <div class="w3-col s8" style="padding-left:0.5em;">
+                            <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                        </div>
+                        <div class="w3-col s4" style="">
+                            <span class="w3-text-green w3-large">${{ $cart->unite_price }}TWD</span>
+                        </div>
+                        <div class="w3-col s12">
                             <img src="{{ asset($cart->meals->img_path) }}" alt="meal photo" style="width:100%">
                         </div>
-                        <div class="w3-col l7 m7" style="padding-left:2em;">
-                            <div class="w3-row">
-                                <div class="w3-col l5 m5">
-                                    <div class="">
-                                        <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
-                                    </div>
-                                    <div class="">
-                                        <span class="w3-text-green w3-large">${{ $cart->meals->price }}</span>
-                                    </div>
-                                    <div class="">
-                                        <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
-                                    </div>
-                                </div>
-                                <div class="w3-col l7 m7">
-                                    <div class="">
-                                        <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
-                                    </div>
-                                    <div class="w3-margin-top">
-                                        <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="w3-col s9" style="padding-left:0.5em;">
+                            <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
                         </div>
-                        <div class="w3-col l2 m2" style="padding-left:1em;">
-                            <div class="">
+                        <div class="w3-col s3">
+                            <p class="w3-tag w3-teal w3-small">{{ $cart->method }}</p>
+                        </div>
+                        <div class="w3-col s12 w3-center">
+                            <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                        </div>
+                        
+                        <div class="w3-row">
+                            <div class="w3-rest"></div>
+                            <div class="w3-col s5 w3-right">
                                 <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
+                            </div>
+                            <div class="w3-col s3 w3-right">
+                                <span class="w3-text-grey w3-large">TOTAL:</span>
                             </div>
                         </div>
                     </div>
@@ -110,99 +83,87 @@
             @endif
         </div>
 
-        <div class="w3-padding-12" id="order-history" style="margin-top:6em;">
+        <div class="w3-padding-12" id="order-history" style="margin-top:3em;">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Order History<h1>
-            <div class="w3-content w3-container">
+            <div class="">
                 @if ($userorders->isEmpty())
                     <div class="w3-center">
                         <h1 style="font-family:cursive;">Sorry! You don't have any order right now!</h1>
                     </div>
                 @else
-                    <div class="w3-content w3-container">
+                    <div class="">
                         @foreach ($userorders as $userorder)
                             @unless ($userorder->carts()->get()->isEmpty())
                                 <div class="w3-margin-top w3-margin-bottom w3-border w3-border-green" style="border-radius:20px;">
                                     <a class="w3-btn-block w3-left-align w3-green" style="border-radius:18px 18px 0 0;">
                                         <div class="w3-row">
-                                            <div class="w3-col l3 m3">
-                                                <label class="w3-medium">Order Number #{{ $userorder->id }}</label>
+                                            <div class="w3-col s12 w3-medium w3-padding-4">
+                                                <label>Order Number #{{ $userorder->id }}</label>
                                             </div>
-                                            <div class="w3-col l2 m2">
-                                                <label class="w3-medium">Total Price</label>
+                                            <div class="w3-col s5 w3-medium w3-padding-4">
+                                                <label>Total Price:</label>
                                             </div>
-                                            <div class="w3-col l2 m2">
-                                                <label class="w3-medium">Pay Way</label>
+                                            <div class="w3-col s7 w3-medium w3-padding-4">
+                                                <span>${{ $userorder->total_price }}TWD</span>
                                             </div>
-                                            <div class="w3-col l3 m3">
-                                                <label class="w3-medium">Order Date</label>
+                                            <div class="w3-col s12 w3-medium w3-padding-4">
+                                                <label>Pay Way:</label>
                                             </div>
-                                            <div class="w3-col l2 m2">
-                                                <label class="w3-medium" style="padding-left:1em;">Order Details</label>
+                                            <div class="w3-col s5 w3-medium w3-padding-4">
+                                                <label>Order Date:</label>
                                             </div>
-                                        </div>
-                                        <div class="w3-row">
-                                            <div class="w3-col l6 m6" style="padding-left:6em;">
-                                                <span class="w3-medium" style="font-family:cursive;">${{ $userorder->total_price }}</span>
+                                            <div class="w3-col s7 w3-medium w3-padding-4">
+                                                <span>{{ date('M j, Y - g:iA', strtotime($userorder->created_at)) }}</span>
                                             </div>
-                                            <div class="w3-col l5 m5" style="padding-left:2em;">
-                                                <span class="w3-medium" style="font-family:cursive;">{{ date('F j, Y - g:iA', strtotime($userorder->created_at)) }}</span>
+                                            <div class="w3-col s12 w3-medium w3-padding-4">
+                                                <label>Order Details</label>
                                             </div>
                                         </div>
                                     </a>
-                                    <div class="w3-container w3-display-container">
-                                        <div class="w3-row w3-margin-top w3-padding-medium w3-border-grey w3-border-bottom">
-                                            <div class="w3-col l4 m4">
-                                                <label class="w3-text-grey w3-medium" style="font-family:cursive;">MEAL</label>
-                                            </div>
-                                            <div class="w3-col l6 m6" style="padding-left:0.5em;">
-                                                <label class="w3-text-grey w3-medium" style="font-family:cursive;">ITEM</label>
-                                            </div>
-                                            <div class="w3-col l1 m1" style="padding-left:0.2em;">
-                                                <label class="w3-text-grey w3-medium" style="font-family:cursive;">TOTAL</label>
-                                            </div>
-                                            <div class="w3-col l1 m1" style="padding-left:0.5em;">
-                                                <label class="w3-text-grey w3-medium" style="font-family:cursive;">STATUS</label>
-                                            </div>
-                                        </div>
-
+                                    <div class="">
                                         @foreach ($userorder->carts()->get() as $cart)
-                                            <div class="w3-row w3-padding-24">
-                                                <div class="w3-col l4 m4 w3-padding-right">
+                                            <div class="w3-row w3-padding-tiny">
+                                                <div class="w3-col s8" style="padding-left:0.5em;">
+                                                    <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                                                </div>
+                                                <div class="w3-col s4">
+                                                    <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span>TWD</span>
+                                                </div>
+                                                <div class="w3-col s12">
                                                     <img src="{{ asset($cart->meals->img_path) }}" alt="meal photo" style="width:100%">
                                                 </div>
-                                                <div class="w3-col l6 m6 w3-padding-left">
-                                                    <div class="w3-row">
-                                                        <div class="w3-col l5 m5">
-                                                            <div class="">
-                                                                <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
-                                                            </div>
-                                                            <div class="">
-                                                                <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span></span>
-                                                            </div>
-                                                            <div class="">
-                                                                <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
-                                                            </div>
+                                                <div class="w3-col s9" style="padding-left:0.5em;">
+                                                    <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
+                                                </div>
+                                                <div class="w3-col s3">
+                                                    <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
+                                                </div>
+                                                 <div class="w3-col s12 w3-center">
+                                                    <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                                                </div>
+                                                <div class="w3-row">
+                                                    <div class="w3-rest"></div>
+                                                    <div class="w3-col s5 w3-right">
+                                                        <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
+                                                    </div>
+                                                    <div class="w3-col s3 w3-right">
+                                                        <span class="w3-text-grey w3-large">TOTAL:</span>
+                                                    </div>
+                                                </div>
+                                                <div class="w3-col s12 w3-center w3-margin-bottom w3-padding-bottom w3-border-grey w3-border-bottom">
+                                                    @if ($cart->cheforders()->withTrashed()->first()->checked)
+                                                        <div class="">
+                                                            <span class="w3-text-whtie w3-large">Approved</span>
                                                         </div>
-                                                        <div class="w3-col l7 m7">
-                                                            <div class="">
-                                                                <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
-                                                            </div>
-                                                            <div class="w3-margin-top">
-                                                                <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    @else
+                                                        @if ($cart->cheforders()->withTrashed()->first()->deleted_at)
+                                                            <span class="w3-text-whtie w3-large">Rejected</span>
+                                                        @else
+                                                            <span class="w3-text-whtie w3-large">Pending</span>
+                                                        @endif
+                                                    @endif
                                                 </div>
-                                                <div class="w3-col l1 m1">
-                                                    <div class="">
-                                                        <span class="w3-text-green w3-large">${{ $cart->price }}</span></span>
-                                                    </div>
-                                                </div>
-                                                    <div class="w3-col l1 m1">
-                                                    <div class="">
-                                                        <span class="w3-text-grey w3-large">{{ ($cart->cheforders()->first()->checked) ? 'Approved' : 'Pending' }}</span>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         @endforeach
 
