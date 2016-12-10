@@ -53,17 +53,10 @@ class ProductController extends Controller
         return view($agent . '.products.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice] );
     }
 
-    public function getCartShowRemove($id)
+    public function getCartShowRemove()
     {
-        sleep(3);
-
-        $user = $this->productService->getUser($id);
-        $carts = $this->productService->getCart($user);
-        $cartQtyArray = $this->productService->getCartQtyArray($carts);
-        $totalPrice = $this->productService->getTotalPrice($carts);
-        
         $agent = $this->agentService->agent();
-        return view($agent . '.products.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice] );
+        return view($agent . '.products.RemoveItem');
     }
 
     public function postCartRemove(Request $request)

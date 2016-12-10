@@ -67,7 +67,7 @@
                     <div class="w3-row">
                         <div class="w3-rest"></div>
                         <div class="w3-col s4 w3-right">
-                            <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
+                            <a href="{!! route('product.cart_remove') !!}" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
                         </div>
                     </div>
 
