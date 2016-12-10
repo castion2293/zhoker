@@ -55,7 +55,7 @@ class ProductController extends Controller
 
     public function getCartShowRemove($id)
     {
-        sleep(1);
+        sleep(3);
 
         $user = $this->productService->getUser($id);
         $carts = $this->productService->getCart($user);
