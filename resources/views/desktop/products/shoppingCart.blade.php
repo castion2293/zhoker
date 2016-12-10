@@ -83,7 +83,7 @@
                             <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
                         </div>
                         <div class="" style="margin-top:3em;">
-                            <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
+                            <a href="{!! route('product.cart.show.remove', ['id' => Auth::user()->id]) !!}" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
                         </div>
                     </div>
                 </div>
