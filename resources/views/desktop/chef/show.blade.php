@@ -56,7 +56,7 @@
                     </label>
                   </div>
                   <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Venue:
+                    <label>Time:
                       @foreach ($meal->shifts as $shift)
                           <p class="w3-tag w3-teal w3-tiny">{{ $shift->shift }}</p>
                       @endforeach

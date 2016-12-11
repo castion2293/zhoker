@@ -30,20 +30,11 @@ class ShiftRepository
      * @param $shift_name
      * @return shift
      */
-     public function findShiftByShiftName($shift_name)
+     public function findShiftByShiftName($shift_name = null)
      {
-         return $this->shift->where('shift', $shift_name)->first();
+         return $this->shift->findShift($shift_name);
      }
-
-     /**
-     * @param null
-     * @return shift
-     */
-     public function findShiftAll()
-     {
-        return $this->shift->all();
-     }
-
+     
      /**
      * @param shift
      * @return meal

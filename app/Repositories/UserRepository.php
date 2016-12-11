@@ -50,15 +50,15 @@ class UserRepository
     }
 
     /**
-     * @param $user, $seq
+     * @param $user, $qty
      * @return userorder
      */
-    public function forUserOrder($user, $seq, $qty = null)
+    public function forUserOrder($user, $qty = null)
     {
         if ($qty) {
-            return $user->userorders()->orderBy('id', $seq)->take($qty)->get();
+            return $user->userorders()->latest('id')->take($qty)->with('carts')->get();
         } else {
-            return $user->userorders()->orderBy('id', $seq)->get();
+            return $user->userorders()->latest('id')->with('carts')->get();
         }
     }
 

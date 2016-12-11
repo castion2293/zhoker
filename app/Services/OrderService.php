@@ -68,9 +68,9 @@ class OrderService
     * @param $user
     * @return userOrder
     */
-    public function getUserOrderByUser($user, $seq)
+    public function getUserOrderByUser($user)
     {
-        return $this->userRepo->forUserOrder($user, $seq);
+        return $this->userRepo->forUserOrder($user);
     }
 
      /**

@@ -76,18 +76,6 @@
                     @endforeach
                 </div>
 
-                <!--@foreach($meals as $meal)
-                  
-                  <div id="{{ $meal->id }}" class="container-fluid">
-                    <div class="row">
-                      <div class="col-sm-8">
-                        <h2>{{ $meal->address }}</h2><br>
-                        <h2>{{ $meal->city }}</h2><br>
-                        <h2>{{ $meal->state }}</h2>
-                      </div>
-                    </div>
-                  </div>
-                @endforeach-->
             </div>
         </div>
     </div>

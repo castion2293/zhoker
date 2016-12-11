@@ -52,9 +52,9 @@ class ChefRepository
      public function forMeals(Chef $chef, $qty = null)
      {
          if ($qty) {
-             return $chef->meals()->orderBy('updated_at', 'desc')->take($qty)->get();
+             return $chef->meals()->latest('updated_at')->take($qty)->get();
          } else {
-             return $chef->meals()->orderBy('updated_at', 'desc')->get();
+             return $chef->meals()->latest('updated_at')->get();
          }
      }
 
@@ -64,7 +64,7 @@ class ChefRepository
      */
      public function forMealsPaginate(Chef $chef, $qty)
      {
-         return $chef->meals()->orderBy('updated_at', 'desc')->paginate($qty);
+         return $chef->meals()->latest('updated_at')->with('methods')->paginate($qty);
      }
 
      /**
@@ -74,9 +74,9 @@ class ChefRepository
      public function forChefOrders(Chef $chef, $qty = null)
      {
          if ($qty) {
-             return $chef->cheforders()->orderBy('id', 'desc')->take($qty)->get();
+             return $chef->cheforders()->latest('id')->take($qty)->with('carts')->get();
          } else {
-             return $chef->cheforders()->orderBy('updated_at', 'desc')->get();
+             return $chef->cheforders()->orderBy('updated_at', 'desc')->with('carts')->get();
          }
      }
 
@@ -86,7 +86,7 @@ class ChefRepository
      */
      public function forChefOrdersPaginate(Chef $chef, $qty)
      {
-         return $chef->cheforders()->withTrashed()->orderBy('id', 'desc')->paginate($qty);
+         return $chef->cheforders()->withTrashed()->latest('id')->with('carts')->paginate($qty);
      }
 
      public function save(Chef $chef)

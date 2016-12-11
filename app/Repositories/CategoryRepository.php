@@ -21,17 +21,8 @@ class CategoryRepository
      * @param $id
      * @return category
      */
-     public function findCategoryById($id)
+     public function findCategoryById($id = null)
      {
-        return $this->category->findOrFail($id);
-     }
-
-     /**
-     * @param null
-     * @return category
-     */
-     public function findCategoryAll()
-     {
-        return $this->category->all();
+        return $this->category->findCategory($id);
      }
 }

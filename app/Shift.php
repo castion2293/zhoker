@@ -10,4 +10,14 @@ class Shift extends Model
     {
         return $this->belongsToMany('App\Meal');
     }
+
+
+    public function scopeFindShift($builder, $shiftTime = null)
+    {
+        if ($shiftTime == 'All' || empty($shiftTime) ) {
+            return $builder->get();
+        }
+
+        return $builder->where('shift', $shiftTime)->first();
+    }
 }

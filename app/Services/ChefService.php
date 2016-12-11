@@ -60,7 +60,7 @@ class ChefService
      */
      public function createCategory()
      {
-         return $this->categoryRepo->findCategoryAll();
+         return $this->categoryRepo->findCategoryById();
      }
 
      /**
@@ -68,7 +68,7 @@ class ChefService
      */
      public function createMethod()
      {
-         return $this->methodRepo->findMethodAll();
+         return $this->methodRepo->findMethodByMethodName();
      }
 
      /**
@@ -76,7 +76,7 @@ class ChefService
      */
      public function createShift()
      {
-         return $this->shiftRepo->findShiftAll();
+         return $this->shiftRepo->findShiftByShiftName();
      }
 
      /**
@@ -162,7 +162,7 @@ class ChefService
      */
      public function editShift()
      {
-        $shifts = $this->shiftRepo->findShiftAll();
+        $shifts = $this->shiftRepo->findShiftByShiftName();
         $shiftarray = [];
         foreach($shifts as $shift) {
             $shiftarray[$shift->id] = $shift->shift;
@@ -176,7 +176,7 @@ class ChefService
      */
      public function editCategory()
      {
-        $categories = $this->categoryRepo->findCategoryAll();
+        $categories = $this->categoryRepo->findCategoryById();
         $categoryarray = [];
         foreach($categories as $category) {
             $categoryarray[$category->id] = $category->category;
@@ -190,7 +190,7 @@ class ChefService
      */
      public function editMethod()
      {
-        $methods = $this->methodRepo->findMethodAll();
+        $methods = $this->methodRepo->findMethodByMethodName();
         $methodarray = [];
         foreach($methods as $method) {
             $methodarray[$method->id] = $method->method;

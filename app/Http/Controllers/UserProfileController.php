@@ -37,7 +37,7 @@ class UserProfileController extends Controller
     {
         $user = $this->userProfileService->indexUser();
         $carts = $this->userProfileService->indexCart($user);
-        $userorders = $this->userProfileService->indexUserOrder($user, 'desc', 3);
+        $userorders = $this->userProfileService->indexUserOrder($user, 3);
 
         $agent = $this->agentService->agent();
         return view($agent . '.user.profile', ['user' => $user, 'carts' => $carts, 'userorders' => $userorders]);

@@ -45,7 +45,7 @@
                     </div>
 
                     <div class=" w3-padding-8">
-                        <label class="w3-text-gery" style="font-family:cursive">Venue</label>                
+                        <label class="w3-text-gery" style="font-family:cursive">Time</label>                
                         {{ Form::select('shifts[]', $shifts, null, ['id' => 'shift-select2', 'class' => 'form-control js-example-basic-multiple', 'multiple' => 'multiple']) }}
                     </div>
 

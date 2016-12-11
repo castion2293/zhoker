@@ -71,30 +71,18 @@ class MapListService
         $chefs = $this->chefRepo->findChefByCity($request->input('city'));
 
         if ($request->input('minPrice') == "" && $request->input('maxPrice') == "") {
-            $meals = Meal::all();
+            $meals = $this->mealRepo->findMealAll();
         } else {
             $meals = $this->mealRepo->findMealByPriceRange($request->input('minPrice'), $request->input('maxPrice'));
         }
 
         $datetimepeoples = $this->datetimepeopleRepo->findDateTimePeopleByDateAndPeople($request->input('date'), $request->input('people'));
 
-        if ($request->input('shift') == 'All') {
-            $shifts = $this->shiftRepo->findShiftAll();
-        } else {
-            $shifts = $this->shiftRepo->findShiftByShiftName($request->input('shift'));
-        }
+        $shifts = $this->shiftRepo->findShiftByShiftName($request->input('shift'));
         
-        if ($request->input('method') == 'All') {
-            $methods = $this->methodRepo->findMethodAll();
-        } else {
-            $methods = $this->methodRepo->findMethodByMethodName($request->input('method'));
-        }
+        $methods = $this->methodRepo->findMethodByMethodName($request->input('method'));
 
-        if ($request->input('type') == null) {
-            $categories = $this->categoryRepo->findCategoryAll();
-        } else {
-            $categories = $this->categoryRepo->findCategoryById($request->input('type'));
-        }
+        $categories = $this->categoryRepo->findCategoryById($request->input('type'));
         
         //find chef_meal_id
         $chef_id = $this->ToArrayId($chefs);

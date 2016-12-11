@@ -46,7 +46,7 @@
                         </div>
 
                         <div class=" w3-padding-8">
-                            <label class="w3-text-gery" style="font-family:cursive">Venue</label>               
+                            <label class="w3-text-gery" style="font-family:cursive">Time</label>               
                             <select id="sel2" class="w3-select js-example-basic-multiple" name="shifts[]" multiple="multiple" placeholder="Shift" required=""> 
                                 @foreach($shifts as $shift)
                                     <option value='{{ $shift->id }}'>{{ $shift->shift }}</option>

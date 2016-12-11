@@ -30,18 +30,9 @@ class MethodRepository
      * @param $method_name
      * @return method
      */
-     public function findMethodByMethodName($method_name)
+     public function findMethodByMethodName($method_name = null)
      {
-         return $this->method->where('method', $method_name)->first();
-     }
-
-     /**
-     * @param null
-     * @return method
-     */
-     public function findMethodAll()
-     {
-        return $this->method->all();
+        return $this->method->findMethod($method_name);
      }
 
      /**

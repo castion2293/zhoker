@@ -10,4 +10,13 @@ class Method extends Model
     {
         return $this->belongsToMany('App\Meal');
     }
+
+    public function scopeFindMethod($builder, $methodName)
+    {
+        if ($methodName == 'All' || empty($methodName) ) {
+            return $builder->get();
+        }
+
+        return $builder->where('method', $methodName)->first();
+    }
 }

@@ -39,7 +39,6 @@
                   <div>
                       <label class="w3-text-grey w3-large" style="font-family:cursive">City</label>
                       <input type="text" name="city" placeholder="City" value="{{ old('city') }}" required maxlength="255" class="w3-input w3-border w3-border-grey w3-large w3-text-grey">
-                      <!--{{ Form::text('city', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'City', 'required' => '', 'maxlength' => '255']) }}-->
                   </div>
                   <div class="" style="margin-top:2em;">
                       <label class="w3-text-grey w3-large" style="font-family:cursive">Date</label>
@@ -73,7 +72,7 @@
             <div class="w3-row w3-border-green w3-border-bottom w3-padding-12" style="margin-top:2em;">
                 <div class="w3-col l3 m3" style="padding-left:2em;">
                   <div class="">
-                      <label class="w3-text-grey w3-large" style="font-family:cursive">Venue</label>
+                      <label class="w3-text-grey w3-large" style="font-family:cursive">Time</label>
                       <select class="form-control w3-text-grey w3-large" name="shift" id="shift">
                         <option class="w3-text-grey w3-white w3-large">All</option>
                         <option class="w3-text-grey w3-white w3-large">Dinner</option>
