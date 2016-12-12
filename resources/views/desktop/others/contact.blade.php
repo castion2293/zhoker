@@ -31,6 +31,12 @@
                 <div class="w3-col l12 m12 w3-margin-top">
                     <textarea name="content" class="w3-input w3-border w3-border-grey w3-large w3-text-grey" rows="10" required></textarea>
                 </div>
+                <div class="w3-col l12 m12 w3-margin-top">
+                    {!! $errors->first('name','<label class="w3-text-red w3-large">:message</label>')!!}
+                    {!! $errors->first('email','<label class="w3-text-red w3-large">:message</label>')!!}
+                    {!! $errors->first('subject','<label class="w3-text-red w3-large">:message</label>')!!}
+                    {!! $errors->first('content','<label class="w3-text-red w3-large">:message</label>')!!}
+                </div>
             </div>
             <div class="w3-row w3-margin-top">
                 <div class="w3-rest"></div>

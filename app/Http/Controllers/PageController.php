@@ -31,7 +31,8 @@ class PageController extends Controller
         $this->mailService->sendContactMail($request->all());
         $this->mailService->sendContactCustomerMail($request->all());
 
-        return redirect('/');
+        $agent = $this->agentService->agent();
+        return view($agent . '.email.SendContactEmail');
     }
 
     public function getAbout()
