@@ -23,12 +23,11 @@
                     <b class="w3-text-green w3-large w3-right w3-margin-right" style="margin-top:1em;">${{ $meal->price }}TWD</b>
                 </div>
             </div>
-            <div class="w3-row w3-padding-8 w3-border-green w3-border-bottom">
-              <div class="w3-col s12 w3-padding-large">
+            <div class="w3-row w3-padding-8">
+              <div class="w3-col s12">
                   <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
-                  <p class="w3-large">{!! $meal->description !!}</p>
               </div>
-              <div class="w3-col s12 w3-padding-large">
+              <div class="w3-col s12">
                   <div class="w3-border-bottom w3-border-grey w3-padding-12">
                     <table class="w3-table w3-medium">
                         <thead>
@@ -79,6 +78,11 @@
                   </div>
               </div>  
             </div>
+
+            <div class="w3-col s12 w3-border-green w3-border-bottom w3-padding-bottom">
+              <p class="w3-large">{!! $meal->description !!}</p>
+            </div>
+
             <div class="w3-row">
               <div class="w3-col s6 w3-padding-small">
                  {!! Form::open(['route' => ['chef.destroy', $meal->id], 'method' => 'DELETE']) !!}

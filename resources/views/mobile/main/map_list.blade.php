@@ -24,25 +24,28 @@
                         <div class="w3-col s12" id="title_img">
                             <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%">
                         </div>
-                        <div class="w3-col s6" style="margin-top:5px;">
+                        <div class="w3-col s12" style="margin-top:5px;">
+                            <div class="w3-row">
+                              <div class="w3-rest"></div>
+                              <div class="w3-col s4 w3-right">
+                                @for ($i = 0; $i < 5; $i++)
+                                  <span class="w3-text-deep-orange star w3-medium"><i class="fa fa-star"></i></span>
+                                @endfor
+                              </div>
+                            </div>
                             <div><span class="w3-text-grey w3-large" id="meal-name"><b>{{ $meal->name }}<b></span></div>
-                            <div>
-                              <section>
-                                <span class="w3-text-green w3-medium" id="meal-price">${{ $meal->price }}</span>
-                                <span class="w3-text-grey w3-medium w3-right" style="padding-left:2px;" id="meal-people">{{ $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->people_left }} people left</span>
-                              </section>
-                            </div>
-                        </div>
-                        <div class="w3-col s6 w3-padding-left">
-                            <div style="margin-top:5px;">
-                              @for ($i = 0; $i < 5; $i++)
-                                <span class="w3-text-deep-orange star w3-medium"><i class="fa fa-star"></i></span>
-                              @endfor
-                            </div>
-                            <div id="method-label" style="padding-top:5px;display: none">
-                              @foreach ($meal->methods as $method)
-                                <p class="w3-tag w3-teal" style="font-size:6px;">{{ $method->method }}</p>
-                              @endforeach
+                            <div class="w3-row">
+                                <div class="w3-col s2">
+                                  <span class="w3-text-green w3-medium" id="meal-price">${{ $meal->price }}</span>
+                                </div>
+                                <div class="w3-col s4"
+                                    <span class="w3-text-grey w3-medium w3-right" style="padding-left:2px;" id="meal-people">{{ $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->people_left }} people left</span>
+                                </div>
+                                <div class="w3-col s6" id="method-label" style="display: none">
+                                  @foreach ($meal->methods as $method)
+                                    <p class="w3-tag w3-teal" style="font-size:8px;">{{ $method->method }}</p>
+                                  @endforeach
+                                </div>
                             </div>
                         </div>
                       </div>
@@ -164,7 +167,8 @@
             meal_name.removeClass("w3-text-white").addClass("w3-text-grey");
             meal_price.removeClass("w3-text-white").addClass("w3-text-green");
             meal_people.removeClass("w3-text-white").addClass("w3-text-grey");
-            star.removeClass("w3-text-white").addClass("w3-text-deep-orange");
+            //star.removeClass("w3-text-white").addClass("w3-text-deep-orange");
+            star.show();
             method_label.hide();
             title_img.animate({width: '100%'}, 1);
             content_img.animate({width: '0'}, 500);
@@ -174,7 +178,8 @@
             meal_name.removeClass("w3-text-grey").addClass("w3-text-white");
             meal_price.removeClass("w3-text-green").addClass("w3-text-white");
             meal_people.removeClass("w3-text-grey").addClass("w3-text-white");
-            star.removeClass("w3-text-deep-orange").addClass("w3-text-white");
+            //star.removeClass("w3-text-deep-orange").addClass("w3-text-white");
+            star.hide();
             method_label.show();
             title_img.animate({width: '0'}, 1);
             content_img.animate({width: '100%'}, 500);

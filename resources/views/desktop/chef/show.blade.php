@@ -22,10 +22,9 @@
                     <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}TWD</b>
                 </div>
             </div>
-            <div class="w3-row w3-padding-12 w3-border-green w3-border-bottom">
+            <div class="w3-row w3-padding-12">
               <div class="w3-col l7 m7 w3-padding-large">
                   <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
-                  <p>{!! $meal->description !!}</p>
               </div>
               <div class="w3-col l5 m5 w3-padding-large">
                   <div class="w3-border-bottom w3-border-grey w3-padding-12">
@@ -78,6 +77,11 @@
                   </div>
               </div>  
             </div>
+
+            <div class="w3-col l12 m12 w3-border-green w3-border-bottom w3-padding-bottom">
+              <p>{!! $meal->description !!}</p>
+            </div>
+
             <div class="w3-row">
               <div class="w3-rest"></div> 
               <div class="w3-col l2 m2 w3-right w3-padding-small">

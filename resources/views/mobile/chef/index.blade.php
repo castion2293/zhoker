@@ -24,20 +24,21 @@
                 </div>
                 <div class="w3-col s12">
                     <div class="w3-row">
-                        <div class="w3-col s7">
-                            <span class="w3-text-grey w3-xxlarge"><b>{{ $meal->name }}<b></span>
-                        </div>
-                        <div class="w3-col s5" style="padding-top:5px;">
+                        <div class="w3-rest"></div>
+                        <div class="w3-col s5 w3-right">
                             @for ($i = 0; $i < 5; $i++)
                                 <span class="w3-text-orange w3-right w3-large"><i class="fa fa-star"></i></span>
                             @endfor
                         </div>
                     </div>
                     <div class="w3-col s12">
+                            <span class="w3-text-grey w3-xlarge"><b>{{ $meal->name }}<b></span>
+                        </div>
+                    <div class="w3-col s12">
                         <b class="w3-text-green w3-left w3-large">${{ $meal->price }}TWD</b>
                     </div>
                     <div class="w3-border-grey w3-border-bottom">
-                        <p class="w3-text-grey w3-large" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 150) !!}{{ strlen(strip_tags($meal->description)) > 150 ? '...' : "" }}</p>
+                        <p class="w3-text-grey w3-medium" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 150) !!}{{ strlen(strip_tags($meal->description)) > 150 ? '...' : "" }}</p>
                     </div>
                     <div class="w3-row">
                         <div class="w3-col s12">
