@@ -184,6 +184,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Nexmo\Laravel\NexmoServiceProvider::class,
+        BackupManager\Laravel\Laravel5ServiceProvider::class,
 
     ],
 
