@@ -11,6 +11,10 @@
                       'insertdatetime media table contextmenu paste code'],
             toobar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
             menubar: false,
+            // image_dimensions: false,
+            // image_class_list: [
+            //     {title: 'Responsive', value: 'img-responsive'}
+            // ],
         });
     </script>
     <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->

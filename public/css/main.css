@@ -15,6 +15,11 @@ body,
     line-height: 1.8;
   }
 
+   img {
+    max-width: 100%;
+    height: auto;
+    }
+
   /*Index input Form placeholder*/
   body #font input::-webkit-input-placeholder {
     color: #000;
@@ -146,3 +151,5 @@ body,
   .bg-grey {
     background: rgba(34, 37, 51, 0.8);
   }
+
+ 

@@ -1,5 +1,5 @@
 <!-- Navbar (sit on top) -->
-  <div class="w3-top">
+  <div class="w3-top" style="height:67px;">
     <ul class="w3-navbar" id="myNavbar">
       @if (Auth::check())
           @if (Auth::user()->isChef() && Session::get('login') == 'chef')
