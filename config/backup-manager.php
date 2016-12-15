@@ -10,8 +10,8 @@ return [
         'key'    => env('S3_KEY'),
         'secret' => env('S3_SECRET'),
         'region' => env('S3_REGION'),
-        'bucket' => 'backupzhoker',
-        'root'   => '',
+        'bucket' => 'zhoker',
+        'root'   => '/database_backups/'.date("Y-m-d  h:i:s A"),
     ],
     'gcs' => [
         'type' => 'Gcs',
