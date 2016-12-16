@@ -28,6 +28,12 @@
                 <span class="w3-text-grey">Email: {{ $user->email }}</span><br>
                 <span class="w3-text-grey">Phone Number:: {{ $user->phone_number }}</span>
             </div>
+
+            <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
+                <div class="w3-col s12 w3-margin-top">
+                    <a href="{{ url('/user_profile/create') }}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Edit Profile</b></a>
+                </div>
+            </div>  
         </div>
 
         <div class="w3-padding-12" id="shopping-cart" style="margin-top:3em;">
@@ -71,8 +77,7 @@
                 @endforeach
 
                 <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
-                    <div class="w3-rest"></div> 
-                    <div class="w3-col l3 m3 w3-right w3-margin-top">
+                    <div class="w3-col s12 w3-margin-top">
                         <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Shopping Cart</b></a>
                     </div>
                 </div>  
@@ -171,8 +176,7 @@
                     </div>
 
                     <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
-                        <div class="w3-rest"></div> 
-                        <div class="w3-col l3 m3 w3-right w3-margin-top">
+                        <div class="w3-col s12 w3-margin-top">
                             <a href="{!! route('order.userorder', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Order</b></a>
                         </div>
                     </div> 

@@ -49,11 +49,15 @@
                             <a href="{{ route('chef.show', $meal->id) }}" style="text-decoration:none;">
                             <div class="thumbnail w3-border-0 w3-padding-tiny">
                                 <div class="w3-white w3-border w3-border-green w3-round-large w3-padding-tiny">
-                                    <span class="w3-text-grey w3-xlarge">{{ $meal->name }}
-                                        @for ($i = 0; $i < 5; $i++)
-                                            <span class="w3-text-orange w3-right w3-large"><i class="fa fa-star"></i></span>
-                                        @endfor
-                                    </span>
+                                    <div class="w3-row">
+                                        <div class="w3-rest"></div>
+                                        <div class="w3-col s6 w3-right">
+                                            @for ($i = 0; $i < 5; $i++)
+                                                <span class="w3-text-orange w3-right w3-large"><i class="fa fa-star"></i></span>
+                                            @endfor
+                                        </div>
+                                    </div>
+                                    <p class="w3-text-grey w3-xlarge">{{ $meal->name }}</p>
                                     <div class="img-wrapper">
                                         <img src="{{ asset($meal->img_path) }}" alt="meal" style="width:100%;" class="zk-enlarge-hover">
                                     </div>
