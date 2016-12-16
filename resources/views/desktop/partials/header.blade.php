@@ -1,5 +1,6 @@
 <!-- Navbar (sit on top) -->
-  <div class="w3-top" style="height:67px;">
+  @inject('UserPresenter', 'App\Presenters\UserPresenter')
+  <div class="w3-top" style="height:10%;">
     <ul class="w3-navbar" id="myNavbar">
       @if (Auth::check())
           @if (Auth::user()->isChef() && Session::get('login') == 'chef')
@@ -11,7 +12,7 @@
               <a href="#" class="w3-padding-large w3-xlarge listcolor" id="chef_help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="{{ url('/chef_profile') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
+              <a href="{{ url('/chef_profile') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Setting</span></a>
             </li>
             <li class="w3-hide-small w3-right">
               <a href="{{url('/chef/create')}}" class="w3-padding-large w3-xlarge listcolor" id="chef_create" ><i class="fa fa-pencil-square-o"></i><span class="w3-large"> Create</span></a>
@@ -28,11 +29,7 @@
           @else 
             <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
             <li class="w3-hide-small w3-right">
-              @if (Auth::user()->user_profile_img != null)
-                <img src="{{ asset(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
-              @else
-                <img src="{{ URL::to('img\default-user-icon-profile.png') }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
-              @endif
+              <img src="{{ $UserPresenter->userProfileImg(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
             </li>
             <li class="w3-hide-small w3-right">
               <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>
@@ -41,7 +38,7 @@
               <a href="#" class="w3-padding-large w3-xlarge listcolor" id="help" ><i class="fa fa-book"></i><span class="w3-large"> Help</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="{{ url('/user_profile/create') }}" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Seting</span></a>
+              <a href="{{ url('/user_profile/create') }}" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Setting</span></a>
             </li>
             <li class="w3-hide-small w3-right">
               <a href="{!! route('order.userorder', ['id' => Auth::user()->id]) !!}" class="w3-padding-large w3-xlarge listcolor" id="chef_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>

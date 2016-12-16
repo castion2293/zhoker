@@ -13,17 +13,14 @@
     </div>
 
     <!--content-->
+    @inject('UserPresenter', 'App\Presenters\UserPresenter')
     <div class="w3-content w3-container w3-padding-32">
         <div class="w3-row" id="user-profile">
             <div class="">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">User Profile<h1>
             </div>
             <div class="w3-col s12">
-                @if ($user->user_profile_img)
-                    <img src="{{ asset($user->user_profile_img) }}" alt="profile" style="width:100%">
-                @else
-                    <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="profile" style="width:100%">
-                @endif
+                <img src="{{ $UserPresenter->userProfileImg($user->user_profile_img) }}" alt="profile" style="width:100%">
             </div> 
             <div class="w3-col s12 w3-center w3-panel w3-light-grey w3-padding-small w3-margin-top">
                 <h2 class="w3-text-grey">Hello, {{ $user->first_name }}</h2>

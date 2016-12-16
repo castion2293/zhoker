@@ -9,6 +9,7 @@
   </div>
 
 <!-- Sidebar (sit on top) in small screen -->
+  @inject('UserPresenter', 'App\Presenters\UserPresenter')
   <nav class="w3-sidenav w3-white w3-animate-right" style="display:none;z-index:5;right:0;width:70%">
     @if (Auth::check())
        @if (Auth::user()->isChef() && Session::get('login') == 'chef')
@@ -23,11 +24,7 @@
           <a href="{{ route('logout') }}" class="w3-hover-green w3-large"><i class="fa fa-sign-out"></i> LogOut</a>
        @else
           <div class="w3-margin-left">
-            @if (Auth::user()->user_profile_img != null)
-              <img src="{{ asset(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
-            @else
-              <img src="{{ URL::to('img\default-user-icon-profile.png') }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
-            @endif
+            <img src="{{ $UserPresenter->userProfileImg(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
           </div>
           <hr>
           <a href="{{ route('home.index') }}" class="w3-hover-green w3-large"><i class="fa fa-home"></i> Home</a>

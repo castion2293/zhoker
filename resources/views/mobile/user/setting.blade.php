@@ -13,6 +13,7 @@
     </div>
 
     <!--content-->
+    @inject('UserPresenter', 'App\Presenters\UserPresenter')
     <div class="w3-content w3-container w3-padding-32">
         <div class="">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Profile Setting<h1>
@@ -45,11 +46,7 @@
                     
                     <div class="form-group w3-row w3-margin-top">
                         <div class="w3-col s12 w3-padding-small">
-                            @if ($user->user_profile_img != null)
-                                <img id="img_content" src="{{ asset($user->user_profile_img) }}" alt="image contetnt" style="width:100%">
-                            @else
-                                <img id="img_content" src="{{ URL::to('img\default-user-icon-profile.png') }}" alt="image contetnt" style="width:100%">
-                            @endif
+                            <img id="img_content" src="{{ $UserPresenter->userProfileImg($user->user_profile_img) }}" alt="image contetnt" style="width:100%">
                         </div>
                         <div class="w3-rest"></div>
                         <div class="w3-col s7 w3-right">

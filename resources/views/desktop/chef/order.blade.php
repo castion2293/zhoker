@@ -94,8 +94,8 @@
                                         <span class="w3-text-grey w3-large">Approved</span>
                                     </div>
                                     <div class="w3-margin-top">
-                                        @inject('OrderPresenter', 'App\Presenters\OrderPresenter')
-                                        <span class="w3-text-grey w3-large">{{ $OrderPresenter->paidCheck($cheforder->paid) }}</span>
+                                        @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
+                                        <span class="w3-text-grey w3-large">{{ $ChefPresenter->paidCheck($cheforder->paid) }}</span>
                                     </div>
                                 @else
                                     <div class="">

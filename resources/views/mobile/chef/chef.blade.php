@@ -13,6 +13,7 @@
     </div>
 
     <!--content-->
+    @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
     <div class="w3-content w3-container w3-padding-32">
         <div class="w3-row" id="profile">
             <div class="">
@@ -20,18 +21,20 @@
             </div>
             
             <div class="w3-col s12" style="">
-                @if ($chef->profile_img)
-                    <img src="{{ asset($chef->profile_img) }}" alt="profile" style="width:100%">
-                @else
-                    <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="profile" style="width:100%">
-                @endif
+                <img src="{{ $ChefPresenter->chefProfileImg($chef->profile_img) }}" alt="profile" style="width:100%">
             </div>
             <div class="w3-col s12 w3-panel w3-light-grey">
-                <div class="">
-                    <p class="w3-text-grey w3-center w3-xxlarge w3-margin-top" style="font-family: cursive">{{ $chef->store_name }}</p>
+                <div class="w3-margin-top">
+                    <p class="w3-text-grey w3-center w3-xlarge w3-margin-top" style="font-family: cursive">{{ $ChefPresenter->chefStoreName($chef->store_name) }}</p>
                     <div class="w3-padding-small">
-                        <p class="w3-text-grey w3-center" style="font-family: cursive">{!! $chef->store_description !!}</p>
+                        <p class="w3-text-grey w3-center" style="font-family: cursive">{!! $ChefPresenter->chefStoreDes($chef->store_description) !!}</p>
                     </div>
+                </div>
+            </div>
+
+            <div class="w3-row w3-margin-top w3-border-grey w3-border-top"> 
+                <div class="w3-col s12 w3-margin-top">
+                    <a href="{{ url('/user_profile/create') }}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover"><b>Edit Profile</b></a>
                 </div>
             </div>
         </div>
@@ -140,8 +143,8 @@
                                     <span class="w3-text-grey w3-medium">Approved</span>
                                 </div>
                                 <div class="w3-col s6 w3-center">
-                                    @inject('OrderPresenter', 'App\Presenters\OrderPresenter')
-                                    <span class="w3-text-grey w3-medium">{{ $OrderPresenter->paidCheck($cheforder->paid) }}</span>
+                                    @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
+                                    <span class="w3-text-grey w3-medium">{{ $ChefPresenter->paidCheck($cheforder->paid) }}</span>
                                 </div>
                             @else
                                 <div class="w3-col s6 w3-center">

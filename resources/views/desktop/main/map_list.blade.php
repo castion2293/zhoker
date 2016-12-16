@@ -17,8 +17,7 @@
         </div>
         <div class="col-md-5">
             <div class="col-md-12 w3-light-grey">
-                <div class="w3-accordion">
-                    <div class="w3-red"><h1>Zhoker</h1></div>
+                <div class="w3-accordion" style="padding-top:15%;">
                     @foreach($meals as $meal)
                       <a id="{{ $meal->id }}" href="#{{ $meal->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
                         <div class="row">

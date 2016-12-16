@@ -1,5 +1,5 @@
 <!-- Navbar (sit on top) -->
-  <div class="w3-top w3-white w3-border-bottom w3-border-grey" style="height:67px;">
+  <div class="w3-top w3-white w3-border-bottom w3-border-grey" style="height:10%">
     <ul class="w3-navbar" id="myNavbar">
       <li>
           <a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left w3-text-grey" id="hometag">Zhoker</a>

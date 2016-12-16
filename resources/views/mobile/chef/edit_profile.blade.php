@@ -20,6 +20,7 @@
     </div>
 
     <!--content-->
+    @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
     <div class="w3-content w3-container w3-padding-32"  id="chef-create">
         <div>
              <div class="">
@@ -50,11 +51,7 @@
                         </div>
                         <div class="form-group w3-row" style="margin-top:10px;">
                             <div class="w3-col s12 w3-padding-small">
-                                @if ($chef->profile_img)
-                                    <img id="img_content" src="{{ asset($chef->profile_img) }}" alt="image contetnt" style="width:100%">
-                                @else
-                                    <img id="img_content" src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="image contetnt" style="width:100%">
-                                @endif
+                                <img id="img_content" src="{{ $ChefPresenter->chefProfileImg($chef->profile_img) }}" alt="image contetnt" style="width:100%">
                             </div>
                             <div class="w3-rest"></div>
                             <div class="w3-col s7 w3-right">

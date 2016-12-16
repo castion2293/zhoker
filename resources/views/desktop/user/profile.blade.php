@@ -24,6 +24,7 @@
     </div>
 
     <!--content-->
+    @inject('UserPresenter', 'App\Presenters\UserPresenter')
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-row" id="user-profile">
             <div class="w3-padding-12">
@@ -31,7 +32,7 @@
             </div>
             <div class="w3-display-container">
                 <div class="w3-col l3 m3">
-                    <img src="{{ asset($user->user_profile_img) }}" alt="profile" style="width:100%">
+                    <img src="{{ $UserPresenter->userProfileImg($user->user_profile_img) }}" alt="profile" style="width:100%">
                 </div>
                 <div class="w3-rest"></div>  
                 <div class="w3-col l8 m8 w3-right w3-panel w3-light-grey">
