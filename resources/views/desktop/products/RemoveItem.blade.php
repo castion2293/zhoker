@@ -19,7 +19,7 @@
             <div class="w3-row w3-border-grey w3-border-top w3-padding-24" style="margin-top:3em;">
                 <div class="w3-rest"></div>
                 <div class="w3-col l3 m3 w3-right">
-                    <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Back to Shopping Cart</b></a>
+                    <a href="{!! route('product.cart.show', ['id' => encrypt(Auth::user()->id)]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Back to Shopping Cart</b></a>
                 </div>
             </div>
         </div>

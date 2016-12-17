@@ -7,6 +7,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 
 use App\Services\ChefService;
 use App\Services\AgentService;
+use App\Services\GateService;
 
 use App\Http\Requests;
 use App\Http\Requests\MealCreateRequest;
@@ -15,13 +16,15 @@ class ChefController extends Controller
 {
     protected $chefService;
     protected $agentService;
+    protected $gateService;
 
-    public function __construct(ChefService $chefService, AgentService $agentService) 
+    public function __construct(ChefService $chefService, AgentService $agentService, GateService $gateService) 
     {
         $this->middleware('chef');
         
         $this->chefService = $chefService;
         $this->agentService = $agentService;
+        $this->gateService = $gateService;
     }
 
     /**
@@ -62,7 +65,7 @@ class ChefController extends Controller
     {
         $meal = $this->chefService->store($request);
 
-        return redirect()->route('chef.show', $meal->id);
+        return redirect()->route('chef.show', encrypt($meal->id));
     }
 
     /**
@@ -73,7 +76,11 @@ class ChefController extends Controller
      */
     public function show($id)
     {
+        $id = $this->gateService->decrypt($id);
+
         $meal = $this->chefService->show($id);
+
+        $this->gateService->chefIdCheck($meal->chef_id);
 
         $agent = $this->agentService->agent();
         return view($agent . '.chef.show',['meal' => $meal]);
@@ -87,7 +94,12 @@ class ChefController extends Controller
      */
     public function edit($id)
     {
+        $id = $this->gateService->decrypt($id);
+
         $meal = $this->chefService->editMeal($id);
+
+        $this->gateService->chefIdCheck($meal->chef_id);
+
         $old_datetimepeople = $this->chefService->editDatetimePeople($meal);
         $shiftarray = $this->chefService->editShift();
         $categoryarray = $this->chefService->editCategory();
@@ -108,7 +120,7 @@ class ChefController extends Controller
     {
         $meal = $this->chefService->update($request, $id);
         
-        return redirect()->route('chef.show', $meal->id);
+        return redirect()->route('chef.show', encrypt($meal->id));
     }
 
     /**
@@ -119,6 +131,9 @@ class ChefController extends Controller
      */
     public function destroy($id)
     {
+        $meal = $this->chefService->editMeal($id);
+        $this->gateService->chefIdCheck($meal->chef_id);
+
         $this->chefService->destroy($id);
         
         return redirect()->route('chef.index');

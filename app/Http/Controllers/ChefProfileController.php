@@ -8,6 +8,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use App\Services\ChefProfileService;
 use App\Services\MainService;
 use App\Services\AgentService;
+use App\Services\GateService;
 
 use App\Http\Requests;
 use App\Http\Requests\ChefProfileEditRequest;
@@ -17,13 +18,15 @@ class ChefProfileController extends Controller
     protected $chefProfileService;
     protected $mainService;
     protected $agentService;
+    protected $gateService;
 
-    public function __construct(ChefProfileService $chefProfileService, MainService $mainService, AgentService $agentService) {
+    public function __construct(ChefProfileService $chefProfileService, MainService $mainService, AgentService $agentService, GateService $gateService) {
         $this->middleware('chef');
 
         $this->chefProfileService = $chefProfileService;
         $this->mainService = $mainService;
         $this->agentService = $agentService;
+        $this->gateService = $gateService;
     }
 
     /**
@@ -35,7 +38,7 @@ class ChefProfileController extends Controller
     {
         $id = $this->chefProfileService->index();
         
-        return redirect()->route('chef_profile.edit', $id);
+        return redirect()->route('chef_profile.edit', encrypt($id));
     }
 
     /**
@@ -78,6 +81,9 @@ class ChefProfileController extends Controller
      */
     public function edit($id)
     {
+        $id = $this->gateService->decrypt($id);
+        $this->gateService->chefIdCheck($id);
+
         $chef = $this->chefProfileService->edit($id);
 
         $agent = $this->agentService->agent();

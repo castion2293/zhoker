@@ -9,6 +9,7 @@ use App\Services\CashierService;
 use App\Services\CreditCardService;
 use App\Services\EventService;
 use App\Services\SessionService;
+use App\Services\GateService;
 
 class CashierController extends Controller
 {
@@ -16,23 +17,29 @@ class CashierController extends Controller
     protected $creditCardService;
     protected $eventService;
     protected $sessionService;
+    protected $gateService;
 
-    public function __construct(CashierService $cashierService, CreditCardService $creditCardService, EventService $eventService,  SessionService $sessionService) {
+    public function __construct(CashierService $cashierService, CreditCardService $creditCardService, EventService $eventService, SessionService $sessionService,
+                                GateService $gateService) {
         $this->middleware('auth');
 
         $this->cashierService = $cashierService;
         $this->creditCardService = $creditCardService;
         $this->eventService = $eventService;
         $this->sessionService = $sessionService;
+        $this->gateService = $gateService;
     }
 
     public function getBindingCard($id)
     {
+        $id = $this->gateService->decrypt($id);
+        $this->gateService->userIdCheck($id);
+
         $user = $this->cashierService->getUser($id);
         $this->sessionService->put('oldUrl', url()->previous());
 
         //for binding credit card
-        $url = "user_profile/" . $user->id . "/edit#payment";
+        $url = "user_profile/" . encrypt($user->id) . "/edit#payment";
         return redirect($url);
     }
 
@@ -61,7 +68,7 @@ class CashierController extends Controller
         //send user order email
         $this->eventService->userOrderEvent($user, $carts);
 
-        return redirect()->route('order.userorder', $user->id);
+        return redirect()->route('order.userorder', encrypt($user->id));
     }
 
     public function postOneTimeCheckout(Request $request)
@@ -92,7 +99,7 @@ class CashierController extends Controller
             //send user order email
             $this->eventService->userOrderEvent($user, $carts);
 
-            return redirect()->route('order.userorder', $user->id);
+            return redirect()->route('order.userorder', encrypt($user->id));
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

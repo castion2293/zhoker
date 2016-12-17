@@ -5,6 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use App\Policies\UserPolicy;
+
+use App\Cart;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        //Cart::class => UserPolicy::class,
     ];
 
     /**
@@ -25,6 +29,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('UserIDCheck', function ($user, $id) {
+            return $user->id == $id;
+        });
+
+        Gate::define('ChefIDCheck', function ($user, $id) {
+            return $user->chef_id == $id;
+        });
     }
 }

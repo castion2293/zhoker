@@ -9,6 +9,7 @@ use App\Services\OrderService;
 use App\Services\CreditCardService;
 use App\Services\EventService;
 use App\Services\AgentService;
+use App\Services\GateService;
 
 class OrderController extends Controller
 {
@@ -16,8 +17,9 @@ class OrderController extends Controller
     protected $creditCardService;
     protected $eventService;
     protected $agentService;
+    protected $gateService;
 
-    public function __construct(OrderService $orderService, CreditCardService $creditCardService, AgentService $agentService, EventService $eventService) {
+    public function __construct(OrderService $orderService, CreditCardService $creditCardService, AgentService $agentService, EventService $eventService, GateService $gateService) {
         $this->middleware('auth', ['only' => ['getUserOrder']]);
         $this->middleware('chef', ['except' => ['getUserOrder']]);
 
@@ -25,10 +27,14 @@ class OrderController extends Controller
         $this->creditCardService = $creditCardService;
         $this->eventService = $eventService;
         $this->agentService = $agentService;
+        $this->gateService = $gateService;
     }
 
     public function getUserOrder($id)
     {
+        $id = $this->gateService->decrypt($id);
+        $this->gateService->userIdCheck($id);
+
         $user = $this->orderService->getUser($id);
         $userorders = $this->orderService->getUserOrderByUser($user, 'desc');
 
@@ -38,6 +44,9 @@ class OrderController extends Controller
 
     public function getChefOrder($id)
     {
+        $id = $this->gateService->decrypt($id);
+        $this->gateService->chefIdCheck($id);
+
         $chef = $this->orderService->getChef($id);
         $cheforders = $this->orderService->getChefOrder($chef, 6);
        
@@ -47,7 +56,12 @@ class OrderController extends Controller
 
     public function getAccept($id)
     {
+        $id = $this->gateService->decrypt($id);
+
         $chefOrder = $this->orderService->getChefOrderById($id);
+
+        $this->gateService->chefIdCheck($chefOrder->chef_id);
+
         $cart = $this->orderService->getCart($chefOrder);
         $userOrder = $this->orderService->getUserOrderByCart($cart);
 
@@ -74,7 +88,12 @@ class OrderController extends Controller
 
     public function getReject($id)
     {
+        $id = $this->gateService->decrypt($id);
+
         $chefOrder = $this->orderService->getChefOrderById($id);
+
+        $this->gateService->chefIdCheck($chefOrder->chef_id);
+
         $cart = $this->orderService->getCart($chefOrder);
         $datetimepeople = $this->orderService->getDateTimePeopleByCart($cart);
         $this->orderService->updatePeopleOrder($datetimepeople, $cart, true);

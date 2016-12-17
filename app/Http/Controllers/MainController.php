@@ -19,12 +19,16 @@ class MainController extends Controller
     protected $authenticateService;
     protected $sessionService;
 
+    private $attempt_key;
+
     public function __construct(MainService $mainService, AgentService $agentService, AuthenticateService $authenticateService, SessionService $sessionService)
     {
         $this->mainService = $mainService;
         $this->agentService = $agentService;
         $this->authenticateService = $authenticateService;
         $this->sessionService = $sessionService;
+
+        $this->attempt_key = 0;
     }
 
     public function getIndex()
@@ -46,6 +50,8 @@ class MainController extends Controller
             $agent = $this->agentService->agent();
             return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);
         }
+        //$this->authenticateService->throttlesLogins(1);
+
         $this->sessionService->flash('ChefError', 'These credentials do not match our records.');
         return redirect()->back();
     }

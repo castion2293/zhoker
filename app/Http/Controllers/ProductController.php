@@ -6,22 +6,28 @@ use Illuminate\Http\Request;
 
 use App\Services\ProductService;
 use App\Services\AgentService;
+use App\Services\GateService;
 
 class ProductController extends Controller
 {
     protected $productService;
     protected $agentService;
+    protected $gateService;
 
-    public function __construct(ProductService $productService, AgentService $agentService) 
+    public function __construct(ProductService $productService, AgentService $agentService, GateService $gateService) 
     {
         $this->middleware('auth', ['except' => ['getProductShow']]);
 
         $this->productService = $productService;
         $this->agentService = $agentService;
+        $this->gateService = $gateService;
     }
 
     public function getProductShow($id, $datetime_id) 
-    {    
+    {   
+        $id = $this->gateService->decrypt($id);
+        $datetime_id = $this->gateService->decrypt($datetime_id);
+
         $meal = $this->productService->getMeal($id);
         $datetimepeople = $this->productService->getDateTimePeople($meal, $datetime_id);
         $methods = $this->productService->getMethod($meal);
@@ -39,11 +45,14 @@ class ProductController extends Controller
         
         $cart = $this->productService->createCart($user, $meal, $datetime, $method, $request);
         
-        return redirect()->route('product.cart.show', $cart->user_id);
+        return redirect()->route('product.cart.show', encrypt($cart->user_id));
     }
 
     public function getCartShow($id)
     {
+        $id = $this->gateService->decrypt($id);
+        $this->gateService->userIdCheck($id);
+
         $user = $this->productService->getUser($id);
         $carts = $this->productService->getCart($user);
         $cartQtyArray = $this->productService->getCartQtyArray($carts);
@@ -78,6 +87,9 @@ class ProductController extends Controller
 
     public function getCheckout($id)
     {
+        $id = $this->gateService->decrypt($id);
+        $this->gateService->userIdCheck($id);
+
         $user = $this->productService->getUser($id);
         $carts = $this->productService->getCart($user);
 

@@ -216,7 +216,7 @@
             <div class="modal-footer w3-row">
                 <div class="w3-rest"></div>
                 <div class="w3-col l4 m4 w3-right">
-                    <a href="{!! route('user.payment.delete', ['id' => $user->id]) !!}" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-small zk-shrink-hover">Delete Credit Card</a>
+                    <a href="{!! route('user.payment.delete', ['id' => encrypt($user->id)]) !!}" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-small zk-shrink-hover">Delete Credit Card</a>
                 </div>
                 <div class="w3-col l4 m4 w3-right w3-padding-right">
                     <div class="btn w3-white w3-text-grey w3-border w3-border-grey btn-block w3-small zk-shrink-hover" data-dismiss="modal" style="cursor:pointer;">Cancel</div>

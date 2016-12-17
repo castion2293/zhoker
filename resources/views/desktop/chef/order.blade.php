@@ -99,10 +99,10 @@
                                     </div>
                                 @else
                                     <div class="">
-                                        <a href="{!! route('order.accept', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
+                                        <a href="{!! route('order.accept', ['id' => encrypt($cheforder->id)]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
                                     </div>
                                     <div class="w3-padding-left" style="margin-top:6em;">
-                                        <a href="{!! route('order.reject', ['id' => $cheforder->id]) !!}" class="w3-test-grey">Reject</a>
+                                        <a href="{!! route('order.reject', ['id' => encrypt($cheforder->id)]) !!}" class="w3-test-grey">Reject</a>
                                     </div>
                                 @endif
                                 

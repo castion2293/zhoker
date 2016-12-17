@@ -10,6 +10,7 @@ use App\Services\UserProfileService;
 use App\Services\CreditCardService;
 use App\Services\AgentService;
 use App\Services\SessionService;
+use App\Services\GateService;
 
 class UserProfileController extends Controller
 {
@@ -17,8 +18,10 @@ class UserProfileController extends Controller
     protected $creditCardService;
     protected $agentService;
     protected $sessionService;
+    protected $gateService;
 
-    public function __construct(UserProfileService $userProfileService, AgentService $agentService, CreditCardService $creditCardService, SessionService $sessionService) 
+    public function __construct(UserProfileService $userProfileService, AgentService $agentService, CreditCardService $creditCardService, SessionService $sessionService,
+                                GateService $gateService) 
     {
         $this->middleware('auth');
 
@@ -26,6 +29,7 @@ class UserProfileController extends Controller
         $this->creditCardService = $creditCardService;
         $this->agentService = $agentService;
         $this->sessionService = $sessionService;
+        $this->gateService = $gateService;
     }
 
     /**
@@ -52,7 +56,7 @@ class UserProfileController extends Controller
     {
         $user = $this->userProfileService->indexUser();
         
-        return redirect()->route('user_profile.edit', $user->id);
+        return redirect()->route('user_profile.edit', encrypt($user->id));
     }
 
     /**
@@ -85,6 +89,9 @@ class UserProfileController extends Controller
      */
     public function edit($id)
     {
+        $id = $this->gateService->decrypt($id);
+        $this->gateService->userIdCheck($id);
+
         $user = $this->userProfileService->indexUser($id);
 
         $agent = $this->agentService->agent();
@@ -100,6 +107,8 @@ class UserProfileController extends Controller
      */
     public function update(UserProfileEditRequest $request, $id)
     {
+        $this->gateService->userIdCheck($id);
+
         $user = $this->userProfileService->indexUser($id);
 
         $this->userProfileService->update($user, $request);
@@ -174,6 +183,9 @@ class UserProfileController extends Controller
 
     public function getPaymentDelete($id)
     {
+        $id = $this->gateService->decrypt($id);
+        $this->gateService->userIdCheck($id);
+
         $user = $this->userProfileService->indexUser($id);
         $credit_card = $this->creditCardService->findCreditCard($user);
 

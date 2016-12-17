@@ -82,7 +82,7 @@
            
             <div class="w3-col s12 w3-margin-top">
                 <!--button id="test">checkout</button-->
-                <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt" class="btn w3-deep-orange w3-large btn-block zk-shrink-hover">Checkout</a>
+                <a href="{!! route('product.cart.checkout', ['id' => encrypt(Auth::user()->id)]) !!}" id="ckt" class="btn w3-deep-orange w3-large btn-block zk-shrink-hover">Checkout</a>
             </div>
             
             <div class="w3-col s12 w3-margin-top">

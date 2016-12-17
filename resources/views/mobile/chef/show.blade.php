@@ -92,7 +92,7 @@
                  {!! Form::close() !!}
               </div>
               <div class="w3-col s6 w3-margin-top w3-padding-small">
-                {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-white w3-large w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
+                {!! Html::linkRoute('chef.edit', 'Edit', [encrypt($meal->id)], ['class' => 'btn w3-white w3-large w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
               </div>
             </div>
     </div>
