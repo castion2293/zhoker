@@ -5,6 +5,12 @@
 @section('styles')
     <link rel="stylesheet" href="{{ URL::to('css/cs-select.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/cs-skin-elastic.css') }}">
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script>
+      FB.init({
+        appId  : {{ env('FACEBOOK_ID') }},
+      });
+    </script>
     <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
 @endsection
 
@@ -28,6 +34,7 @@
             <div class="w3-col l10 m10">
                 <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}<h1>
             </div>
+            <div id="shareBtn" class="btn btn-success clearfix">Share</div>
             <div class="w3-col l2 m2">
                 <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}TWD</b>
             </div>
@@ -247,7 +254,19 @@
 					    new SelectFx(el);
 				 } );
 			})();
-	</script>
+	 </script>
+
+   <script>
+      document.getElementById('shareBtn').onclick = function() {
+        //alert('{{ url()->current() }}');
+
+        FB.ui({
+          method: 'share',
+          display: 'popup',
+          href: '{{ url()->current() }}',
+        }, function(response){});
+      }
+    </script>
 
     <!--SignIn and SignUp Error show-->
     <script>
