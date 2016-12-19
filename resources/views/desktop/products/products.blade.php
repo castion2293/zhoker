@@ -5,7 +5,7 @@
 @section('styles')
     <link rel="stylesheet" href="{{ URL::to('css/cs-select.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/cs-skin-elastic.css') }}">
-    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script src="https://connect.facebook.net/en_US/all.js"></script>
     <script>
       FB.init({
         appId  : {{ env('FACEBOOK_ID') }},
