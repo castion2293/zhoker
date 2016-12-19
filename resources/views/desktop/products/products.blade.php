@@ -1,8 +1,9 @@
 @extends('desktop.layout.master')
 
-@section('title', '| Product meal show')
+@section('title', '| Product meal show {{ $meal->description }}')
 
 @section('styles')
+    <meta property="og:image" content="{{ asset($meal->img_path) }}" />
     <link rel="stylesheet" href="{{ URL::to('css/cs-select.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/cs-skin-elastic.css') }}">
     <script src="https://connect.facebook.net/en_US/all.js"></script>
@@ -34,7 +35,6 @@
             <div class="w3-col l10 m10">
                 <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}<h1>
             </div>
-            <div id="shareBtn" class="btn btn-success clearfix">Share</div>
             <div class="w3-col l2 m2">
                 <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}TWD</b>
             </div>
@@ -47,6 +47,12 @@
             </div>
             <div class="w3-col l5 m5 w3-padding-large">
               {!! Form::open(['route' => ['product.cart', $meal->id, $datetimepeople->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
+                <div class="w3-rol">
+                    <div class="w3-rest"></div>
+                    <div class="w3-right">
+                      <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
+                    </div>
+                </div>
                 <div class="w3-margin-top w3-border-bottom w3-border-grey">
                     <label>Evaluation:  
                         @for ($i = 0; $i < 5; $i++)
@@ -256,6 +262,7 @@
 			})();
 	 </script>
 
+   <!--Facebook Share Link-->
    <script>
       document.getElementById('shareBtn').onclick = function() {
         //alert('{{ url()->current() }}');
@@ -263,7 +270,7 @@
         FB.ui({
           method: 'share',
           display: 'popup',
-          href: '{{ url()->current() }}',
+          href: 'https://zhoker.com/product/eyJpdiI6Im1ka3BJMHBzYUFSUGhuYmRaM2pSTXc9PSIsInZhbHVlIjoicG02dm52YkJTc1JQeUdmc3hhY0RtZz09IiwibWFjIjoiYmNmYzU0ZmM3YmNkY2YxMjFlM2FhMmZhMTYxYjA5MThjY2ViMmQ4Y2JmNTJlMzdkZDZiMjdmYzI5NjgzYjg5MyJ9/eyJpdiI6IitiQU9GUE1wUlVSNWJRV3ZIaURZMUE9PSIsInZhbHVlIjoiVHNwdmJUdjhEXC9GUUVqU2VEd0V6c3c9PSIsIm1hYyI6ImUwYjE4MTc1NGE0MGVjZWJmYWU4MzFmYTVjNzJmOWFlYzgyOGIzZDdlMjE3ZjIwMDM3ZDIzY2Y3ODg1ZTM4ODQifQ==',
         }, function(response){});
       }
     </script>
