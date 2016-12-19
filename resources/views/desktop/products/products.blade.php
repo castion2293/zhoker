@@ -1,6 +1,6 @@
 @extends('desktop.layout.master')
 
-@section('title', '| Product meal show {{ $meal->description }}')
+@section('title', '| Product meal show' . $meal->description)
 
 @section('styles')
     <meta property="og:image" content="{{ asset($meal->img_path) }}" />
