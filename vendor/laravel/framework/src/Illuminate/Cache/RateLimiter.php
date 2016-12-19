@@ -38,10 +38,10 @@ class RateLimiter
         if ($this->cache->has($key.':lockout')) {
             return true;
         }
-
+        
         if ($this->attempts($key) > $maxAttempts) {
             $this->cache->add($key.':lockout', Carbon::now()->getTimestamp() + ($decayMinutes * 60), $decayMinutes);
-
+            
             $this->resetAttempts($key);
 
             return true;

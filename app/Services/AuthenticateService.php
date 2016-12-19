@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Auth;
-use Cache;
-use Carbon\Carbon;
 
 class AuthenticateService
 {
+    use ThrottlesLogins;
+
     public function chefLogin($request)
     {
         return Auth::attempt([
@@ -17,22 +18,26 @@ class AuthenticateService
         ], true);
     }
 
-    // public function throttlesLogins($attempts)
-    // {
-        
-    //     if (Cache::has('lockout')) {
-    //         return true;
-    //     }
+    public function throttlesLogins($request)
+    {
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
 
-    //     if ($attempts > 0) {
-            
-    //         Cache::add('lockout', Carbon::now()->getTimestamp() + 60, 1);
-    //         dd($attempts);
-    //         $attempts = 0;
+            return $this->sendLockoutResponse($request);
+        }
+    }
 
-    //         return true;
-    //     }
+    public function incrementLoginAttempt($request) {
+        $this->incrementLoginAttempts($request);
+    }
 
-    //     $attempts++;
-    // }
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'email';
+    }
 }

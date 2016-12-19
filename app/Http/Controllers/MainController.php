@@ -50,7 +50,9 @@ class MainController extends Controller
             $agent = $this->agentService->agent();
             return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);
         }
-        //$this->authenticateService->throttlesLogins(1);
+
+        $this->authenticateService->throttlesLogins($request);
+        $this->authenticateService->incrementLoginAttempt($request);
 
         $this->sessionService->flash('ChefError', 'These credentials do not match our records.');
         return redirect()->back();
