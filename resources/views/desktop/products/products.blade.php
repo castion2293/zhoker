@@ -258,7 +258,19 @@
 
    <!--Facebook Share Link-->
    <script src="https://connect.facebook.net/en_US/all.js"></script>
-   <script src="{{ URL::to('js/facebook-share-link.js') }}"></script>
+   <script>
+      FB.init({
+          appId  : {{ env('FACEBOOK_ID') }},
+      });
+        
+      document.getElementById('shareBtn').onclick = function() {
+          FB.ui({
+              method: 'share',
+              display: 'popup',
+              href: '{{ url()->current() }}',
+          }, function(response){});
+      }
+   </script>
 
     <!--SignIn and SignUp Error show-->
     <script>
