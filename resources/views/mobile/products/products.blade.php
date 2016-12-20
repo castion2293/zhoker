@@ -85,6 +85,12 @@
                       @endforeach
                     </label>
                 </div>
+                <div class="w3-rol w3-margin-top">
+                    <div class="w3-rest"></div>
+                    <div class="w3-right">
+                      <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
+                    </div>
+                </div>
                 <div class="w3-margin-top w3-border-grey w3-border-bottom w3-padding-12">
                     <label class="w3-text-grey w3-large" style="font-family: cursive">meal description</label>
                     <p>{!! $meal->description !!}</p>
@@ -241,12 +247,16 @@
     <script src="{{ URL::to('js/selectFx.js') }}"></script>
     <!-- Animated Select option -->
     <script>
-			(function() {
-				 [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {	
-					    new SelectFx(el);
-				 } );
-			})();
+			// (function() {
+			// 	 [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {	
+			// 		    new SelectFx(el);
+			// 	 } );
+			// })();
 	</script>
+
+    <!--Facebook Share Link-->
+    <script src="https://connect.facebook.net/en_US/all.js"></script>
+    <script src="{{ URL::to('js/facebook-share-link.js') }}"></script>
 
     <!--SignIn and SignUp Error show-->
     <script>

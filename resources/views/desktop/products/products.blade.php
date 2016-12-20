@@ -6,12 +6,6 @@
     <meta property="og:image" content="{{ asset($meal->img_path) }}" />
     <link rel="stylesheet" href="{{ URL::to('css/cs-select.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/cs-skin-elastic.css') }}">
-    <script src="https://connect.facebook.net/en_US/all.js"></script>
-    <script>
-      FB.init({
-        appId  : {{ env('FACEBOOK_ID') }},
-      });
-    </script>
     <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
 @endsection
 
@@ -47,12 +41,6 @@
             </div>
             <div class="w3-col l5 m5 w3-padding-large">
               {!! Form::open(['route' => ['product.cart', $meal->id, $datetimepeople->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
-                <div class="w3-rol">
-                    <div class="w3-rest"></div>
-                    <div class="w3-right">
-                      <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
-                    </div>
-                </div>
                 <div class="w3-margin-top w3-border-bottom w3-border-grey">
                     <label>Evaluation:  
                         @for ($i = 0; $i < 5; $i++)
@@ -101,6 +89,12 @@
             </div>
 
             <div class="w3-col s12 w3-padding-large">
+                <div class="w3-rol">
+                    <div class="w3-rest"></div>
+                    <div class="w3-right">
+                      <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
+                    </div>
+                </div>
                 <label class="w3-text-grey w3-large" style="font-family: cursive">meal description</label>
                 <p>{!! $meal->description !!}</p>
             </div>
@@ -255,25 +249,16 @@
     <script src="{{ URL::to('js/selectFx.js') }}"></script>
     <!-- Animated Select option -->
     <script>
-			(function() {
-				 [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {	
-					    new SelectFx(el);
-				 } );
-			})();
+			// (function() {
+			// 	 [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {	
+			// 		    new SelectFx(el);
+			// 	 } );
+			// })();
 	 </script>
 
    <!--Facebook Share Link-->
-   <script>
-      document.getElementById('shareBtn').onclick = function() {
-        //alert('{{ url()->current() }}');
-
-        FB.ui({
-          method: 'share',
-          display: 'popup',
-          href: 'https://zhoker.com/product/eyJpdiI6Im1ka3BJMHBzYUFSUGhuYmRaM2pSTXc9PSIsInZhbHVlIjoicG02dm52YkJTc1JQeUdmc3hhY0RtZz09IiwibWFjIjoiYmNmYzU0ZmM3YmNkY2YxMjFlM2FhMmZhMTYxYjA5MThjY2ViMmQ4Y2JmNTJlMzdkZDZiMjdmYzI5NjgzYjg5MyJ9/eyJpdiI6IitiQU9GUE1wUlVSNWJRV3ZIaURZMUE9PSIsInZhbHVlIjoiVHNwdmJUdjhEXC9GUUVqU2VEd0V6c3c9PSIsIm1hYyI6ImUwYjE4MTc1NGE0MGVjZWJmYWU4MzFmYTVjNzJmOWFlYzgyOGIzZDdlMjE3ZjIwMDM3ZDIzY2Y3ODg1ZTM4ODQifQ==',
-        }, function(response){});
-      }
-    </script>
+   <script src="https://connect.facebook.net/en_US/all.js"></script>
+   <script src="{{ URL::to('js/facebook-share-link.js') }}"></script>
 
     <!--SignIn and SignUp Error show-->
     <script>
