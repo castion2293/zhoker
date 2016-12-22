@@ -23,6 +23,7 @@
     </div>
 
     <!--content-->
+    @inject('ProductPresenter', 'App\Presenters\ProductPresenter')
     <div class="w3-padding-32">
         <div class="w3-row w3-border-green w3-border-bottom">
             <div class="w3-col s12 w3-center">
@@ -41,7 +42,21 @@
                 <div class="w3-margin-top w3-border-grey w3-border-top w3-border-bottom w3-padding-12">
                     {!! Form::open(['route' => ['product.cart', $meal->id, $datetimepeople->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                         <div class="w3-row w3-padding-small">
-                            <div class="w3-col s12">
+                            <div class="w3-col s12 w3-border-bottom w3-border-grey">
+                                <label>Evaluation:  
+                                    @for ($i = 0; $i < 5; $i++)
+                                      <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
+                                    @endfor
+                                </label>
+                            </div>
+                            <div class="w3-col s12 w3-margin-top w3-border-bottom w3-border-grey">
+                                <label>Type:
+                                  @foreach ($meal->categories as $category)
+                                      <p class="w3-tag w3-teal w3-tiny">{{ $category->category }}</p>
+                                  @endforeach
+                                </label>
+                            </div>
+                            <div class="w3-col s12 w3-margin-top">
                                 <label class="w3-text-grey w3-large" style="font-family:cursive">Date/time</label><br>
                                 <div class="" style="margin-top:0.5em;">
                                     <span class="w3-text-grey w3-large">{{ $datetimepeople->date }} / {{ $datetimepeople->time }}</span>
@@ -70,22 +85,15 @@
                     {!! Form::close() !!}
                 </div>
             </div>
+            <div class="w3-col s6 w3-margin-top w3-padding-left w3-padding-right">
+                @if (Auth::check())
+                  <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="{{ $ProductPresenter->checkUserBuyNextTimeItem(Auth::user(), $datetimepeople->id) ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i> Buy Next Time</div>
+                @else
+                  <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="fa fa-heart-o"></i> Buy Next Time</div>
+                @endif  
+            </div>
             <div class="w3-col s12 w3-padding-large">
-                <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Evaluation:  
-                        @for ($i = 0; $i < 5; $i++)
-                          <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
-                        @endfor
-                    </label>
-                </div>
-                <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Type:
-                      @foreach ($meal->categories as $category)
-                          <p class="w3-tag w3-teal w3-tiny">{{ $category->category }}</p>
-                      @endforeach
-                    </label>
-                </div>
-                <div class="w3-rol w3-margin-top">
+                <div class="w3-margin-top">
                     <div class="w3-rest"></div>
                     <div class="w3-right">
                       <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
@@ -340,6 +348,47 @@
                 $("#add-to-cart").trigger("click");
                 return false;
             @endif
+        });
+    </script>
+
+    <!--buy next time-->
+    <script>
+        $(function () {
+          $("#bnt-btn").click(function() {
+
+            @if (Auth::check())
+              if ($("#bnt-btn").children().hasClass("fa fa-heart-o")) {
+                  postBuyNextTime();
+                  $("#bnt-btn").children().removeClass("fa fa-heart-o").addClass("fa fa-heart");
+              } else {
+                  postBuyNextTime();
+                  $("#bnt-btn").children().removeClass("fa fa-heart").addClass('fa fa-heart-o');
+              }
+            @else
+              $("#myModal").modal();
+            @endif
+
+          });
+
+          function postBuyNextTime() {
+            var user_id = {{ Auth::check() ? Auth::user()->id : 0 }};
+            var datetimepeople_id = {{ $datetimepeople->id }};
+            var token = '{{ Session::token() }}';
+
+            var url = '{{ route('product.cart.buynexttime') }}';
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {user_id: user_id, datetimepeople_id: datetimepeople_id, _token: token},
+                // success : function(data){
+                //     alert('success');
+                // },
+                // error : function(data){
+                //     alert('failure');
+                // },
+            });
+          }
         });
     </script>
 @endsection

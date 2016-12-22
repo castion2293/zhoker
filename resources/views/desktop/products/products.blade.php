@@ -373,7 +373,7 @@
           });
 
           function postBuyNextTime() {
-            var user_id = {{ Auth::user()->id }};
+            var user_id = {{ Auth::check() ? Auth::user()->id : 0 }};
             var datetimepeople_id = {{ $datetimepeople->id }};
             var token = '{{ Session::token() }}';
 

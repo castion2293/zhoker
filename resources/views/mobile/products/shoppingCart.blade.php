@@ -90,6 +90,48 @@
             </div>
         @endif
     </div>
+
+    <div class="w3-content w3-container w3-padding-32">
+        <h3 class="w3-text-green w3-border-green w3-border-bottom">Buy Next Time Items<h3>
+
+        @if ($buyNextTimeItems->isEmpty())
+            <div class="w3-center">
+                <h3 style="font-family:cursive;">Sorry! You don't have any buy next time items now!</h3>
+            </div>
+        @else
+            @foreach ($buyNextTimeItems as $datetimepeople)
+                <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
+                    <div class="w3-col s8" style="margin-top:0.5em;padding-left:0.5em;">
+                        <span class="w3-text-grey w3-large"><b>{{ $datetimepeople->meals->name }}</b></span>
+                    </div>
+                    <div class="w3-col s4" style="margin-top:0.5em;">
+                        <span class="w3-text-green w3-large">${{ $datetimepeople->meals->price }}TWD</span>
+                    </div>
+                    <div class="w3-col s12">
+                        <img src="{{ asset($datetimepeople->meals->img_path) }}" alt="meal photo" style="width:100%">
+                    </div>
+                    <div class="w3-col s12" style="padding-left:0.5em;">
+                        @foreach ($datetimepeople->meals->methods as $method)
+                            <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
+                        @endforeach
+                    </div>
+                    <div class="w3-col s12" style="padding-left:0.5em;">
+                        <span class="w3-text-grey w3-large">{{ $datetimepeople->date }} / {{ $datetimepeople->time }}</span>
+                    </div>
+                    <div class="w3-col s12" style="padding-left:0.5em;">
+                        <span class="w3-text-grey w3-large">{{ $datetimepeople->people_left }} People Left</span>
+                    </div>
+                    <div class="w3-col s6 w3-padding-12" style="padding-right:0.1em;">
+                        <div id="bnt{{ $datetimepeople->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover bnt-btn"><i class="fa fa-heart"></i> Buy Next Time</div>
+                    </div>
+                    <div class="w3-col s6 w3-padding-12" style="padding-left:0.1em;">
+                        <a href="{{ route('product.show', ['id' => encrypt($datetimepeople->meals->id), 'datetime_id' => encrypt($datetimepeople->id)])}}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover"><i class="fa fa-shopping-cart"></i> Add To Cart</a>
+                    </div>
+                </div>
+            @endforeach
+        @endif
+
+    </div>
 @endsection
 
 @section('scripts')
@@ -222,4 +264,46 @@
         });
     });
 </script>
+
+    <!--buy next time-->
+    <script>
+        $(function () {
+          $(".bnt-btn").on('click',function(event){
+            id =  "#".concat(event.target.id);
+            datetimepeople_id = event.target.id.substring(3);
+            
+            @if (Auth::check())
+              if ($(id).children().hasClass("fa fa-heart-o")) {
+                postBuyNextTime(datetimepeople_id);
+                $(id).children().removeClass("fa fa-heart-o").addClass("fa fa-heart");
+              } else {
+                postBuyNextTime(datetimepeople_id);
+                $(id).children().removeClass("fa fa-heart").addClass('fa fa-heart-o');
+              }
+            @else
+              $("#myModal").modal();
+            @endif
+
+          });
+
+          function postBuyNextTime(datetimepeople_id) {
+            var user_id = {{ Auth::user()->id }};
+            var token = '{{ Session::token() }}';
+
+            var url = '{{ route('product.cart.buynexttime') }}';
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {user_id: user_id, datetimepeople_id: datetimepeople_id, _token: token},
+                // success : function(data){
+                //     alert('success');
+                // },
+                // error : function(data){
+                //     alert('fail');
+                // },
+            });
+          }
+        });
+    </script>
 @endsection
