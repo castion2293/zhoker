@@ -105,6 +105,6 @@ class OrderController extends Controller
         $user = $this->orderService->getUserByCart($cart);
         $this->eventService->chefRejectEvent($user, $cart);
 
-        return redirect()->route('order.cheforder', ['id' => $chefOrder->chef_id]);
+        return redirect()->route('order.cheforder', ['id' => encrypt($chefOrder->chef_id)]);
     }
 }

@@ -28,7 +28,6 @@ class ChefRejectListener
     public function handle(ChefRejectEvent $event)
     {
         $cart = $event->cart;
-
         $event->user->notify(new SendUserRejectEmail($cart));
     }
 }

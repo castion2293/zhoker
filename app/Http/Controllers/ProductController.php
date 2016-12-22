@@ -44,6 +44,9 @@ class ProductController extends Controller
         $method = $this->productService->getMethod($meal, $request->method_way);
         
         $cart = $this->productService->createCart($user, $meal, $datetime, $method, $request);
+
+        if (count($this->productService->getBuyNextTimeItems($user, $datetime_id)))
+            $this->productService->buyNextTimeCancel($user, $datetime_id);
         
         return redirect()->route('product.cart.show', encrypt($cart->user_id));
     }
@@ -57,9 +60,11 @@ class ProductController extends Controller
         $carts = $this->productService->getCart($user);
         $cartQtyArray = $this->productService->getCartQtyArray($carts);
         $totalPrice = $this->productService->getTotalPrice($carts);
+
+        $buyNextTimeItems = $this->productService->getBuyNextTimeItems($user);
         
         $agent = $this->agentService->agent();
-        return view($agent . '.products.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice] );
+        return view($agent . '.products.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice, 'buyNextTimeItems' => $buyNextTimeItems] );
     }
 
     public function getCartShowRemove()
@@ -101,5 +106,11 @@ class ProductController extends Controller
 
         $agent = $this->agentService->agent();
         return view($agent . '.products.checkout', ['user' => $user, 'carts'=> $carts, 'totalPrice' => $totalPrice] );
+    }
+
+    public function postAddToBuyNextTime(Request $request)
+    {
+        $user = $this->productService->getUser($request->user_id);
+        $this->productService->buyNextTimeToggle($user, $request->datetimepeople_id);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\NexmoMessage;
 
-class SendUserConfirmEmail extends Notification
+class SendUserConfirmEmail extends Notification implements ShouldQueue
 {
     use Queueable;
 

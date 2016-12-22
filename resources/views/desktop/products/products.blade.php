@@ -24,6 +24,7 @@
     </div>
 
     <!--content-->
+    @inject('ProductPresenter', 'App\Presenters\ProductPresenter')
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-row w3-margin-top w3-border-green w3-border-bottom">
             <div class="w3-col l10 m10">
@@ -37,6 +38,13 @@
             <div class="w3-col l7 m7 w3-padding-large">
                 <div class="w3-padding-12">
                     <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
+                </div>
+                <div class="w3-right">
+                    @if (Auth::check())
+                      <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="{{ $ProductPresenter->checkUserBuyNextTimeItem(Auth::user(), $datetimepeople->id) ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i> Buy Next Time</div>
+                    @else
+                      <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="fa fa-heart-o"></i> Buy Next Time</div>
+                    @endif  
                 </div>
             </div>
             <div class="w3-col l5 m5 w3-padding-large">
@@ -342,6 +350,47 @@
                 $("#add-to-cart").trigger("click");
                 return false;
             @endif
+        });
+    </script>
+
+    <!--buy next time-->
+    <script>
+        $(function () {
+          $("#bnt-btn").click(function() {
+
+            @if (Auth::check())
+              if ($("#bnt-btn").children().hasClass("fa fa-heart-o")) {
+                  postBuyNextTime();
+                  $("#bnt-btn").children().removeClass("fa fa-heart-o").addClass("fa fa-heart");
+              } else {
+                  postBuyNextTime();
+                  $("#bnt-btn").children().removeClass("fa fa-heart").addClass('fa fa-heart-o');
+              }
+            @else
+              $("#myModal").modal();
+            @endif
+
+          });
+
+          function postBuyNextTime() {
+            var user_id = {{ Auth::user()->id }};
+            var datetimepeople_id = {{ $datetimepeople->id }};
+            var token = '{{ Session::token() }}';
+
+            var url = '{{ route('product.cart.buynexttime') }}';
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {user_id: user_id, datetimepeople_id: datetimepeople_id, _token: token},
+                // success : function(data){
+                //     alert('success');
+                // },
+                // error : function(data){
+                //     alert('failure');
+                // },
+            });
+          }
         });
     </script>
 @endsection

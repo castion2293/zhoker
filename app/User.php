@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Chef', 'chef_id');
     }
 
+    public function meals()
+    {
+        return $this->belongsToMany('App\Meal');
+    }
+
     public function carts()
     {
         return $this->hasMany('App\Cart');
@@ -50,5 +55,10 @@ class User extends Authenticatable
     public function creditcards()
     {
         return $this->hasOne('App\CreditCard');
+    }
+
+    public function datetimepeoples()
+    {
+        return $this->belongsToMany('App\DateTimePeople', 'user_datetimepeople', 'user_id', 'datetimepeople_id');
     }
 }

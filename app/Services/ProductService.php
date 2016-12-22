@@ -137,4 +137,31 @@ class ProductService
 
         return $totalPrice;
     }
+
+    /**
+     * @param $user, $datetimepeople_id
+     * @return 
+     */
+    public function buyNextTimeToggle($user, $datetimepeople_id)
+    {
+        return $this->userRepo->dataTimePeopleToggle($user, $datetimepeople_id);
+    }
+
+    /**
+     * @param $user, $datetimepeople_id
+     * @return 
+     */
+    public function buyNextTimeCancel($user, $datetimepeople_id)
+    {
+        return $this->userRepo->dateTimePeopleDetach($user, $datetimepeople_id);
+    }
+
+     /**
+     * @param $user
+     * @return 
+     */
+    public function getBuyNextTimeItems($user, $datetimepeople_id = null)
+    {
+        return $this->userRepo->forDateTimePeopleByUser($user, $datetimepeople_id);
+    }
 }

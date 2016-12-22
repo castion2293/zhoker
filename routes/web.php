@@ -97,6 +97,10 @@ Route::get('product/cart/checkout/{id}', [
     'uses' => 'ProductController@getCheckout',
     'as' => 'product.cart.checkout'
 ]);
+Route::post('product/cart/buynexttime', [
+    'uses' => 'ProductController@postAddToBuyNextTime',
+    'as' => 'product.cart.buynexttime'
+]);
 
 //check out
 Route::get('product/cart/bindingcard/{id}', [

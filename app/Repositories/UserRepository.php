@@ -62,6 +62,19 @@ class UserRepository
         }
     }
 
+    /**
+     * @param $user, $datetimepeople_id
+     * @return $datetimepeople
+     */
+    public function forDateTimePeopleByUser(User $user, $datetimepeople_id = null)
+    {
+        if ($datetimepeople_id) {
+            return $user->datetimepeoples()->find($datetimepeople_id);
+        } else {
+            return $user->datetimepeoples()->latest('id')->with('meals')->get();
+        }
+    }
+
 
     /**
      * @param $user
@@ -88,5 +101,23 @@ class UserRepository
     public function saveCreditCard(User $user, $credit_card)
     {
         return $user->creditcards()->save($credit_card);
+    }
+
+    /**
+     * @param $user, $datetimepeople_id
+     * @return 
+     */
+    public function dataTimePeopleToggle(User $user, $datetimepeople_id)
+    {
+        return $user->datetimepeoples()->toggle($datetimepeople_id);
+    }
+
+    /**
+     * @param $user, $datetimepeople_id
+     * @return 
+     */
+    public function dateTimePeopleDetach(User $user, $datetimepeople_id)
+    {
+        return $user->datetimepeoples()->detach($datetimepeople_id);
     }
 }

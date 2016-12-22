@@ -10,6 +10,11 @@ class Meal extends Model
         'chef_id', 'name', 'date', 'time', 'price', 'people_left',  'evaluation', 'description', 'img_path',
     ];
 
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
     public function chefs()
     {
         return $this->belongsTo('App\Chef', 'chef_id');
