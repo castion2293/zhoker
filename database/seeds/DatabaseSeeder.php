@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    protected $toTruncate = ['categories', 'methods', 'shifts'];
+    //protected $toTruncate = ['categories', 'methods', 'shifts'];
 
     /**
      * Run the database seeds.
@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($toTruncate as $table) {
-            DB::table($table)->truncate();
-        }
+        // foreach ($toTruncate as $table) {
+        //     DB::table($table)->truncate();
+        // }
 
         $this->call(CategoryTableSeeder::class);
         $this->call(MethodTableSeeder::class);
