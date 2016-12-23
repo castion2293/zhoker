@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
         //     )
         //     ->everyMinute();
 
-        $date = Carbon::now()->toW3cString();
+        $date = date("Y-m-d  h:i:s A");
         $environment = env('APP_ENV');
         $schedule->command(
             "db:backup --database=mysql --destination=s3 --destinationPath=/{$environment}/projectname_{$environment}_{$date} --compression=gzip"
