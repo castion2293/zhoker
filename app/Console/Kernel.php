@@ -26,6 +26,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->command(
+            "db:backup --database=mysql --destination=s3 --destinationPath=/" . date("Y-m-d  h:i:s A") . ".sql --compression=gzip"
+            )
+            ->everyMinute();
     }
 
     /**
