@@ -100,89 +100,19 @@
     </div>  
 
   <!--Data Time People Modal -->
-  <div class="modal" id="DatetimePeopleModal" role="dialog" style="width:100%;">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div>
-          <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
-        </div>
-        <div class="w3-margin-top">
-          <h1 class="text-center w3-padding-8 w3-text-green w3-large">Select Data/Time/People</h1>
-        </div>
-        <div class="modal-body">
-          {!! Form::open([null, 'data-parsley-validate' => '']) !!}
-            <div class="form-group">
-                <label for="date" class="w3-text-grey"> Date</label>
-                {{ Form::text('date', null, ['class' => 'form-control w3-large w3-text-grey', 'id' => 'datepicker', 'required' => '']) }}
-            </div>
-
-            <div id="time-form" class="form-group">
-                <label for="time" class="w3-text-grey"> Time</label>
-                {{ Form::text('time', null, ['class' => 'form-control w3-large w3-text-grey', 'id' => 'timepicker', 'required' => '']) }}
-            </div>
-
-            <div id="people-form" class="form-ground">
-                <label for="people" class="w3-text-grey"> People</label>
-                <select class="form-control" id="peoplepicker" name="people" required="">
-                    <option value='1'>1 Person</option>
-                    <option value='2'>2 People</option>
-                    <option value='3'>3 People</option>
-                    <option value='4'>4 People</option>
-                    <option value='5'>5 People</option>
-                    <option value='6'>6 People</option>
-                    <option value='7'>7 People</option>
-                    <option value='8'>8 People</option>
-                    <option value='9'>9 People</option>
-                    <option value='10'>10 People</option>
-                </select>
-            </div>
-
-            <a href="#modal-picker" class="btn btn-success form-control w3-margin-top" id="confirm-btn" data-dismiss="modal"><span class="w3-large"></span>Confirm</a>
-            
-          {!! Form::close() !!}
-        </div>
-      </div>
-
-    </div>
-  </div>  
+  @include('mobile.partials.ChefCreateFullCalendar'); 
 @endsection
 
 @section('scripts')
+    <!--Select-2-->
     <script>
-    $(function () {
-        var dptlist = "";
-        var list = "";
-
-        //Open Date Time People Modal
-        $("#modal-picker").click(function(){
-          $("#DatetimePeopleModal").modal();
+         $(function () {
+            $(".js-example-basic-multiple").select2();
         });
-
-        //datetimepicker
-        $("#datepicker").datetimepicker({
-            format: 'YYYY-MM-DD',
-        });
-        $("#timepicker").datetimepicker({
-            format: 'LT'
-        });
-
-        //OnPicker Event
-        $("#confirm-btn").on('click', function(event) {
-           dptlist = $("#dtp-result").val();
-           list = $("#datepicker").val() + "," + $("#timepicker").val() + "," + $("#peoplepicker").val() + ";";
-           dptlist = dptlist.concat(list);
-           $("#dtp-result").val(dptlist);
-        });
-
-        //Select-2
-        $(".js-example-basic-multiple").select2();
-        
-    });
     </script>
+
+    <!--Upload Picture-->
     <script>
-         //Upload Picture
          function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

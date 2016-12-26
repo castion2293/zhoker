@@ -86,4 +86,13 @@ class DateTimePeopleRepository
      {
         return $datetimepeople->meals()->associate($meal);
      }
+
+     /**
+     * @param $datetimepeople
+     * @return 
+     */
+     public function delete(DatetimePeople $datetimepeople)
+     {
+         return $datetimepeople->delete();
+     }
 }

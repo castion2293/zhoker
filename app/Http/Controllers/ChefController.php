@@ -100,13 +100,13 @@ class ChefController extends Controller
 
         $this->gateService->chefIdCheck($meal->chef_id);
 
-        $old_datetimepeople = $this->chefService->editDatetimePeople($meal);
+        $datetimepeoples = $this->chefService->editDatetimePeople($meal);
         $shiftarray = $this->chefService->editShift();
         $categoryarray = $this->chefService->editCategory();
         $methodarray = $this->chefService->editMethod();
         
         $agent = $this->agentService->agent();
-        return view($agent . '.chef.edit', ['meal' => $meal, 'datetimepeople' => $old_datetimepeople, 'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
+        return view($agent . '.chef.edit', ['meal' => $meal, 'datetimepeoples' => $datetimepeoples, 'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
     }
 
     /**

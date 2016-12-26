@@ -11,17 +11,19 @@
     <link rel="stylesheet" href="{{ URL::to('css/component.css') }}"><!--side direction dot-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" /><!--Select-2-->
     <link rel="stylesheet" href="{{ URL::to('css/bootstrap-datetimepicker.min.css') }}"><!--Bootstrap DateTimePicker-->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.css' rel='stylesheet' /><!--FullCalendar-->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.print.css' rel='stylesheet' media='print' /><!--FullCalendar-->
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{ URL::to('js/0609.js') }}"></script>
     <script type="text/javascript" src="{{ URL::to('js/JQ.js') }}"></script>
     <script src="{{ URL::to('js/parsley.min.js') }}"></script> <!--Parsley Validation-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script><!--Boostrap DateTimePicker-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="{{ URL::to('js/bootstrap-datetimepicker.min.js') }}"></script><!--Boostrap DateTimePicker-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script><!--Select-2-->
-    <!--TinyMCE-->
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script><!--TinyMCE-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script><!--FullCalendar-->
 
     @yield('styles')
 </head>

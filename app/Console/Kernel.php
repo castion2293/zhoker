@@ -27,17 +27,11 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
-        // $schedule->command(
-        //     //"db:backup --database=mysql --destination=s3 --destinationPath=/" . date("Y-m-d  h:i:s A") . ".sql --compression=gzip"
-        //     "db:backup --database=mysql --destination=s3 --destinationPath=data.sql --compression=gzip"
-        //     )
-        //     ->everyMinute();
-
-        $date = date("Y-m-d  h:i:s A");
-        $environment = env('APP_ENV');
         $schedule->command(
-            "db:backup --database=mysql --destination=s3 --destinationPath=/{$environment}/projectname_{$environment}_{$date} --compression=gzip"
-            )->everyMinute();
+            //"db:backup --database=mysql --destination=s3 --destinationPath=/" . date("Y-m-d  h:i:s A") . ".sql --compression=gzip"
+            "db:backup --database=mysql --destination=s3 --destinationPath=data.sql --compression=gzip"
+            )
+            ->everyMinute();
     }
 
     /**

@@ -39,8 +39,8 @@
                         <tbody>
                           @foreach ($meal->datetimepeoples as $datetimepeople)
                             <tr>
-                              <td>{{ date('M d, Y', strtotime($datetimepeople->date)) }}</td>
-                              <td>{{ $datetimepeople->time }}</td>
+                              <td>{{ $datetimepeople->date }}</td>
+                              <td>{{ date("G:i a", strtotime($datetimepeople->time)) }}</td>
                               <td class="w3-center">{{ $datetimepeople->people_left }}</td>
                               <td class="w3-center"><span class="w3-badge w3-red">{{ $datetimepeople->people_order }}</span></td>
                             </tr>

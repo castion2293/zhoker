@@ -97,10 +97,10 @@ class MealRepository
      * @param $meal
      * @return 
      */
-     public function forDateTimePeopleDelete(Meal $meal)
-     {
-         return $meal->datetimepeoples()->delete();
-     }
+    //  public function forDateTimePeopleDelete(Meal $meal)
+    //  {
+    //      return $meal->datetimepeoples()->delete();
+    //  }
 
      /**
      * @param $meal

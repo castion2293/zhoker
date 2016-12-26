@@ -147,14 +147,7 @@ class ChefService
      */
      public function editDatetimePeople($meal)
      {
-         $datetimepeoples = $this->mealRepo->forDateTimePeople($meal);
-
-         $old_datetimepeople = "";
-         foreach ($datetimepeoples as $datetimepeople) {
-             $old_datetimepeople .= $datetimepeople->date . ',' . $datetimepeople->time . ',' . $datetimepeople->people_left . ';';
-         }
-
-         return $old_datetimepeople;
+        return $this->mealRepo->forDateTimePeople($meal);
      }
 
      /**
@@ -207,7 +200,11 @@ class ChefService
      {
         $meal = $this->mealRepo->findMealById($id);
 
-        $this->mealRepo->forDateTimePeopleDelete($meal);
+        $datetimepeoples = $this->mealRepo->forDateTimePeople($meal);
+
+        foreach ($datetimepeoples as $datetimepeople) {
+            $this->datetimepeopleRepo->delete($datetimepeople);
+        }
 
         $meal->name = $request->input('name');
         $meal->price = $request->input('price');
