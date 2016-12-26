@@ -1,6 +1,6 @@
 <!--Data Time People Modal -->
   <div class="modal" id="DatetimePeopleModal" role="dialog">
-    <div class="modal-dialog" style="width90%;">
+    <div class="modal-dialog" style="width:90%;">
 
       <!-- Modal content-->
       <div class="modal-content">
