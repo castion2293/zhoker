@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRoleToUsersTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddRoleToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('role')->nullable()->after('chef_id')->unsigned();
+        Schema::create('images', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('meal_id')->index()->unsigned();
+            $table->string('image_path');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddRoleToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-             $table->dropColumn('role');
-        });
+        Schema::dropIfExists('images');
     }
 }

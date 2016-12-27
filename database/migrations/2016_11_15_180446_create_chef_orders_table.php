@@ -15,9 +15,10 @@ class CreateChefOrdersTable extends Migration
     {
         Schema::create('chef_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('chef_id');
+            $table->integer('chef_id')->index()->unsigned();
             $table->boolean('checked')->default(false);
             $table->boolean('paid')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

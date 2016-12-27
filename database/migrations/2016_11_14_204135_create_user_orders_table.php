@@ -15,7 +15,7 @@ class CreateUserOrdersTable extends Migration
     {
         Schema::create('user_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->index()->unsigned();
             $table->integer('total_price');
             $table->string('pay_way')->nullable();
             $table->string('contact_first_name');

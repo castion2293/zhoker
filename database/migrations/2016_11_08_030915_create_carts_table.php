@@ -15,8 +15,9 @@ class CreateCartsTable extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('meal_id')->unsigned();
+            $table->integer('user_id')->index()->unsigned();
+            $table->integer('meal_id')->index()->unsigned();
+            $table->integer('datetimepeople_id')->index()->unsigned();
             $table->integer('unite_price');
             $table->tinyInteger('people_order');
             $table->integer('price');
@@ -24,8 +25,9 @@ class CreateCartsTable extends Migration
             $table->string('time');
             $table->string('method');
             $table->boolean('checked')->default(0);
-            $table->integer('user_order_id')->unsigned()->nullable();
-            $table->integer('chef_order_id')->unsigned()->nullable();
+            $table->integer('user_order_id')->index()->unsigned()->nullable();
+            $table->integer('chef_order_id')->index()->unsigned()->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

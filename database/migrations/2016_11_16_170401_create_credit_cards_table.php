@@ -15,7 +15,7 @@ class CreateCreditCardsTable extends Migration
     {
         Schema::create('credit_cards', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unique();
+            $table->integer('user_id')->index()->unique();
             $table->text('customer_id');
             $table->string('brand');
             $table->string('cvc_check');

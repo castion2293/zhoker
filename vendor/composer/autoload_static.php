@@ -473,13 +473,6 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
     );
 
     public static $classMap = array (
-        'AddChefToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_15_210436_add_chef_to_users_table.php',
-        'AddDatetimepeopleIdToCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_12_032205_add_datetimepeople_id_to_carts_table.php',
-        'AddProfileToChefsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_22_225229_add_profile_to_chefs_table.php',
-        'AddProfileToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_05_235245_add_profile_to_users_table.php',
-        'AddRoleToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_17_162731_add_role_to_users_table.php',
-        'AddSoftDeleteToCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_22_173600_add_softDelete_to_carts_table.php',
-        'AddSoftDeleteToChefordersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_22_174212_add_softDelete_to_cheforders_table.php',
         'CategoryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoryTableSeeder.php',
         'CreateCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_08_030915_create_carts_table.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_024229_create_categories_table.php',
@@ -487,6 +480,7 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         'CreateChefsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_15_211727_create_chefs_table.php',
         'CreateCreditCardsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_16_170401_create_credit_cards_table.php',
         'CreateDateTimePeoplesTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_15_222350_create_date_time_peoples_table.php',
+        'CreateImagesTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_26_143513_create_images_table.php',
         'CreateMealCategoryTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_030153_create_meal_category_table.php',
         'CreateMealMethodTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_023211_create_meal_method_table.php',
         'CreateMealShiftTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_013310_create_meal_shift_table.php',

@@ -19,6 +19,9 @@ class CreateChefsTable extends Migration
             $table->string('city');
             $table->string('state')->nullable();
             $table->integer('zip_code');
+            $table->string('profile_img')->nullable();
+            $table->text('store_description')->nullable();
+            $table->string('store_name')->nullable();
             $table->timestamps();
         });
     }

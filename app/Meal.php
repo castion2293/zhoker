@@ -3,12 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Meal extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
-        'chef_id', 'name', 'date', 'time', 'price', 'people_left',  'evaluation', 'description', 'img_path',
+        'chef_id', 'name', 'date', 'time', 'price', 'people_left',  'evaluation', 'description',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function users()
     {
@@ -23,6 +28,11 @@ class Meal extends Model
     public function datetimepeoples()
     {
         return $this->hasMany('App\DateTimePeople');
+    }
+
+    public function images()
+    {
+        return $this->hasMany('App\Image');
     }
 
     public function shifts()

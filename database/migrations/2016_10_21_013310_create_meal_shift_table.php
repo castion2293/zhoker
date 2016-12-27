@@ -15,11 +15,8 @@ class CreateMealShiftTable extends Migration
     {
          Schema::create('meal_shift', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('meal_id')->unsigned();
-            // $table->foreign('meal_id')->references('id')->on('meals');
-
-            $table->integer('shift_id')->unsigned();
-            // $table->foreign('shift_id')->references('id')->on('shitfs');
+            $table->integer('meal_id')->index()->unsigned();
+            $table->integer('shift_id')->index()->unsigned();
         });
 
          Schema::table('meal_shift', function(Blueprint $table) {
