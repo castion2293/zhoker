@@ -47,6 +47,8 @@ class ChefController extends Controller
      */
     public function create()
     {
+        //flash()->success('Nick', 'thank you');
+
         $categories = $this->chefService->createCategory();
         $methods = $this->chefService->createMethod();
         $shifts = $this->chefService->createShift();
@@ -65,7 +67,7 @@ class ChefController extends Controller
     {
         $meal = $this->chefService->store($request);
 
-        return redirect()->route('chef.show', encrypt($meal->id));
+        return "success";
     }
 
     /**
