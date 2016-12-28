@@ -16,6 +16,7 @@ class CreateDateTimePeoplesTable extends Migration
         Schema::create('date_time_peoples', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('meal_id')->index()->unsigned();
+            $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
             $table->string('date');
             $table->string('time');
             $table->tinyInteger('people_left');

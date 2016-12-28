@@ -120,7 +120,7 @@ class ChefController extends Controller
     {
         $meal = $this->chefService->update($request, $id);
         
-        return redirect()->route('chef.show', encrypt($meal->id));
+        // return redirect()->route('chef.show', encrypt($meal->id));
     }
 
     /**

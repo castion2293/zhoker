@@ -28,7 +28,7 @@
             <div class="w3-padding-12 w3-margin-top">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">Create a Menu<h1>
             </div>
-            {!! Form::open(['route' => 'chef.store', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
+            <!--{!! Form::open(['route' => 'chef.store', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}-->
                 <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
                     <div class="w3-col l5 m5">
                         <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1026201601.png') }}" alt="profile" style="width:100%">
@@ -36,10 +36,10 @@
                     <div class="w3-col l7 m7" style="padding-left:2em;">
                         <div class="w3-row">
                             <div class="w3-col l6 m6" style="padding-right:0.5em;">
-                                {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Menu Name', 'required' => '', 'maxlength' => '255']) }}   
+                                {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'menu-name', 'placeholder' => 'Menu Name', 'required' => '', 'maxlength' => '255']) }}   
                             </div>
                             <div class="w3-col l6 m6" style="padding-left:0.5em;">
-                                {{ Form::text('price', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Menu Price', 'required' => '', 'maxlength' => '11']) }}              
+                                {{ Form::text('price', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'menu-price', 'placeholder' => 'Menu Price', 'required' => '', 'maxlength' => '11']) }}              
                             </div>
                         </div>
                                 
@@ -50,7 +50,7 @@
 
                         <div class=" w3-padding-8">
                             <label class="w3-text-gery" style="font-family:cursive">Time</label>               
-                            <select id="sel2" class="w3-select js-example-basic-multiple" name="shifts[]" multiple="multiple" placeholder="Shift" required=""> 
+                            <select class="w3-select js-example-basic-multiple" id="shift-select2" name="shifts[]" multiple="multiple" placeholder="Shift" required=""> 
                                 @foreach($shifts as $shift)
                                     <option value='{{ $shift->id }}'>{{ $shift->shift }}</option>
                                 @endforeach
@@ -59,7 +59,7 @@
                                 
                         <div class=" w3-padding-8">
                             <label class="w3-text-gery" style="font-family:cursive">Category</label>  
-                            <select class="w3-select js-example-basic-multiple" name="categories[]" multiple="multiple" required=""> 
+                            <select class="w3-select js-example-basic-multiple" id="category-select2" name="categories[]" multiple="multiple" required=""> 
                                 @foreach($categories as $category)
                                     <option value='{{ $category->id }}'>{{ $category->category }}</option>
                                 @endforeach
@@ -68,14 +68,14 @@
                                
                         <div class=" w3-padding-8">
                             <label class="w3-text-gery" style="font-family:cursive">Method</label>  
-                            <select class="w3-select js-example-basic-multiple" name="methods[]" multiple="multiple" required=""> 
+                            <select class="w3-select js-example-basic-multiple" id="method-select2" name="methods[]" multiple="multiple" required=""> 
                                 @foreach($methods as $method)
                                     <option value='{{ $method->id }}'>{{ $method->method }}</option>
                                 @endforeach
                             </select>
                         </div> 
                                    
-                        <div class="form-group w3-row">
+                        <!--div class="form-group w3-row">
                             <div class="w3-col l2 m2 w3-padding-small">
                                 <img id="img_content" src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/image.png') }}" alt="image contetnt" style="width:100%">
                             </div>
@@ -83,22 +83,30 @@
                                 <input type="file" id="myFile" name="img" onchange="readURL(this);" style="display:none;" required="" />
                                 <button type="button" class="w3-btn w3-white w3-border w3-border-grey w3-margin-top w3-margin-left w3-text-grey" style="font-family:cursive;" onclick="document.getElementById('myFile').click();">Upload a Photo</button>
                             </div>
+                        </div-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="dropzone" id="my-dropzone">
+                        <div class="fallback">
+                            <input name="img" type="file" multiple  required="" />
                         </div>
                     </div>
                 </div>
+
                 <div class="w3-border-green w3-border-bottom w3-padding-12">
                     <div class="form-group">
                         <label class="w3-text-gery w3-large" style="font-family:cursive">Menu Description</label> 
-                        {{ Form::textarea('description', null, ['class' => 'form-control']) }}
+                        {{ Form::textarea('description', null, ['class' => 'form-control', 'id' => 'meal-description']) }}
                     </div>
                 </div>
                 <div class="w3-row w3-margin-top">
                     <div class="w3-rest"></div>
                     <div class="w3-col l3 m3 w3-right">
-                        {!! Form::submit('Create Menu', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
+                        {!! Form::submit('Create Menu', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'submit-all']) !!}
                     </div>
                 </div>  
-            {!! Form::close() !!}
+            <!--{!! Form::close() !!}-->
         </div>
     </div>  
 
@@ -110,13 +118,52 @@
 @section('scripts')
     <!--Select-2-->
     <script>
-         $(function () {
+        $(function () {
             $(".js-example-basic-multiple").select2();
         });
     </script>
 
     <!--Upload Picture-->
     <script>
+        Dropzone.options.myDropzone= {
+            url: '{{ url::to('\chef') }}',
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            parallelUploads: 5,
+            maxFiles: 5,
+            maxFilesize: 1,
+            method: 'POST',
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            headers: {
+                'X-CSRF-Token': $('input[name="_token"]').val()
+            },
+            init: function() {
+                dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
+
+                document.getElementById("submit-all").addEventListener("click", function(e) {
+                    // Make sure that the form isn't actually being sent.
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dzClosure.processQueue();
+                });
+
+                //send all the form data along with the files:
+                this.on("sendingmultiple", function(data, xhr, formData) {
+                    formData.append("name", jQuery("#menu-name").val());
+                    formData.append("price", jQuery("#menu-price").val());
+                    formData.append("datetimepeople", jQuery("#dtp-result").val());
+                    formData.append("shifts",  jQuery("#shift-select2").select2().val().toString());
+                    formData.append("categories", jQuery("#category-select2").select2().val().toString());
+                    formData.append("methods", jQuery("#method-select2").select2().val().toString());
+
+                    tinyMCE.triggerSave();//get tinyMCE textarea value
+                    formData.append("description", jQuery("#meal-description").val());
+                });
+            }
+        }
+    </script>
+    <!--script>
          function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -129,5 +176,5 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    </script>
+    </script-->
 @endsection

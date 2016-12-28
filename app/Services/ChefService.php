@@ -92,12 +92,22 @@ class ChefService
         $meal->price = $request->input('price');
         $meal->description = Purifier::clean($request->input('description'));
 
-        // save the image
-        if ($request->hasFile('img')) {
-            $meal->img_path = $this->imageService->save($request->file('img'), '/images/');
-        }
-
         $this->mealRepo->save($meal);
+
+        //save the image
+        $files = $request->file('file');
+
+        $count = 0;//counter
+        foreach($files as $file) {
+
+            $filename = $this->imageService->save($file, '/images/', $count);
+           
+            $meal->images()->create([
+                'image_path' => $filename,
+            ]);
+
+            $count++;
+        }
 
         $dtp_array = explode(";", $request->datetimepeople);
         
@@ -115,10 +125,10 @@ class ChefService
             $this->datetimepeopleRepo->save($datetimepeople);
             
         }
-        
-        $this->mealRepo->shiftSync($meal, $request->shifts);
-        $this->mealRepo->categorySync($meal, $request->categories);
-        $this->mealRepo->methodSync($meal, $request->methods);
+
+        $this->mealRepo->shiftSync($meal, explode(",", $request->shifts));
+        $this->mealRepo->categorySync($meal, explode(",", $request->categories));
+        $this->mealRepo->methodSync($meal, explode(",", $request->methods));
 
         return $meal;
      }

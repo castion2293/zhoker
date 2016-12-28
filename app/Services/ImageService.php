@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use Storage;
+use App\Jobs\SaveImagetoS3;
+// use Storage;
 
 class ImageService
 {
@@ -14,13 +15,14 @@ class ImageService
         
     }
 
-    public function save($image, $path)
+    public function save($image, $path, $counter)
     {
-        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $filename = time() . $counter . '.' . $image->getClientOriginalExtension();
 
-        $s3 = Storage::disk('s3');
+        //$s3 = Storage::disk('s3');
         $filePath = $path . $filename;
-        $s3->put($filePath, file_get_contents($image), 'public');
+        //$s3->put($filePath, file_get_contents($image), 'public');
+        dispatch(new SaveImagetoS3($filePath, $image));
 
         return 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
     }
