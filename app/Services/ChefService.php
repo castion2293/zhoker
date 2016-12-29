@@ -9,6 +9,7 @@ use App\Repositories\MethodRepository;
 use App\Repositories\ShiftRepository;
 use App\Repositories\MealRepository;
 use App\Repositories\DateTimePeopleRepository;
+use App\Repositories\ImageRepository;
 
 use App\Services\ImageService;
 
@@ -23,6 +24,7 @@ class ChefService
     protected $shiftRepo;
     protected $mealRepo;
     protected $datetimepeopleRepo;
+    protected $imageRepo;
 
     protected $imageService;
 
@@ -30,7 +32,7 @@ class ChefService
      * ChefService constructor.
      */
     public function __construct(UserRepository $userRepo, ChefRepository $chefRepo, CategoryRepository $categoryRepo, MethodRepository $methodRepo, ShiftRepository $shiftRepo,
-                               MealRepository $mealRepo, DateTimePeopleRepository $datetimepeopleRepo, ImageService $imageService)
+                               MealRepository $mealRepo, DateTimePeopleRepository $datetimepeopleRepo, ImageRepository $imageRepo, ImageService $imageService)
     {
         $this->userRepo = $userRepo;
         $this->chefRepo = $chefRepo;
@@ -39,6 +41,7 @@ class ChefService
         $this->shiftRepo = $shiftRepo;
         $this->mealRepo = $mealRepo;
         $this->datetimepeopleRepo = $datetimepeopleRepo;
+        $this->imageRepo = $imageRepo;
 
         $this->imageService = $imageService;
     }
@@ -220,10 +223,6 @@ class ChefService
         $meal->price = $request->input('price');
         $meal->description = Purifier::clean($request->input('description'));
 
-        if ($request->hasFile('img')) {
-            $meal->img_path = $this->imageService->update($request->file('img'), $meal->img_padth, '/images/');
-        }
-
         $this->mealRepo->save($meal);
 
         $dtp_array = explode(";", $request->datetimepeople);
@@ -253,17 +252,47 @@ class ChefService
      * @param $id
      * @return 
      */
-     public function destroy($id)
+     public function destroy($meal)
      {
-        $meal = $this->mealRepo->findMealById($id);
+        // $this->mealRepo->forDateTimePeopleDelete($meal);
+        // $this->mealRepo->shiftDetach($meal);
+        // $this->mealRepo->categoryDetach($meal);
+        // $this->mealRepo->methodDetach($meal);
 
-        $this->mealRepo->forDateTimePeopleDelete($meal);
-        $this->mealRepo->shiftDetach($meal);
-        $this->mealRepo->categoryDetach($meal);
-        $this->mealRepo->methodDetach($meal);
-
-        $this->imageService->delete($meal->img_path);
-        
         $this->mealRepo->delete($meal);
+     }
+
+      /**
+     * @param $request $meal
+     * @return 
+     */
+     public function uploadImage($request, $meal)
+     {
+         $files =$request->file('file');
+
+         $count = 0;//counter
+         foreach($files as $file) {
+
+            $filename = $this->imageService->save($file, '/images/', $count);
+        
+            $meal->images()->create([
+                'image_path' => $filename,
+            ]);
+
+            $count++;
+         }
+     }
+
+      /**
+     * @param $image_id
+     * @return 
+     */
+     public function deleteImage($image_id)
+     {
+         $image = $this->imageRepo->findImageById($image_id);
+
+         $this->imageService->delete($image->image_path);
+
+         $this->imageRepo->delete($image);
      }
 }

@@ -22,7 +22,11 @@
                       <a id="{{ $meal->id }}" href="#{{ $meal->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
                         <div class="row">
                           <div class="col-md-4" id="title_img">
-                              <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%">
+                              @foreach ($meal->images as $image)
+                                  @if ($loop->first)
+                                    <img src="{{ asset($image->image_path) }}" alt="Food1" style="width:100%">
+                                  @endif
+                              @endforeach
                           </div>
                           <div class="col-md-8">
                               <div class="row">
@@ -53,17 +57,15 @@
                         <div class="row">
                             <div class="col-md-6 w3-padding-12">
                               <a href="#" class="w3-white">
-                                <div class="content-img" style="width:0">
-                                    <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%">
-                                </div>
-                                <div class="content-img" style="margin-top:10px;width:0">
-                                    <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%;">
-                                </div>
-                                <div class="content-img" style="margin-top:10px;width:0">
-                                    <img src="{{ asset($meal->img_path) }}" alt="Food1" style="width:100%;">
-                                </div>
-                              </div>
-                            </a>
+                                @foreach ($meal->images as $image)
+                                    @if ($loop->index == 2 || $loop->index == 3 || $loop->index == 4)
+                                      <div class="content-img w3-padding-8">
+                                          <img src="{{ asset($image->image_path) }}" alt="Food{{ $image->id }}" style="width:100%">
+                                      </div>
+                                    @endif
+                                @endforeach
+                              </a>
+                            </div>
                             <div class="col-md-6 w3-content w3-container">
                               <div class="w3-padding-12 w3-text-grey w3-justify">
                                  <p class="w3-text-grey" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 300) !!}{{ strlen(strip_tags($meal->description)) > 300 ? '...' : "" }}</p>

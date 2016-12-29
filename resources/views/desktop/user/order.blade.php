@@ -73,7 +73,11 @@
                                 @foreach ($userorder->carts()->withTrashed()->get() as $cart)
                                     <div class="w3-row w3-padding-24">
                                         <div class="w3-col l4 m4 w3-padding-right">
-                                            <img src="{{ asset($cart->meals->img_path) }}" alt="meal photo" style="width:100%">
+                                            @foreach ($cart->meals->images as $image)
+                                                @if ($loop->first)
+                                                    <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
+                                                @endif
+                                            @endforeach
                                         </div>
                                         <div class="w3-col l6 m6 w3-padding-left">
                                             <div class="w3-row">

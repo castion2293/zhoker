@@ -52,9 +52,9 @@ class ChefRepository
      public function forMeals(Chef $chef, $qty = null)
      {
          if ($qty) {
-             return $chef->meals()->latest('updated_at')->take($qty)->get();
+             return $chef->meals()->latest('updated_at')->take($qty)->with('images')->get();
          } else {
-             return $chef->meals()->latest('updated_at')->get();
+             return $chef->meals()->latest('updated_at')->with('images')->get();
          }
      }
 
@@ -64,7 +64,7 @@ class ChefRepository
      */
      public function forMealsPaginate(Chef $chef, $qty)
      {
-         return $chef->meals()->latest('updated_at')->with('methods')->paginate($qty);
+         return $chef->meals()->latest('updated_at')->with(['methods', 'images'])->paginate($qty);
      }
 
      /**

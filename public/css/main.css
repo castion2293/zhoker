@@ -153,4 +153,7 @@ body,
     background: rgba(34, 37, 51, 0.8);
   }
 
-  
+  /*delete image button in chef edit blade*/
+  #delete_img:focus {
+    outline:0;
+  }

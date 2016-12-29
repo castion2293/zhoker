@@ -62,7 +62,11 @@
                                             <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span>TWD</span>
                                         </div>
                                         <div class="w3-col s12">
-                                            <img src="{{ asset($cart->meals->img_path) }}" alt="meal photo" style="width:100%">
+                                            @foreach ($cart->meals->images as $image)
+                                                @if ($loop->first)
+                                                    <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
+                                                @endif
+                                            @endforeach
                                         </div>
                                         <div class="w3-col s9 w3-margin-top" style="padding-left:0.5em;">
                                             <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>

@@ -68,7 +68,11 @@
                                         @endfor
                                     </span>
                                     <div class="img-wrapper">
-                                        <img src="{{ asset($meal->img_path) }}" alt="meal" style="width:100%;" class="zk-enlarge-hover">
+                                        @foreach ($meal->images as $image)
+                                            @if ($loop->first)
+                                                <img src="{{ asset($image->image_path) }}" alt="meal" style="width:100%;" class="zk-enlarge-hover">
+                                            @endif
+                                        @endforeach
                                     </div>
                                     <div class="caption w3-row w3-round-large">
                                         <div class="w3-col m8">

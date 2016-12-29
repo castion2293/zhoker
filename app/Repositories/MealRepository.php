@@ -31,7 +31,7 @@ class MealRepository
      */
      public function findMealById($id)
      {
-        return $this->meal->findOrFail($id);
+        return $this->meal->with(['images', 'datetimepeoples', 'methods', 'shifts', 'categories'])->findOrFail($id);
      }
 
     /**
@@ -40,7 +40,7 @@ class MealRepository
     */
     public function findMealByIdAndPriceOrder($id, $order)
     {
-        return $this->meal->wherein('id', $id)->orderBy('price', $order)->get();
+        return $this->meal->wherein('id', $id)->orderBy('price', $order)->with(['images', 'datetimepeoples', 'methods', 'shifts', 'categories'])->get();
     }
 
     /**

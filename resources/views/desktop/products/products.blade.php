@@ -3,7 +3,7 @@
 @section('title', '| Product meal show' . $meal->name)
 
 @section('styles')
-    <meta property="og:image" content="{{ asset($meal->img_path) }}" />
+    <!--meta property="og:image" content="{{ asset($meal->img_path) }}" /-->
     <link rel="stylesheet" href="{{ URL::to('css/cs-select.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/cs-skin-elastic.css') }}">
     <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
@@ -12,15 +12,13 @@
 @section('content')
     <!--header picture-->
     <div class="w3-row" id="top-pic">
-        <div class="w3-col l4 m4">
-            <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
-        </div>
-        <div class="w3-col l4 m4">
-            <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
-        </div>
-        <div class="w3-col l4 m4">
-            <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
-        </div>
+        @foreach ($meal->images as $image)
+            @if ($loop->index == 2 || $loop->index == 3 || $loop->index == 4)
+              <div class="w3-col l4 m4">
+                  <img src="{{ asset($image->image_path) }}" alt="profile" style="width:100%">
+              </div>
+            @endif
+        @endforeach
     </div>
 
     <!--content-->
@@ -37,7 +35,11 @@
         <div class="w3-row w3-padding-12">
             <div class="w3-col l7 m7 w3-padding-large">
                 <div class="w3-padding-12">
-                    <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
+                    @foreach ($meal->images as $image)
+                        @if ($loop->first)
+                          <img src="{{ asset($image->image_path) }}" alt="this is a photo" style="width:100%">
+                        @endif
+                    @endforeach
                 </div>
                 <div class="w3-right">
                     @if (Auth::check())

@@ -24,7 +24,11 @@
             </div>
             <div class="w3-row w3-padding-12">
               <div class="w3-col l7 m7 w3-padding-large">
-                  <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
+                  @foreach ($meal->images as $image)
+                    @if ($loop->first)
+                        <img src="{{ asset($image->image_path) }}" alt="this is a photo" style="width:100%">
+                    @endif
+                  @endforeach
               </div>
               <div class="w3-col l5 m5 w3-padding-large">
                   <div class="w3-border-bottom w3-border-grey w3-padding-12">

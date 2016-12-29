@@ -11,15 +11,13 @@
 @section('content')
     <!--header picture-->
     <div class="w3-row" id="top-pic">
-        <div class="w3-col s12">
-            <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
-        </div>
-        <!--div class="w3-col l4 m4">
-            <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
-        </div>
-        <div class="w3-col l4 m4">
-            <img src="{{ asset($meal->img_path) }}" alt="profile" style="width:100%">
-        </div-->
+        @foreach ($meal->images as $image)
+            @if ($loop->index == 2)
+              <div class="w3-col s12">
+                  <img src="{{ asset($image->image_path) }}" alt="profile" style="width:100%">
+              </div>
+            @endif
+        @endforeach
     </div>
 
     <!--content-->
@@ -37,7 +35,11 @@
         <div class="w3-row w3-padding-12">
             <div class="w3-col s12 w3-padding-small">
                 <div class="w3-padding-4">
-                    <img src="{{ asset($meal->img_path) }}" alt="this is a photo" style="width:100%">
+                    @foreach ($meal->images as $image)
+                        @if ($loop->first)
+                          <img src="{{ asset($image->image_path) }}" alt="this is a photo" style="width:100%">
+                        @endif
+                    @endforeach
                 </div>
                 <div class="w3-margin-top w3-border-grey w3-border-top w3-border-bottom w3-padding-12">
                     {!! Form::open(['route' => ['product.cart', $meal->id, $datetimepeople->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}

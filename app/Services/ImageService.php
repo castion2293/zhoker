@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Jobs\SaveImagetoS3;
+use App\Jobs\DeleteImagetoS3;
 // use Storage;
 
 class ImageService
@@ -43,9 +44,9 @@ class ImageService
 
     public function delete($Filename)
     {
-        $s3 = Storage::disk('s3');
         $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
         $Filepath = substr($Filename, $leng);
-        $s3->delete($Filepath);
+
+        dispatch(new DeleteImagetoS3($Filepath));
     }
 }

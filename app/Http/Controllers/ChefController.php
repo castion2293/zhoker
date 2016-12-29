@@ -47,8 +47,6 @@ class ChefController extends Controller
      */
     public function create()
     {
-        //flash()->success('Nick', 'thank you');
-
         $categories = $this->chefService->createCategory();
         $methods = $this->chefService->createMethod();
         $shifts = $this->chefService->createShift();
@@ -67,7 +65,7 @@ class ChefController extends Controller
     {
         $meal = $this->chefService->store($request);
 
-        return "success";
+        flash()->success('Success', 'The meal has been created successfully!');
     }
 
     /**
@@ -122,7 +120,7 @@ class ChefController extends Controller
     {
         $meal = $this->chefService->update($request, $id);
         
-        // return redirect()->route('chef.show', encrypt($meal->id));
+        return redirect()->route('chef.show', encrypt($meal->id));
     }
 
     /**
@@ -136,8 +134,27 @@ class ChefController extends Controller
         $meal = $this->chefService->editMeal($id);
         $this->gateService->chefIdCheck($meal->chef_id);
 
-        $this->chefService->destroy($id);
+        $this->chefService->destroy($meal);
         
         return redirect()->route('chef.index');
+    }
+
+    public function uploadImage(Request $request, $id)
+    {
+        $meal = $this->chefService->editMeal($id);
+        $this->gateService->chefIdCheck($meal->chef_id);
+
+        $this->chefService->uploadImage($request, $meal);
+    }
+
+    public function deleteImage($image_id, $meal_id)
+    {
+        $meal = $this->chefService->editMeal($meal_id);
+        $this->gateService->chefIdCheck($meal->chef_id);
+
+        $this->chefService->deleteImage($image_id);
+
+        $url = "chef/" . encrypt($meal_id) . "/edit#submit";
+        return redirect($url);
     }
 }

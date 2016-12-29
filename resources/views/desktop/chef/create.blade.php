@@ -29,19 +29,20 @@
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">Create a Menu<h1>
             </div>
             
-            <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
+            <div class="w3-row" style="padding-bottom: 2em;">
                 <div class="w3-col l5 m5">
                     <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1026201601.png') }}" alt="profile" style="width:100%">
                 </div>
                 <div class="w3-col l7 m7" style="padding-left:2em;">
-                    <div class="w3-row">
-                        <div class="w3-col l6 m6" style="padding-right:0.5em;">
-                            {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'menu-name', 'placeholder' => 'Menu Name', 'required' => '', 'maxlength' => '255']) }}   
-                        </div>
-                        <div class="w3-col l6 m6" style="padding-left:0.5em;">
-                            {{ Form::text('price', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'menu-price', 'placeholder' => 'Menu Price', 'required' => '', 'maxlength' => '11']) }}              
-                        </div>
+                    
+                    <div class="" style="padding-right:0.5em;">
+                        {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'menu-name', 'placeholder' => 'Menu Name', 'required' => '', 'maxlength' => '255']) }}   
                     </div>
+
+                    <div class="w3-padding-8 w3-margin-top" style="padding-right:0.5em;">
+                        {{ Form::text('price', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'menu-price', 'placeholder' => 'Menu Price', 'required' => '', 'maxlength' => '11']) }}              
+                    </div>
+                    
                             
                     <div class="input-group w3-padding-8 w3-margin-top">
                         <span class="input-group-addon" id="modal-picker" style="cursor:pointer;"><span class="glyphicon glyphicon-calendar"></span></span>   
@@ -76,7 +77,9 @@
                     </div> 
                 </div>
             </div>
+            
             <div class="form-group">
+                <label class="w3-text-gery w3-large" style="font-family:cursive">Upload Photos(10 max)</label> 
                 <div class="dropzone" id="my-dropzone">
                     <div class="fallback">
                         <input name="img" type="file" multiple  required="" />
@@ -120,9 +123,9 @@
             url: '{{ url::to('\chef') }}',
             autoProcessQueue: false,
             uploadMultiple: true,
-            parallelUploads: 5,
-            maxFiles: 5,
-            maxFilesize: 1,
+            parallelUploads: 10,
+            maxFiles: 10,
+            maxFilesize: 5,
             method: 'POST',
             acceptedFiles: 'image/*',
             addRemoveLinks: true,
