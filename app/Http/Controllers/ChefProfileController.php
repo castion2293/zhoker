@@ -104,6 +104,8 @@ class ChefProfileController extends Controller
         $meals = $this->mainService->getMeals($chef, 6);
         $cheforders = $this->mainService->getChefOrders($chef, 3);
 
+        flash()->success('Success', 'The user profile has been updated successfully!');
+
         $agent = $this->agentService->agent();
         return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);
     }

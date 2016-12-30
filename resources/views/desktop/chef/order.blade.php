@@ -106,7 +106,8 @@
                                         <a href="{!! route('order.accept', ['id' => encrypt($cheforder->id)]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
                                     </div>
                                     <div class="w3-padding-left" style="margin-top:6em;">
-                                        <a href="{!! route('order.reject', ['id' => encrypt($cheforder->id)]) !!}" class="w3-test-grey">Reject</a>
+                                        <a href="{!! route('order.reject', ['id' => encrypt($cheforder->id)]) !!}" id="reject-confirm" class="w3-test-grey" style="display:none;">Reject</a>
+                                        <a href="#" id="reject-warn" class="w3-test-grey">Reject</a>
                                     </div>
                                 @endif
                                 
@@ -122,4 +123,26 @@
             </div>
         @endif 
     </div>
+@endsection
+
+@section('scripts')
+    <!--delete meal-->
+    <script>
+        $(function () {
+            $("#reject-warn").click(function () {
+              swal({
+                title: "Are you sure?",
+                text: "You will not be able to accept the order again!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, reject it!",
+                closeOnConfirm: false
+              },
+              function(){
+                $("#reject-confirm")[0].click();
+              });
+            });
+        });
+    </script>
 @endsection

@@ -155,7 +155,8 @@
                         </div>
 
                         <div class="w3-col s12 w3-margin-top">
-                            <button id="del-visa" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-large zk-shrink-hover">Delete Card</button>
+                            <button id="delete-warn" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-large zk-shrink-hover">Delete Card</button>
+                            <a href="{!! route('user.payment.delete', ['id' => encrypt($user->id)]) !!}" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-small zk-shrink-hover" id="delete-confirm" style="display:none;">Delete Credit Card</a>
                         </div>
                     </div>
                 @endif
@@ -207,29 +208,6 @@
     </div>
   </div>
 
-  <!--Delete Modal -->
-  <div class="modal" id="del-modal" role="dialog"  style="width:100%;">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body" style="padding:10px 30px;">
-            <div class="w3-center">
-                <span class="w3-text-gery w3-large">Do you want to delete this card?</span>   
-            </div>
-            <div class="modal-footer w3-row">
-                <div class="w3-col s12">
-                    <a href="{!! route('user.payment.delete', ['id' => encrypt($user->id)]) !!}" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-small zk-shrink-hover">Delete Credit Card</a>
-                </div>
-                <div class="w3-col s12 w3-margin-top">
-                    <div class="btn w3-white w3-text-grey w3-border w3-border-grey btn-block w3-small zk-shrink-hover" data-dismiss="modal" style="cursor:pointer;">Cancel</div>
-                </div>
-                </div>
-            </div>
-      </div>
-
-    </div>
-  </div>
 @endsection
 
 @section('scripts')
@@ -286,17 +264,30 @@
 
     <script>
         $(function () {
-
           //edit modal show
           $("#edit-visa").click(function(){
             $("#edit-modal").modal();
           });
+        });
+    </script>
 
-          //delete modal show
-          $("#del-visa").click(function(){
-            $("#del-modal").modal();
-          });
-
+    <!--delete credit card-->
+    <script>
+        $(function () {
+            $("#delete-warn").click(function () {
+              swal({
+                title: "Are you sure?",
+                text: "You will not be able to use this card anymore!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+              },
+              function(){
+                $("#delete-confirm")[0].click();
+              });
+            });
         });
     </script>
 @endsection

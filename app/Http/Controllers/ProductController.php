@@ -67,12 +67,6 @@ class ProductController extends Controller
         return view($agent . '.products.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice, 'buyNextTimeItems' => $buyNextTimeItems] );
     }
 
-    public function getCartShowRemove()
-    {
-        $agent = $this->agentService->agent();
-        return view($agent . '.products.RemoveItem');
-    }
-
     public function postCartRemove(Request $request)
     {
         $user = $this->productService->getUser();
@@ -81,6 +75,8 @@ class ProductController extends Controller
         
         $item = $this->productService->getCartById($request->id);
         $this->productService->deleteCart($item);
+
+        flash()->success('Success', 'Your item has been removed from your shopping cart!');
     }
 
     public function postCartStore(Request $request)

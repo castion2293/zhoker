@@ -125,7 +125,11 @@
                                 </div>
                             </div>
                             <div class="w3-col s12" style="margin-top:0.1em;">
-                                <img src="{{ asset($cart->meals->img_path) }}" alt="meal photo" style="width:100%">
+                                 @foreach ($cart->meals->images as $image)
+                                    @if ($loop->first)
+                                        <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
+                                    @endif
+                                 @endforeach
                             </div>
                             <div class="w3-col s12">
                                 <div class="w3-margin-top">

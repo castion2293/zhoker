@@ -90,7 +90,7 @@
                                 <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
                             </div>
                             <div class="" style="margin-top:1.5em;">
-                                <a href="{!! route('product.cart_remove') !!}" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
+                                <a href="rmv{{ $cart->id }}" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
                             </div>
                         </div>
                     </div>
@@ -104,6 +104,8 @@
                         <input type="text" name="totalPrice" id="totalPrice" style="display:none;" value="{{ $totalPrice }}">
                         <!--button id="test">checkout</button-->
                         <a href="{!! route('product.cart.checkout', ['id' => encrypt(Auth::user()->id)]) !!}" id="ckt" class="btn w3-deep-orange btn-block zk-shrink-hover"><i class="fa fa-credit-card"></i> Checkout</a>
+                        <!--link for refresh page after item remove, not shown-->
+                        <a href="{!! route('product.cart.show', ['id' => encrypt(Auth::user()->id)]) !!}" id="remove-link" style="display:none;"></a>
                     </div>
                 </div>
             @endif
@@ -279,12 +281,13 @@
                 method: 'POST',
                 url: url,
                 data: {id: id, qty: Qtys, _token: token},
-                // success : function(data){
-                //     alert('success');
-                // },
-                // error : function(data){
-                //     alert('fail');
-                // },
+                success : function(data){
+                    $("#remove-link")[0].click();
+                    //alert('success');
+                },
+                error : function(data){
+                    //alert('fail');
+                },
             });
             // .done(function (msg) {
             //     alert(msg['message']);

@@ -91,13 +91,36 @@
               <div class="w3-col l2 m2 w3-right w3-padding-small">
                  {!! Form::open(['route' => ['chef.destroy', $meal->id], 'method' => 'DELETE']) !!}
 
-                    {!! Form::submit('Delete', ['class' => 'btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block w3-margin-top zk-shrink-hover']) !!}
+                    {!! Form::submit('Delete', ['class' => 'btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block w3-margin-top zk-shrink-hover', 'id' => 'delete-confirm', 'style' => 'display:none;']) !!}
 
                  {!! Form::close() !!}
+                 <button id="delete-warn" class="btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block w3-margin-top zk-shrink-hover">Delete</button>
               </div>
               <div class="w3-col l2 m2 w3-right w3-margin-top w3-padding-small">
                 {!! Html::linkRoute('chef.edit', 'Edit', [encrypt($meal->id)], ['class' => 'btn w3-white w3-large w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
               </div>
             </div>
     </div>
+@endsection
+
+@section('scripts')
+    <!--delete meal-->
+    <script>
+        $(function () {
+            $("#delete-warn").click(function () {
+              swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover the meal!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+              },
+              function(){
+                $("#delete-confirm").click();
+              });
+            });
+        });
+    </script>
 @endsection

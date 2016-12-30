@@ -68,6 +68,7 @@ class CashierController extends Controller
         //send user order email
         $this->eventService->userOrderEvent($user, $carts);
 
+        flash()->success('Success', 'Your order has been created successfully!');
         return redirect()->route('order.userorder', encrypt($user->id));
     }
 
@@ -99,9 +100,11 @@ class CashierController extends Controller
             //send user order email
             $this->eventService->userOrderEvent($user, $carts);
 
+            flash()->success('Success', 'Your order has been created successfully!');
             return redirect()->route('order.userorder', encrypt($user->id));
 
         } catch (\Exception $e) {
+            flash()->error('Error', $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

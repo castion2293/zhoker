@@ -113,6 +113,7 @@ class UserProfileController extends Controller
 
         $this->userProfileService->update($user, $request);
 
+        flash()->success('Success', 'Your profile has been updated successfully!');
         return redirect()->route('user_profile.index');
     }
 
@@ -132,10 +133,14 @@ class UserProfileController extends Controller
         $user = $this->userProfileService->indexUser();
 
         if ($this->userProfileService->resetPassword($user, $request)) {
+
+            flash()->success('Success', 'Password has been reseted successfully!');
             $agent = $this->agentService->agent();
             return view($agent . '.user.setting', ['user' => $user]);
         } else {
-            return back()->withErrors('The specified password does not match the database password');
+
+            flash()->error('Error', 'The specified password does not match the database password');
+            return redirect()->back();
         }
     }
 
@@ -153,12 +158,17 @@ class UserProfileController extends Controller
                 $oldUrl = $this->sessionService->get('oldUrl');
                 $this->sessionService->forget('oldUrl');
                 
+                flash()->success('Success', 'The credit card has been binded successfully!');
                 return redirect($oldUrl);
             }
 
+            flash()->success('Success', 'The credit card has been binded successfully!');
             $url = url()->previous() . "#payment";
             return redirect($url);
+
         } catch (\Exception $e) {
+
+            flash()->error('Error', $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -174,9 +184,13 @@ class UserProfileController extends Controller
             $creditCard = $this->creditCardService->findCreditCard($user);
             $this->creditCardService->updateCreditCard($creditCard, $user, $customer);
 
+            flash()->success('Success', 'The credit card has been updated successfully!');
             $url = url()->previous() . "#payment";
             return redirect($url);
+
         } catch (\Exception $e) {
+
+            flash()->error('Error', $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -191,6 +205,7 @@ class UserProfileController extends Controller
 
         $this->creditCardService->deleteCreditCard($credit_card);
 
+        flash()->success('Success', 'The credit card has been deleted successfully!');
         $url = url()->previous() . "#payment";
         return redirect($url);
     }

@@ -145,7 +145,8 @@
                                 </div>
                             </div>
                             <div class="">
-                                <span id="del-visa" class="glyphicon glyphicon-remove zk-shrink-hover" style="cursor:pointer;margin-top:1.5em;padding-left:1em;"></span>
+                                <span id="delete-warn" class="glyphicon glyphicon-remove zk-shrink-hover" style="cursor:pointer;margin-top:1.5em;padding-left:1em;"></span>
+                                <a href="{!! route('user.payment.delete', ['id' => encrypt($user->id)]) !!}" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-small zk-shrink-hover" id="delete-confirm" style="display:none;">Delete Credit Card</a>
                             </div>
                         </div>
                         <div class="w3-accordion-content w3-container">
@@ -198,31 +199,6 @@
             </div>
           {!! Form::close() !!}
         </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!--Delete Modal -->
-  <div class="modal" id="del-modal" role="dialog">
-    <div class="modal-dialog" style="width:500px;">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body" style="padding:10px 50px;">
-            <div class="w3-center w3-padding-33" style="padding-right:0.8em;margin-top:0em;">
-                <span class="w3-text-gery w3-large">Do you want to delete this card?</span>   
-            </div>
-            <div class="modal-footer w3-row">
-                <div class="w3-rest"></div>
-                <div class="w3-col l4 m4 w3-right">
-                    <a href="{!! route('user.payment.delete', ['id' => encrypt($user->id)]) !!}" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-small zk-shrink-hover">Delete Credit Card</a>
-                </div>
-                <div class="w3-col l4 m4 w3-right w3-padding-right">
-                    <div class="btn w3-white w3-text-grey w3-border w3-border-grey btn-block w3-small zk-shrink-hover" data-dismiss="modal" style="cursor:pointer;">Cancel</div>
-                </div>
-                </div>
-            </div>
       </div>
 
     </div>
@@ -288,12 +264,26 @@
           $("#edit-visa").click(function(){
             $("#edit-modal").modal();
           });
+        });
+    </script>
 
-          //delete modal show
-          $("#del-visa").click(function(){
-            $("#del-modal").modal();
-          });
-
+    <!--delete credit card-->
+    <script>
+        $(function () {
+            $("#delete-warn").click(function () {
+              swal({
+                title: "Are you sure?",
+                text: "You will not be able to use this card anymore!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+              },
+              function(){
+                $("#delete-confirm")[0].click();
+              });
+            });
         });
     </script>
 @endsection

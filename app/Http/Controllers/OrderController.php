@@ -78,12 +78,14 @@ class OrderController extends Controller
                 $user = $this->orderService->getUserByCart($cart);
                 $this->eventService->chefConFirmEvent($user, $cart);
 
-                return redirect()->route('order.cheforder', ['id' => $chefOrder->chef_id]);
+                flash()->success('Success', 'You have accepted the order successfully!');
+                return redirect()->route('order.cheforder', ['id' => encrypt($chefOrder->chef_id)]);
             }
 
         } catch (\Exception $e) {
+            flash()->error('Error', $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
-        }    
+        }
     }
 
     public function getReject($id)
@@ -105,6 +107,7 @@ class OrderController extends Controller
         $user = $this->orderService->getUserByCart($cart);
         $this->eventService->chefRejectEvent($user, $cart);
 
+        flash()->success('Success', 'You have rejected the order successfully!');
         return redirect()->route('order.cheforder', ['id' => encrypt($chefOrder->chef_id)]);
     }
 }

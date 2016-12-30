@@ -120,6 +120,7 @@ class ChefController extends Controller
     {
         $meal = $this->chefService->update($request, $id);
         
+        flash()->success('Success', 'The meal has been updated successfully!');
         return redirect()->route('chef.show', encrypt($meal->id));
     }
 
@@ -135,7 +136,8 @@ class ChefController extends Controller
         $this->gateService->chefIdCheck($meal->chef_id);
 
         $this->chefService->destroy($meal);
-        
+
+        flash()->success('Success', 'The meal has been deleted successfully!');
         return redirect()->route('chef.index');
     }
 
