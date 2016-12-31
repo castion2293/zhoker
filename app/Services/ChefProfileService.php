@@ -44,6 +44,7 @@ class ChefProfileService
 
      public function update($request, $id)
      {
+        
         $chef = $this->chefRepo->findChefById($id);
 
         $chef->address = $request->input('address');
@@ -58,7 +59,7 @@ class ChefProfileService
         }
 
         $this->chefRepo->save($chef);
-
+        
         return $chef;
      }
 }

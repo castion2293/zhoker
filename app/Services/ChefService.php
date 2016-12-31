@@ -272,7 +272,7 @@ class ChefService
 
          $count = 0;//counter
          foreach($files as $file) {
-
+             
             $filename = $this->imageService->save($file, '/images/', $count);
         
             $meal->images()->create([

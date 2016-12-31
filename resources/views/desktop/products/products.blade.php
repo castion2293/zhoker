@@ -13,7 +13,7 @@
     <!--header picture-->
     <div class="w3-row" id="top-pic">
         @foreach ($meal->images as $image)
-            @if ($loop->index == 2 || $loop->index == 3 || $loop->index == 4)
+            @if ($loop->iteration == 2 || $loop->iteration == 3 || $loop->iteration == 4)
               <div class="w3-col l4 m4">
                   <img src="{{ asset($image->image_path) }}" alt="profile" style="width:100%">
               </div>
@@ -35,11 +35,26 @@
         <div class="w3-row w3-padding-12">
             <div class="w3-col l7 m7 w3-padding-large">
                 <div class="w3-padding-12">
-                    @foreach ($meal->images as $image)
-                        @if ($loop->first)
-                          <img src="{{ asset($image->image_path) }}" alt="this is a photo" style="width:100%">
-                        @endif
-                    @endforeach
+            
+                    <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+                        @foreach ($meal->images as $image)
+                            @if ($loop->first)
+                              <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                <a href="{{ $image->image_path }}" itemprop="contentUrl" data-size="1024x575">
+                                    <img src="{{ asset($image->image_path) }}" alt="this is a photo" style="width:100%">
+                                </a>                                   
+                              </figure>
+                            @else
+                              <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                <a href="{{ $image->image_path }}" itemprop="contentUrl" data-size="1024x575">
+                                    <img src="{{ asset($image->image_path) }}" alt="this is a photo" style="width:100%;display:none;">
+                                </a>                                   
+                              </figure>
+                            @endif
+                        @endforeach
+                    </div>
+                    @include('desktop.partials.photoswipe')
+
                 </div>
                 <div class="w3-right">
                     @if (Auth::check())

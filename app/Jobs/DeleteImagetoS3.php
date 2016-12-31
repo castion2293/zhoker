@@ -32,7 +32,6 @@ class DeleteImagetoS3 implements ShouldQueue
      */
     public function handle()
     {
-        $s3 = Storage::disk('s3');
-        $s3->delete($this->filePath);
+        Storage::disk('s3')->delete($this->filePath);
     }
 }

@@ -34,7 +34,6 @@ class SaveImagetoS3
      */
     public function handle()
     {
-        $s3 = Storage::disk('s3');
-        $s3->put($this->filePath, file_get_contents($this->image), 'public');
+        Storage::disk('s3')->put($this->filePath, $this->image, 'public');
     }
 }

@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Jobs\SaveImagetoS3;
 use App\Jobs\DeleteImagetoS3;
-// use Storage;
+use Storage;
+
+use Image;
 
 class ImageService
 {
@@ -21,7 +23,9 @@ class ImageService
         $filename = time() . $counter . '.' . $image->getClientOriginalExtension();
         $filePath = $path . $filename;
 
-        dispatch(new SaveImagetoS3($filePath, $image));
+        $imageResize = $this->resize($image);
+
+        dispatch(new SaveImagetoS3($filePath, $imageResize));
 
         return 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
     }
@@ -29,15 +33,16 @@ class ImageService
     public function update($image, $oldFilename, $path)
     {
         $filename = time() . '.' . $image->getClientOriginalExtension();
-
-        $s3 = Storage::disk('s3');
         $filePath = $path . $filename;
-        $s3->put($filePath, file_get_contents($image), 'public');
 
+        $imageResize = $this->resize($image);
+        
+        Storage::disk('s3')->put($filePath, $imageResize, 'public');
+        
         $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
 
         $oldpath = substr($oldFilename, $leng);
-        $s3->delete($oldpath);
+        Storage::disk('s3')->delete($oldpath);
 
         return 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
     }
@@ -48,5 +53,12 @@ class ImageService
         $Filepath = substr($Filename, $leng);
 
         dispatch(new DeleteImagetoS3($Filepath));
+    }
+
+    public function resize($file)
+    {
+        return Image::make($file)->fit(1024, 575)
+                                 ->stream()
+                                 ->__toString();
     }
 }

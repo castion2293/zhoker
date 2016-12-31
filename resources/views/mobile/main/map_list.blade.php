@@ -59,7 +59,7 @@
                           <div class="w3-col s12 w3-padding-12">
                             <a href="#" class="w3-white">
                               @foreach ($meal->images as $image)
-                                  @if ($loop->index == 2 || $loop->index == 3 || $loop->index == 4)
+                                  @if ($loop->iteration == 2 || $loop->iteration == 3 || $loop->iteration == 4)
                                     <div class="content-img w3-padding-8">
                                         <img src="{{ asset($image->image_path) }}" alt="Food{{ $image->id }}" style="width:100%">
                                     </div>
