@@ -3,7 +3,9 @@
 @section('title', '| Product meal show' . $meal->name)
 
 @section('styles')
-    <!--meta property="og:image" content="{{ asset($meal->img_path) }}" /-->
+    @foreach ($meal->images as $image)
+      <meta property="og:image" content="{{ asset($image->image_path) }}">
+    @endforeach
     <link rel="stylesheet" href="{{ URL::to('css/cs-select.css') }}">
     <link rel="stylesheet" href="{{ URL::to('css/cs-skin-elastic.css') }}">
     <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
