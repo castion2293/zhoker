@@ -28,19 +28,28 @@ class OAuthController extends Controller
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = $this->findOrCreateFaceBookUser(
+            Socialite::driver('facebook')->user()
+        );
         
-        if ( empty($local_user = User::where('email', $user->email)->first()) ) {
-            
-            $local_user = User::firstorCreate([
-                'first_name' => $user->name,
-                'email' => $user->email,
-                'password' => $user->id,
-            ]);
-        }
-
-        Auth::login($local_user);
+        Auth::login( $user);
 
         return redirect()->route('home.index', ['user' => $user]);
+    }
+
+    protected function findOrCreateFaceBookUser($fbUser)
+    {
+        $user = User::firstOrNew(['email' => $fbUser->email]);
+        
+        if($user->exists) return $user;
+
+        $user->fill([
+            'first_name' => $fbUser->name,
+            'email' => $fbUser->email,
+            'password' => $fbUser->id,
+            'user_profile_img' => $fbUser->avatar_original
+        ])->save();
+
+        return $user;
     }
 }
