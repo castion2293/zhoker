@@ -29,8 +29,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
 
         $schedule->command(
-            //"db:backup --database=mysql --destination=s3 --destinationPath=" . Carbon::now() . ".sql --compression=gzip"
-            "db:backup --database=mysql --destination=s3 --destinationPath=data.sql --compression=gzip"
+            "db:backup --database=mysql --destination=s3 --destinationPath=" . Carbon::now() . ".sql --compression=gzip"
+            //"db:backup --database=mysql --destination=s3 --destinationPath=data.sql --compression=gzip"
             )
             ->everyMinute();
     }
