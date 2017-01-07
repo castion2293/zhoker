@@ -20,10 +20,8 @@
         @foreach ($meals as $meal)
             <div class="w3-row w3-white w3-border w3-border-green w3-round-large w3-margin-top w3-padding-medium">
                 <div class="w3-col s12 w3-padding-4">
-                     @foreach($meal->images as $image)
-                        @if ($loop->first)
+                     @foreach($meal->images->take(1) as $image)
                             <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                        @endif
                      @endforeach
                 </div>
                 <div class="w3-col s12">

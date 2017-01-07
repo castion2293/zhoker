@@ -22,10 +22,8 @@
                     <a id="{{ $meal->id }}" href="#{{ $meal->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
                       <div class="w3-row">
                         <div class="w3-col s12" id="title_img">
-                            @foreach ($meal->images as $image)
-                                @if ($loop->first)
+                            @foreach ($meal->images->take(1) as $image)
                                   <img src="{{ asset($image->image_path) }}" alt="Food1" style="width:100%">
-                                @endif
                             @endforeach
                         </div>
                         <div class="w3-col s12" style="margin-top:5px;">
@@ -58,8 +56,8 @@
                       <div class="w3-row">
                           <div class="w3-col s12 w3-padding-12">
                             <a href="#" class="w3-white">
-                              @foreach ($meal->images as $image)
-                                  @if ($loop->iteration == 2 || $loop->iteration == 3 || $loop->iteration == 4)
+                              @foreach ($meal->images->take(4) as $image)
+                                  @if ($loop->iteration > 1)
                                     <div class="content-img w3-padding-8">
                                         <img src="{{ asset($image->image_path) }}" alt="Food{{ $image->id }}" style="width:100%">
                                     </div>

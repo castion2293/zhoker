@@ -47,10 +47,8 @@
                 @foreach ($carts as $cart)
                     <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                         <div class="w3-col l3 m3 w3-padding-right">
-                            @foreach ($cart->meals->images as $image)
-                                @if ($loop->first)
+                            @foreach ($cart->meals->images->take(1) as $image)
                                     <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                @endif
                             @endforeach
                         </div>
                         <div class="w3-col l5 m5 w3-padding-left">
@@ -135,10 +133,8 @@
                     @foreach ($buyNextTimeItems as $datetimepeople)
                         <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                             <div class="w3-col l3 m3 w3-padding-right">
-                                @foreach ($datetimepeople->meals->images as $image)
-                                    @if ($loop->first)
+                                @foreach ($datetimepeople->meals->images->take(1) as $image)
                                         <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                    @endif
                                 @endforeach
                             </div>
                             <div class="w3-col l7 m7 w3-padding-left">

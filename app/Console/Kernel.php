@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
 {
@@ -28,8 +29,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
 
         $schedule->command(
-            //"db:backup --database=mysql --destination=s3 --destinationPath=/" . date("Y-m-d  h:i:s A") . ".sql --compression=gzip"
-            "db:backup --database=mysql --destination=s3 --destinationPath=data.sql --compression=gzip"
+            "db:backup --database=mysql --destination=s3 --destinationPath=/" . Carbon::now() . ".sql --compression=gzip"
+            // "db:backup --database=mysql --destination=s3 --destinationPath=data.sql --compression=gzip"
             )
             ->everyMinute();
     }

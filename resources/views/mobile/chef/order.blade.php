@@ -50,10 +50,8 @@
                             </div>
                         </div>
                         <div class="w3-col s12">
-                            @foreach ($cart->meals->images as $image)
-                                @if ($loop->first)
+                            @foreach ($cart->meals->images->take(1) as $image)
                                     <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                @endif
                             @endforeach
                         </div>
                         <div class="w3-col s12 w3-margin-top">

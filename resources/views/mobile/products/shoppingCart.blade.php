@@ -29,10 +29,8 @@
                          <!--span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span-->
                     </div>
                     <div class="w3-col s12">
-                        @foreach ($cart->meals->images as $image)
-                            @if ($loop->first)
+                        @foreach ($cart->meals->images->take(1) as $image)
                                 <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                            @endif
                         @endforeach
                     </div>
                     <div class="w3-col s9" style="margin-top:1em;padding-left:0.5em;">
@@ -114,10 +112,8 @@
                         <span class="w3-text-green w3-large">${{ $datetimepeople->meals->price }}TWD</span>
                     </div>
                     <div class="w3-col s12">
-                        @foreach ($datetimepeople->meals->images as $image)
-                            @if ($loop->first)
+                        @foreach ($datetimepeople->meals->images->take(1) as $image)
                                 <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                            @endif
                         @endforeach
                     </div>
                     <div class="w3-col s12" style="padding-left:0.5em;">

@@ -35,10 +35,8 @@
                 @foreach ($carts as $cart)
                     <div class="w3-row w3-padding-16 w3-border-grey w3-border-bottom">
                         <div class="w3-col l5 m5 w3-padding-right" style="margin-top:0.5em;">
-                            @foreach ($cart->meals->images as $image)
-                                @if ($loop->first)
+                            @foreach ($cart->meals->images->take(1) as $image)
                                     <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                @endif
                             @endforeach
                         </div>
                         <div class="w3-col l5 m5 w3-padding-right">
