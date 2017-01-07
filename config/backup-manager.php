@@ -11,7 +11,7 @@ return [
         'secret' => env('S3_SECRET'),
         'region' => env('S3_REGION'),
         'bucket' => 'zhoker',
-        'root'   => '/database_backups/',
+        'root'   => '',
     ],
     'gcs' => [
         'type' => 'Gcs',
