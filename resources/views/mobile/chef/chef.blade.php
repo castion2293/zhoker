@@ -46,7 +46,7 @@
                 <div class="w3-row">
                     @foreach($mealchunk as $meal)
                         <div class="w3-col s12">
-                            <a href="{{ route('chef.show', $meal->id) }}" style="text-decoration:none;">
+                            <a href="{{ route('chef.show', encrypt($meal->id)) }}" style="text-decoration:none;">
                             <div class="thumbnail w3-border-0 w3-padding-tiny">
                                 <div class="w3-white w3-border w3-border-green w3-round-large w3-padding-tiny">
                                     <div class="w3-row">

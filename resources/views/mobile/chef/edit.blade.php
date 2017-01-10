@@ -60,7 +60,7 @@
             <div class="w3-border-green w3-border-bottom w3-padding-12">
                 <div class="form-group">
                     <label class="w3-text-gery w3-large" style="font-family:cursive">Menu Description</label> 
-                    {{ Form::textarea('description', null, ['class' => 'form-control']) }}
+                    {{ Form::textarea('description', null, ['class' => 'form-control', 'rows' => '15']) }}
                 </div>
             </div>
             <div class="w3-row w3-margin-top">

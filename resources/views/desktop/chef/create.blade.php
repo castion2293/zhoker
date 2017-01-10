@@ -77,6 +77,13 @@
                     </div> 
                 </div>
             </div>
+
+            <div class="w3-padding-12">
+                <div class="form-group">
+                    <label class="w3-text-gery w3-large" style="font-family:cursive">Menu Description</label> 
+                    {{ Form::textarea('description', null, ['class' => 'form-control', 'id' => 'meal-description', 'rows' => '30']) }}
+                </div>
+            </div>
             
             <div class="form-group">
                 <label class="w3-text-gery w3-large" style="font-family:cursive">Upload Photos(10 max)</label> 
@@ -87,13 +94,7 @@
                 </div>
             </div>
 
-            <div class="w3-border-green w3-border-bottom w3-padding-12">
-                <div class="form-group">
-                    <label class="w3-text-gery w3-large" style="font-family:cursive">Menu Description</label> 
-                    {{ Form::textarea('description', null, ['class' => 'form-control', 'id' => 'meal-description']) }}
-                </div>
-            </div>
-            <div class="w3-row w3-margin-top">
+            <div class="w3-row w3-margin-top w3-border-green w3-border-top" style="padding-top:1em;">
                 <div class="w3-rest"></div>
                 <div class="w3-col l3 m3 w3-right">
                     {!! Form::submit('Create Menu', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'submit-all']) !!}

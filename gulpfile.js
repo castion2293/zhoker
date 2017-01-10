@@ -14,12 +14,14 @@ require('laravel-elixir-vue');
  */
 
 elixir(mix => {
-    // mix.styles(['w3.css',
-    //             'component.css',
-    //             'bootstrap-datetimepicker.min.css',
-    //             'main.css'])
-       mix.scripts(['0609.js',
+        mix.styles(['w3.css',
+                'component.css',
+                'bootstrap-datetimepicker.min.css',
+                'main.css'])
+           .scripts(['0609.js',
                     'JQ.js',
                     'parsley.min.js',
                     'bootstrap-datetimepicker.min.js']);
+           //.webpack('app.js');
+    
 });
