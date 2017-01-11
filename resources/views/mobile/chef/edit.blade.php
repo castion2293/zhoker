@@ -3,13 +3,7 @@
 @section('title', '| Chef edit')
 
 @section('styles')
-    <script>
-        tinymce.init({
-            selector:'textarea',
-            plugins: "link code",
-            menubar: false,
-        });
-    </script>
+    <script src="{{ URL::to('js/tinyMCE.js') }}"></script>
     <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
 @endsection
 
