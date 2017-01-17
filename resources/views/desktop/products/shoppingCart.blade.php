@@ -88,7 +88,7 @@
                                 <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
                             </div>
                             <div class="" id="remove_part" style="margin-top:1.5em;">
-                                <a href="remove_part" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
+                                <p id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</p>
                             </div>
                         </div>
                     </div>

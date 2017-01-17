@@ -69,7 +69,7 @@
                     <div class="w3-row">
                         <div class="w3-rest"></div>
                         <div id="remove_part" class="w3-col s4 w3-right">
-                            <a href="remove_part" id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</a>
+                            <p id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</p>
                         </div>
                     </div>
 
