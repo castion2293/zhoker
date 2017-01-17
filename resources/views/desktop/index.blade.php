@@ -50,23 +50,13 @@
 
      <!-- Container (About Section) -->
     <div class="w3-content w3-container w3-padding-64" id="about ">
-        <h3 class="w3-center ">關於</h3>
-        <p class="w3-center "><em>Zhoker</em></p>
-        <p>"回家吃飯"是吃的共享經濟第一品牌。作為全國最大的家庭廚房共享平台，致力於挖掘美食達人，與身邊飯友共享家庭美味。
-            平台經過實地上門認證、衛生標準核查、專業服務培訓和上門拍照試吃等，已發掘上萬家民間“美食家”。
-            家廚以配送、上門自取、提供堂食等多種方式，為忙碌的上班族，不願下廚的年輕人提供安心可口的家常菜。
-            解決對健康飲食的需求與富餘生產力的對接問題，創造一種全新的生活方式。 </p>
-        <div class="w3-row ">
-
-
-        <!-- Hide this text on small devices -->
-        <div class="w3-col w3-hide-small w3-section ">
-            <p>"回家吃飯"是吃的共享經濟第一品牌。作為全國最大的家庭廚房共享平台，致力於挖掘美食達人，與身邊飯友共享家庭美味。
-                平台經過實地上門認證、衛生標準核查、專業服務培訓和上門拍照試吃等，已發掘上萬家民間“美食家”。
-                家廚以配送、上門自取、提供堂食等多種方式，為忙碌的上班族，不願下廚的年輕人提供安心可口的家常菜。
-                解決對健康飲食的需求與富餘生產力的對接問題，創造一種全新的生活方式。</p>
-        </div>
-        </div>
+        <h3 class="w3-center "><em>Zhoker</em></h3>
+        <p>Zhoker.com is the first brand of eating in sharing economics. As a leader of the household kitchen and food sharing platform, we devote our efforts to 
+           find those outstanding chefs to work with us. our purpose is to help everyone can taste delicious meal and share with someon. We guarantee that we inspect
+           every chef's kitchen and make them to fullfil the high quality standard, so please enjoy any meal we offer to you. we still provide some professional training
+           for chef and delicate meal photo taken service. You can get meals from deliver or take out, even you can have the meal in chef's house. that give you opportunity
+           social with someone who has same interestings with you. We like to help those busy people who don't have time to cook. Even though the life is busy, taking the 
+           healthy and delicious meal is still very important for everyone. That is a brand new life experience and don't hesitate, come trying out!</p>
     </div>
 
     <!--Carousel Photo show-->
