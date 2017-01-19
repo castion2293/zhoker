@@ -6,3 +6,5 @@ tinymce.init({
     toobar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
     menubar: false,
 });
+
+//k
