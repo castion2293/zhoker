@@ -3,7 +3,7 @@
 @section('title', '| Chef edit')
 
 @section('styles')
-    <script src="{{ URL::to('js/tinyMCE.js') }}"></script>
+    <script src="{{ URL::to('js/tinymce.js') }}"></script>
     <script src="{{ URL::to('js/GoogleAnalytics.js') }}"></script><!--Google Analytics-->
 @endsection
 
