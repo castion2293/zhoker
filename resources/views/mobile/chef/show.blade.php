@@ -24,13 +24,13 @@
                 </div>
             </div>
             <div class="w3-row w3-padding-8">
-              <div class="w3-col s12">
+              <div class="w3-col s12 w3-display-container">
 
                   <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
                         @foreach ($meal->images as $image)
                             @if ($loop->first)
                               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                                <a href="{{ $image->image_path }}" itemprop="contentUrl" data-size="1024x575">
+                                <a id="image_link" href="{{ $image->image_path }}" itemprop="contentUrl" data-size="1024x575">
                                     <img src="{{ asset($image->image_path) }}" alt="this is a photo" style="width:100%">
                                 </a>                                   
                               </figure>
@@ -44,7 +44,9 @@
                         @endforeach
                     </div>
                     @include('desktop.partials.photoswipe')
-                    
+                    <div class="w3-display-bottomright" style="padding-right:3em;padding-bottom:1em;">
+                      <div id="image_btn" class="w3-btn-floating w3-text-white w3-transparent" style="border: 2px solid;"><i class="fa fa-instagram"></i></div>
+                    </div>
               </div>
               <div class="w3-col s12">
                   <div class="w3-border-bottom w3-border-grey w3-padding-12">
@@ -137,5 +139,14 @@
               });
             });
         });
+    </script>
+
+    <!--swipe image btn-->
+    <script>
+      $(function () {
+        $("#image_btn").click(function() {
+          $("#image_link")[0].click();
+        });
+      });
     </script>
 @endsection

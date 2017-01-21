@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddOriImagePathTable' => $baseDir . '/database/migrations/2017_01_20_192052_add_ori_image_path_table.php',
     'CategoryTableSeeder' => $baseDir . '/database/seeds/CategoryTableSeeder.php',
     'CreateCartsTable' => $baseDir . '/database/migrations/2016_11_08_030915_create_carts_table.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_10_21_024229_create_categories_table.php',
