@@ -113,7 +113,13 @@
                     </div>
                 </div>
                 <div class="w3-row w3-padding-12">
-                    {!! Form::submit('ADD TO CART', ['id' => 'add-to-cart', 'class' => 'btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange']) !!}
+                    @if ($datetimepeople->people_left != 0)
+                      {!! Form::submit('ADD TO CART', ['id' => 'add-to-cart', 'class' => 'btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange']) !!}
+                    @else
+                      <div id="reserve" class="btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange">Reserve Meal</div>
+                      <!--link for going to shoppingcart page, not shown--> 
+                      <a href="{{ url('/product/cart/show/' . encrypt(Auth::user()->id) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                    @endif
                 </div>
                {!! Form::close() !!}
             </div>
@@ -414,6 +420,41 @@
             });
           }
         });
+    </script>
+
+    <!--reserve meal-->
+    <script>
+      $(function () {
+        $("#reserve").click(function() {
+
+          @if (Auth::check())
+            postReserveMeal();
+          @else
+            $("#myModal").modal();
+          @endif
+
+        });
+
+        function postReserveMeal() {
+          var user_id = {{ Auth::check() ? Auth::user()->id : 0 }};
+          var meal_id = {{ $meal->id }};
+          var token = '{{ Session::token() }}';
+
+          var url = '{{ route('product.cart.addreversemeal') }}';
+
+          $.ajax({
+                method: 'POST',
+                url: url,
+                data: {user_id: user_id, meal_id: meal_id, _token: token},
+                success : function(data){
+                    $("#shopping-link")[0].click();
+                },
+                error : function(data){
+                    //alert('failure');
+                },
+            });
+        }
+      });
     </script>
 
     <!--swipe image btn-->

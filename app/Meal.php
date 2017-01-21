@@ -17,7 +17,7 @@ class Meal extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User', 'user_meal');
     }
 
     public function chefs()

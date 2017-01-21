@@ -97,6 +97,14 @@ Route::post('product/cart/buynexttime', [
     'uses' => 'ProductController@postAddToBuyNextTime',
     'as' => 'product.cart.buynexttime'
 ]);
+Route::post('product/cart/addreversemeal', [
+    'uses' => 'ProductController@postAddReserveMeal',
+    'as' => 'product.cart.addreversemeal'
+]);
+Route::post('product/cart/cancelreversemeal', [
+    'uses' => 'ProductController@postCancelReserveMeal',
+    'as' => 'product.cart.cancelreversemeal'
+]);
 
 //check out
 Route::get('product/cart/bindingcard/{id}', [

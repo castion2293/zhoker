@@ -13,7 +13,7 @@
     </div>
 
     <!--content-->
-    <div class="w3-content w3-container w3-padding-32">
+    <div id="shoppingcart" class="w3-content w3-container w3-padding-64">
         @if ($carts->isEmpty())
             <div class="w3-center">
                 <h1 style="font-family:cursive;">Sorry! Please Add Your Items first!</h1>
@@ -95,7 +95,7 @@
         @endif
     </div>
 
-    <div class="w3-content w3-container w3-padding-32">
+    <div id="buynexttime" class="w3-content w3-container w3-padding-64">
         <h3 class="w3-text-green w3-border-green w3-border-bottom">Buy Next Time Items<h3>
 
         @if ($buyNextTimeItems->isEmpty())
@@ -138,6 +138,46 @@
         @endif
 
     </div>
+
+    <div id="reserve" class="w3-content w3-container w3-padding-64">
+        <h3 class="w3-text-green w3-border-green w3-border-bottom">Reserve Items<h3>
+
+         @if ($reserveItems->isEmpty())
+            <div class="w3-center">
+                <h3 style="font-family:cursive;">Sorry! You don't have any reserve items now!</h3>
+            </div>
+        @else
+            @foreach ($reserveItems as $meal)
+                <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
+                    <div class="w3-col s8" style="margin-top:0.5em;padding-left:0.5em;">
+                        <span class="w3-text-grey w3-large"><b>{{ $meal->name }}</b></span>
+                    </div>
+                    <div class="w3-col s4" style="margin-top:0.5em;">
+                        <span class="w3-text-green w3-large">${{ $meal->price }}TWD</span>
+                    </div>
+                    <div class="w3-col s12">
+                        @foreach ($meal->images->take(1) as $image)
+                            <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
+                        @endforeach
+                    </div>
+                    <div class="w3-col s12" style="padding-left:0.5em;">
+                        @foreach ($meal->methods as $method)
+                            <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
+                        @endforeach
+                    </div>
+                    <div class="w3-col s6 w3-padding-12" style="padding-right:0.1em;">
+                        <div id="btn{{ $meal->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-red w3-text-red zk-shrink-hover res-btn">Cancel</div>
+                        <!--link for going to shoppingcart page, not shown--> 
+                        <a href="{{ url('/product/cart/show/' . encrypt(Auth::user()->id) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                    </div>
+                    <div class="w3-col s6 w3-padding-12" style="padding-left:0.1em;">
+                        <a href="{{ route('product.show', ['id' => encrypt($datetimepeople->meals->id), 'datetime_id' => encrypt($datetimepeople->id)])}}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">Other Days</a>
+                    </div>
+                </div>
+            @endforeach
+        @endif
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -313,4 +353,30 @@
           }
         });
     </script>
+
+    <!--Remove reserve items-->
+    <script>
+        $(function () {
+            $(".res-btn").on('click', function(event){
+                var user_id = {{ Auth::user()->id }};
+                meal_id = event.target.id.substring(3);
+                var token = '{{ Session::token() }}';
+                
+                var url = '{{ route('product.cart.cancelreversemeal') }}';
+
+                $.ajax({
+                    method: 'POST',
+                    url: url,
+                    data: {user_id: user_id, meal_id: meal_id, _token: token},
+                    success : function(data){
+                        $("#shopping-link")[0].click();
+                    },
+                    error : function(data){
+                        //alert('fail');
+                    },
+                });
+            });
+        });
+    </script>
+    
 @endsection

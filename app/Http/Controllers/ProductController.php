@@ -62,9 +62,15 @@ class ProductController extends Controller
         $totalPrice = $this->productService->getTotalPrice($carts);
 
         $buyNextTimeItems = $this->productService->getBuyNextTimeItems($user);
+        $reserveItems = $this->productService->getReserveItems($user);
         
         $agent = $this->agentService->agent();
-        return view($agent . '.products.shoppingCart', ['carts' => $carts, 'Qtys' => $cartQtyArray, 'totalPrice' => $totalPrice, 'buyNextTimeItems' => $buyNextTimeItems] );
+        return view($agent . '.products.shoppingCart', ['carts' => $carts, 
+                                                        'Qtys' => $cartQtyArray, 
+                                                        'totalPrice' => $totalPrice, 
+                                                        'buyNextTimeItems' => $buyNextTimeItems,
+                                                        'reserveItems' => $reserveItems,
+                                                       ]);
     }
 
     public function postCartRemove(Request $request)
@@ -108,5 +114,17 @@ class ProductController extends Controller
     {
         $user = $this->productService->getUser($request->user_id);
         $this->productService->buyNextTimeToggle($user, $request->datetimepeople_id);
+    }
+
+    public function postAddReserveMeal(Request $request)
+    {
+        $user = $this->productService->getUser($request->user_id);
+        $this->productService->reserveMealAdd($user, $request->meal_id);
+    }
+
+    public function postCancelReserveMeal(Request $request)
+    {
+        $user = $this->productService->getUser($request->user_id);
+        $this->productService->reserveMealCancel($user, $request->meal_id);
     }
 }

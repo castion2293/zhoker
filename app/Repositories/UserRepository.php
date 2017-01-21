@@ -75,6 +75,19 @@ class UserRepository
         }
     }
 
+    /**
+     * @param $user, $meal_id
+     * @return $meal
+     */
+    public function forMealByUser(User $user, $meal_id = null)
+    {
+        if ($meal_id) {
+            return $user->meals()->find($meal_id);
+        } else {
+            return $user->meals()->latest('id')->get();
+        }
+    }
+
 
     /**
      * @param $user
@@ -101,6 +114,24 @@ class UserRepository
     public function saveCreditCard(User $user, $credit_card)
     {
         return $user->creditcards()->save($credit_card);
+    }
+
+    /**
+     * @param $user, $meal_id
+     * @return 
+     */
+    public function mealAttach(User $user, $meal_id)
+    {
+        return $user->meals()->attach($meal_id);
+    }
+
+     /**
+     * @param $user, $meal_id
+     * @return 
+     */
+    public function mealDetach(User $user, $meal_id)
+    {
+        return $user->meals()->detach($meal_id);
     }
 
     /**

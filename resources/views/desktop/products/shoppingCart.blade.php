@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="w3-padding-64">
+        <div id="shoppingcart" class="w3-padding-128">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">In Shopping Cart<h1>
 
             @if ($carts->isEmpty())
@@ -103,13 +103,13 @@
                         <!--button id="test">checkout</button-->
                         <a href="{!! route('product.cart.checkout', ['id' => encrypt(Auth::user()->id)]) !!}" id="ckt" class="btn w3-deep-orange btn-block zk-shrink-hover"><i class="fa fa-credit-card"></i> Checkout</a>
                         <!--link for refresh page after item remove, not shown-->
-                        <a href="{!! route('product.cart.show', ['id' => encrypt(Auth::user()->id)]) !!}" id="remove-link" style="display:none;"></a>
+                        <a href="{{ url('/product/cart/show/' . encrypt(Auth::user()->id) . '#shoppingcart') }}" id="remove-link" style="display:none;"></a>
                     </div>
                 </div>
             @endif
         </div>
 
-        <div class="w3-padding-64">
+        <div id="buynexttime" class="w3-padding-128">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Buy Next Time Items<h1>
         
             <div class="w3-content w3-container">
@@ -172,6 +172,64 @@
                             </div>
                         </div>
                     @endforeach
+                @endif
+            </div>
+        </div>
+
+        <div id="reserve" class="w3-padding-128">
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">Reserve Items<h1>
+
+            <div class="w3-content w3-container">
+                @if ($reserveItems->isEmpty())
+                    <div class="w3-center">
+                        <h1 style="font-family:cursive;">Sorry! You don't have any reserve items now!</h1>
+                    </div>
+                @else
+                    <div class="w3-row w3-margin-top w3-padding-medium w3-border-grey w3-border-bottom">
+                        <div class="w3-col l4 m4">
+                            <label class="w3-text-grey w3-medium" style="font-family:cursive;">MEAL</label>
+                        </div>
+                        <div class="w3-col l6 m6" style="padding-left:0.5em;">
+                            <label class="w3-text-grey w3-medium" style="font-family:cursive;">ITEM</label>
+                        </div>
+                        <div class="w3-col l2 m2 w3-center">
+                            <label class="w3-text-grey w3-medium" style="font-family:cursive;">ACTION</label>
+                        </div>
+                    </div>
+
+                     @foreach ($reserveItems as $meal)
+                        <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
+                            <div class="w3-col l3 m3 w3-padding-right">
+                                @foreach ($meal->images->take(1) as $image)
+                                    <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
+                                @endforeach
+                            </div>
+                            <div class="w3-col l7 m7" style="padding-left:2em;">
+                                <div class="">
+                                    <span class="w3-text-grey w3-large"><b>{{ $meal->name }}</b></span>
+                                </div>
+                                <div class="">
+                                    <span class="w3-text-green w3-large">${{ $meal->price }}</span>
+                                </div>
+                                <div class="">
+                                    @foreach ($meal->methods as $method)
+                                        <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="w3-col l2 m2">
+                                <div class="w3-margin-top">  
+                                    <div id="btn{{ $meal->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-red w3-text-red zk-shrink-hover res-btn">Cancel</div>
+                                    <!--link for going to shoppingcart page, not shown--> 
+                                    <a href="{{ url('/product/cart/show/' . encrypt(Auth::user()->id) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                                </div>
+                                <div class="" style="margin-top:1em;">  
+                                    <a href="{{ route('product.show', ['id' => encrypt($datetimepeople->meals->id), 'datetime_id' => encrypt($datetimepeople->id)])}}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">Other Days</a>
+                                </div>
+                            </div>
+                        </div>
+                     @endforeach
+
                 @endif
             </div>
         </div>
@@ -352,4 +410,30 @@
           }
         });
     </script>
+
+    <!--Remove reserve items-->
+    <script>
+        $(function () {
+            $(".res-btn").on('click', function(event){
+                var user_id = {{ Auth::user()->id }};
+                meal_id = event.target.id.substring(3);
+                var token = '{{ Session::token() }}';
+                
+                var url = '{{ route('product.cart.cancelreversemeal') }}';
+
+                $.ajax({
+                    method: 'POST',
+                    url: url,
+                    data: {user_id: user_id, meal_id: meal_id, _token: token},
+                    success : function(data){
+                        $("#shopping-link")[0].click();
+                    },
+                    error : function(data){
+                        //alert('fail');
+                    },
+                });
+            });
+        });
+    </script>
+
 @endsection

@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     public function meals()
     {
-        return $this->belongsToMany('App\Meal');
+        return $this->belongsToMany('App\Meal', 'user_meal');
     }
 
     public function carts()

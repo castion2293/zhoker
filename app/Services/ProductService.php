@@ -164,4 +164,31 @@ class ProductService
     {
         return $this->userRepo->forDateTimePeopleByUser($user, $datetimepeople_id);
     }
+
+     /**
+     * @param $user, $meal_id
+     * @return 
+     */
+    public function reserveMealAdd($user, $meal_id)
+    {
+        return $this->userRepo->mealAttach($user, $meal_id);
+    }
+
+    /**
+     * @param $user
+     * @return 
+     */
+    public function reserveMealCancel($user, $meal_id)
+    {
+        return $this->userRepo->mealDetach($user, $meal_id);
+    }
+
+     /**
+     * @param $user
+     * @return 
+     */
+    public function getReserveItems($user, $meal_id = null)
+    {
+        return $this->userRepo->forMealByUser($user, $meal_id);
+    }
 }
