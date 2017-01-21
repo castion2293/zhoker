@@ -171,7 +171,7 @@
                         <a href="{{ url('/product/cart/show/' . encrypt(Auth::user()->id) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
                     </div>
                     <div class="w3-col s6 w3-padding-12" style="padding-left:0.1em;">
-                        <a href="{{ route('product.show', ['id' => encrypt($datetimepeople->meals->id), 'datetime_id' => encrypt($datetimepeople->id)])}}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">Other Days</a>
+                        <a href="#" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">Other Days</a>
                     </div>
                 </div>
             @endforeach
