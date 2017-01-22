@@ -7,6 +7,19 @@
 @endsection
 
 @section('content')
+
+    <!--navbar-->
+    <div class="fixed-circle-nav w3-transparent"style="right:2em;">
+        <section class="section section--nav">
+		    <nav class="nav nav--shamso">
+				<a href="#top-pic" class="nav__item nav__item--current" aria-label="Item 1"><span class="nav__item-title">Top</span></a>
+				<a href="#shoppingcart" class="nav__item " aria-label="Item 2"><span class="nav__item-title">Shopping Cart</span></a>
+				<a href="#buynexttime" class="nav__item" aria-label="Item 3"><span class="nav__item-title">Buy Next Time</span></a>
+				<a href="#reserve" class="nav__item" aria-label="Item 4"><span class="nav__item-title">Reserve Meal</span></a>
+			</nav>
+		</section>
+    </div>
+
     <!--header picture-->
     <div class="" id="top-pic">
         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1114201602.JPG" alt="profile" style="width:100%">
@@ -238,6 +251,9 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ URL::to('js/animate_scroll.js') }}"></script>
+    <script src="{{ URL::to('js/navbar.js') }}"></script>
+    
 <script>
     $(function () {
         var Qtys = {!! json_encode($Qtys) !!}; 

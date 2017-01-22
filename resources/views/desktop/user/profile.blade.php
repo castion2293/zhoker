@@ -7,6 +7,8 @@
 @endsection
 
 @section('content')
+
+    <!--navbar-->
     <div class="fixed-circle-nav w3-transparent"style="right:2em;">
         <section class="section section--nav">
 		    <nav class="nav nav--shamso">
@@ -26,7 +28,7 @@
     <!--content-->
     @inject('UserPresenter', 'App\Presenters\UserPresenter')
     <div class="w3-content w3-container w3-padding-64">
-        <div class="w3-row" id="user-profile">
+        <div class="w3-row w3-padding-128" id="user-profile">
             <div class="w3-padding-12">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">User Profile<h1>
             </div>
@@ -46,7 +48,7 @@
             </div>
         </div>
 
-        <div class="w3-padding-12" id="shopping-cart" style="margin-top:6em;">
+        <div class="w3-padding-12 w3-padding-128" id="shopping-cart">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Shopping Cart<h1>
             @if ($carts->isEmpty())
                 <div class="w3-center">
@@ -113,7 +115,7 @@
             @endif
         </div>
 
-        <div class="w3-padding-12" id="order-history" style="margin-top:6em;">
+        <div class="w3-padding-128" id="order-history">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Order History<h1>
             <div class="w3-content w3-container">
                 @if ($userorders->isEmpty())
@@ -232,58 +234,6 @@
 @endsection
 
 @section('scripts')
-<script>
-$(document).ready(function(){
-  // Add smooth scrolling to all links in navbar + footer link
-  $(".fixed-circle-nav a").on('click', function(event) {
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 900, function(){
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-})
-</script>
-<script>
-(function(window) {
-	function init() {
-		[].slice.call(document.querySelectorAll('.nav')).forEach(function(nav) {
-			var navItems = [].slice.call(nav.querySelectorAll('.nav__item')),
-				itemsTotal = navItems.length,
-				setCurrent = function(item) {
-					// return if already current
-					if( item.classList.contains('nav__item--current') ) {
-						return false;
-					}
-					// remove current
-					var currentItem = nav.querySelector('.nav__item--current');
-					currentItem.classList.remove('nav__item--current');
-					
-					// set current
-					item.classList.add('nav__item--current');
-				};
-			
-			navItems.forEach(function(item) {
-				item.addEventListener('click', function() { setCurrent(item); });
-			});
-		});
-	}
-
-	init();
-
-})(window);
-</script>
+    <script src="{{ URL::to('js/animate_scroll.js') }}"></script>
+    <script src="{{ URL::to('js/navbar.js') }}"></script>
 @endsection
