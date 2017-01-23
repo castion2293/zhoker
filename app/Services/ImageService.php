@@ -18,14 +18,14 @@ class ImageService
         
     }
 
-    public function save($image, $path, $counter)
+    public function save($image, $path, $counter, $action)
     {
-        $filename = time() . $counter . '.' . $image->getClientOriginalExtension();
+        $filename = $action . time() . $counter . '.' . $image->getClientOriginalExtension();
         $filePath = $path . $filename;
 
-        $imageResize = $this->resize($image);
+        $imageFile = $this->streamImage($image, $action);
 
-        dispatch(new SaveImagetoS3($filePath, $imageResize));
+        dispatch(new SaveImagetoS3($filePath, $imageFile));
 
         return 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
     }
@@ -55,10 +55,17 @@ class ImageService
         dispatch(new DeleteImagetoS3($Filepath));
     }
 
-    public function resize($file)
+    private function streamImage($image, $action)
     {
-        return Image::make($file)->fit(1024, 575)
+        if ($action == 'resize') {
+            return Image::make($image)->fit(1024, 575)
                                  ->stream()
                                  ->__toString();
+        }
+
+        return Image::make($image)->stream()
+                                 ->__toString();
     }
+
+
 }

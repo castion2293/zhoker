@@ -97,16 +97,18 @@ class ChefService
 
         $this->mealRepo->save($meal);
 
-        //save the image
+        // save the image
         $files = $request->file('file');
 
         $count = 0;//counter
         foreach($files as $file) {
 
-            $filename = $this->imageService->save($file, '/images/', $count);
+            $image_path = $this->imageService->save($file, '/images/', $count, 'resize'); //resize imgage
+            $ori_image_path = $this->imageService->save($file, '/images/', $count, 'original'); //original imgage
            
             $meal->images()->create([
-                'image_path' => $filename,
+                'image_path' => $image_path,
+                'ori_image_path' => $ori_image_path,
             ]);
 
             $count++;
@@ -122,7 +124,9 @@ class ChefService
 
             $datetimepeople->date = $dpt_split_array[0];
             $datetimepeople->time = $dpt_split_array[1];
-            $datetimepeople->people_left = $dpt_split_array[2];
+            $datetimepeople->end_date = $dpt_split_array[2];
+            $datetimepeople->end_time = $dpt_split_array[3];
+            $datetimepeople->people_left = $dpt_split_array[4];
             $this->datetimepeopleRepo->mealAssociate($datetimepeople, $meal);
 
             $this->datetimepeopleRepo->save($datetimepeople);

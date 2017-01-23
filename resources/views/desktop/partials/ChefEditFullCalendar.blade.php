@@ -111,8 +111,10 @@
                 eventsFromCalendar.forEach(function(element) {
                     var date = element.start.toISOString().slice(0,10);
                     var time = element.start.toISOString().slice(11,16);
+                    var end_date = element.end.toISOString().slice(0,10);
+                    var end_time = element.end.toISOString().slice(11,16);
                     var people = element.title.toString().split(" ");
-                    list += date + "," + time + "," + people[0] + ";";
+                    list += date + "," + time + "," + end_date + "," + end_time + "," + people[0] + ";";
                 });
 
                 $("#dtp-result").val(list);

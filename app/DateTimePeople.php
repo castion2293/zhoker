@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DateTimePeople extends Model
 {
     protected $fillable = [
-        'meal_id', 'date', 'time', 'people_left', 'people_order',
+        'meal_id', 'date', 'time', 'end_date', 'end_time', 'people_left', 'people_order',
     ];
 
     public function users()

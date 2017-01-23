@@ -474,6 +474,7 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
     );
 
     public static $classMap = array (
+        'AddEndToDatetimepeopleTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_22_143908_add_end_to_datetimepeople_table.php',
         'AddOriImagePathTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_20_192052_add_ori_image_path_table.php',
         'CategoryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoryTableSeeder.php',
         'CreateCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_08_030915_create_carts_table.php',

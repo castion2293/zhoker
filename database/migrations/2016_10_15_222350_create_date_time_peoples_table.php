@@ -19,6 +19,8 @@ class CreateDateTimePeoplesTable extends Migration
             $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
             $table->string('date');
             $table->string('time');
+            $table->string('end_time');
+            $table->string('end_date');
             $table->tinyInteger('people_left');
             $table->tinyInteger('people_order')->default(0);
             $table->timestamps();
