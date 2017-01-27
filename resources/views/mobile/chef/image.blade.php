@@ -73,7 +73,7 @@
             </div>
             <div class="modal-footer">
                 <div class="w3-center">
-                    <a href="{!! route('image.index', ['id' => encrypt($chef->id)]) !!}" class="btn w3-large w3-green zk-shrink-hover" id="finish-upload" style="width:80%;display:none;">Finish</a>
+                    <a href="{{ url('image/index/' . encrypt($chef->id) . '/#title') }}" class="btn w3-large w3-green zk-shrink-hover" id="finish-upload" style="width:80%;display:none;">Finish</a>
                 </div>
                 <div class="w3-center w3-margin-top">
                     <button class="btn w3-large w3-white w3-text-green w3-border w3-border-green zk-shrink-hover" id="upload-img" style="width:80%;">Upload</button>

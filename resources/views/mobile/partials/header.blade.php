@@ -18,6 +18,7 @@
           <a href="{!! route('order.cheforder', ['id' => encrypt(Auth::user()->chef_id)]) !!}" class="w3-hover-green w3-large w3-margin-top w3-text-blue"><i class="fa fa-credit-card"></i> Order</a>
           <a href="{{ url('/chef') }}" class="w3-hover-green w3-large w3-margin-top w3-text-blue"><i class="fa fa-th-list"></i> Menu</a>
           <a href="{{url('/chef/create')}}" class="w3-hover-green w3-large w3-margin-top w3-text-blue"><i class="fa fa-pencil-square-o"></i> Create</a>
+          <a href="{!! route('image.index', ['id' => encrypt(Auth::user()->chef_id)]) !!}" class="w3-hover-green w3-large w3-margin-top w3-text-blue"><i class="fa fa-camera-retro"></i> Image</a>
           <a href="{{ url('/chef_profile') }}" class="w3-hover-green w3-large w3-margin-top w3-text-blue"><i class="fa fa-cog"></i> Setting</a>
           <a href="{{ route('help.get') }}" class="w3-hover-green w3-large w3-text-blue"><i class="fa fa-book w3-margin-top"></i> Help</a>
           <hr>
