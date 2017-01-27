@@ -95,12 +95,12 @@ class MealRepository
 
      /**
      * @param $meal
-     * @return 
+     * @return image
      */
-    //  public function forDateTimePeopleDelete(Meal $meal)
-    //  {
-    //      return $meal->datetimepeoples()->delete();
-    //  }
+     public function forImage(Meal $meal)
+     {
+         return $meal->images()->get();
+     }
 
      /**
      * @param $meal
@@ -123,6 +123,11 @@ class MealRepository
      public function save(Meal $meal)
      {
          return $meal->save();
+     }
+
+     public function imageSync(Meal $meal, $images)
+     {
+         return $meal->images()->sync($images);
      }
 
      public function shiftSync(Meal $meal, $shitfs)

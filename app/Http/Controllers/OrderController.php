@@ -32,9 +32,8 @@ class OrderController extends Controller
 
     public function getUserOrder($id)
     {
-        $id = $this->gateService->decrypt($id);
-        $this->gateService->userIdCheck($id);
-
+        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+       
         $user = $this->orderService->getUser($id);
         $userorders = $this->orderService->getUserOrderByUser($user, 'desc');
 
@@ -44,8 +43,7 @@ class OrderController extends Controller
 
     public function getChefOrder($id)
     {
-        $id = $this->gateService->decrypt($id);
-        $this->gateService->chefIdCheck($id);
+        $id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
 
         $chef = $this->orderService->getChef($id);
         $cheforders = $this->orderService->getChefOrder($chef, 6);
@@ -56,7 +54,7 @@ class OrderController extends Controller
 
     public function getAccept($id)
     {
-        $id = $this->gateService->decrypt($id);
+        $id = $this->gateService->decrypt($id)->getId();
 
         $chefOrder = $this->orderService->getChefOrderById($id);
 
@@ -90,7 +88,7 @@ class OrderController extends Controller
 
     public function getReject($id)
     {
-        $id = $this->gateService->decrypt($id);
+        $id = $this->gateService->decrypt($id)->getId();
 
         $chefOrder = $this->orderService->getChefOrderById($id);
 

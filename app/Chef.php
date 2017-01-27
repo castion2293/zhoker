@@ -24,4 +24,9 @@ class Chef extends Model
     {
         return $this->hasMany('App\ChefOrder');
     }
+
+    public function images()
+    {
+        return $this->hasMany('App\Image');
+    }
 }

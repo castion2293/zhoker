@@ -81,9 +81,8 @@ class ChefProfileController extends Controller
      */
     public function edit($id)
     {
-        $id = $this->gateService->decrypt($id);
-        $this->gateService->chefIdCheck($id);
-
+        $id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
+        
         $chef = $this->chefProfileService->edit($id);
 
         $agent = $this->agentService->agent();

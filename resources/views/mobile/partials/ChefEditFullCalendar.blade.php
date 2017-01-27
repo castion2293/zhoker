@@ -96,7 +96,8 @@
                     @foreach($datetimepeoples as $datetimepeople)
                         {
                             title: '{{ $datetimepeople->people_left }} people',
-                            start: '{{ $datetimepeople->date }} {{ $datetimepeople->time }}'
+                            start: '{{ $datetimepeople->date }} {{ $datetimepeople->time }}',
+                            end: '{{ $datetimepeople->end_date }} {{ $datetimepeople->end_time }}'
                         },
                     @endforeach
                 ],
@@ -118,6 +119,13 @@
                 });
 
                 $("#dtp-result").val(list);
+            });
+
+            //link to image-from
+            $('#DatetimePeopleModal').on('hidden.bs.modal', function (e) {
+                $('html, body').animate({
+                    scrollTop: $("#name-form").offset().top
+                }, 100);
             });
 
         });

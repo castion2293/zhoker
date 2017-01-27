@@ -21,7 +21,7 @@
          {!! Form::model($meal, ['route' => ['chef.update', $meal->id], 'method' => 'PUT', 'files' => true]) !!}
             <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
                 <div class="w3-col s12">
-                    <div class="w3-row">
+                    <div class="w3-row" id="name-form">
                         <div class="w3-col s12">
                             {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Menu Name', 'required' => '', 'maxlength' => '255']) }}   
                         </div>
@@ -51,12 +51,42 @@
                     </div> 
                 </div>
             </div>
+
+            <div class="w3-padding-12" id="image-form">
+                <div class="w3-row">
+                    <div class="w3-col l2 m2">
+                        <div id="select-modal-trigger" class="btn w3-large w3-white w3-text-grey w3-border w3-border-grey btn-block zk-shrink-hover"><i class="fa fa-picture-o"></i> Phote</div>
+                    </div>
+                </div>
+
+                <!--for image input, not shown-->
+                {{ Form::text('img', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'image-input', 'style' => 'display:none;']) }} 
+
+                <div class="w3-border w3-border-grey w3-round-large w3-padding-24 w3-margin-top">
+                    <div class="w3-row-padding">
+                        @foreach ($images as $image)
+                            <div class="w3-col m2 l2 w3-padding-12 w3-display-container ckb-display" id="dpy{{ $image->id }}" style="display:none;">
+                                <img src="{{ asset($image->image_path) }}" alt="image" style="width:100%;">
+                                <div class="w3-display-bottomright" style="padding-right:1em;pading-bottom:1em;cursor:pointer;">
+                                    <div class="w3-large image-link" data-toggle="tooltip"  >
+                                        <i id="lko{{ $image->id }}" class="fa fa-link zk-enlarge-hover"></i>
+                                    </div>
+                                </div>
+                                <!--for copy link use, not shown-->
+                                <p id="lko{{ $image->id }}_catch" style="display:none;">{{ $image->ori_image_path }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
             <div class="w3-border-green w3-border-bottom w3-padding-12">
                 <div class="form-group">
                     <label class="w3-text-gery w3-large" style="font-family:cursive">Menu Description</label> 
                     {{ Form::textarea('description', null, ['class' => 'form-control', 'rows' => '15']) }}
                 </div>
             </div>
+
             <div class="w3-row w3-margin-top">
                 <div class="w3-rest"></div>
                 <div class="w3-col l2 m2 w3-right">
@@ -64,50 +94,18 @@
                 </div>
             </div>  
          {!! Form::close() !!}
-
-         <div class="w3-padding-12 w3-margin-top">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Image<h1>
-         </div>
-
-         <div class="w3-border w3-border-green w3-round-large w3-padding-24 w3-margin-top">
-            @foreach ($meal->images as $image)
-                <div class="w3-padding-medium w3-display-container">
-                    {!! Form::open(['route' => ['chef.delete.delete_image', $image->id, $meal->id], 'method' => 'DELETE']) !!}
-                        <img src="{{ asset($image->image_path) }}" alt="meal" style="width:100%;">
-                        <button type="submit" id="delete_img" class="w3-xxlarge w3-text-white w3-transparent w3-display-topmiddle zk-shrink-hover" style="border:none;"><i class="fa fa-times"></i></button>
-                    {!! Form::close() !!}
-                </div>
-            @endforeach
-        </div>
-
-        <div class="form-group w3-margin-top">
-            <label class="w3-text-gery w3-large" style="font-family:cursive">Upload Photos(10 max)</label> 
-            <div class="dropzone" id="my-dropzone">
-                <div class="fallback">
-                    <input name="img" type="file" multiple  required="" />
-                </div>
-            </div>
-
-            <div class="w3-row w3-margin-top w3-border-green w3-border-top" style="padding-top:1em;">
-                <div class="w3-rest"></div>
-                <div class="w3-col l2 m2 w3-right">
-                    <button class="btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover" id="upload-img">Upload Image</button>
-                    <a href="{{ url('/chef/' . encrypt($meal->id) . '/edit#submit') }}" id="success-link" style="display:none;">Success Link</a>
-                </div>
-            </div>  
-        </div>
-
-
      </div>
 
   <!--Data Time People Modal -->
   @include('mobile.partials.ChefEditFullCalendar');
+  <!--Image Select-->
+  @include('mobile.partials.ChefEditImageSelect');
 
 @endsection
 
 @section('scripts')
-    <!--Select-2-->
     <script>
+        //Select-2
          $(function () {
             $(".js-example-basic-multiple").select2();
             $("#shift-select2").select2().val({!! json_encode($meal->shifts()->getRelatedIds()) !!}).trigger('change');
@@ -116,39 +114,4 @@
         });
     </script>
 
-    <!--Upload file-->
-    <script>
-        Dropzone.options.myDropzone= {
-            url: '{{ route('chef.upload.upload_image', ['meal_id' => $meal->id]) }}',
-            autoProcessQueue: false,
-            uploadMultiple: true,
-            parallelUploads: 10,
-            maxFiles: 10,
-            maxFilesize: 5,
-            method: 'POST',
-            acceptedFiles: 'image/*',
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-Token': $('input[name="_token"]').val()
-            },
-            init: function() {
-                dzClosure = this; // Makes sure that 'this' is understood inside the functions below.
-
-                document.getElementById("upload-img").addEventListener("click", function(e) {
-                    // Make sure that the form isn't actually being sent.
-                    e.preventDefault();
-                    e.stopPropagation();
-                    dzClosure.processQueue();
-                });
-
-                //send all the form data along with the files:
-                this.on("sendingmultiple", function(data, xhr, formData) {
-                
-                });
-            },
-            success: function(file, response){
-                $("#success-link")[0].click();
-            }
-        }
-    </script>
 @endsection

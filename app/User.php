@@ -61,9 +61,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\DateTimePeople', 'user_datetimepeople', 'user_id', 'datetimepeople_id');
     }
-
-    public function images()
-    {
-        return $this->hasMany('App\Image');
-    }
 }

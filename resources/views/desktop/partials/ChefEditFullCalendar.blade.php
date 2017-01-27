@@ -25,7 +25,8 @@
             var old_datetimepeople = '';
 
             @foreach ($datetimepeoples as $datetimepeople) 
-                old_datetimepeople += "{{ $datetimepeople->date }}" + "," + "{{ $datetimepeople->time }}" + "," + "{{ $datetimepeople->people_left }}" + ";";
+                old_datetimepeople += "{{ $datetimepeople->date }}" + "," + "{{ $datetimepeople->time }}" + "," + "{{ $datetimepeople->end_date }}" + ","
+                                       + "{{ $datetimepeople->end_time }}" + "," + "{{ $datetimepeople->people_left }}" + ";";
             @endforeach
 
             $("#dtp-result").val(old_datetimepeople);
@@ -96,7 +97,8 @@
                     @foreach($datetimepeoples as $datetimepeople)
                         {
                             title: '{{ $datetimepeople->people_left }} people',
-                            start: '{{ $datetimepeople->date }} {{ $datetimepeople->time }}'
+                            start: '{{ $datetimepeople->date }} {{ $datetimepeople->time }}',
+                            end: '{{ $datetimepeople->end_date }} {{ $datetimepeople->end_time }}',
                         },
                     @endforeach
                 ],
@@ -105,10 +107,12 @@
 
             //confirm button
             $("#confirm-btn").click(function() {
+
                 var eventsFromCalendar = $('#calendar').fullCalendar('clientEvents');
 
                 var list = "";
                 eventsFromCalendar.forEach(function(element) {
+                    console.log(element.start.toISOString().slice(0,10));
                     var date = element.start.toISOString().slice(0,10);
                     var time = element.start.toISOString().slice(11,16);
                     var end_date = element.end.toISOString().slice(0,10);
@@ -116,9 +120,15 @@
                     var people = element.title.toString().split(" ");
                     list += date + "," + time + "," + end_date + "," + end_time + "," + people[0] + ";";
                 });
-
+                
                 $("#dtp-result").val(list);
             });
 
+            //link to image-from
+            $('#DatetimePeopleModal').on('hidden.bs.modal', function (e) {
+                $('html, body').animate({
+                    scrollTop: $("#chef-create").offset().top
+                }, 100);
+            });
         });
     </script>

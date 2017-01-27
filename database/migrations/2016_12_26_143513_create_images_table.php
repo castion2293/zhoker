@@ -15,10 +15,8 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->index()->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('meal_id')->index()->unsigned()->nullable();
-            $table->foreign('meal_id')->references('id')->on('meals');
+            $table->integer('chef_id')->index()->unsigned()->nullable();
+            $table->foreign('chef_id')->references('id')->on('chefs');
             $table->string('image_path');
             $table->string('ori_image_path');
             $table->timestamps();

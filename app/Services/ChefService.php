@@ -25,8 +25,13 @@ class ChefService
     protected $mealRepo;
     protected $datetimepeopleRepo;
     protected $imageRepo;
-
     protected $imageService;
+
+    protected $user;
+    protected $chef;
+    protected $meal;
+    protected $datetimepeople;
+    protected $request;
 
     /**
      * ChefService constructor.
@@ -46,73 +51,135 @@ class ChefService
         $this->imageService = $imageService;
     }
 
-    /**
-     * @return meal
+     /**
+     * @param $id
+     * @return 
      */
-     public function index()
+     public function destroy($meal)
      {
-         $user = $this->userRepo->findUserById();
-         $chef = $this->userRepo->forChef($user);
-         $meals = $this->chefRepo->forMealsPaginate($chef, 6);
+        // $this->mealRepo->forDateTimePeopleDelete($meal);
+        // $this->mealRepo->shiftDetach($meal);
+        // $this->mealRepo->categoryDetach($meal);
+        // $this->mealRepo->methodDetach($meal);
 
-         return $meals;
+        $this->mealRepo->delete($meal);
+     }
+
+
+     //New version
+     /**
+     * @return $this
+     */
+     public function findUser()
+     {
+         $this->user = $this->userRepo->findUserById();
+
+         return $this;
      }
 
      /**
-     * @return category
+     * $user
+     * @return $this
      */
-     public function createCategory()
+     public function findChef($user = null)
      {
-         return $this->categoryRepo->findCategoryById();
+         count($user) ?: $user = $this->user;
+
+         $this->chef = $this->userRepo->forChef($user);
+
+         return $this;
      }
 
      /**
-     * @return method
+     * 
+     * @return $chef
      */
-     public function createMethod()
+     public function getChef()
      {
-         return $this->methodRepo->findMethodByMethodName();
+         return $this->chef;
      }
 
      /**
-     * @return shift
+     * $chef, $qty
+     * @return $this
      */
-     public function createShift()
+     public function findMeals($qty, $chef = null)
      {
-         return $this->shiftRepo->findShiftByShiftName();
+         count($chef) ?: $chef = $this->chef;
+
+         $this->meal = $this->chefRepo->forMealsPaginate($chef, $qty);
+
+         return $this;
      }
 
      /**
-     * @param $request
-     * @return meal
+     * @param $id
+     * @return $this
      */
-     public function store($request)
+     public function findMeal($id)
      {
-        $meal = $this->mealRepo->NewMeal();
+         $this->meal = $this->mealRepo->findMealById($id);
+
+         return $this;
+     }
+
+     /**
+     * 
+     * @return $this
+     */
+     public function createMeal($request)
+     {
+         $this->request = $request;
+
+         $meal = $this->mealRepo->NewMeal();
         
-        $meal->chef_id = $this->userRepo->getChef_id();
-        $meal->name = $request->input('name');
-        $meal->price = $request->input('price');
-        $meal->description = Purifier::clean($request->input('description'));
+         $meal->chef_id = $this->userRepo->getChef_id();
+         $meal->name = $this->request->name;
+         $meal->price = $this->request->price;
+         $meal->description = Purifier::clean($this->request->description);
 
-        $this->mealRepo->save($meal);
+         $this->mealRepo->save($meal);
 
-        // save the image
-        $files = $request->file('file');
+         $this->meal = $meal;
 
-        $count = 0;//counter
-        foreach($files as $file) {
+         return $this;
+     }
 
-            $image_path = $this->imageService->save($file, '/images/', $count, 'resize'); //resize imgage
-            $ori_image_path = $this->imageService->save($file, '/images/', $count, 'original'); //original imgage
-           
-            $meal->images()->create([
-                'image_path' => $image_path,
-                'ori_image_path' => $ori_image_path,
-            ]);
+     /**
+     * 
+     * @return $this
+     */
+     public function updateMeal($meal, $request)
+     {
+          $this->request = $request;
 
-            $count++;
-        }
+          $meal->name = $this->request->name;
+          $meal->price = $this->request->price;
+          $meal->description = Purifier::clean($this->request->description);
+
+          $this->mealRepo->save($meal);
+
+          $this->meal = $meal;
+
+          return $this;
+     }
+
+     /**
+     * 
+     * @return $meals
+     */
+     public function getMeal()
+     {
+         return $this->meal;
+     }
+
+     /**
+     * $meal, $request
+     * @return $meals
+     */
+     public function createDatetimePeople($meal, $request = null)
+     {
+        count($request) ?: $request = $this->request;
 
         $dtp_array = explode(";", $request->datetimepeople);
         
@@ -122,6 +189,7 @@ class ChefService
             
             $dpt_split_array = explode(",", $dtp_array[$i]);
 
+            //$datetimepeople->meal_id = $meal->id;
             $datetimepeople->date = $dpt_split_array[0];
             $datetimepeople->time = $dpt_split_array[1];
             $datetimepeople->end_date = $dpt_split_array[2];
@@ -130,55 +198,86 @@ class ChefService
             $this->datetimepeopleRepo->mealAssociate($datetimepeople, $meal);
 
             $this->datetimepeopleRepo->save($datetimepeople);
-            
         }
 
-        $this->mealRepo->shiftSync($meal, explode(",", $request->shifts));
-        $this->mealRepo->categorySync($meal, explode(",", $request->categories));
-        $this->mealRepo->methodSync($meal, explode(",", $request->methods));
-
-        return $meal;
+        return $this;
      }
 
      /**
-     * @param $id
-     * @return meal
+     * $datetimepeople
+     * @return $this
      */
-     public function show($id)
+     public function deleteDateTimePeople($datetimepeoples = null)
      {
-         return $this->mealRepo->findMealById($id);
-     }
+         count($datetimepeoples) ?: $datetimepeoples = $this->datetimepeople;
 
-     /**
-     * @param $id
-     * @return meal
-     */
-     public function editMeal($id)
-     {
-         return $this->mealRepo->findMealById($id);
+         foreach ($datetimepeoples as $datetimepeople) {
+            $this->datetimepeopleRepo->delete($datetimepeople);
+         }
+
+         return $this;
      }
 
      /**
      * @param $meal
      * @return datetimepeople
      */
-     public function editDatetimePeople($meal)
+     public function findDatetimePeople($meal)
      {
-        return $this->mealRepo->forDateTimePeople($meal);
+        $this->datetimepeople = $this->mealRepo->forDateTimePeople($meal);
+
+        return $this;
+     }
+
+     public function getDateTimePeople()
+     {
+         return $this->datetimepeople;
      }
 
      /**
-     * @return shift
+     * $meal, $request
+     * @return $this
      */
-     public function editShift()
+     public function connectImage($meal, $request = null)
      {
-        $shifts = $this->shiftRepo->findShiftByShiftName();
-        $shiftarray = [];
-        foreach($shifts as $shift) {
-            $shiftarray[$shift->id] = $shift->shift;
-        }
+        count($request) ?: $request = $this->request;
 
-        return $shiftarray;
+        $img_array = explode(",", $request->img);
+        array_pop($img_array);
+
+        $this->mealRepo->imageSync($meal, $img_array);
+
+        return $this;
+     }
+
+     /**
+     * $meal
+     * @return $images
+     */
+     public function editImage($meal)
+     {
+         return $this->mealRepo->forImage($meal);
+     }
+
+     /**
+     * @return category
+     */
+     public function getCategory()
+     {
+         return $this->categoryRepo->findCategoryById();
+     }
+
+     /**
+     * $meal, $request
+     * @return $this
+     */
+     public function connectCategory($meal, $request = null)
+     {
+         count($request) ?: $request = $this->request;
+
+         $this->mealRepo->categorySync($meal, $request->categories);
+
+         return $this;
      }
 
      /**
@@ -198,6 +297,27 @@ class ChefService
      /**
      * @return method
      */
+     public function getMethod()
+     {
+         return $this->methodRepo->findMethodByMethodName();
+     }
+
+     /**
+     * $meal, $request
+     * @return $this
+     */
+     public function connectMethod($meal, $request = null)
+     {
+         count($request) ?: $request = $this->request;
+
+         $this->mealRepo->methodSync($meal, $request->methods);
+
+         return $this;
+     }
+
+     /**
+     * @return method
+     */
      public function editMethod()
      {
         $methods = $this->methodRepo->findMethodByMethodName();
@@ -210,93 +330,37 @@ class ChefService
      }
 
      /**
-     * @param $request
-     * @return meal
+     * @return shift
      */
-     public function update($request, $id)
+     public function getShift()
      {
-        $meal = $this->mealRepo->findMealById($id);
-
-        $datetimepeoples = $this->mealRepo->forDateTimePeople($meal);
-
-        foreach ($datetimepeoples as $datetimepeople) {
-            $this->datetimepeopleRepo->delete($datetimepeople);
-        }
-
-        $meal->name = $request->input('name');
-        $meal->price = $request->input('price');
-        $meal->description = Purifier::clean($request->input('description'));
-
-        $this->mealRepo->save($meal);
-
-        $dtp_array = explode(";", $request->datetimepeople);
-        
-        for($i=0; $i < count($dtp_array) - 1; $i++)
-        {
-            $datetimepeople = $this->datetimepeopleRepo->NewDateTimePeople();
-            
-            $dpt_split_array = explode(",", $dtp_array[$i]);
-
-            $datetimepeople->date = $dpt_split_array[0];
-            $datetimepeople->time = $dpt_split_array[1];
-            $datetimepeople->people_left = $dpt_split_array[2];
-            $this->datetimepeopleRepo->mealAssociate($datetimepeople, $meal);
-
-            $this->datetimepeopleRepo->save($datetimepeople);
-        }
-
-        $this->mealRepo->shiftSync($meal, $request->shifts);
-        $this->mealRepo->categorySync($meal, $request->categories);
-        $this->mealRepo->methodSync($meal, $request->methods);
-
-        return $meal;
+         return $this->shiftRepo->findShiftByShiftName();
      }
 
      /**
-     * @param $id
-     * @return 
+     * $meal, $request
+     * @return $this
      */
-     public function destroy($meal)
+     public function connectShift($meal, $request = null)
      {
-        // $this->mealRepo->forDateTimePeopleDelete($meal);
-        // $this->mealRepo->shiftDetach($meal);
-        // $this->mealRepo->categoryDetach($meal);
-        // $this->mealRepo->methodDetach($meal);
+         count($request) ?: $request = $this->request;
 
-        $this->mealRepo->delete($meal);
+         $this->mealRepo->shiftSync($meal, $request->shifts);
+
+         return $this;
      }
 
       /**
-     * @param $request $meal
-     * @return 
+     * @return shift
      */
-     public function uploadImage($request, $meal)
+     public function editShift()
      {
-         $files =$request->file('file');
+        $shifts = $this->shiftRepo->findShiftByShiftName();
+        $shiftarray = [];
+        foreach($shifts as $shift) {
+            $shiftarray[$shift->id] = $shift->shift;
+        }
 
-         $count = 0;//counter
-         foreach($files as $file) {
-             
-            $filename = $this->imageService->save($file, '/images/', $count);
-        
-            $meal->images()->create([
-                'image_path' => $filename,
-            ]);
-
-            $count++;
-         }
-     }
-
-      /**
-     * @param $image_id
-     * @return 
-     */
-     public function deleteImage($image_id)
-     {
-         $image = $this->imageRepo->findImageById($image_id);
-
-         $this->imageService->delete($image->image_path);
-
-         $this->imageRepo->delete($image);
+        return $shiftarray;
      }
 }

@@ -474,8 +474,6 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
     );
 
     public static $classMap = array (
-        'AddEndToDatetimepeopleTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_22_143908_add_end_to_datetimepeople_table.php',
-        'AddOriImagePathTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_20_192052_add_ori_image_path_table.php',
         'CategoryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoryTableSeeder.php',
         'CreateCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_08_030915_create_carts_table.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_024229_create_categories_table.php',
@@ -485,6 +483,7 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
         'CreateDateTimePeoplesTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_15_222350_create_date_time_peoples_table.php',
         'CreateImagesTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_26_143513_create_images_table.php',
         'CreateMealCategoryTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_030153_create_meal_category_table.php',
+        'CreateMealImageTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_24_152823_create_meal_image_table.php',
         'CreateMealMethodTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_023211_create_meal_method_table.php',
         'CreateMealShiftTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_013310_create_meal_shift_table.php',
         'CreateMealsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_15_213800_create_meals_table.php',

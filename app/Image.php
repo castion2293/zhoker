@@ -17,6 +17,6 @@ class Image extends Model
 
     public function meals()
     {
-        return $this->belongsTo('App\Meal', 'meal_id');
+        return $this->belongsToMany('App\Meal', 'meal_image');
     }
 }

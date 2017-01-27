@@ -8,6 +8,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use App\Services\ChefService;
 use App\Services\AgentService;
 use App\Services\GateService;
+use App\Services\ImageService;
 
 use App\Http\Requests;
 use App\Http\Requests\MealCreateRequest;
@@ -17,14 +18,16 @@ class ChefController extends Controller
     protected $chefService;
     protected $agentService;
     protected $gateService;
+    protected $imageService;
 
-    public function __construct(ChefService $chefService, AgentService $agentService, GateService $gateService) 
+    public function __construct(ChefService $chefService, AgentService $agentService, GateService $gateService, ImageService $imageService) 
     {
         $this->middleware('chef');
         
         $this->chefService = $chefService;
         $this->agentService = $agentService;
         $this->gateService = $gateService;
+        $this->imageService = $imageService;
     }
 
     /**
@@ -34,7 +37,8 @@ class ChefController extends Controller
      */
     public function index()
     {
-        $meals = $this->chefService->index();
+        // $meals = $this->chefService->index();
+        $meals = $this->chefService->findUser()->findChef()->findMeals(6)->getMeal();
 
         $agent = $this->agentService->agent();
         return view($agent . '.chef.index', ['meals' => $meals]);
@@ -47,12 +51,15 @@ class ChefController extends Controller
      */
     public function create()
     {
-        $categories = $this->chefService->createCategory();
-        $methods = $this->chefService->createMethod();
-        $shifts = $this->chefService->createShift();
+        $chef = $this->chefService->findUser()->findChef()->getChef();
+        $images = $this->imageService->findImageByChef($chef)->getImage();
+
+        $categories = $this->chefService->getCategory();
+        $methods = $this->chefService->getMethod();
+        $shifts = $this->chefService->getShift();
 
         $agent = $this->agentService->agent();
-        return view($agent . '.chef.create', ['categories' => $categories, 'methods' => $methods, 'shifts' => $shifts]);
+        return view($agent . '.chef.create', ['categories' => $categories, 'methods' => $methods, 'shifts' => $shifts, 'images' => $images]);
     }
 
     /**
@@ -63,9 +70,17 @@ class ChefController extends Controller
      */
     public function store(MealCreateRequest $request)
     {
-        $meal = $this->chefService->store($request);
+        $meal = $this->chefService->createMeal($request)->getMeal();
+        $this->chefService->createDatetimePeople($meal);
+        $this->chefService->connectImage($meal);
+        $this->chefService->connectCategory($meal);
+        $this->chefService->connectMethod($meal);
+        $this->chefService->connectShift($meal);
 
-        flash()->success('Success', 'The meal has been created successfully!');
+        //flash()->success('Success', 'The meal has been created successfully!');
+
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.show',['meal' => $meal]);
     }
 
     /**
@@ -76,9 +91,9 @@ class ChefController extends Controller
      */
     public function show($id)
     {
-        $id = $this->gateService->decrypt($id);
+        $id = $this->gateService->decrypt($id)->getId();
 
-        $meal = $this->chefService->show($id);
+        $meal = $this->chefService->findMeal($id)->getMeal();
 
         $this->gateService->chefIdCheck($meal->chef_id);
 
@@ -94,19 +109,24 @@ class ChefController extends Controller
      */
     public function edit($id)
     {
-        $id = $this->gateService->decrypt($id);
+        $id = $this->gateService->decrypt($id)->getId();
 
-        $meal = $this->chefService->editMeal($id);
+        $meal = $this->chefService->findMeal($id)->getMeal();
 
         $this->gateService->chefIdCheck($meal->chef_id);
 
-        $datetimepeoples = $this->chefService->editDatetimePeople($meal);
+        $chef = $this->chefService->findUser()->findChef()->getChef();
+        $images = $this->imageService->findImageByChef($chef)->getImage();
+
+        $mealImages = $this->chefService->editImage($meal);
+        $datetimepeoples = $this->chefService->findDatetimePeople($meal)->getDateTimePeople();
         $shiftarray = $this->chefService->editShift();
         $categoryarray = $this->chefService->editCategory();
         $methodarray = $this->chefService->editMethod();
         
         $agent = $this->agentService->agent();
-        return view($agent . '.chef.edit', ['meal' => $meal, 'datetimepeoples' => $datetimepeoples, 'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
+        return view($agent . '.chef.edit', ['meal' => $meal, 'datetimepeoples' => $datetimepeoples, 'images' => $images, 'mealImages' => $mealImages,
+                                            'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
     }
 
     /**
@@ -118,7 +138,13 @@ class ChefController extends Controller
      */
     public function update(MealCreateRequest $request, $id)
     {
-        $meal = $this->chefService->update($request, $id);
+        $meal = $this->chefService->findMeal($id)->getMeal();
+        $meal = $this->chefService->updateMeal($meal, $request)->getMeal();
+        $this->chefService->findDatetimePeople($meal)->deleteDateTimePeople()->createDatetimePeople($meal);
+        $this->chefService->connectImage($meal);
+        $this->chefService->connectCategory($meal);
+        $this->chefService->connectMethod($meal);
+        $this->chefService->connectShift($meal);
         
         flash()->success('Success', 'The meal has been updated successfully!');
         return redirect()->route('chef.show', encrypt($meal->id));
@@ -132,31 +158,12 @@ class ChefController extends Controller
      */
     public function destroy($id)
     {
-        $meal = $this->chefService->editMeal($id);
+        $meal = $this->chefService->findMeal($id)->getMeal();
         $this->gateService->chefIdCheck($meal->chef_id);
 
         $this->chefService->destroy($meal);
 
         flash()->success('Success', 'The meal has been deleted successfully!');
         return redirect()->route('chef.index');
-    }
-
-    public function uploadImage(Request $request, $id)
-    {
-        $meal = $this->chefService->editMeal($id);
-        $this->gateService->chefIdCheck($meal->chef_id);
-
-        $this->chefService->uploadImage($request, $meal);
-    }
-
-    public function deleteImage($image_id, $meal_id)
-    {
-        $meal = $this->chefService->editMeal($meal_id);
-        $this->gateService->chefIdCheck($meal->chef_id);
-
-        $this->chefService->deleteImage($image_id);
-
-        $url = "chef/" . encrypt($meal_id) . "/edit#submit";
-        return redirect($url);
     }
 }

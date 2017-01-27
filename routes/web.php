@@ -152,16 +152,22 @@ Route::get('auth/facebook/callback', 'Auth\OAuthController@handleProviderCallbac
 //Chef CRUD and profile
 Route::get('/chef_content', 'MainController@getChefContent');
 Route::resource('chef', 'ChefController');
-Route::post('chef/upload/upload_image/{meal_id}', [
-    'uses' => 'ChefController@uploadImage',
-    'as' => 'chef.upload.upload_image'
-]);
-Route::delete('chef/delete_image/{image_id}/{meal_id}', [
-    'uses' => 'ChefController@deleteImage',
-    'as' => 'chef.delete.delete_image'
-]);
 Route::resource('chef_profile', 'ChefProfileController', [
     'only' => ['index', 'edit', 'update', 'destroy']
+]);
+
+//Image 
+Route::get('image/index/{id}', [
+    'uses' => 'ImageController@index',
+    'as' => 'image.index'
+]);
+Route::post('image/upload/{chef_id}', [
+    'uses' => 'ImageController@upload',
+    'as' => 'image.upload'
+]);
+Route::delete('image/delete/{chef_id}', [
+    'uses' => 'ImageController@delete',
+    'as' => 'image.delete'
 ]);
 
 //User CRUD and profile

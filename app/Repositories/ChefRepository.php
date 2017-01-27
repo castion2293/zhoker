@@ -89,6 +89,24 @@ class ChefRepository
          return $chef->cheforders()->withTrashed()->latest('id')->with('carts')->paginate($qty);
      }
 
+     /**
+     * @param $chef
+     * @return images
+     */
+     public function forImages(Chef $chef)
+     {
+         return $chef->images()->latest('updated_at')->get();
+     }
+
+    /**
+     * @param $chef
+     * @return images
+     */
+     public function forImagesPaginate(Chef $chef, $qty)
+     {
+         return $chef->images()->latest('updated_at')->paginate($qty);
+     }
+
      public function save(Chef $chef)
      {
          return $chef->save();

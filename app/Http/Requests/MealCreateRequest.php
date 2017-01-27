@@ -30,7 +30,7 @@ class MealCreateRequest extends FormRequest
             'shifts' => 'required',
             'categories' => 'required',
             'methods' => 'required',
-            'img' => 'image',
+            'img' => 'required',
             'description' => 'required',
         ];
     }

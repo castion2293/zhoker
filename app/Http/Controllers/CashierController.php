@@ -32,8 +32,7 @@ class CashierController extends Controller
 
     public function getBindingCard($id)
     {
-        $id = $this->gateService->decrypt($id);
-        $this->gateService->userIdCheck($id);
+        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
 
         $user = $this->cashierService->getUser($id);
         $this->sessionService->put('oldUrl', url()->previous());

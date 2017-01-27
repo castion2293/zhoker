@@ -89,9 +89,8 @@ class UserProfileController extends Controller
      */
     public function edit($id)
     {
-        $id = $this->gateService->decrypt($id);
-        $this->gateService->userIdCheck($id);
-
+        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+        
         $user = $this->userProfileService->indexUser($id);
 
         $agent = $this->agentService->agent();
@@ -197,9 +196,8 @@ class UserProfileController extends Controller
 
     public function getPaymentDelete($id)
     {
-        $id = $this->gateService->decrypt($id);
-        $this->gateService->userIdCheck($id);
-
+        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+        
         $user = $this->userProfileService->indexUser($id);
         $credit_card = $this->creditCardService->findCreditCard($user);
 

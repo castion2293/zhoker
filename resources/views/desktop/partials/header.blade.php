@@ -15,6 +15,9 @@
               <a href="{{ url('/chef_profile') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Setting</span></a>
             </li>
             <li class="w3-hide-small w3-right">
+              <a href="{!! route('image.index', ['id' => encrypt(Auth::user()->chef_id)]) !!}" class="w3-padding-large w3-xlarge listcolor" id="chef_setUp" ><i class="fa fa-camera-retro"></i><span class="w3-large"> Image</span></a>
+            </li>
+            <li class="w3-hide-small w3-right">
               <a href="{{url('/chef/create')}}" class="w3-padding-large w3-xlarge listcolor" id="chef_create" ><i class="fa fa-pencil-square-o"></i><span class="w3-large"> Create</span></a>
             </li>
             <li class="w3-hide-small w3-right">

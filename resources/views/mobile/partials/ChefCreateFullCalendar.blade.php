@@ -110,5 +110,12 @@
                 $("#dtp-result").val(list);
             });
 
+            //link to image-from
+            $('#DatetimePeopleModal').on('hidden.bs.modal', function (e) {
+                $('html, body').animate({
+                    scrollTop: $("#name-form").offset().top
+                }, 100);
+            });
+
         });
     </script>
