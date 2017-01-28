@@ -18,6 +18,17 @@ class MapListService
     protected $mealRepo;
     protected $datetimepeopleRepo;
 
+    protected $request;
+    protected $chef;
+    protected $price;
+    protected $meal;
+    protected $datetimepeople;
+    protected $shift;
+    protected $method;
+    protected $category;
+    
+    protected $id;
+
     /**
      * MapListService constructor.
      */
@@ -33,100 +44,217 @@ class MapListService
     }
 
     /**
-     * @param $request
-     * @return meals
+     * @param $city
+     * @return $this
      */
-    public function mapList($request)
+    public function findChef($city)
     {
-        $chefs = $this->chefRepo->findChefByCity($request->input('city'));
-        $shifts = $this->shiftRepo->findShiftByShiftName($request->input('shift'));
-        $datetimepeoples = $this->datetimepeopleRepo->findDateTimePeopleByDate($request->input('date'));
+        $this->chef = $this->chefRepo->findChefByCity($city);
 
-        //find chef_meal_id
-        $chef_id = $this->ToArrayId($chefs);
-        
-        $meals = $this->mealRepo->findMealByChefId($chef_id);
-
-        $chef_meal_id = $this->ToArrayId($meals);
-        
-        //find shift_meal_id
-        $meals = $this->shiftRepo->forMeals($shifts);
-        
-        $shift_meal_id = $this->ToArrayId($meals);
-
-        //find date_meal_id
-        $date_meal_id = $this->ToArrayMealId($datetimepeoples);
-        
-        //find Meals
-        $meal_id = array_intersect($chef_meal_id, $shift_meal_id, $date_meal_id);
-        return $this->mealRepo->findMealById($meal_id);
+        return $this;
     }
 
     /**
-     * @param $request
-     * @return meals
+     * @param $chef
+     * @return $this
      */
-    public function mapListDetail($request)
+    public function findChefMealId($chef = null)
     {
-        $chefs = $this->chefRepo->findChefByCity($request->input('city'));
+        count($chef) ?: $chef = $this->chef;
 
-        if ($request->input('minPrice') == "" && $request->input('maxPrice') == "") {
-            $meals = $this->mealRepo->findMealAll();
+        $chef_id = $this->ToArrayId($chef);
+        $meals = $this->mealRepo->findMealByChefId($chef_id);
+        $this->id = $this->ToArrayId($meals);
+
+        return $this;
+    }
+
+    /**
+     * @param $minPrice, $maxPrice
+     * @return $this
+     */
+    public function findPrice($minPrice, $maxPrice)
+    {
+        if ($minPrice == "" && $maxPrice == "") {
+            $this->price = $this->mealRepo->findMealAll();
         } else {
-            $meals = $this->mealRepo->findMealByPriceRange($request->input('minPrice'), $request->input('maxPrice'));
+            $this->price = $this->mealRepo->findMealByPriceRange($minPrice, $maxPrice);
         }
 
-        $datetimepeoples = $this->datetimepeopleRepo->findDateTimePeopleByDateAndPeople($request->input('date'), $request->input('people'));
+        return $this;
+    }
 
-        $shifts = $this->shiftRepo->findShiftByShiftName($request->input('shift'));
-        
-        $methods = $this->methodRepo->findMethodByMethodName($request->input('method'));
+    /**
+     * @param $price
+     * @return $this
+     */
+    public function findPriceId($price = null)
+    {
+        count($price) ?: $price = $this->price;
 
-        $categories = $this->categoryRepo->findCategoryById($request->input('type'));
-        
-        //find chef_meal_id
-        $chef_id = $this->ToArrayId($chefs);
-        
-        $chef_meals = $this->mealRepo->findMealByChefId($chef_id);
+        $this->id = $this->ToArrayId($price);
 
-        $chef_meal_id = $this->ToArrayId($chef_meals);
+        return $this;
+    }
 
-        //find meal_meal_id
-        $meal_meal_id = $this->ToArrayId($meals);
+    /**
+     * @param $date
+     * @return $this
+     */
+    public function findDatetimepeople($date, $people = null)
+    {
+        if ($people) 
+            $this->datetimepeople = $this->datetimepeopleRepo->findDateTimePeopleByDateAndPeople($date, $people); 
+        else
+            $this->datetimepeople = $this->datetimepeopleRepo->findDateTimePeopleByDate($date);
         
-        //find date_meal_id
-        $date_meal_id = $this->ToArrayMealId($datetimepeoples);
+        return $this;
+    }
+
+     /**
+     * @param $datetimepeople
+     * @return $this
+     */
+    public function findDatetimepeopleMealId($datetimepeople = null)
+    {
+        count($datetimepeople) ?: $datetimepeople = $this->datetimepeople;
+
+        $this->id = $this->ToArrayMealId($datetimepeople);
+
+        return $this;
+    }
+
+    /**
+     * @param $shift
+     * @return $this
+     */
+    public function findShift($shift)
+    {
+        $this->shift = $this->shiftRepo->findShiftByShiftName($shift);
+
+        return $this;
+    }
+
+     /**
+     * @param $shift
+     * @return $this
+     */
+    public function findShiftMealId($shift = null)
+    {
+        count($shift) ?: $shift = $this->shift;
         
-        //find shift_meal_id
-        if ($request->input('shift') == 'All') {
-            $shift_meal_id = $this->ToMultiArrayMealID($shifts);
+        if (count($shift) > 1) {
+            $this->id = $this->ToMultiArrayMealID($shift);
         } else {
-            $shift_meals = $this->shiftRepo->forMeals($shifts);
-        
-            $shift_meal_id = $this->ToArrayId($shift_meals);
+            $shift_meals = $this->shiftRepo->forMeals($shift);
+            $this->id = $this->ToArrayId($shift_meals);
         }
 
-        //find Method_meal_id
-        if ($request->input('method') == 'All') {
-            $method_meal_id = $this->ToMultiArrayMealID($methods);
+        return $this;
+    }
+
+     /**
+     * @param $method
+     * @return $this
+     */
+    public function findMethod($method)
+    {
+        $this->method = $this->methodRepo->findMethodByMethodName($method);
+
+        return $this;
+    }
+
+     /**
+     * @param $method
+     * @return $this
+     */
+    public function findMethodMealId($method = null)
+    {
+        count($method) ?: $method = $this->method;
+
+        if (count($method) > 1) {
+            $this->id = $this->ToMultiArrayMealID($method);
         } else {
-            $method_meals = $this->methodRepo->forMeals($methods);
+            $method_meals = $this->methodRepo->forMeals($method);
+            $this->id = $this->ToArrayId($method_meals);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $category
+     * @return $this
+     */
+    public function findCategory($category)
+    {
+        $this->category = $this->categoryRepo->findCategoryById($category);
         
-            $method_meal_id = $this->ToArrayId($method_meals);
+        return $this;
+    }
+
+     /**
+     * @param $category
+     * @return $this
+     */
+    public function findCategoryMealId($category = null)
+    {
+        count($category) ?: $category = $this->category;
+
+        $this->id = $this->ToMultiArrayMealID($category);
+
+        return $this;
+    }
+
+    /**
+     * @param 
+     * @return $id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+     /**
+     * @param 
+     * @return $this
+     */
+    public function findMeal()
+    {
+        $args = func_get_args();
+        $object = array_pop($args);
+
+        foreach($args as $arg) {
+            $object = array_intersect($object, $arg);
         }
-        //find Category_meal_id
-        $category_meal_id = $this->ToMultiArrayMealID($categories);
 
-        //find searching meal id
-        $meal_id = array_intersect($chef_meal_id, $meal_meal_id, $date_meal_id, $shift_meal_id, $method_meal_id, $category_meal_id);
+        $this->id = $object;
 
-        if ($request->input('sort') == "1") {
-            $meals = $this->mealRepo->findMealByIdAndPriceOrder($meal_id, 'asc');
-        } else if($request->input('sort') == "2") {
-            $meals = $this->mealRepo->findMealByIdAndPriceOrder($meal_id, 'desc');
+        return $this;
+    }
+
+     /**
+     * @param $sort
+     * @return $this
+     */
+    public function sortMeal($sort = '1')
+    {
+        if ($sort == '1') {
+            $this->meal = $this->mealRepo->findMealByIdAndPriceOrder($this->id, 'asc');
+        } else if($request->input('sort') == '2') {
+            $this->meal = $this->mealRepo->findMealByIdAndPriceOrder($this->id, 'desc');
         }
 
-        return $meals;
+        return $this;
+    }
+
+    /**
+     * @param 
+     * @return $meal
+     */
+    public function getMeal()
+    {
+        return $this->meal;
     }
 
     /**

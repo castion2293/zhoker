@@ -26,7 +26,10 @@ class MapListController extends Controller
     {
         $this->sessionService->requestFlash($request);
 
-        $meals = $this->mapListService->mapList($request);
+        $chefMealId = $this->mapListService->findChef($request->city)->findChefMealId()->getId();
+        $shiftMealId = $this->mapListService->findShift($request->shift)->findShiftMealId()->getId();
+        $datetimepeopleMealId = $this->mapListService->findDatetimepeople($request->date)->findDatetimepeopleMealId()->getId();
+        $meals = $this->mapListService->findMeal($chefMealId, $shiftMealId, $datetimepeopleMealId)->sortMeal()->getMeal();
         
         $agent = $this->agentService->agent();
         return view($agent . '.main.map_list', ['meals' => $meals, 'date' => $request->input('date')]);
@@ -36,7 +39,15 @@ class MapListController extends Controller
     {
         $this->sessionService->requestFlash($request);
 
-        $meals = $this->mapListService->mapListDetail($request);
+        $chefMealId = $this->mapListService->findChef($request->city)->findChefMealId()->getId();
+        $priceMealId = $this->mapListService->findPrice($request->minPrice, $request->maxPrice)->findPriceId()->getId();
+        $datetimepeopleMealId = $this->mapListService->findDatetimepeople($request->date, $request->people)->findDatetimepeopleMealId()->getId();
+        $shiftMealId = $this->mapListService->findShift($request->shift)->findShiftMealId()->getId();
+        $methodMealId = $this->mapListService->findMethod($request->method)->findMethodMealId()->getId();
+        $categoryMealId = $this->mapListService->findCategory($request->type)->findCategoryMealId()->getId();
+        $meals = $this->mapListService->findMeal($chefMealId, $priceMealId, $datetimepeopleMealId, $shiftMealId, $methodMealId, $categoryMealId)
+                                      ->sortMeal($request->sort)
+                                      ->getMeal();
         
         $agent = $this->agentService->agent();
         return view($agent . '.main.map_list', ['meals' => $meals, 'date' => $request->input('date')]);
