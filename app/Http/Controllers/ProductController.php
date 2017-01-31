@@ -47,8 +47,9 @@ class ProductController extends Controller
 
         if (count($this->productService->getBuyNextTimeItems($user, $datetime_id)))
             $this->productService->buyNextTimeCancel($user, $datetime_id);
-        
-        return redirect()->route('product.cart.show', encrypt($cart->user_id));
+
+        $url = '/product/cart/show/' . encrypt($cart->user_id) . '#shoppingcart';
+        return redirect($url);
     }
 
     public function getCartShow($id)
@@ -124,5 +125,15 @@ class ProductController extends Controller
     {
         $user = $this->productService->getUser($request->user_id);
         $this->productService->reserveMealCancel($user, $request->meal_id);
+    }
+
+    public function getOtherDays($id)
+    {
+        $id = $this->gateService->decrypt($id)->getId();
+        $meal = $this->productService->getMeal($id);
+        $datetimepeoples = $this->productService->getDateTimePeopleOthers($meal);
+
+        $agent = $this->agentService->agent();
+        return view($agent . '.products.otherdays', ['meal' => $meal, 'datetimepeoples' => $datetimepeoples] );
     }
 }

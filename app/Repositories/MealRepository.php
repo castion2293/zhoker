@@ -79,8 +79,11 @@ class MealRepository
      * @param $meal
      * @return datetimepeople
      */
-     public function forDateTimePeople(Meal $meal)
+     public function forDateTimePeople(Meal $meal, $others = false)
      {
+        if ($others)
+            return $meal->datetimepeoples()->where('people_left', '>', 0)->get();
+
         return $meal->datetimepeoples()->get();
      }
 

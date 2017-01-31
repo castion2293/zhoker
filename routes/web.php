@@ -105,6 +105,10 @@ Route::post('product/cart/cancelreversemeal', [
     'uses' => 'ProductController@postCancelReserveMeal',
     'as' => 'product.cart.cancelreversemeal'
 ]);
+Route::get('product/cart/otherdays/{meal_id}', [
+    'uses' => 'ProductController@getOtherDays',
+    'as' => 'product.cart.otherdays'
+]);
 
 //check out
 Route::get('product/cart/bindingcard/{id}', [

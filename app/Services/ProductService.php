@@ -51,6 +51,16 @@ class ProductService
 
     /**
      * @param $meal
+     * @return datetimepeople
+     */
+    public function getDateTimePeopleOthers($meal)
+    {
+        return $this->mealRepo->forDateTimePeople($meal, true);
+    }
+    
+
+    /**
+     * @param $meal
      * @return method
      */
     public function getMethod($meal, $id = null)

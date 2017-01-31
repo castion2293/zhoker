@@ -61,7 +61,7 @@
                       <div id="image_btn" class="w3-btn-floating w3-text-white w3-transparent" style="border: 2px solid;"><i class="fa fa-instagram"></i></div>
                     </div>
                 </div>
-                <div class="w3-right">
+                <div class="w3-right" style="padding-right:3em;">
                     @if (Auth::check())
                       <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="{{ $ProductPresenter->checkUserBuyNextTimeItem(Auth::user(), $datetimepeople->id) ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i> Buy Next Time</div>
                     @else
@@ -116,22 +116,26 @@
                     @if ($datetimepeople->people_left != 0)
                       {!! Form::submit('ADD TO CART', ['id' => 'add-to-cart', 'class' => 'btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange']) !!}
                     @else
-                      <div id="reserve" class="btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange">Reserve Meal</div>
-                      <!--link for going to shoppingcart page, not shown--> 
-                      <a href="{{ url('/product/cart/show/' . encrypt(Auth::user() ? Auth::user()->id : 0) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                      <div class="w3-row">
+                          <div class="w3-col l6 m6" style="padding-right:0.5em;">
+                              <div id="reserve" class="btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange">Reserve Meal</div>
+                              <!--link for going to shoppingcart page, not shown--> 
+                              <a href="{{ url('/product/cart/show/' . encrypt(Auth::user() ? Auth::user()->id : 0) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                          </div>
+                          <div class="w3-col l6 m6" style="padding-left:0.5em;">
+                              <a href="{{ route('product.cart.otherdays', ['meal_id' => encrypt($meal->id)]) }}" class="btn w3-white w3-text-blue w3-border w3-border-blue btn-block w3-large zk-shrink-hover">Other Days</a>
+                          </div>
+                      </div>
                     @endif
                 </div>
                {!! Form::close() !!}
             </div>
 
             <div class="w3-col s12 w3-padding-large">
-                <div class="w3-rol">
-                    <div class="w3-rest"></div>
-                    <div class="w3-right">
-                      <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
-                    </div>
-                </div>
-                <label class="w3-text-grey w3-large" style="font-family: cursive">meal description</label>
+                 <div>
+                    <label class="w3-text-grey w3-large" style="font-family: cursive">meal description</label>
+                    <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
+                 </div>
                 <p>{!! $meal->description !!}</p>
             </div>
         </div>

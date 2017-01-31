@@ -60,28 +60,6 @@ class UserProfileController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function show($id)
-    // {
-    //     //
-    // }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -114,17 +92,6 @@ class UserProfileController extends Controller
 
         flash()->success('Success', 'Your profile has been updated successfully!');
         return redirect()->route('user_profile.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function resetPassword(UserResetPasswordRequest $request)

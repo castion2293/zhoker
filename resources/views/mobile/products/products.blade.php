@@ -102,9 +102,16 @@
                             @if ($datetimepeople->people_left != 0)
                               {!! Form::submit('ADD TO CART', ['id' => 'add-to-cart', 'class' => 'btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange']) !!}
                             @else
-                              <div id="reserve" class="btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange">Reserve Meal</div>
-                              <!--link for going to shoppingcart page, not shown--> 
-                              <a href="{{ url('/product/cart/show/' . encrypt(Auth::user() ? Auth:user()->id : 0) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                              <div class="w3-row">
+                                  <div class="w3-col s6" style="padding-right:0.5em;">
+                                      <div id="reserve" class="btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange">Reserve Meal</div>
+                                      <!--link for going to shoppingcart page, not shown--> 
+                                      <a href="{{ url('/product/cart/show/' . encrypt(Auth::user() ? Auth::user()->id : 0) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                                  </div>
+                                  <div class="w3-col s6"  style="padding-left:0.5em;">
+                                      <a href="{{ route('product.cart.otherdays', ['meal_id' => encrypt($meal->id)]) }}" class="btn w3-white w3-text-blue w3-border w3-border-blue btn-block w3-large zk-shrink-hover">Other Days</a>
+                                  </div>
+                              </div>
                             @endif
                         </div>
                     {!! Form::close() !!}
@@ -118,14 +125,9 @@
                 @endif  
             </div>
             <div class="w3-col s12 w3-padding-large">
-                <div class="w3-margin-top">
-                    <div class="w3-rest"></div>
-                    <div class="w3-right">
-                      <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
-                    </div>
-                </div>
                 <div class="w3-margin-top w3-border-grey w3-border-bottom w3-padding-12">
                     <label class="w3-text-grey w3-large" style="font-family: cursive">meal description</label>
+                    <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
                     <p>{!! $meal->description !!}</p>
                 </div>
             </div>
