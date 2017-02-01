@@ -29,6 +29,7 @@
                 </div>
                 <div class="w3-col l2 m2">
                     <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic clickdown" name="shift" style="height:50px">
+                        <option class="w3-text-black w3-white w3-large">All</option>
                         <option class="w3-text-black w3-white w3-large">Dinner</option>
                         <option class="w3-text-black w3-white w3-large">Lunch</option>
                         <option class="w3-text-black w3-white w3-large">Brunch</option>
@@ -100,41 +101,6 @@
     <div class="w3-padding64 w3-content w3-container" style="margin-top:5em;">
         <h3 class="w3-center ">OUR CHEF</h3>
         <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
-
-        <!--div class="w3-row-padding">
-            <div class="w3-col l4 m4">
-                <a href="#">
-                    <div class="w3-display-container">
-                        <img src="{{ URL::to('img/1128201612.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;">
-                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Mr. Smith</b></h3>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="w3-col l4 m4">
-                <a href="#">
-                    <div class="w3-display-container">
-                        <img src="{{ URL::to('img/1128201613.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;">
-                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Mr. Smith</b></h3>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="w3-col l4 m4">
-                <a href="#">
-                    <div class="w3-display-container">
-                        <img src="{{ URL::to('img/1128201614.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;">
-                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Mr. Smith</b></h3>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div-->
     </div>
 
     <!-- Container (Portfolio Section) -->
@@ -254,7 +220,8 @@
     // datepicker
     $(function () {
         $("#datepicker").datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD',
+            minDate: moment()
         });
     })
     </script>

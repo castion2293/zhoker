@@ -43,6 +43,13 @@
                 selectHelper: true,
                 eventStartEditable : true,
                 select: function(start, end) {
+
+                    //disable previous days
+                    if(start.isBefore(moment())) {
+                        $('#calendar').fullCalendar('unselect');
+                        return false;
+                    }
+                    
                     var People = prompt('People');
                     var eventData;
                     if (People) {

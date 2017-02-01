@@ -57,7 +57,7 @@
                           <th>People Orders</th>
                         </thead>
                         <tbody>
-                          @foreach ($meal->datetimepeoples as $datetimepeople)
+                          @foreach ($meal->datetimepeoples->take(5) as $datetimepeople)
                             <tr>
                               <td>{{ $datetimepeople->date }}</td>
                               <td>{{ date("g:i a", strtotime($datetimepeople->time)) }}</td>

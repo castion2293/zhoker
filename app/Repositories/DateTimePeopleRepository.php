@@ -3,9 +3,12 @@
 namespace App\Repositories;
 
 use App\DateTimePeople;
+use App\Repositories\Foundation\DateTrait;
 
 class DateTimePeopleRepository
 {
+    use DateTrait;
+
     protected $datetimepeople;
 
     public function __construct(DateTimePeople $datetimepeople)
@@ -36,7 +39,11 @@ class DateTimePeopleRepository
      */
      public function findDateTimePeopleByDate($date)
      {
-         return $this->datetimepeople->where('date', $date)->get();
+         $now = $this->CheckDate($date);
+         
+         return $this->datetimepeople->where('date', $date)
+                                     ->where('end_time', '>', $now)
+                                     ->get();
      }
 
      /**
@@ -45,8 +52,11 @@ class DateTimePeopleRepository
      */
      public function findDateTimePeopleByDateAndPeople($date, $people)
      {
+         $now = $this->CheckDate($date);
+
          return $this->datetimepeople->where('date', $date)
                                      ->where('people_left', '>=', $people)
+                                     ->where('end_time', '>', $now)
                                      ->get();
      }
 

@@ -3,9 +3,12 @@
 namespace App\Repositories;
 
 use App\Meal;
+use App\Repositories\Foundation\DateTrait;
 
 class MealRepository
 {
+    use DateTrait;
+
     protected $meal;
 
     /**
@@ -81,10 +84,16 @@ class MealRepository
      */
      public function forDateTimePeople(Meal $meal, $others = false)
      {
-        if ($others)
-            return $meal->datetimepeoples()->where('people_left', '>', 0)->get();
+        if ($others) {
+            return $meal->datetimepeoples()
+                        ->where('people_left', '>', 0)
+                        ->where('date', '>', $this->getToday())
+                        ->get();
+        }
 
-        return $meal->datetimepeoples()->get();
+        return $meal->datetimepeoples()
+                    ->where('date', '>', $this->getToday())
+                    ->get();
      }
 
      /**

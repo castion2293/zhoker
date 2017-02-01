@@ -219,7 +219,8 @@
         // datepicker
         $(function () {
             $("#datepicker").datetimepicker({
-                format: 'YYYY-MM-DD'
+                format: 'YYYY-MM-DD',
+                minDate: moment()
             });
         });
 

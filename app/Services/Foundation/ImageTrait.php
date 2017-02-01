@@ -9,7 +9,6 @@ use Image;
 
 trait ImageTrait
 {
-    //old version
     public function save($image, $path, $counter, $action)
     {
         $filename = $action . time() . $counter . '.' . $image->getClientOriginalExtension();

@@ -32,7 +32,7 @@
                     </div>
                     <!--date and shift not display-->
                     <div style="display:none;">
-                        {{ Form::text('shift', 'Dinner', ['required' => '']) }}
+                        {{ Form::text('shift', 'All', ['required' => '']) }}
                         {{ Form::text('date', null, ['id' => 'default_date', 'required' => '']) }}
                     </div>
                     <button class="w3-col s2 w3-btn w3-border-green w3-large w3-green" style="height:50px">
@@ -96,41 +96,6 @@
     <div class="w3-padding64 w3-content w3-container" style="margin-top:5em;">
         <h3 class="w3-center ">OUR CHEF</h3>
         <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
-
-        <!--div class="w3-row-padding">
-            <div class="w3-col l4 m4">
-                <a href="#">
-                    <div class="w3-display-container">
-                        <img src="{{ URL::to('img/1128201612.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;">
-                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Mr. Smith</b></h3>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="w3-col l4 m4">
-                <a href="#">
-                    <div class="w3-display-container">
-                        <img src="{{ URL::to('img/1128201613.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;">
-                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Mr. Smith</b></h3>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="w3-col l4 m4">
-                <a href="#">
-                    <div class="w3-display-container">
-                        <img src="{{ URL::to('img/1128201614.JPG') }}" alt="picture1" style="width:100%;margin-bottom:0;">
-                        <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Mr. Smith</b></h3>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div-->
     </div>
 
     <!-- Container (Portfolio Section) -->
@@ -249,7 +214,7 @@
     <script>
     // date
     $(function () {
-        $("#default_date").val("{{ date("Y-m-d" , strtotime(\Carbon\Carbon::now()) ) }}");
+        $("#default_date").val("{{ date("Y-m-d" , strtotime($now) ) }}");
     })
     </script>
 @endsection
