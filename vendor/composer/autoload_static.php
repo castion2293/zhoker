@@ -474,11 +474,13 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
     );
 
     public static $classMap = array (
+        'AddEvalutedToCartsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_205522_add_evaluted_to_carts_table.php',
         'CategoryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoryTableSeeder.php',
         'CreateCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_08_030915_create_carts_table.php',
         'CreateCategoriesTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_024229_create_categories_table.php',
         'CreateChefOrdersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_15_180446_create_chef_orders_table.php',
         'CreateChefsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_15_211727_create_chefs_table.php',
+        'CreateCommentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_31_203820_create_comments_table.php',
         'CreateCreditCardsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_16_170401_create_credit_cards_table.php',
         'CreateDateTimePeoplesTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_15_222350_create_date_time_peoples_table.php',
         'CreateImagesTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_26_143513_create_images_table.php',

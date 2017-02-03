@@ -77,6 +77,8 @@
                 </div>
                 <div class="w3-center w3-margin-top">
                     <button class="btn w3-large w3-white w3-text-green w3-border w3-border-green zk-shrink-hover" id="upload-img" style="width:80%;">Upload</button>
+                    <button class="btn w3-large w3-white w3-text-white w3-border w3-border-white" style="width:20%;display:none;" id="hide-btn" disabled>Upload</button>
+                    <div class="" id="loader" style="left:43%;margin-top:-3em;display:none;"></div>
                 </div>
             </div>
         </div>
@@ -125,7 +127,9 @@
                     e.preventDefault();
                     e.stopPropagation();
                     dzClosure.processQueue();
-                    $("#upload-img").text("Uploading...")
+                    $("#upload-img").hide();
+                    $("#hide-btn").show();
+                    $("#loader").show();
                 });
 
                 //send all the form data along with the files:
@@ -134,7 +138,8 @@
                 });
             },
             success: function(file, response){
-                $("#upload-img").hide();
+                $("#hide-btn").hide();
+                $("#loader").hide();
                 $("#finish-upload").show();
             }
         }

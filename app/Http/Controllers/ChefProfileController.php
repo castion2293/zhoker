@@ -66,6 +66,8 @@ class ChefProfileController extends Controller
      */
     public function update(ChefProfileEditRequest $request, $id)
     {
+        $id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
+        
         $chef = $this->chefProfileService->update($request, $id);
 
         $meals = $this->mainService->getMeals($chef, 6);

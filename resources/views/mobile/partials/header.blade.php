@@ -25,7 +25,7 @@
           <a href="{{ route('logout') }}" class="w3-hover-green w3-large w3-text-blue"><i class="fa fa-sign-out"></i> LogOut</a>
        @else
           <div class="w3-margin-left">
-            <img src="{{ $UserPresenter->userProfileImg(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
+            <img src="{{ Auth::user()->user_profile_img }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
           </div>
           <hr>
           <a href="{{ route('home.index') }}" class="w3-hover-green w3-large w3-text-blue"><i class="fa fa-home"></i> Home</a>

@@ -7,6 +7,7 @@
             timer: 2000,
         });
     </script>
+    {{ session()->forget('flash_message') }}
 @endif
 
 @if (session()->has('flash_message_overlay'))
@@ -18,4 +19,5 @@
             confirmButtonText: "Okay",
         });
     </script>
+    {{ session()->forget('flash_message_overlay') }}
 @endif

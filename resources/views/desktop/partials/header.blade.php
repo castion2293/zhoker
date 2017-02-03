@@ -32,7 +32,7 @@
           @else 
             <li><a href="{{ route('home.index') }}" class="w3-padding-large w3-xlarge w3-left listcolor" id="hometag">Zhoker</a></li>
             <li class="w3-hide-small w3-right">
-              <img src="{{ $UserPresenter->userProfileImg(Auth::user()->user_profile_img) }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
+              <img src="{{ Auth::user()->user_profile_img }}" class="w3-circle w3-margin-top w3-margin-right" style="width:35px;height:35px;">
             </li>
             <li class="w3-hide-small w3-right">
               <a href="{{ route('logout') }}" class="w3-padding-large w3-xlarge listcolor" id="sign-out-bar" ><i class="fa fa-sign-out"></i><span class="w3-large"> LogOut</span></a>

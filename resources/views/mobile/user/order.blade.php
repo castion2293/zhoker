@@ -97,6 +97,13 @@
                                                 @endif
                                             @endif
                                         </div>
+                                        <div class="w3-col s12 w3-center">
+                                            @if ($cart->evaluated)
+                                                <span class="w3-text-whtie w3-large">Evaluated</span>
+                                            @else
+                                                <a href="{{ route('evaluation.create', ['id' => encrypt($cart->id)])}}" class="w3-text-deep-orange w3-large">Evaluate</a>
+                                            @endif
+                                        </div>
                                        
                                     </div>
                                 @endforeach

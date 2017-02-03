@@ -37,7 +37,7 @@
         <div class="w3-row w3-padding-12">
             <div class="w3-col l7 m7 w3-padding-large">
                 <div class="w3-padding-12 w3-display-container">
-            
+               
                     <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
                         @foreach ($meal->images as $image)
                             @if ($loop->first)
@@ -73,9 +73,18 @@
               {!! Form::open(['route' => ['product.cart', $meal->id, $datetimepeople->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                 <div class="w3-margin-top w3-border-bottom w3-border-grey">
                     <label>Evaluation:  
-                        @for ($i = 0; $i < 5; $i++)
-                          <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
-                        @endfor
+                        @if ($meal->people_eva > 0)
+                            @for ($i = 0; $i < $ProductPresenter->getEvaluateScore($meal->evaluation, $meal->people_eva); $i++)
+                              <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
+                            @endfor
+                        @else
+                              <span class="w3-text-orange w3-large">New Meal</span>
+                        @endif
+                    </label>
+                </div>
+                <div class="w3-margin-top w3-border-bottom w3-border-grey">
+                    <label>Eaten:
+                        <span class="w3-text-grey w3-large">{{ $meal->people_eaten }} {{str_plural('person', $meal->people_eaten)}}</span>
                     </label>
                 </div>
                 <div class="w3-margin-top w3-border-bottom w3-border-grey">
@@ -131,13 +140,43 @@
                {!! Form::close() !!}
             </div>
 
-            <div class="w3-col s12 w3-padding-large">
+            <div class="w3-col l12 m12 w3-padding-large">
                  <div>
                     <label class="w3-text-grey w3-large" style="font-family: cursive">meal description</label>
                     <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
                  </div>
-                <p>{!! $meal->description !!}</p>
+                 <div class="w3-padding-small">
+                    <p>{!! $meal->description !!}</p>
+                 </div>
             </div>
+
+            <div class="w3-col l12 m12 w3-padding-large">
+                 <label class="w3-text-grey w3-large" style="font-family: cursive">Comments</label>
+                 <div class="w3-padding-small">
+                    @foreach ($meal->comments()->latest('created_at')->get() as $comment)
+                      <div class="w3-padding-12 w3-border-bottom w3-border-light-grey">
+                        <div class="w3-row">
+                            <div class="w3-col l1 m1" style="padding-top:0.8em;">
+                                <img src="{{ $comment->users->user_profile_img }}" class="w3-circle w3-margin-right" style="width:35px;height:35px;">
+                            </div>
+                            <div class="w3-col l11 m11">
+                                @for ($i = 0; $i < $comment->score; $i++)
+                                    <span class="w3-text-orange w3-medium"><i class="fa fa-star"></i></span>
+                                @endfor
+                                <p class="w3-text-grey">
+                                    <span class="w3-medium">{{ $comment->users->first_name }} /<span>
+                                    <span class="w3-medium">{{ date('M d Y', strtotime($comment->created_at)) }}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w3-margin-top">
+                            <p>{!! $comment->content !!}</p>
+                        </div>
+                      </div>
+                    @endforeach
+                 </div>
+             </div>
+
         </div>
     </div>
 
@@ -287,14 +326,6 @@
     <!-- Animated Select Option -->
     <script src="{{ URL::to('js/classie.js') }}"></script>
     <script src="{{ URL::to('js/selectFx.js') }}"></script>
-    <!-- Animated Select option -->
-    <script>
-			// (function() {
-			// 	 [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {	
-			// 		    new SelectFx(el);
-			// 	 } );
-			// })();
-	 </script>
 
    <!--Facebook Share Link-->
    <script src="https://connect.facebook.net/en_US/all.js"></script>

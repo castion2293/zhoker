@@ -142,6 +142,15 @@ Route::get('order/reject/{id}', [
     'as' => 'order.reject'
 ]);
 
+//evaluation
+Route::get('evaluation/create/{meal_id}', [
+    'uses' => 'EvaluationController@create',
+    'as' => 'evaluation.create'
+]);
+Route::post('evaluation/store/{meal_id}', [
+    'uses' => 'EvaluationController@store',
+    'as' => 'evaluation.store'
+]);
 
 //Chef login
 Route::post('/chef_login', [

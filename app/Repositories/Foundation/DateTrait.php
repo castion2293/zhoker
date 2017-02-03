@@ -9,9 +9,7 @@ trait DateTrait
     public function CheckDate($date)
     {
         if ($date == $this->getToday()) {
-             $h = Carbon::now()->hour;
-             $m = Carbon::now()->minute;
-             return $h . ':' . $m;
+            return date("H:i", strtotime(Carbon::now()));
          } 
 
          return '';

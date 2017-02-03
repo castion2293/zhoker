@@ -28,7 +28,7 @@ class ProductController extends Controller
         $id = $this->gateService->decrypt($id)->getId();
         $datetime_id = $this->gateService->decrypt($datetime_id)->getId();
 
-        $meal = $this->productService->getMeal($id);
+        $meal = $this->productService->findMeal($id)->getMeal();
         $datetimepeople = $this->productService->getDateTimePeople($meal, $datetime_id);
         $methods = $this->productService->getMethod($meal);
     
@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function postAddToCart(Request $request, $id, $datetime_id)
     {
         $user = $this->productService->getUser();
-        $meal = $this->productService->getMeal($id);
+        $meal = $this->productService->findMeal($id)->getMeal();
         $datetime = $this->productService->getDateTimePeople($meal, $datetime_id);
         $method = $this->productService->getMethod($meal, $request->method_way);
         
@@ -130,7 +130,7 @@ class ProductController extends Controller
     public function getOtherDays($id)
     {
         $id = $this->gateService->decrypt($id)->getId();
-        $meal = $this->productService->getMeal($id);
+        $meal = $this->productService->findMeal($id)->getMeal();
         $datetimepeoples = $this->productService->getDateTimePeopleOthers($meal);
 
         $agent = $this->agentService->agent();

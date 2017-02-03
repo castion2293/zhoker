@@ -63,9 +63,18 @@
                         <div class="w3-row w3-padding-small">
                             <div class="w3-col s12 w3-border-bottom w3-border-grey">
                                 <label>Evaluation:  
-                                    @for ($i = 0; $i < 5; $i++)
-                                      <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
-                                    @endfor
+                                    @if ($meal->people_eva > 0)
+                                        @for ($i = 0; $i < $ProductPresenter->getEvaluateScore($meal->evaluation, $meal->people_eva); $i++)
+                                          <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
+                                        @endfor
+                                    @else
+                                        <span class="w3-text-orange w3-large">New Meal</span>
+                                    @endif
+                                </label>
+                            </div>
+                            <div class="w3-col s12 w3-margin-top w3-border-bottom w3-border-grey">
+                                <label>Eaten:                                
+                                    <span class="w3-text-grey w3-large">{{ $meal->people_eaten }} people</span>
                                 </label>
                             </div>
                             <div class="w3-col s12 w3-margin-top w3-border-bottom w3-border-grey">
@@ -124,6 +133,7 @@
                   <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="fa fa-heart-o"></i> Buy Next Time</div>
                 @endif  
             </div>
+
             <div class="w3-col s12 w3-padding-large">
                 <div class="w3-margin-top w3-border-grey w3-border-bottom w3-padding-12">
                     <label class="w3-text-grey w3-large" style="font-family: cursive">meal description</label>
@@ -131,6 +141,34 @@
                     <p>{!! $meal->description !!}</p>
                 </div>
             </div>
+
+            <div class="w3-col s12 w3-padding-large">
+                <label class="w3-text-grey w3-large" style="font-family: cursive">Comments</label>
+                 <div class="w3-padding-small">
+                    @foreach ($meal->comments()->latest('created_at')->get() as $comment)
+                      <div class="w3-padding-12 w3-border-bottom w3-border-light-grey">
+                        <div class="w3-row">
+                            <div class="w3-col s2" style="padding-top:0.8em;">
+                                <img src="{{ $comment->users->user_profile_img }}" class="w3-circle w3-margin-right" style="width:35px;height:35px;">
+                            </div>
+                            <div class="w3-col s10">
+                                @for ($i = 0; $i < $comment->score; $i++)
+                                    <span class="w3-text-orange w3-medium"><i class="fa fa-star"></i></span>
+                                @endfor
+                                <p class="w3-text-grey">
+                                    <span class="w3-medium">{{ $comment->users->first_name }} /<span>
+                                    <span class="w3-medium">{{ date('M d Y', strtotime($comment->created_at)) }}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w3-margin-top">
+                            <p>{!! str_limit($comment->content, 100) !!}</p>
+                        </div>
+                      </div>
+                    @endforeach
+                 </div>
+            </div>
+
         </div>
     </div>
 

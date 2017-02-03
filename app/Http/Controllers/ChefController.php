@@ -79,7 +79,7 @@ class ChefController extends Controller
         $this->chefService->connectMethod($meal);
         $this->chefService->connectShift($meal);
 
-        //flash()->success('Success', 'The meal has been created successfully!');
+        flash()->success('Success', 'The meal has been created successfully!');
 
         $agent = $this->agentService->agent();
         return view($agent . '.chef.show',['meal' => $meal]);

@@ -16,4 +16,13 @@ class ProductPresenter
 
          return false;
      }
+
+     /**
+     * @param $score, $number
+     * @return int
+     */
+     public function getEvaluateScore($score, $number)
+     {
+         return $score / $number;
+     }
 }

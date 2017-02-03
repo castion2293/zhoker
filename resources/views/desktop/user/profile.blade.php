@@ -34,7 +34,7 @@
             </div>
             <div class="w3-display-container">
                 <div class="w3-col l3 m3">
-                    <img src="{{ $UserPresenter->userProfileImg($user->user_profile_img) }}" alt="profile" style="width:100%">
+                    <img src="{{ $user->user_profile_img }}" alt="profile" style="width:100%">
                 </div>
                 <div class="w3-rest"></div>  
                 <div class="w3-col l8 m8 w3-right w3-panel w3-light-grey">

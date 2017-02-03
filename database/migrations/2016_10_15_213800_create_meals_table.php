@@ -18,9 +18,9 @@ class CreateMealsTable extends Migration
             $table->integer('chef_id')->index()->unsigned();
             $table->string('name');
             $table->integer('price');
-            $table->integer('people_eaten')->default(0);
-            $table->integer('people_eva')->nullable();
-            $table->tinyInteger('evaluation')->nullable();
+            $table->integer('people_eaten')->default(0)->unsigned();
+            $table->integer('people_eva')->default(0)->unsigned();
+            $table->tinyInteger('evaluation')->default(0)->unsigned();
             $table->text('description');
             $table->softDeletes();
             $table->timestamps();

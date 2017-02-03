@@ -34,7 +34,7 @@ class MealRepository
      */
      public function findMealById($id)
      {
-        return $this->meal->with(['images', 'datetimepeoples', 'methods', 'shifts', 'categories'])->findOrFail($id);
+        return $this->meal->with(['images', 'datetimepeoples', 'methods', 'shifts', 'categories', 'comments'])->findOrFail($id);
      }
 
     /**
@@ -170,6 +170,29 @@ class MealRepository
      public function methodDetach(Meal $meal)
      {
          return $meal->methods()->detach();
+     }
+
+     /**
+     * @param $meal
+     * @return 
+     */
+    public function updatePeopleEaten(Meal $meal)
+    {
+        return $meal->update([
+            'people_eaten' => $meal->people_eaten++,
+        ]);
+    }
+
+     /**
+     * @param $meal, $score
+     * @return 
+     */
+     public function updateEvaluate(Meal $meal, $score)
+     {
+         return $meal->update([
+             'people_eva' => $meal->people_eva++,
+             'evaluation' => $meal->evaluation + $score,
+         ]);
      }
 
      public function delete(Meal $meal)

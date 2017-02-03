@@ -17,6 +17,8 @@ class ImageController extends Controller
 
     public function __construct(ImageService $imageService, AgentService $agentService, GateService $gateService) 
     {
+        $this->middleware('chef');
+
         $this->imageService =$imageService;
         $this->agentService = $agentService;
         $this->gateService = $gateService;

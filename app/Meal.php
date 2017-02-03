@@ -54,4 +54,9 @@ class Meal extends Model
     {
         return $this->hasOne('App\Cart');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

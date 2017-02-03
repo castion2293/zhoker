@@ -69,6 +69,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
             'password' => bcrypt($data['password']),
+            'user_profile_img' => 'https://s3-us-west-2.amazonaws.com/zhoker/profile_images/default-user-icon-profile.png',
         ]);
     }
 }

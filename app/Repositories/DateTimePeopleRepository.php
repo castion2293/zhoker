@@ -42,8 +42,8 @@ class DateTimePeopleRepository
          $now = $this->CheckDate($date);
          
          return $this->datetimepeople->where('date', $date)
-                                     ->where('end_time', '>', $now)
-                                     ->get();
+                                      ->where('end_time', '>', $now)
+                                      ->get();
      }
 
      /**

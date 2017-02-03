@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group w3-row w3-margin-top">
                         <div class="w3-col l2 m2 w3-padding-small">
-                            <img id="img_content" src="{{ $UserPresenter->userProfileImg($user->user_profile_img) }}" alt="image contetnt" style="width:100%">
+                            <img id="img_content" src="{{ $user->user_profile_img }}" alt="image contetnt" style="width:100%">
                         </div>
                         <div class="w3-col l10 m10">
                             <input type="file" id="myFile" name="user_profile_img" onchange="readURL(this);" style="display:none;">

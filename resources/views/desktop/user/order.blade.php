@@ -105,10 +105,17 @@
                                                 <span class="w3-text-green w3-large">${{ $cart->price }}</span></span>
                                             </div>
                                         </div>
-                                            <div class="w3-col l1 m1">
+                                        <div class="w3-col l1 m1">
                                             <div class="">
                                                 @if ($cart->cheforders()->withTrashed()->first()->checked)
                                                     <span class="w3-text-grey w3-large">Approved</span>
+                                                    <div class="" style="margin-top:2em;">
+                                                        @if ($cart->evaluated)
+                                                            <span class="w3-text-grey w3-large">Evaluated</span>
+                                                        @else
+                                                            <a href="{{ route('evaluation.create', ['id' => encrypt($cart->id)])}}" class="w3-text-deep-orange w3-large">Evaluate</a>
+                                                        @endif
+                                                    </div>
                                                 @else
                                                     @if ($cart->cheforders()->withTrashed()->first()->deleted_at)
                                                         <span class="w3-text-grey w3-large">Rejected</span>
@@ -119,6 +126,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <hr>
                                 @endforeach
 
                             </div>

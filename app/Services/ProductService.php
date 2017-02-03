@@ -12,6 +12,8 @@ class ProductService
     protected $mealRepo;
     protected $cartRepo;
 
+    protected $meal;
+
     /**
      * ProductService constructor.
      */
@@ -33,11 +35,22 @@ class ProductService
 
     /**
      * @param $id
+     * @return $this
+     */
+    public function findMeal($id)
+    {
+        $this->meal =  $this->mealRepo->findMealById($id);
+
+        return $this;
+    }
+
+    /**
+     * @param 
      * @return meal
      */
-    public function getMeal($id)
+    public function getMeal()
     {
-        return $this->mealRepo->findMealById($id);
+        return $this->meal;
     }
 
     /**

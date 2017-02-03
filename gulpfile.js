@@ -17,10 +17,12 @@ elixir(mix => {
         mix.styles(['w3.css',
                 'component.css',
                 'bootstrap-datetimepicker.min.css',
+                'star-rating.css',
                 'main.css'])
            .scripts(['0609.js',
                     'JQ.js',
                     'parsley.min.js',
+                    'star-rating.js',
                     'bootstrap-datetimepicker.min.js']);
            //.webpack('app.js');
     

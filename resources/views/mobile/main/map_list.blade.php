@@ -9,6 +9,9 @@
 @endsection
 
 @section('content')
+    @inject('ProductPresenter', 'App\Presenters\ProductPresenter')
+
+    <!--content-->
     <div class="w3-row">
         <!--div class="col-xs-12">
             <div  class="w3-display-container" style="height:90%;width:60%;margin-top:4%;">
@@ -31,7 +34,13 @@
                               <div class="w3-rest"></div>
                               <div class="w3-col s4 w3-right">
                                 @for ($i = 0; $i < 5; $i++)
-                                  <span class="w3-text-deep-orange star w3-medium"><i class="fa fa-star"></i></span>
+                                  @if ($meal->people_eva > 0)
+                                      @for ($i = 0; $i < $ProductPresenter->getEvaluateScore($meal->evaluation, $meal->people_eva); $i++)
+                                          <span class="w3-text-deep-orange star w3-medium"><i class="fa fa-star"></i></span>
+                                      @endfor
+                                  @else
+                                      <span class="w3-text-deep-orange w3-medium">New Meal</span>
+                                  @endif
                                 @endfor
                               </div>
                             </div>
@@ -42,6 +51,9 @@
                                 </div>
                                 <div class="w3-col s4"
                                     <span class="w3-text-grey w3-medium w3-right" style="padding-left:2px;" id="meal-people">{{ $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->people_left }} people left</span>
+                                </div>
+                                <div class="w3-col s6" id="eaten">
+                                    <p class="w3-text-grey w3-medium w3-padding-left">{{ $meal->people_eaten }} people eaten</p>
                                 </div>
                                 <div class="w3-col s6" id="method-label" style="display: none">
                                   @foreach ($meal->methods as $method)
@@ -67,7 +79,8 @@
                           </div>
                           <div class="w3-col s12 w3-content w3-container">
                             <div class="w3-padding-12 w3-text-grey w3-justify">
-                                <p class="w3-text-grey" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 300) !!}{{ strlen(strip_tags($meal->description)) > 300 ? '...' : "" }}</p>
+                                <!--p class="w3-text-grey" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 300) !!}{{ strlen(strip_tags($meal->description)) > 300 ? '...' : "" }}</p-->
+                                <p class="w3-text-grey" style="font-family:cursive;">{!! str_limit($meal->description, 350) !!}</p>
                             </div>
                           </div>
                       </div>
@@ -158,6 +171,7 @@
           var meal_people = $(hash).find("#meal-people");
           var star = $(hash).find(".star");
           var method_label = $(hash).find("#method-label");
+          var eaten = $(hash).find("#eaten");
           var title_img = $(hash).find("#title_img");
           var content_img = $(contentID).find(".content-img");
 
@@ -170,6 +184,7 @@
             //star.removeClass("w3-text-white").addClass("w3-text-deep-orange");
             star.show();
             method_label.hide();
+            eaten.show();
             title_img.animate({width: '100%'}, 1);
             content_img.animate({width: '0'}, 500);
           } else {
@@ -181,6 +196,7 @@
             //star.removeClass("w3-text-deep-orange").addClass("w3-text-white");
             star.hide();
             method_label.show();
+            eaten.hide();
             title_img.animate({width: '0'}, 1);
             content_img.animate({width: '100%'}, 500);
           }

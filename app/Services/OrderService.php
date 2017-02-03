@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\UserRepository;
 use App\Repositories\ChefRepository;
+use App\Repositories\MealRepository;
 use App\Repositories\DateTimePeopleRepository;
 use App\Repositories\CartRepository;
 use App\Repositories\ChefOrderRepository;
@@ -12,6 +13,7 @@ class OrderService
 {
     protected $userRepo;
     protected $chefRepo;
+    protected $mealRepo;
     protected $dateTimePeopleRepo;
     protected $cartRepo;
     protected $chefOrderRepo;
@@ -19,10 +21,12 @@ class OrderService
     /**
      * OrderService constructor.
      */
-    public function __construct(UserRepository $userRepo, ChefRepository $chefRepo, DateTimePeopleRepository $dateTimePeopleRepo, CartRepository $cartRepo, ChefOrderRepository $chefOrderRepo)
+    public function __construct(UserRepository $userRepo, ChefRepository $chefRepo, MealRepository $mealRepo, DateTimePeopleRepository $dateTimePeopleRepo, 
+                                CartRepository $cartRepo, ChefOrderRepository $chefOrderRepo)
     {
         $this->userRepo = $userRepo;
         $this->chefRepo = $chefRepo;
+        $this->mealRepo = $mealRepo;
         $this->dateTimePeopleRepo = $dateTimePeopleRepo;
         $this->cartRepo = $cartRepo;
         $this->chefOrderRepo = $chefOrderRepo;
@@ -134,6 +138,15 @@ class OrderService
     public function updatePeopleOrder($datetimepeople, $cart, $rcv)
     {
         return $this->dateTimePeopleRepo->updatePeople($datetimepeople, $cart, $rcv);
+    }
+
+    /**
+    * @param $meal
+    * @return 
+    */
+    public function updateMealPeopleEaten($meal)
+    {
+        return $this->mealRepo->updatePeopleEaten($meal);
     }
 
      /**

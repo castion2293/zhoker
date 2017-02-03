@@ -72,6 +72,17 @@ class CartRepository
      * @param $cart
      * @return 
      */
+    public function updateEvaluated(Cart $cart)
+    {
+        return $cart->update([
+            'evaluated' => true,
+        ]);
+    }
+
+    /**
+     * @param $cart
+     * @return 
+     */
     public function delete(Cart $cart)
     {
         return $cart->delete();

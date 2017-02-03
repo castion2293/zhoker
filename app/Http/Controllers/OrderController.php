@@ -71,6 +71,7 @@ class OrderController extends Controller
                 $this->creditCardService->charge($cart->price, "twd", decrypt($userOrder->cashier_id));
 
                 $this->orderService->updateChefOrderPaid($chefOrder);
+                $this->orderService->updateMealPeopleEaten($cart->meals);
 
                 //send user meal confirmed email
                 $user = $this->orderService->getUserByCart($cart);
@@ -81,7 +82,7 @@ class OrderController extends Controller
             }
 
         } catch (\Exception $e) {
-            flash()->error('Error', $e->getMessage());
+            //flash()->error('Error', $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

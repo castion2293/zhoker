@@ -26,7 +26,7 @@
              <div class="">
                 <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Chef Profile<h1>
             </div>
-            {!! Form::model($chef, ['route' => ['chef_profile.update', $chef->id], 'method' => 'PUT', 'data-parsley-validate' => '', 'files' => true]) !!}
+            {!! Form::model($chef, ['route' => ['chef_profile.update', encrypt($chef->id)], 'method' => 'PUT', 'data-parsley-validate' => '', 'files' => true]) !!}
                 <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
                     <div class="w3-col s12">
                         <div class="">
