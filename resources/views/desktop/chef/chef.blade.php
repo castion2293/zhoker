@@ -33,7 +33,7 @@
             </div>
             <div class="w3-display-container">
                 <div class="w3-display-topleft" style="width:30%;margin-top:3em;margin-left:4em;">
-                    <img src="{{ $ChefPresenter->chefProfileImg($chef->profile_img) }}" alt="profile" style="width:100%">
+                    <img src="{{ $chef->profile_img }}" alt="profile" style="width:100%">
                 </div>
                 <div class="w3-rest"></div>  
                 <div class="w3-col l8 m8 w3-right w3-panel w3-light-grey">

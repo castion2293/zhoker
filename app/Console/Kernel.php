@@ -25,9 +25,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
-
         $schedule->command(
             "db:backup --database=mysql --destination=s3 --destinationPath=" . date("Y-m-d") . "/data.sql --compression=gzip"
             )

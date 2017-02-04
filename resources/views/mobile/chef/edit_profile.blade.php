@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group w3-row" style="margin-top:10px;">
                             <div class="w3-col s12 w3-padding-small">
-                                <img id="img_content" src="{{ $ChefPresenter->chefProfileImg($chef->profile_img) }}" alt="image contetnt" style="width:100%">
+                                <img id="img_content" src="{{ $chef->profile_img }}" alt="image contetnt" style="width:100%">
                             </div>
                             <div class="w3-rest"></div>
                             <div class="w3-col s7 w3-right">

@@ -33,6 +33,7 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
+    'Pheanstalk\\' => array($vendorDir . '/pda/pheanstalk/src'),
     'Nexmo\\Laravel\\' => array($vendorDir . '/nexmo/laravel/src'),
     'Nexmo\\' => array($vendorDir . '/nexmo/client/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),

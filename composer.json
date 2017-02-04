@@ -19,7 +19,8 @@
         "stripe/stripe-php": "^4.1",
         "nexmo/client": "@beta",
         "nexmo/laravel": "1.0.0-beta3",
-        "backup-manager/laravel": "^1.1"
+        "backup-manager/laravel": "^1.1",
+        "pda/pheanstalk": "^3.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

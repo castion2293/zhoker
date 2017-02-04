@@ -21,7 +21,7 @@
             </div>
             
             <div class="w3-col s12" style="">
-                <img src="{{ $ChefPresenter->chefProfileImg($chef->profile_img) }}" alt="profile" style="width:100%">
+                <img src="{{ $chef->profile_img }}" alt="profile" style="width:100%">
             </div>
             <div class="w3-col s12 w3-panel w3-light-grey">
                 <div class="w3-margin-top">
