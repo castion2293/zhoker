@@ -19,7 +19,7 @@ class CreateChefsTable extends Migration
             $table->string('city');
             $table->string('state')->nullable();
             $table->integer('zip_code');
-            $table->string('profile_img')->nullable();
+            $table->string('profile_img')->default('https://s3-us-west-2.amazonaws.com/zhoker/profile_images/1486175258.png');
             $table->text('store_description')->nullable();
             $table->string('store_name')->nullable();
             $table->timestamps();

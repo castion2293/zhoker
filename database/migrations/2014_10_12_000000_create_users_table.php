@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('user_profile_img')->nullable();
+            $table->string('user_profile_img')->default('https://s3-us-west-2.amazonaws.com/zhoker/profile_images/1486175258.png');
             $table->integer('chef_id')->index()->nullable()->unsigned();
             $table->string('chef_psw')->nullable();
             $table->tinyInteger('role')->nullable()->unsigned();

@@ -51,7 +51,7 @@ class RegisterController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'phone_number' => 'required|numeric',
             'password' => 'required|min:6|confirmed',
-            'g-recaptcha-response'=>'required|captcha',
+            //'g-recaptcha-response'=>'required|captcha',
         ]);
     }
 
@@ -69,7 +69,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
             'password' => bcrypt($data['password']),
-            'user_profile_img' => 'https://s3-us-west-2.amazonaws.com/zhoker/profile_images/default-user-icon-profile.png',
         ]);
     }
 }
