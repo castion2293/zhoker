@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SaveImagetoS3
+class SaveImagetoS3 implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
