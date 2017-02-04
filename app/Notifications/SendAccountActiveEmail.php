@@ -46,7 +46,7 @@ class SendAccountActiveEmail extends Notification implements ShouldQueue
                     ->success()
                     ->subject('Registered Email Confirmation')
                     ->line('Please click the link below to activate your account')
-                    ->action('Activate', url('/auth/register/activate/'.$this->token))
+                    ->action('Activate', 'https://zhoker.com/auth/register/activate/'.$this->token)
                     ->line('Thank you for using our application!');
     }
 

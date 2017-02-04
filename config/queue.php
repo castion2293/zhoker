@@ -43,7 +43,7 @@ return [
 
         'beanstalkd' => [
             'driver' => 'beanstalkd',
-            'host' => 'zhoker.com',
+            'host' => 'localhost',
             'queue' => 'default',
             'retry_after' => 90,
         ],
