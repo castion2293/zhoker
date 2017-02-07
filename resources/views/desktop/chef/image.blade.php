@@ -141,6 +141,17 @@
                 $("#hide-btn").hide();
                 $("#loader").hide();
                 $("#finish-upload").show();
+            },
+            error : function(file, response){
+                $("#loader").hide();
+                $("#hide-btn").hide();
+                $("#upload-img").show();
+                swal({
+                    title: "image uplaod error",
+                    // text: "",
+                    type: "error",
+                    timer: 2000,
+                });
             }
         }
     </script>

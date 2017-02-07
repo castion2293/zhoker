@@ -393,13 +393,14 @@
             datetimepeople_id = event.target.id.substring(3);
             
             @if (Auth::check())
-              if ($(id).children().hasClass("fa fa-heart-o")) {
-                postBuyNextTime(datetimepeople_id);
-                $(id).children().removeClass("fa fa-heart-o").addClass("fa fa-heart");
-              } else {
-                postBuyNextTime(datetimepeople_id);
-                $(id).children().removeClass("fa fa-heart").addClass('fa fa-heart-o');
-              }
+            //   if ($(id).children().hasClass("fa fa-heart-o")) {
+            //     postBuyNextTime(datetimepeople_id);
+            //     $(id).children().removeClass("fa fa-heart-o").addClass("fa fa-heart");
+            //   } else {
+            //     postBuyNextTime(datetimepeople_id);
+            //     $(id).children().removeClass("fa fa-heart").addClass('fa fa-heart-o');
+            //   }
+              postBuyNextTime(datetimepeople_id);
             @else
               $("#myModal").modal();
             @endif
@@ -416,12 +417,16 @@
                 method: 'POST',
                 url: url,
                 data: {user_id: user_id, datetimepeople_id: datetimepeople_id, _token: token},
-                // success : function(data){
-                //     alert('success');
-                // },
-                // error : function(data){
-                //     alert('fail');
-                // },
+                success : function(data){
+                    if ($(id).children().hasClass("fa fa-heart-o")) {
+                        $(id).children().removeClass("fa fa-heart-o").addClass("fa fa-heart");
+                    } else {
+                        $(id).children().removeClass("fa fa-heart").addClass('fa fa-heart-o');
+                    }
+                },
+                error : function(data){
+                    //alert('fail');
+                },
             });
           }
         });
