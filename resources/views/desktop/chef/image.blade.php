@@ -112,7 +112,7 @@
             uploadMultiple: true,
             parallelUploads: 10,
             maxFiles: 10,
-            maxFilesize: 4,
+            maxFilesize: 10,
             method: 'POST',
             acceptedFiles: 'image/*',
             addRemoveLinks: true,
@@ -147,7 +147,7 @@
                 $("#hide-btn").hide();
                 $("#upload-img").show();
                 swal({
-                    title: "image uplaod error",
+                    title: "image upload error",
                     // text: "",
                     type: "error",
                     timer: 2000,

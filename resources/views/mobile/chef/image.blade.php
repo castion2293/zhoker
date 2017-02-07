@@ -112,7 +112,7 @@
             uploadMultiple: true,
             parallelUploads: 10,
             maxFiles: 10,
-            maxFilesize: 4,
+            maxFilesize: 10,
             method: 'POST',
             acceptedFiles: 'image/*',
             addRemoveLinks: true,
