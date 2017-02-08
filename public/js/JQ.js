@@ -60,25 +60,4 @@ $(function () {
       if( $("#eatlocationSmall").val() == '') 
         $("#eatlocationSmall").val("Salt lake city");
     });
-
-    //googleMap
-    // $("#googleMap").googleMap({
-    //     zoom: 13,
-    //     type: "ROADMAP" // Map type (optional)
-    // });
-    // $("#googleMap").addMarker({
-    //     address: "751 S 300 E Salt Lake City Utah", // Postale Address
-    //     url: 'https://www.yahoo.com.tw',
-    //     title: 'HOUSE',
-    //     text: "751 S 300 E Salt Lake City Utah"
-    //     //    id: 'marker1'
-    // });
-    // $("#googleMap").addMarker({
-    //     address: " 95 N. 300 W., Salt Lake City, UT", // Postale Address
-    //     url: 'https://www.ldsbc.edu',
-    //     title: 'LDSBC',
-    //     text: "95 N. 300 W., Salt Lake City, UT"
-    //     //    id: 'marker1'
-    // });
-
 })

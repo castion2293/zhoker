@@ -18,12 +18,15 @@ elixir(mix => {
                 'component.css',
                 'bootstrap-datetimepicker.min.css',
                 'star-rating.css',
-                'main.css'])
+                'main.css',
+                'styles.css'])
            .scripts(['0609.js',
                     'JQ.js',
                     'parsley.min.js',
                     'star-rating.js',
-                    'bootstrap-datetimepicker.min.js']);
+                    'bootstrap-datetimepicker.min.js',
+                    'jquery.tabslet.min.js',
+                    'initializers.js']);
            //.webpack('app.js');
     
 });
