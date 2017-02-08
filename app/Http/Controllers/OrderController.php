@@ -35,10 +35,11 @@ class OrderController extends Controller
         $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
        
         $user = $this->orderService->getUser($id);
-        $userorders = $this->orderService->getUserOrderByUser($user, 'desc');
+        $userorders = $this->orderService->getUserOrderByUser($user, 1);
+        $userordersAll = $this->orderService->getUserOrderByUser($user);
 
         $agent = $this->agentService->agent();
-        return view($agent . '.user.order', ['userorders' => $userorders]);
+        return view($agent . '.user.order', ['userorders' => $userorders, 'userordersAll' => $userordersAll]);
     }
 
     public function getChefOrder($id)

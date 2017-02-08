@@ -13,6 +13,7 @@
     </div>
 
     <!--content-->
+    @inject('ProductPresenter', 'App\Presenters\ProductPresenter')
     <div class="w3-content w3-container w3-padding-32">
         <div class="">
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Menu Lists<h1>
@@ -28,9 +29,13 @@
                     <div class="w3-row">
                         <div class="w3-rest"></div>
                         <div class="w3-col s5 w3-right">
-                            @for ($i = 0; $i < 5; $i++)
-                                <span class="w3-text-orange w3-right w3-large"><i class="fa fa-star"></i></span>
-                            @endfor
+                            @if ($meal->people_eva > 0)
+                                @for ($i = 0; $i < $ProductPresenter->getEvaluateScore($meal->evaluation, $meal->people_eva); $i++)
+                                    <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
+                                @endfor
+                            @else
+                                <span class="w3-text-orange w3-large">New Meal</span>
+                            @endif
                         </div>
                     </div>
                     <div class="w3-col s12">

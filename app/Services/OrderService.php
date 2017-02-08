@@ -72,9 +72,9 @@ class OrderService
     * @param $user
     * @return userOrder
     */
-    public function getUserOrderByUser($user)
+    public function getUserOrderByUser($user, $qty = null)
     {
-        return $this->userRepo->forUserOrder($user);
+        return $this->userRepo->forUserOrder($user, $qty);
     }
 
      /**
