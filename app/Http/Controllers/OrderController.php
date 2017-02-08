@@ -47,9 +47,10 @@ class OrderController extends Controller
 
         $chef = $this->orderService->getChef($id);
         $cheforders = $this->orderService->getChefOrder($chef, 6);
+        $chefordersAll = $this->orderService->getChefOrderAll($chef);
        
         $agent = $this->agentService->agent();
-        return view($agent . '.chef.order', ['cheforders'=> $cheforders]);
+        return view($agent . '.chef.order', ['cheforders'=> $cheforders, 'chefordersAll' => $chefordersAll]);
     }
 
     public function getAccept($id)

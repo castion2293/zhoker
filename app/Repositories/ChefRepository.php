@@ -76,7 +76,7 @@ class ChefRepository
          if ($qty) {
              return $chef->cheforders()->latest('id')->take($qty)->with('carts')->get();
          } else {
-             return $chef->cheforders()->orderBy('updated_at', 'desc')->with('carts')->get();
+             return $chef->cheforders()->latest('id')->with('carts')->get();
          }
      }
 

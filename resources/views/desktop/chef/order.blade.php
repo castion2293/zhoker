@@ -30,11 +30,11 @@
                     </ul>
                 <div id='tab-1' class="w3-content w3-container">
                     <!--Chef Order Calendar View -->
-                    @include('desktop.partials.ChefOrderCalendar');
+                    @include('desktop.partials.ChefOrderCalendar')
                 </div>                
                 <div id='tab-2' class="w3-content w3-container">
                     <!--Chef Order list View -->
-                    @include('desktop.partials.ChefOrderList');
+                    @include('desktop.partials.ChefOrderList')
                 </div>
             </div>
             

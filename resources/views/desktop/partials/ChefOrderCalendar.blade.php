@@ -9,7 +9,7 @@
             <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
         </div>
         <div>
-            <h3 class="text-center w3-padding-8 w3-text-white">Upload Images</h3>
+            <h3 class="text-center w3-padding-8 w3-text-white">Schedule</h3>
         </div>
         <div class="modal-body" style="padding:10px 50px;">
             <div class="w3-row w3-padding-medium w3-border-grey w3-border-bottom">
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            @foreach ($cheforders as $cheforder)
+            @foreach ($chefordersAll as $cheforder)
                 @foreach($cheforder->carts()->get() as $cart)
                     <div id="item{{$cart->id}}" class="w3-row w3-padding-24 w3-border-grey w3-border-bottom items" style="display:none;">
                         <div class="w3-col l3 m3 w3-padding-right w3-margin-top">
@@ -135,7 +135,7 @@
                 showInforModal(event);
             },
             events: [
-                @foreach($cheforders as $cheforder)
+                @foreach($chefordersAll as $cheforder)
                     @foreach($cheforder->carts()->get() as $cart)
                         {
                             title: '{{ $cart->meals->name }} / {{ $cart->people_order }} people',

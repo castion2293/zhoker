@@ -105,6 +105,15 @@ class OrderService
     }
 
      /**
+    * @param $chef
+    * @return cheforder
+    */
+    public function getChefOrderAll($chef)
+    {
+        return $this->chefRepo->forChefOrders($chef);
+    }
+
+     /**
     * @param $cart
     * @return datetimepeople
     */
