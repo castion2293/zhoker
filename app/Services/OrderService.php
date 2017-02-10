@@ -51,21 +51,38 @@ class OrderService
     }
 
     /**
-    * @param 
-    * @return $user
+    * @param $chef
+    * @return $this
     */
-    public function getUser($id)
+    public function findUserByChef($chef = null)
     {
-        return $this->user;
+        count($chef) ?: $chef = $this->chef;
+
+        $this->user = $this->chefRepo->forUser($chef);
+
+        return $this;
     }
 
     /**
     * @param $cart
     * @return user
     */
-    public function getUserByCart($cart)
+    public function findUserByCart($cart)
     {
-        return $this->cartRepo->forUser($cart);
+        count($cart) ?: $cart = $this->cart;
+
+        $this->user = $this->cartRepo->forUser($cart);
+
+        return $this;
+    }
+
+    /**
+    * @param 
+    * @return $user
+    */
+    public function getUser()
+    {
+        return $this->user;
     }
 
      /**
@@ -75,6 +92,19 @@ class OrderService
     public function findChef($id)
     {
         $this->chef = $this->chefRepo->findChefById($id);
+
+        return $this;
+    }
+
+     /**
+    * @param $chefOrder
+    * @return $this
+    */
+    public function findChefByChefOrder($chefOrder = null)
+    {
+        count($chefOrder) ?: $chefOrder = $this->chefOrder;
+
+        $this->chef = $this->chefOrderRepo->forChef($chefOrder);
 
         return $this;
     }
@@ -161,11 +191,24 @@ class OrderService
 
      /**
     * @param $id
-    * @return cheforder
+    * @return this
     */
     public function findChefOrderById($id)
     {
         $this->ChefOrder = $this->chefOrderRepo->findChefOrderById($id);
+
+        return $this;
+    }
+
+     /**
+    * @param $cart
+    * @return this
+    */
+    public function findChefOrderByCart($cart)
+    {
+        count($cart) ?: $cart = $this->cart;
+
+        $this->chefOrder = $this->cartRepo->forChefOrder($cart);
 
         return $this;
     }
@@ -179,9 +222,9 @@ class OrderService
         count($chef) ?: $chef = $this->chef;
 
         if (count($pagi))
-            $this->ChefOrder = $this->chefRepo->forChefOrdersPaginate($chef, $qty);
+            $this->chefOrder = $this->chefRepo->forChefOrdersPaginate($chef, $qty);
         else
-            $this->ChefOrder = $this->chefRepo->forChefOrders($chef, $qty);
+            $this->chefOrder = $this->chefRepo->forChefOrders($chef, $qty);
 
         return $this;
     }
@@ -192,7 +235,7 @@ class OrderService
     */
     public function getChefOrder()
     {
-        return $this->ChefOrder;
+        return $this->chefOrder;
     }
 
      /**

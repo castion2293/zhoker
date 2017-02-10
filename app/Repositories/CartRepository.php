@@ -125,6 +125,15 @@ class CartRepository
     }
 
     /**
+     * @param $cart
+     * @return cheforder
+     */
+    public function forChefOrder(Cart $cart)
+    {
+        return $cart->cheforders()->first();
+    }
+
+    /**
      * @param $cart, $userOrder
      * @return $
      */

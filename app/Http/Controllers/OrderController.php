@@ -114,10 +114,16 @@ class OrderController extends Controller
         $id = $this->gateService->decrypt($id)->getId();
 
         $cart = $this->orderService->findCartById($id)->getCart();
-        $user = $this->orderService->getUserByCart($cart);
-
         $this->orderService->getDateTimePeopleByCart($cart)->updatePeopleOrder($cart, true);
-        $this->orderService->findCartById($id)->deleteCart();
+
+        $user = $this->orderService->findUserByCart($cart)->getUser();
+        $chef_user = $this->orderService->findChefOrderByCart($cart)->findChefByChefOrder()->findUserByChef()->getUser();
+
+        //send user and chef cancel email
+        $this->eventService->ChefCancelEvent($chef_user, $cart);
+        $this->eventService->userCancelEvent($user, $cart);
+
+        $this->orderService->deleteCart($cart);
 
         flash()->success('Success', 'You have rejected the order successfully!');
         return redirect()->route('order.userorder', ['id' => encrypt($user->id)]);

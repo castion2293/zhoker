@@ -6,6 +6,8 @@ use App\Events\UserOrderEvent;
 use App\Events\ChefOrderEvent;
 use App\Events\ChefConfirmEvent;
 use App\Events\ChefRejectEvent;
+use App\Events\ChefCancelEvent;
+use App\Events\UserCancelEvent;
 
 class EventService
 {
@@ -43,5 +45,23 @@ class EventService
     public function chefRejectEvent($user, $cart)
     {
         return event(new ChefRejectEvent($user, $cart));
+    }
+
+    /**
+     * @param $user, $carts
+     * @return 
+     */
+    public function ChefCancelEvent($user, $cart)
+    {
+        return event(new ChefCancelEvent($user, $cart));
+    }
+
+    /**
+     * @param $user, $carts
+     * @return 
+     */
+    public function userCancelEvent($user, $cart)
+    {
+        return event(new UserCancelEvent($user, $cart));
     }
 }
