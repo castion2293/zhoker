@@ -1,3 +1,4 @@
+@inject('OrderPresenter', 'App\Presenters\OrderPresenter')
 <div class="w3-row w3-padding-medium w3-border-grey w3-border-bottom" style="margin-top:7em;">
     <div class="w3-col l3 m3">
         <label class="w3-text-grey" style="font-family:cursive;">MEAL</label>
@@ -17,7 +18,7 @@
 </div>
 
 @foreach ($cheforders as $cheforder)
-    @foreach($cheforder->carts()->get() as $cart)
+    @foreach($cheforder->carts()->withTrashed()->get() as $cart)
         <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
             <div class="w3-col l3 m3 w3-padding-right w3-margin-top">
                 @foreach ($cart->meals->images->take(1) as $image)
@@ -52,38 +53,56 @@
                         <div class="">
                             <span class="w3-text-grey w3-large">{{ $userorder->contact_first_name }} {{ $userorder->contact_last_name }}</span>
                         </div>
-                        <div class="">
-                            <span class="w3-text-grey w3-large">{{ $userorder->contact_phone_number }}</span>
-                        </div>
-                        <div class="">
-                            <span class="w3-text-grey w3-large">{{ $userorder->contact_email }}</span>
-                        </div>
-                        <div class="">
-                            <span class="w3-text-grey w3-large">{{ $userorder->contact_address }}</span>
-                        </div>
+                        @if ($cheforder->checked)
+                            <div class="">
+                                <span class="w3-text-grey w3-large">{{ $userorder->contact_phone_number }}</span>
+                            </div>
+                            <div class="">
+                                <span class="w3-text-grey w3-large">{{ $userorder->contact_email }}</span>
+                            </div>
+                            <div class="">
+                                <span class="w3-text-grey w3-large">{{ $userorder->contact_address }}</span>
+                            </div>
+                        @else
+                            @if (!$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
+                                <div class="">
+                                    <span class="w3-text-deep-orange w3-large">Not Approve Yet!</span>
+                                </div>
+                            @endif
+                        @endif
                     @endforeach
                 </div>
             </div>
             <div class="w3-col l1 m1">
-                @if ($cheforder->checked)
-                    <div class="">
-                        <span class="w3-text-grey w3-large">Approved</span>
-                    </div>
-                    <div class="w3-margin-top">
-                        @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
-                        <span class="w3-text-grey w3-large">{{ $ChefPresenter->paidCheck($cheforder->paid) }}</span>
-                    </div>
+                @if ($cheforder->deleted_at)
+                    @if ($cart->deleted_at)
+                        <span class="w3-text-grey w3-large">Rejected</span>
+                    @endif
                 @else
-                    <div class="">
-                        <a href="{!! route('order.accept', ['id' => encrypt($cheforder->id)]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
-                    </div>
-                    <div class="w3-padding-left" style="margin-top:6em;">
-                        <a href="{!! route('order.reject', ['id' => encrypt($cheforder->id)]) !!}" id="reject-confirm" class="w3-test-grey" style="display:none;">Reject</a>
-                        <a href="#" id="reject-warn" class="w3-test-grey">Reject</a>
-                    </div>
+                    @if ($cart->deleted_at)
+                        <span class="w3-text-grey w3-large">Canceled</span>
+                    @else
+                        @if ($cheforder->checked)
+                            <span class="w3-text-grey w3-large">Approved</span>
+                            <div class="w3-margin-top">
+                                <span class="w3-text-grey w3-large">{{ $OrderPresenter->paidCheck($cheforder->paid) }}</span>
+                            </div>
+                        @else
+                            @if ($OrderPresenter->compareDateTime($cart, $now))
+                                <span class="w3-text-grey w3-large">Overdue</span>
+                            @else
+                                <div class="">
+                                    <a href="{!! route('order.accept', ['id' => encrypt($cheforder->id)]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
+                                </div>
+                                <div class="w3-padding-left" style="margin-top:6em;">
+                                    <a href="{!! route('order.reject', ['id' => encrypt($cheforder->id)]) !!}" id="warn{{$cheforder->id}}confirm" class="w3-test-grey" style="display:none;">Reject</a>
+                                    <a href="#" id="warn{{$cheforder->id}}" class="w3-test-grey warn">Reject</a>
+                                </div>
+                            @endif
+                        @endif
+                    @endif
                 @endif
-                
-                
+
             </div>
         </div>
     @endforeach
@@ -96,18 +115,19 @@
 <!--delete meal-->
 <script>
     $(function () {
-        $("#reject-warn").click(function () {
+        $(".warn").click(function (event) {
             swal({
-            title: "Are you sure?",
-            text: "You will not be able to accept the order again!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, reject it!",
-            closeOnConfirm: false
+                title: "Are you sure?",
+                text: "You will not be able to accept the order again!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, reject it!",
+                closeOnConfirm: false
             },
             function(){
-            $("#reject-confirm")[0].click();
+                let id = "#" + event.target.id + "confirm";
+                $(id)[0].click();
             });
         });
     });

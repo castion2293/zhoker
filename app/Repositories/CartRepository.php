@@ -23,7 +23,7 @@ class CartRepository
      */
     public function findCartById($id)
     {
-        return $this->cart->findOrFail($id);
+        return $this->cart->find($id);
     }
 
     /**

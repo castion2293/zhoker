@@ -74,9 +74,9 @@ class ChefRepository
      public function forChefOrders(Chef $chef, $qty = null)
      {
          if ($qty) {
-             return $chef->cheforders()->latest('id')->take($qty)->with('carts')->get();
+             return $chef->cheforders()->withTrashed()->latest('id')->take($qty)->with('carts')->get();
          } else {
-             return $chef->cheforders()->latest('id')->with('carts')->get();
+             return $chef->cheforders()->withTrashed()->latest('id')->with('carts')->get();
          }
      }
 

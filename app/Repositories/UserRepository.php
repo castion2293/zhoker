@@ -53,13 +53,22 @@ class UserRepository
      * @param $user, $qty
      * @return userorder
      */
-    public function forUserOrder($user, $qty = null)
+    public function forUserOrder(User $user, $qty = null)
     {
         if ($qty) {
             return $user->userorders()->latest('id')->take($qty)->with('carts')->get();
         } else {
             return $user->userorders()->latest('id')->with('carts')->get();
         }
+    }
+
+    /**
+     * @param $user, $qty
+     * @return userorder
+     */
+    public function forUserOrderPaginate(User $user, $qty)
+    {
+        return $user->userorders()->latest('id')->with('carts')->paginate($qty);
     }
 
     /**

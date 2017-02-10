@@ -18,6 +18,13 @@ class OrderService
     protected $cartRepo;
     protected $chefOrderRepo;
 
+    protected $user;
+    protected $chef;
+    protected $cart;
+    protected $datetimepeople;
+    protected $chefOrder;
+    protected $userOrder;
+
     /**
      * OrderService constructor.
      */
@@ -34,11 +41,22 @@ class OrderService
 
     /**
     * @param $id
-    * @return user
+    * @return $this
+    */
+    public function findUser($id)
+    {
+        $this->user = $this->userRepo->findUserById($id);
+
+        return $this;
+    }
+
+    /**
+    * @param 
+    * @return $user
     */
     public function getUser($id)
     {
-        return $this->userRepo->findUserById($id);
+        return $this->user;
     }
 
     /**
@@ -50,67 +68,131 @@ class OrderService
         return $this->cartRepo->forUser($cart);
     }
 
+     /**
+    * @param $id
+    * @return $this
+    */
+    public function findChef($id)
+    {
+        $this->chef = $this->chefRepo->findChefById($id);
+
+        return $this;
+    }
+
     /**
     * @param $id
     * @return chef
     */
-    public function getChef($id)
+    public function getChef()
     {
-        return $this->chefRepo->findChefById($id);
+        return $this->chef;
+    }
+
+    /**
+    * @param $id
+    * @return $this
+    */
+    public function findCartById($id)
+    {
+        $this->cart = $this->cartRepo->findCartById($id);
+
+        return $this;
     }
 
     /**
     * @param $cheforder
+    * @return $this
+    */
+    public function findCart($chefOrder = null)
+    {
+        count($chefOrder) ?: $chefOrder = $this->chefOrder;
+
+        $this->cart = $this->chefOrderRepo->forCart($chefOrder);
+
+        return $this;
+    }
+
+    /**
+    * @param 
     * @return cart
     */
-    public function getCart($chefOrder)
+    public function getCart()
     {
-        return $this->chefOrderRepo->forCart($chefOrder);
+        return $this->cart;
     }
 
      /**
-    * @param $user
-    * @return userOrder
+    * @param $qty, $pagi, $user
+    * @return $this
     */
-    public function getUserOrderByUser($user, $qty = null)
+    public function findUserOrderByUser($qty = null, $pagi = null, $user = null)
     {
-        return $this->userRepo->forUserOrder($user, $qty);
+        count($user) ?: $user = $this->user;
+
+        if (count($pagi))
+            $this->userOrder = $this->userRepo->forUserOrderPaginate($user, $qty);
+        else
+            $this->userOrder = $this->userRepo->forUserOrder($user, $qty);
+
+        return $this;
     }
 
      /**
     * @param $cart
     * @return userOrder
     */
-    public function getUserOrderByCart($cart)
+    public function findUserOrderByCart($cart = null)
     {
-        return $this->cartRepo->forUserOrder($cart);
+        count($cart) ?: $cart = $this->cart;
+
+        $this->userOrder = $this->cartRepo->forUserOrder($cart);
+
+        return $this;
+    }
+
+     /**
+    * @param 
+    * @return $userOrder
+    */
+    public function getUserOrder()
+    {
+        return $this->userOrder;
     }
 
      /**
     * @param $id
     * @return cheforder
     */
-    public function getChefOrderById($id)
+    public function findChefOrderById($id)
     {
-        return $this->chefOrderRepo->findChefOrderById($id);
+        $this->ChefOrder = $this->chefOrderRepo->findChefOrderById($id);
+
+        return $this;
     }
 
-     /**
-    * @param $chef
-    * @return cheforder
+    /**
+    * @param $qty, $pagi, $chef
+    * @return $this
     */
-    public function getChefOrder($chef, $qty)
+    public function findChefOrder($qty = null, $pagi = null, $chef = null)
     {
-        return $this->chefRepo->forChefOrdersPaginate($chef, $qty);
+        count($chef) ?: $chef = $this->chef;
+
+        if (count($pagi))
+            $this->ChefOrder = $this->chefRepo->forChefOrdersPaginate($chef, $qty);
+        else
+            $this->ChefOrder = $this->chefRepo->forChefOrders($chef, $qty);
+
+        return $this;
     }
 
-     /**
-    * @param $chef
-    * @return cheforder
+    /**
+    * @param 
+    * @return $chef
     */
-    public function getChefOrderAll($chef)
+    public function getChefOrder()
     {
-        return $this->chefRepo->forChefOrders($chef);
+        return $this->ChefOrder;
     }
 
      /**
@@ -119,7 +201,11 @@ class OrderService
     */
     public function getDateTimePeopleByCart($cart)
     {
-        return $this->cartRepo->forDateTimePeople($cart);
+        count($cart) ?: $cart = $this->cart;
+
+        $this->datetimepeople = $this->cartRepo->forDateTimePeople($cart);
+
+        return $this;
     }
 
      /**
@@ -144,9 +230,13 @@ class OrderService
     * @param $datetimepeople, $cart, $rcv
     * @return 
     */
-    public function updatePeopleOrder($datetimepeople, $cart, $rcv)
+    public function updatePeopleOrder($cart, $rcv, $datetimepeople = null)
     {
-        return $this->dateTimePeopleRepo->updatePeople($datetimepeople, $cart, $rcv);
+        count($datetimepeople) ?: $datetimepeople = $this->datetimepeople;
+
+        $this->dateTimePeopleRepo->updatePeople($datetimepeople, $cart, $rcv);
+
+        return $this;
     }
 
     /**
@@ -171,8 +261,10 @@ class OrderService
     * @param $cart
     * @return 
     */
-    public function deleteCart($cart)
+    public function deleteCart($cart = null)
     {
+        count($cart) ?: $cart = $this->cart;
+
         return $this->cartRepo->delete($cart);
     }
 }

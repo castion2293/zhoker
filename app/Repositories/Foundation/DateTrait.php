@@ -8,15 +8,24 @@ trait DateTrait
 {
     public function CheckDate($date)
     {
-        if ($date == $this->getToday()) {
+        if ($date == $this->getTodayDate()) {
             return date("H:i", strtotime(Carbon::now()));
          } 
 
          return '';
     }
 
-    public function getToday()
+    public function getTodayDate($now = null)
     {
-        return date("Y-m-d" , strtotime(Carbon::now()) );
+        count($now) ?: $now = Carbon::now();
+
+        return date("Y-m-d" , strtotime($now) );
+    }
+
+    public function getTodayTime($now = null)
+    {
+        count($now) ?: $now = Carbon::now();
+
+        return date("H:i", strtotime($now) );
     }
 }

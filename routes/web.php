@@ -141,6 +141,10 @@ Route::get('order/reject/{id}', [
     'uses' => 'OrderController@getReject',
     'as' => 'order.reject'
 ]);
+Route::get('order/cancel/{id}', [
+    'uses' => 'OrderController@getCancel',
+    'as' => 'order.cancel'
+]);
 
 //evaluation
 Route::get('evaluation/create/{meal_id}', [

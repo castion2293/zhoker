@@ -1,3 +1,4 @@
+@inject('OrderPresenter', 'App\Presenters\OrderPresenter')
 <div class="" style="margin-top:7em;">
     @foreach ($userorders as $userorder)
         
@@ -81,24 +82,38 @@
                                 </div>
                             </div>
                             <div class="w3-col l1 m1">
-                                <div class="">
-                                    @if ($cart->cheforders()->withTrashed()->first()->checked)
-                                        <span class="w3-text-grey w3-large">Approved</span>
-                                        <div class="" style="margin-top:2em;">
-                                            @if ($cart->evaluated)
-                                                <span class="w3-text-grey w3-large">Evaluated</span>
-                                            @else
-                                                <a href="{{ route('evaluation.create', ['id' => encrypt($cart->id)])}}" class="w3-text-deep-orange w3-large">Evaluate</a>
-                                            @endif
-                                        </div>
+                                @if ($cart->deleted_at)
+                                    @if ($OrderPresenter->chefDeleteCheck($cart))
+                                        <span class="w3-text-grey w3-large">Rejected</span>
                                     @else
-                                        @if ($cart->cheforders()->withTrashed()->first()->deleted_at)
-                                            <span class="w3-text-grey w3-large">Rejected</span>
+                                        <span class="w3-text-grey w3-large">Canceled</span>
+                                    @endif
+                                @else
+                                    @if ($OrderPresenter->compareDateTime($cart, $now))
+                                        @if ($OrderPresenter->chefOrderCheck($cart))
+                                            <span class="w3-text-grey w3-large">Approved</span>
+                                            <div class="" style="margin-top:2em;">                                           
+                                                @if ($cart->evaluated)
+                                                    <span class="w3-text-grey w3-large">Evaluated</span>
+                                                @else
+                                                    <a href="{{ route('evaluation.create', ['id' => encrypt($cart->id)])}}" class="w3-text-deep-orange w3-large">Evaluate</a>
+                                                @endif
+                                            </div>
+                                        @else
+                                            <span class="w3-text-grey w3-large">Overdue</span>
+                                        @endif
+                                    @else
+                                        @if ($OrderPresenter->chefOrderCheck($cart))
+                                            <span class="w3-text-grey w3-large">Approved</span>
                                         @else
                                             <span class="w3-text-grey w3-large">Pending</span>
                                         @endif
+                                        <div style="margin-top:2em;">
+                                            <a href="{{ route('order.cancel', ['id' => encrypt($cart->id)]) }}" id="warn{{$cart->id}}confirm" style="display:none;">Cancel</a>
+                                            <a href="#" id="warn{{$cart->id}}" class="w3-text-blue w3-medium warn">Cancel</a>
+                                        </div>
                                     @endif
-                                </div>
+                                @endif
                             </div>
                         </div>
                         <hr>
@@ -108,4 +123,29 @@
             </div>
         
     @endforeach
+
+    <div class="text-center">
+        {!! $userorders->links(); !!}
+    </div>
 </div>
+
+<!--delete meal-->
+<script>
+    $(function () {
+        $(".warn").click(function (event) {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover the order again!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, cancel it!",
+                closeOnConfirm: false
+            },
+            function(){
+                let id = "#" + event.target.id + "confirm";
+                $(id)[0].click();
+            });
+        });
+    });
+</script>

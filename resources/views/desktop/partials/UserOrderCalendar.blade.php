@@ -1,3 +1,4 @@
+@inject('OrderPresenter', 'App\Presenters\OrderPresenter')
 <div id='calendar' style="margin-top:7em;"></div>
 
 <!--Infomation Modal -->
@@ -95,20 +96,36 @@
                                 </div>
                                 <div class="w3-col l1 m1">
                                     <div class="">
-                                        @if ($cart->cheforders()->withTrashed()->first()->checked)
-                                            <span class="w3-text-grey w3-large">Approved</span>
-                                            <div class="" style="margin-top:2em;">
-                                                @if ($cart->evaluated)
-                                                    <span class="w3-text-grey w3-large">Evaluated</span>
-                                                @else
-                                                    <a href="{{ route('evaluation.create', ['id' => encrypt($cart->id)])}}" class="w3-text-deep-orange w3-large">Evaluate</a>
-                                                @endif
-                                            </div>
-                                        @else
-                                            @if ($cart->cheforders()->withTrashed()->first()->deleted_at)
+                                        @if ($cart->deleted_at)
+                                            @if ($OrderPresenter->chefDeleteCheck($cart))
                                                 <span class="w3-text-grey w3-large">Rejected</span>
                                             @else
-                                                <span class="w3-text-grey w3-large">Pending</span>
+                                                <span class="w3-text-grey w3-large">Canceled</span>
+                                            @endif
+                                        @else
+                                            @if ($OrderPresenter->compareDateTime($cart, $now))
+                                                @if ($OrderPresenter->chefOrderCheck($cart))
+                                                    <span class="w3-text-grey w3-large">Approved</span>
+                                                    <div class="" style="margin-top:2em;">                                           
+                                                        @if ($cart->evaluated)
+                                                            <span class="w3-text-grey w3-large">Evaluated</span>
+                                                        @else
+                                                            <a href="{{ route('evaluation.create', ['id' => encrypt($cart->id)])}}" class="w3-text-deep-orange w3-large">Evaluate</a>
+                                                        @endif
+                                                    </div>
+                                                @else
+                                                    <span class="w3-text-grey w3-large">Overdue</span>
+                                                @endif
+                                            @else
+                                                @if ($OrderPresenter->chefOrderCheck($cart))
+                                                    <span class="w3-text-grey w3-large">Approved</span>
+                                                @else
+                                                    <span class="w3-text-grey w3-large">Pending</span>
+                                                @endif
+                                                <div style="margin-top:2em;">
+                                                    <a href="{{ route('order.cancel', ['id' => encrypt($cart->id)]) }}" id="warn{{$cart->id}}confirm" style="display:none;">Cancel</a>
+                                                    <a href="#" id="warn{{$cart->id}}" class="w3-text-blue w3-medium warn">Cancel</a>
+                                                </div>
                                             @endif
                                         @endif
                                     </div>

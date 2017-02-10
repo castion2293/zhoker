@@ -1,8 +1,9 @@
+@inject('OrderPresenter', 'App\Presenters\OrderPresenter')
 <div id='calendar' style="margin-top:5em;"></div>
 
 <!--Infomation Modal -->
 <div class="modal fade" id="info-modal" role="dialog">
-    <div class="modal-dialog" style="width:100%;">
+    <div class="modal-dialog" style="width:95%;">
 
     <div class="modal-content">
         <div>
@@ -13,7 +14,7 @@
         </div>
         <div class="modal-body" style="padding:10px 10px;">
             @foreach ($cheforders as $cheforder)
-                @foreach($cheforder->carts()->get() as $cart)
+                @foreach($cheforder->carts()->withTrashed()->get() as $cart)
                     <div id="item{{$cart->id}}" class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top items" style="display:none;">
                         <div class="w3-col s8" style="margin-top:0.2em;">
                             <div class="">
@@ -49,36 +50,63 @@
                                     <div class="">
                                         <span class="w3-text-grey w3-medium">{{ $userorder->contact_first_name }} {{ $userorder->contact_last_name }}</span>
                                     </div>
-                                    <div class="">
-                                        <span class="w3-text-grey w3-medium">{{ $userorder->contact_phone_number }}</span>
-                                    </div>
-                                    <div class="">
-                                        <span class="w3-text-grey w3-medium">{{ $userorder->contact_email }}</span>
-                                    </div>
-                                    <div class="">
-                                        <span class="w3-text-grey w3-medium">{{ $userorder->contact_address }}</span>
-                                    </div>
+                                    @if ($cheforder->checked)
+                                        <div class="">
+                                            <span class="w3-text-grey w3-medium">{{ $userorder->contact_phone_number }}</span>
+                                        </div>
+                                        <div class="">
+                                            <span class="w3-text-grey w3-medium">{{ $userorder->contact_email }}</span>
+                                        </div>
+                                        <div class="">
+                                            <span class="w3-text-grey w3-medium">{{ $userorder->contact_address }}</span>
+                                        </div>
+                                    @else
+                                        @if (!$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
+                                            <div class="">
+                                                <span class="w3-text-deep-orange w3-medium">Not Approve Yet!</span>
+                                            </div>
+                                        @endif
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
                         
-                        @if ($cheforder->checked)
-                            <div class="w3-col s6 w3-center">
-                                <span class="w3-text-grey w3-large">Approved</span>
-                            </div>
-                            <div class="w3-col s6 w3-center">
-                                @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
-                                <span class="w3-text-grey w3-large">{{ $ChefPresenter->paidCheck($cheforder->paid) }}</span>
-                            </div>
+                        @if ($cheforder->deleted_at)
+                            @if ($cart->deleted_at)
+                                <div class="w3-col s12 w3-center">
+                                    <span class="w3-text-grey w3-large">Rejected</span>
+                                </div>
+                            @endif
                         @else
-                            <div class="w3-rest"></div>
-                            <div class="w3-col s2 w3-right">
-                                <a href="{!! route('order.reject', ['id' => encrypt($cheforder->id)]) !!}" id="reject-confirm" class="w3-test-grey" style="display:none;">Reject</a>
-                                <a href="#" id="reject-warn" class="w3-test-grey">Reject</a>
-                            </div>
-                            <div class="w3-col s12 w3-padding-8">
-                                <a href="{!! route('order.accept', ['id' => encrypt($cheforder->id)]) !!}" class="w3-btn w3-deep-orange w3-btn-block w3-round-medium zk-shrink-hover">Accept</a>
-                            </div>
+                            @if ($cart->deleted_at)
+                                <div class="w3-col s12 w3-center">
+                                    <span class="w3-text-grey w3-large">Canceled</span>
+                                </div>
+                            @else
+                                @if ($cheforder->checked)
+                                    <div class="w3-col s6 w3-center">
+                                        <span class="w3-text-grey w3-large">Approved</span>
+                                    </div>
+                                    <div class="w3-col s6 w3-center">
+                                        <span class="w3-text-grey w3-large">{{ $OrderPresenter->paidCheck($cheforder->paid) }}</span>
+                                    </div>
+                                @else
+                                    @if ($OrderPresenter->compareDateTime($cart, $now))
+                                        <div class="w3-col s12 w3-center">
+                                            <span class="w3-text-grey w3-large">Overdue</span>
+                                        </div>
+                                    @else
+                                        <div class="w3-rest"></div>
+                                        <div class="w3-col s2 w3-right">
+                                            <a href="{!! route('order.reject', ['id' => encrypt($cheforder->id)]) !!}" id="warn{{$cheforder->id}}confirm" class="w3-test-grey" style="display:none;">Reject</a>
+                                            <a href="#" id="warn{{$cheforder->id}}" class="w3-test-grey warn">Reject</a>
+                                        </div>
+                                        <div class="w3-col s12 w3-padding-8">
+                                            <a href="{!! route('order.accept', ['id' => encrypt($cheforder->id)]) !!}" class="w3-btn w3-deep-orange w3-btn-block w3-round-medium zk-shrink-hover">Accept</a>
+                                        </div>
+                                    @endif
+                                @endif
+                            @endif
                         @endif
                             
                     </div>
@@ -119,7 +147,7 @@
             },
             events: [
                 @foreach($chefordersAll as $cheforder)
-                    @foreach($cheforder->carts()->get() as $cart)
+                    @foreach($cheforder->carts()->withTrashed()->get() as $cart)
                         {
                             title: '{{ $cart->meals->name }} / {{ $cart->people_order }} people',
                             start: '{{ $cart->date }} {{ $cart->time }}',

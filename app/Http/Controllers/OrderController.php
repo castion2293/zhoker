@@ -20,8 +20,8 @@ class OrderController extends Controller
     protected $gateService;
 
     public function __construct(OrderService $orderService, CreditCardService $creditCardService, AgentService $agentService, EventService $eventService, GateService $gateService) {
-        $this->middleware('auth', ['only' => ['getUserOrder']]);
-        $this->middleware('chef', ['except' => ['getUserOrder']]);
+        $this->middleware('auth', ['only' => ['getUserOrder', 'getCancel']]);
+        $this->middleware('chef', ['except' => ['getUserOrder', 'getCancel']]);
 
         $this->orderService = $orderService;
         $this->creditCardService = $creditCardService;
@@ -33,10 +33,9 @@ class OrderController extends Controller
     public function getUserOrder($id)
     {
         $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
-       
-        $user = $this->orderService->getUser($id);
-        $userorders = $this->orderService->getUserOrderByUser($user, 1);
-        $userordersAll = $this->orderService->getUserOrderByUser($user);
+
+        $userorders = $this->orderService->findUser($id)->findUserOrderByUser(6, true)->getUserOrder();
+        $userordersAll = $this->orderService->findUser($id)->findUserOrderByUser()->getUserOrder();
 
         $agent = $this->agentService->agent();
         return view($agent . '.user.order', ['userorders' => $userorders, 'userordersAll' => $userordersAll]);
@@ -46,9 +45,8 @@ class OrderController extends Controller
     {
         $id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
 
-        $chef = $this->orderService->getChef($id);
-        $cheforders = $this->orderService->getChefOrder($chef, 6);
-        $chefordersAll = $this->orderService->getChefOrderAll($chef);
+        $cheforders = $this->orderService->findChef($id)->findChefOrder(6, true)->getChefOrder();
+        $chefordersAll = $this->orderService->findChef($id)->findChefOrder()->getChefOrder();
        
         $agent = $this->agentService->agent();
         return view($agent . '.chef.order', ['cheforders'=> $cheforders, 'chefordersAll' => $chefordersAll]);
@@ -58,13 +56,13 @@ class OrderController extends Controller
     {
         $id = $this->gateService->decrypt($id)->getId();
 
-        $chefOrder = $this->orderService->getChefOrderById($id);
-
+        $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
+        
         $this->gateService->chefIdCheck($chefOrder->chef_id);
 
-        $cart = $this->orderService->getCart($chefOrder);
-        $userOrder = $this->orderService->getUserOrderByCart($cart);
-
+        $cart = $this->orderService->findCart($chefOrder)->getCart();
+        $userOrder = $this->orderService->findUserOrderByCart($cart)->getUserOrder();
+        
         $this->creditCardService->setAPIKey(config('services.stripe.secret'));
 
         try {
@@ -93,22 +91,35 @@ class OrderController extends Controller
     {
         $id = $this->gateService->decrypt($id)->getId();
 
-        $chefOrder = $this->orderService->getChefOrderById($id);
+        $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
 
         $this->gateService->chefIdCheck($chefOrder->chef_id);
 
-        $cart = $this->orderService->getCart($chefOrder);
-        $datetimepeople = $this->orderService->getDateTimePeopleByCart($cart);
-        $this->orderService->updatePeopleOrder($datetimepeople, $cart, true);
-
-        $this->orderService->deleteChefOrder($chefOrder);
-        $this->orderService->deleteCart($cart);
+        $cart = $this->orderService->findCart($chefOrder)->getCart();
+        $this->orderService->getDateTimePeopleByCart($cart)->updatePeopleOrder($cart, true);
 
         //send user meal Rejected email
         $user = $this->orderService->getUserByCart($cart);
         $this->eventService->chefRejectEvent($user, $cart);
 
+        $this->orderService->deleteChefOrder($chefOrder);
+        $this->orderService->deleteCart($cart);
+        
         flash()->success('Success', 'You have rejected the order successfully!');
         return redirect()->route('order.cheforder', ['id' => encrypt($chefOrder->chef_id)]);
+    }
+
+    public function getCancel($id)
+    {
+        $id = $this->gateService->decrypt($id)->getId();
+
+        $cart = $this->orderService->findCartById($id)->getCart();
+        $user = $this->orderService->getUserByCart($cart);
+
+        $this->orderService->getDateTimePeopleByCart($cart)->updatePeopleOrder($cart, true);
+        $this->orderService->findCartById($id)->deleteCart();
+
+        flash()->success('Success', 'You have rejected the order successfully!');
+        return redirect()->route('order.userorder', ['id' => encrypt($user->id)]);
     }
 }
