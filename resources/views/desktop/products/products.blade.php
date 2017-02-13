@@ -14,12 +14,10 @@
 @section('content')
     <!--header picture-->
     <div class="w3-row" id="top-pic">
-        @foreach ($meal->images->take(4) as $image)
-            @if ($loop->iteration > 1)
-              <div class="w3-col l4 m4">
-                  <img src="{{ asset($image->image_path) }}" alt="profile" style="width:100%">
-              </div>
-            @endif
+        @foreach ($meal->images()->skip(1)->take(3)->get() as $image)  
+            <div class="w3-col l4 m4">
+                <img src="{{ asset($image->image_path) }}" alt="profile" style="width:100%">
+            </div>
         @endforeach
     </div>
 

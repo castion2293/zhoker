@@ -87,12 +87,12 @@ class MealRepository
         if ($others) {
             return $meal->datetimepeoples()
                         ->where('people_left', '>', 0)
-                        ->where('date', '>', $this->getToday())
+                        ->where('date', '>', $this->getTodayDate())
                         ->get();
         }
 
         return $meal->datetimepeoples()
-                    ->where('date', '>', $this->getToday())
+                    ->where('date', '>', $this->getTodayDate())
                     ->get();
      }
 
@@ -178,9 +178,7 @@ class MealRepository
      */
     public function updatePeopleEaten(Meal $meal)
     {
-        return $meal->update([
-            'people_eaten' => $meal->people_eaten++,
-        ]);
+        return $meal->increment('people_eaten' );
     }
 
      /**

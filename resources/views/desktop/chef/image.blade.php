@@ -33,7 +33,7 @@
                 {!! Form::open(['route' => ['image.delete', encrypt($chef->id)], 'method' => 'DELETE']) !!}
                     <ul>
                         @foreach ($images as $image)
-                            <li>
+                            <li id="image{{ $loop->iteration }}" style="display:none;">
                                 <input type="checkbox" name="image[]" id="cb{{ $image->id }}" value="{{ $image->id }}" />
                                 <label for="cb{{ $image->id }}"><img src="{{ asset($image->image_path) }}" /></label>
                             </li>
@@ -43,8 +43,8 @@
                     <button type="submit" id="delete-img" class="" style="display:none;">delete</button>
                 {!! Form::close() !!}
             </div>
-            <div class="text-center">
-                {!! $images->links(); !!}
+            <div id="more-images" class="w3-center">
+                <button class="btn w3-large w3-white w3-border w3-border-green w3-text-green zk-shrink-hover" style="width:15%">More...</button>
             </div>
         </div>
 
@@ -88,8 +88,6 @@
 @endsection
 
 @section('scripts')
-    
-    
     <script>
         $(function () {
             // open upload modal
@@ -154,5 +152,30 @@
                 });
             }
         }
+    </script>
+
+    <!--Images loading-->
+    <script>
+        $(function () {
+            let base = 8;
+            let num_image = base;
+            let count = 1;
+
+            for (i = 1; i < 1 + base; i++) {
+                $("#image" + i).show();
+            }
+
+            $("#more-images").click(function() {
+                if (count >= {{ count($images) }} / num_image)
+                    $("#more-images").hide();
+
+                for(i = 1 + num_image; i < 1 + base + num_image; i++) {
+                    $("#image" + i).show();
+                }
+
+                num_image += base;
+                count++;
+            });
+        });
     </script>
 @endsection
