@@ -45,6 +45,6 @@ class MainService
      */
      public function getChefOrders($chef, $qty)
      {
-         return $this->chefRepo->forChefOrders($chef, $qty);
+         return $this->chefRepo->forChefOrders($chef, null, $qty);
      }
 }

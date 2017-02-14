@@ -19,14 +19,16 @@ elixir(mix => {
                 'bootstrap-datetimepicker.min.css',
                 'star-rating.css',
                 'main.css',
-                'styles.css'])
+                'styles.css',
+                'jQueryPagination.min.css'])
            .scripts(['0609.js',
                     'JQ.js',
                     'parsley.min.js',
                     'star-rating.js',
                     'bootstrap-datetimepicker.min.js',
                     'jquery.tabslet.min.js',
-                    'initializers.js']);
+                    'initializers.js',
+                    'jQueryPagination.min.js']);
            //.webpack('app.js');
     
 });

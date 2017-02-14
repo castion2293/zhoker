@@ -53,12 +53,12 @@ class UserRepository
      * @param $user, $qty
      * @return userorder
      */
-    public function forUserOrder(User $user, $qty = null)
+    public function forUserOrder(User $user, $filter = null, $qty = null)
     {
         if ($qty) {
             return $user->userorders()->latest('id')->take($qty)->with('carts')->get();
         } else {
-            return $user->userorders()->latest('id')->with('carts')->get();
+            return $filter->apply($user->userorders()->newQuery())->get();
         }
     }
 
@@ -66,10 +66,10 @@ class UserRepository
      * @param $user, $qty
      * @return userorder
      */
-    public function forUserOrderPaginate(User $user, $qty)
-    {
-        return $user->userorders()->latest('id')->with('carts')->paginate($qty);
-    }
+    // public function forUserOrderPaginate(User $user, $qty)
+    // {
+    //     return $user->userorders()->latest('id')->with('carts')->paginate($qty);
+    // }
 
     /**
      * @param $user, $datetimepeople_id

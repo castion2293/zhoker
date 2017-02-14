@@ -52,7 +52,7 @@ class UserProfileService
     */
     public function indexUserOrder($user, $qty=null)
     {
-        return $this->userRepo->forUserOrder($user, $qty);
+        return $this->userRepo->forUserOrder($user,null, $qty);
     }
 
     /**

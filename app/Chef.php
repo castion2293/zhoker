@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\Foundation\QueryFilter;
 
 class Chef extends Model
 {

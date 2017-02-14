@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            @foreach ($chefordersAll as $cheforder)
+            @foreach ($cheforders as $cheforder)
                 @foreach($cheforder->carts()->withTrashed()->get() as $cart)
                     <div id="item{{$cart->id}}" class="w3-row w3-padding-24 w3-border-grey w3-border-bottom items" style="display:none;">
                         <div class="w3-col l3 m3 w3-padding-right w3-margin-top">
@@ -154,7 +154,7 @@
                 showInforModal(event);
             },
             events: [
-                @foreach($chefordersAll as $cheforder)
+                @foreach($cheforders as $cheforder)
                     @foreach($cheforder->carts()->withTrashed()->get() as $cart)
                         {
                             title: '{{ $cart->meals->name }} / {{ $cart->people_order }} people',

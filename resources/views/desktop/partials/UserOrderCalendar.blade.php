@@ -13,7 +13,7 @@
             <h3 class="text-center w3-padding-8 w3-text-white">Schedule</h3>
         </div>
         <div class="modal-body" style="padding:10px 50px;">
-            @foreach ($userordersAll as $userorder)
+            @foreach ($userorders as $userorder)
 
                 <div id="item{{$userorder->id}}" class="w3-margin-top w3-margin-bottom w3-border w3-border-green items" style="border-radius:20px;display:none;">
                     <a class="w3-btn-block w3-left-align w3-green" style="border-radius:18px 18px 0 0;">
@@ -171,7 +171,7 @@
                 showInforModal(event);
             },
             events: [
-                @foreach($userordersAll as $userorder)
+                @foreach($userorders as $userorder)
                     @foreach($userorder->carts()->withTrashed()->get() as $cart)
                         {
                             title: '{{ $cart->meals->name }} / {{ $cart->people_order }} people',

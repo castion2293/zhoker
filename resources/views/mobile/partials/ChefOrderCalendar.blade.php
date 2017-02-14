@@ -146,7 +146,7 @@
                 showInforModal(event);
             },
             events: [
-                @foreach($chefordersAll as $cheforder)
+                @foreach($cheforders as $cheforder)
                     @foreach($cheforder->carts()->withTrashed()->get() as $cart)
                         {
                             title: '{{ $cart->meals->name }} / {{ $cart->people_order }} people',

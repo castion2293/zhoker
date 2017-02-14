@@ -27,14 +27,18 @@
         <div class="w3-border w3-border-grey w3-round-large w3-padding-24 w3-margin-top">
             <div id="img-checkbox">
                 {!! Form::open(['route' => ['image.delete', encrypt($chef->id)], 'method' => 'DELETE']) !!}
-                    <ul>
-                        @foreach ($images as $image)
-                            <li id="image{{ $loop->iteration }}" style="display:none;">
-                                <input type="checkbox" name="image[]" id="cb{{ $image->id }}" value="{{ $image->id }}" />
-                                <label for="cb{{ $image->id }}"><img src="{{ asset($image->image_path) }}" /></label>
-                            </li>
+                    <div id="paginate">
+                        @foreach ($images->chunk(8) as $imagesChunk)
+                            <ul>
+                                @foreach ($imagesChunk as $image)
+                                    <li>
+                                        <input type="checkbox" name="image[]" id="cb{{ $image->id }}" value="{{ $image->id }}" />
+                                        <label for="cb{{ $image->id }}"><img src="{{ asset($image->image_path) }}" /></label>
+                                    </li>
+                                @endforeach
+                            </ul>
                         @endforeach
-                    </ul>
+                    </div>
                     <!--for submit delete image, not shown-->
                     <button type="submit" id="delete-img" class="" style="display:none;">delete</button>
                 {!! Form::close() !!}
@@ -145,28 +149,11 @@
         }
     </script>
 
-    <!--Images loading-->
+    <!--JQuery Pagination-->
     <script>
-        $(function () {
-            let base = 8;
-            let num_image = base;
-            let count = 1;
-
-            for (i = 1; i < 1 + base; i++) {
-                $("#image" + i).show();
-            }
-
-            $("#more-images").click(function() {
-                if (count >= {{ count($images) }} / num_image)
-                    $("#more-images").hide();
-
-                for(i = 1 + num_image; i < 1 + base + num_image; i++) {
-                    $("#image" + i).show();
-                }
-
-                num_image += base;
-                count++;
-            });
+        jQuery('#paginate').mbPagination({
+            showFirstLast: true,
+            perPage: 1,
         });
     </script>
 @endsection

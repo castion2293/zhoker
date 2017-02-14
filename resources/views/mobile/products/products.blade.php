@@ -155,7 +155,7 @@
                                 @endfor
                                 <p class="w3-text-grey">
                                     <span class="w3-medium">{{ $comment->users->first_name }} /<span>
-                                    <span class="w3-medium">{{ date('M d Y', strtotime($comment->created_at)) }}</span>
+                                    <span class="w3-medium">{{ $comment->created_at->diffForHumans() }}</span>
                                 </p>
                             </div>
                         </div>

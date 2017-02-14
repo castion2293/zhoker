@@ -155,15 +155,12 @@ class OrderService
     * @param $qty, $pagi, $user
     * @return $this
     */
-    public function findUserOrderByUser($qty = null, $pagi = null, $user = null)
+    public function findUserOrderByUser($filter = null, $qty = null, $user = null)
     {
         count($user) ?: $user = $this->user;
 
-        if (count($pagi))
-            $this->userOrder = $this->userRepo->forUserOrderPaginate($user, $qty);
-        else
-            $this->userOrder = $this->userRepo->forUserOrder($user, $qty);
-
+        $this->userOrder = $this->userRepo->forUserOrder($user, $filter);
+        
         return $this;
     }
 
@@ -217,14 +214,11 @@ class OrderService
     * @param $qty, $pagi, $chef
     * @return $this
     */
-    public function findChefOrder($qty = null, $pagi = null, $chef = null)
+    public function findChefOrder($filter = null, $qty = null,  $chef = null)
     {
         count($chef) ?: $chef = $this->chef;
-
-        if (count($pagi))
-            $this->chefOrder = $this->chefRepo->forChefOrdersPaginate($chef, $qty);
-        else
-            $this->chefOrder = $this->chefRepo->forChefOrders($chef, $qty);
+    
+        $this->chefOrder = $this->chefRepo->forChefOrders($chef, $filter);
 
         return $this;
     }

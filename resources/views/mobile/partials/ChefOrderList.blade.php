@@ -1,5 +1,5 @@
 @inject('OrderPresenter', 'App\Presenters\OrderPresenter')
-<div class="" style="margin-top:5em;">
+<div class="" id="paginate" style="margin-top:5em;">
     @foreach ($cheforders as $cheforder)
         @foreach($cheforder->carts()->withTrashed()->get() as $cart)
             <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
@@ -101,9 +101,6 @@
     @endforeach
 </div>
 
-<div class="text-center">
-    {!! $cheforders->links(); !!}
-</div>
 
 <!--delete meal-->
 <script>
@@ -123,5 +120,13 @@
                 $(id)[0].click();
             });
         });
+    });
+</script>
+
+<!--JQuery Pagination-->
+<script>
+    jQuery('#paginate').mbPagination({
+        showFirstLast: true,
+        perPage: 2,
     });
 </script>

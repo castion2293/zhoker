@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Foundation\OrderFilters;
 
 use App\Services\OrderService;
 use App\Services\CreditCardService;
@@ -30,26 +31,26 @@ class OrderController extends Controller
         $this->gateService = $gateService;
     }
 
-    public function getUserOrder($id)
+    public function getUserOrder($id, OrderFilters $filter)
     {
-        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
-
-        $userorders = $this->orderService->findUser($id)->findUserOrderByUser(6, true)->getUserOrder();
-        $userordersAll = $this->orderService->findUser($id)->findUserOrderByUser()->getUserOrder();
-
+        //$id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+        
+        //$userorders = $this->orderService->findUser($id)->findUserOrderByUser(6, true)->getUserOrder();
+        $userorders = $this->orderService->findUser($id)->findUserOrderByUser($filter)->getUserOrder();
+        
         $agent = $this->agentService->agent();
-        return view($agent . '.user.order', ['userorders' => $userorders, 'userordersAll' => $userordersAll]);
+        return view($agent . '.user.order', ['userorders' => $userorders]);
     }
 
-    public function getChefOrder($id)
+    public function getChefOrder($id, OrderFilters $filter)
     {
-        $id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
+        //$id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
 
-        $cheforders = $this->orderService->findChef($id)->findChefOrder(6, true)->getChefOrder();
-        $chefordersAll = $this->orderService->findChef($id)->findChefOrder()->getChefOrder();
-       
+        // $cheforders = $this->orderService->findChef($id)->findChefOrder($filter, true, 2)->getChefOrder();
+        $cheforders = $this->orderService->findChef($id)->findChefOrder($filter)->getChefOrder();
+        
         $agent = $this->agentService->agent();
-        return view($agent . '.chef.order', ['cheforders'=> $cheforders, 'chefordersAll' => $chefordersAll]);
+        return view($agent . '.chef.order', ['cheforders'=> $cheforders]);
     }
 
     public function getAccept($id)

@@ -71,12 +71,12 @@ class ChefRepository
      * @param $chef
      * @return cheforder
      */
-     public function forChefOrders(Chef $chef, $qty = null)
+     public function forChefOrders(Chef $chef, $filter = null, $qty = null)
      {
          if ($qty) {
              return $chef->cheforders()->withTrashed()->latest('id')->take($qty)->with('carts')->get();
          } else {
-             return $chef->cheforders()->withTrashed()->latest('id')->with('carts')->get();
+             return $filter->apply($chef->cheforders()->newQuery())->get();
          }
      }
 
@@ -84,10 +84,10 @@ class ChefRepository
      * @param $chef
      * @return cheforder
      */
-     public function forChefOrdersPaginate(Chef $chef, $qty)
-     {
-         return $chef->cheforders()->withTrashed()->latest('id')->with('carts')->paginate($qty);
-     }
+    //  public function forChefOrdersPaginate(Chef $chef, $filter, $qty = null)
+    //  {
+    //      return $filter->apply($chef->cheforders()->newQuery())->paginate($qty);
+    //  }
 
      /**
      * @param $chef
