@@ -68,7 +68,7 @@
                 <div class="w3-row">
                     <div class="w3-rest"></div>
                     <div class="w3-col l6 m6 w3-right w3-margin-top">
-                        <a href="{!! route('product.cart.show', ['id' => encrypt(Auth::user()->id)]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover" style="padding-left:0.5em;"><b>Back to Shopping Cart</b></a>
+                        <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover" style="padding-left:0.5em;"><b>Back to Shopping Cart</b></a>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                             <span class="w3-text-grey" style="font-family:cursive;">Sorry! you are not binding your credit card yet!<span><br>
                             <span class="w3-text-grey" style="font-family:cursive;">You can binding your card in the link below:<span>
                             <div class="w3-padding-large">
-                                <a href="{{ route('product.cart.bindingcard', ['id' => encrypt($user->id)]) }}" class="btn w3-green btn-block w3-large zk-shrink-hover">Binding Credit Card</a>
+                                <a href="{{ route('product.cart.bindingcard', ['id' => $user->id]) }}" class="btn w3-green btn-block w3-large zk-shrink-hover">Binding Credit Card</a>
                             </div>
                         @else 
                             <div id="dropdown" class=" w3-row w3-btn-block w3-white w3-left-align w3-border-grey w3-border">

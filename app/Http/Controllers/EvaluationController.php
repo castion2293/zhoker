@@ -29,8 +29,6 @@ class EvaluationController extends Controller
 
     public function create($id)
     {
-        $id = $this->gateService->decrypt($id)->getId();
-
         $cart = $this->evaluationService->findCart($id)->getCart();
         
         $agent = $this->agentService->agent();
@@ -39,8 +37,6 @@ class EvaluationController extends Controller
     
     public function store(Request $request, $id)
     {
-        $id = $this->gateService->decrypt($id)->getId();
-
         $user = $this->evaluationService->findUser()->getUser();
         $cart = $this->evaluationService->findCart($id)->getCart();
         $this->evaluationService->createComment($user->id, $cart->meals->id, $request);

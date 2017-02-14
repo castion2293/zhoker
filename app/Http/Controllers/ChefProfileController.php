@@ -38,7 +38,7 @@ class ChefProfileController extends Controller
     {
         $id = $this->chefProfileService->index();
         
-        return redirect()->route('chef_profile.edit', encrypt($id));
+        return redirect()->route('chef_profile.edit', $id);
     }
 
     /**
@@ -49,7 +49,7 @@ class ChefProfileController extends Controller
      */
     public function edit($id)
     {
-        $id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
+        $this->gateService->chefIdCheck($id);
         
         $chef = $this->chefProfileService->edit($id);
 
@@ -66,7 +66,7 @@ class ChefProfileController extends Controller
      */
     public function update(ChefProfileEditRequest $request, $id)
     {
-        $id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
+        $this->gateService->chefIdCheck($id);
         
         $chef = $this->chefProfileService->update($request, $id);
 

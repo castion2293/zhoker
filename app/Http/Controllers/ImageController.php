@@ -26,7 +26,7 @@ class ImageController extends Controller
 
     public function index($id)
     {
-        $id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
+        $this->gateService->chefIdCheck($id);
 
         $chef = $this->imageService->findChef($id)->getChef();
         $images = $this->imageService->findImageByChef($chef, 20)->getImage();
@@ -44,11 +44,11 @@ class ImageController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
+        $this->gateService->chefIdCheck($id);
         
         $this->imageService->deleteImage($request->input('image'));
 
-        $url = "image/index/" . encrypt($id) . "#title";
+        $url = "image/index/" . $id . "#title";
         return redirect($url);
     }
 }

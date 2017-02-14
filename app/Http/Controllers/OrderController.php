@@ -33,7 +33,7 @@ class OrderController extends Controller
 
     public function getUserOrder($id, OrderFilters $filter)
     {
-        //$id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+        $this->gateService->userIdCheck($id);
         
         //$userorders = $this->orderService->findUser($id)->findUserOrderByUser(6, true)->getUserOrder();
         $userorders = $this->orderService->findUser($id)->findUserOrderByUser($filter)->getUserOrder();
@@ -44,7 +44,7 @@ class OrderController extends Controller
 
     public function getChefOrder($id, OrderFilters $filter)
     {
-        //$id = $this->gateService->decrypt($id)->chefIdCheck()->getId();
+        $this->gateService->chefIdCheck($id);
 
         // $cheforders = $this->orderService->findChef($id)->findChefOrder($filter, true, 2)->getChefOrder();
         $cheforders = $this->orderService->findChef($id)->findChefOrder($filter)->getChefOrder();
@@ -55,8 +55,6 @@ class OrderController extends Controller
 
     public function getAccept($id)
     {
-        $id = $this->gateService->decrypt($id)->getId();
-
         $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
         
         $this->gateService->chefIdCheck($chefOrder->chef_id);
@@ -79,7 +77,9 @@ class OrderController extends Controller
                 $this->eventService->chefConFirmEvent($user, $cart);
 
                 flash()->success('Success', 'You have accepted the order successfully!');
-                return redirect()->route('order.cheforder', ['id' => encrypt($chefOrder->chef_id)]);
+
+                $url = "order/chef_order/" . $chefOrder->chef_id . "?chefOrderType=approve";
+                return redirect($url);
             }
 
         } catch (\Exception $e) {
@@ -90,7 +90,7 @@ class OrderController extends Controller
 
     public function getReject($id)
     {
-        $id = $this->gateService->decrypt($id)->getId();
+        $this->gateService->userIdCheck($id);
 
         $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
 
@@ -99,7 +99,7 @@ class OrderController extends Controller
         $cart = $this->orderService->findCart($chefOrder)->getCart();
         $this->orderService->getDateTimePeopleByCart($cart)->updatePeopleOrder($cart, true);
 
-        //send user meal Rejected email
+        // //send user meal Rejected email
         $user = $this->orderService->getUserByCart($cart);
         $this->eventService->chefRejectEvent($user, $cart);
 
@@ -107,13 +107,13 @@ class OrderController extends Controller
         $this->orderService->deleteCart($cart);
         
         flash()->success('Success', 'You have rejected the order successfully!');
-        return redirect()->route('order.cheforder', ['id' => encrypt($chefOrder->chef_id)]);
+        
+        $url = "order/chef_order/" . $chefOrder->chef_id . "?chefOrderType=reject";
+        return redirect($url);
     }
 
     public function getCancel($id)
     {
-        $id = $this->gateService->decrypt($id)->getId();
-
         $cart = $this->orderService->findCartById($id)->getCart();
         $this->orderService->getDateTimePeopleByCart($cart)->updatePeopleOrder($cart, true);
 
@@ -127,6 +127,8 @@ class OrderController extends Controller
         $this->orderService->deleteCart($cart);
 
         flash()->success('Success', 'You have rejected the order successfully!');
-        return redirect()->route('order.userorder', ['id' => encrypt($user->id)]);
+       
+        $url = "order/user_order/" . $user->id . "?userOrderType=cancel";
+        return redirect($url);
     }
 }

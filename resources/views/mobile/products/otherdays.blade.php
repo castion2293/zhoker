@@ -103,7 +103,7 @@
                                 <td>{{ $datetimepeople->date }}</td>
                                 <td>{{ $datetimepeople->time }}</td>
                                 <td class="w3-center">{{ $datetimepeople->people_left }}</td>
-                                <td class="w3-right"><a href="{{ route('product.show', ['id' => encrypt($meal->id), 'datetime_id' => encrypt($datetimepeople->id)])}}" class="btn w3-deep-orange zk-shrink-hover w3-small">Add to Cart</a></td>
+                                <td class="w3-right"><a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $datetimepeople->id])}}" class="btn w3-deep-orange zk-shrink-hover w3-small">Add to Cart</a></td>
                             </tr>
                         @endforeach
                     </table>

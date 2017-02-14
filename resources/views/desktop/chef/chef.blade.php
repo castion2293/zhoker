@@ -59,7 +59,7 @@
                 <div class="w3-row">
                     @foreach($mealchunk as $meal)
                         <div class="w3-col m4">
-                            <a href="{{ route('chef.show', encrypt($meal->id)) }}" style="text-decoration:none;">
+                            <a href="{{ route('chef.show', $meal->id) }}" style="text-decoration:none;">
                             <div class="thumbnail w3-border-0 w3-padding-tiny">
                                 <div class="w3-white w3-border w3-border-green w3-round-large w3-padding-tiny">
                                     <span class="w3-text-grey w3-large" style="font-family: cursive">{{ $meal->name }}
@@ -196,7 +196,7 @@
                     <div class="w3-row">
                         <div class="w3-rest"></div> 
                         <div class="w3-col l3 m3 w3-right w3-margin-top">
-                            <a href="{!! route('order.cheforder', ['id' => encrypt(Auth::user()->chef_id)]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Order</b></a>
+                            <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Order</b></a>
                         </div>
                     </div> 
 

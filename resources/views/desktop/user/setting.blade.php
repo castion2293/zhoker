@@ -146,7 +146,7 @@
                             </div>
                             <div class="">
                                 <span id="delete-warn" class="glyphicon glyphicon-remove zk-shrink-hover" style="cursor:pointer;margin-top:1.5em;padding-left:1em;"></span>
-                                <a href="{!! route('user.payment.delete', ['id' => encrypt($user->id)]) !!}" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-small zk-shrink-hover" id="delete-confirm" style="display:none;">Delete Credit Card</a>
+                                <a href="{!! route('user.payment.delete', ['id' => $user->id]) !!}" class="btn w3-white w3-text-red w3-border w3-border-red btn-block w3-small zk-shrink-hover" id="delete-confirm" style="display:none;">Delete Credit Card</a>
                             </div>
                         </div>
                         <div class="w3-accordion-content w3-container">

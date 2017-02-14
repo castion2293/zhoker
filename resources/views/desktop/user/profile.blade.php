@@ -108,7 +108,7 @@
                 <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
                     <div class="w3-rest"></div> 
                     <div class="w3-col l3 m3 w3-right w3-margin-top">
-                        <a href="{!! route('product.cart.show', ['id' => encrypt(Auth::user()->id)]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Shopping Cart</b></a>
+                        <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Shopping Cart</b></a>
                     </div>
                 </div>  
 
@@ -222,7 +222,7 @@
                     <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
                         <div class="w3-rest"></div> 
                         <div class="w3-col l3 m3 w3-right w3-margin-top">
-                            <a href="{!! route('order.userorder', ['id' => encrypt(Auth::user()->id)]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Order</b></a>
+                            <a href="{!! route('order.userorder', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Order</b></a>
                         </div>
                     </div> 
 

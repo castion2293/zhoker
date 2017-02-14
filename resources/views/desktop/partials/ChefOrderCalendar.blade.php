@@ -106,10 +106,10 @@
                                             <span class="w3-text-grey w3-large">Overdue</span>
                                         @else
                                             <div class="">
-                                                <a href="{!! route('order.accept', ['id' => encrypt($cheforder->id)]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
+                                                <a href="{!! route('order.accept', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
                                             </div>
                                             <div class="w3-padding-left" style="margin-top:6em;">
-                                                <a href="{!! route('order.reject', ['id' => encrypt($cheforder->id)]) !!}" id="warn{{$cheforder->id}}confirm" class="w3-test-grey" style="display:none;">Reject</a>
+                                                <a href="{!! route('order.reject', ['id' => $cheforder->id]) !!}" id="warn{{$cheforder->id}}confirm" class="w3-test-grey" style="display:none;">Reject</a>
                                                 <a href="#" id="warn{{$cheforder->id}}" class="w3-test-grey warn">Reject</a>
                                             </div>
                                         @endif

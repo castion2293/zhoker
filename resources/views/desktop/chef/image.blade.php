@@ -30,7 +30,7 @@
 
         <div class="w3-border w3-border-grey w3-round-large w3-padding-24 w3-margin-top">
             <div id="img-checkbox">
-                {!! Form::open(['route' => ['image.delete', encrypt($chef->id)], 'method' => 'DELETE']) !!}
+                {!! Form::open(['route' => ['image.delete', $chef->id], 'method' => 'DELETE']) !!}
                     <div id="paginate">
                         @foreach ($images->chunk(12) as $imagesChunk)
                             <ul>
@@ -77,7 +77,7 @@
             </div>
             <div class="modal-footer">
                 <div class="w3-center">
-                    <a href="{{ url('image/index/' . encrypt($chef->id) . '/#title') }}" class="btn w3-large w3-green zk-shrink-hover" id="finish-upload" style="width:20%;display:none;">Finish</a>
+                    <a href="{{ url('image/index/' . $chef->id . '/#title') }}" class="btn w3-large w3-green zk-shrink-hover" id="finish-upload" style="width:20%;display:none;">Finish</a>
                 </div>
                 <div class="w3-center w3-margin-top">
                     <button class="btn w3-large w3-white w3-text-green w3-border w3-border-green zk-shrink-hover" id="upload-img" style="width:20%;">Upload</button>

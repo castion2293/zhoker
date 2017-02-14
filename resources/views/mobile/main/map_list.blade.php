@@ -85,7 +85,7 @@
                           </div>
                       </div>
 
-                      <a href="{{ route('product.show', ['id' => encrypt($meal->id), 'datetime_id' => encrypt($meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->id)])}}" target="_blank" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">Read More</a>
+                      <a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->id])}}" target="_blank" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">Read More</a>
                       
                       </div>
                   @endforeach

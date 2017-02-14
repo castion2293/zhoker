@@ -32,13 +32,13 @@ class CashierController extends Controller
 
     public function getBindingCard($id)
     {
-        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+        $this->gateService->userIdCheck($id);
 
         $user = $this->cashierService->getUser($id);
         $this->sessionService->put('oldUrl', url()->previous());
 
         //for binding credit card
-        $url = "user_profile/" . encrypt($user->id) . "/edit#payment";
+        $url = "user_profile/" . $user->id . "/edit#payment";
         return redirect($url);
     }
 
@@ -68,7 +68,9 @@ class CashierController extends Controller
         $this->eventService->userOrderEvent($user, $carts);
 
         flash()->success('Success', 'Your order has been created successfully!');
-        return redirect()->route('order.userorder', encrypt($user->id));
+
+        $url = "order/user_order/" . $user->id . "?userOrderType=all";
+        return redirect($url);
     }
 
     public function postOneTimeCheckout(Request $request)
@@ -81,7 +83,7 @@ class CashierController extends Controller
             $carts = $this->cashierService->getCart($user);
             $totalPrice = $this->cashierService->getTotalPrice($carts);
 
-            $userOrder = $this->cashierService->createUserOrder($user, encrypt($customer->id), $totalPrice);
+            $userOrder = $this->cashierService->createUserOrder($user, $customer->id, $totalPrice);
 
             foreach ($carts as $cart) {
                 $chefOrder = $this->cashierService->createChefOrder($cart);
@@ -100,7 +102,9 @@ class CashierController extends Controller
             $this->eventService->userOrderEvent($user, $carts);
 
             flash()->success('Success', 'Your order has been created successfully!');
-            return redirect()->route('order.userorder', encrypt($user->id));
+
+            $url = "order/user_order/" . $user->id . "?userOrderType=all";
+            return redirect($url);
 
         } catch (\Exception $e) {
             flash()->error('Error', $e->getMessage());

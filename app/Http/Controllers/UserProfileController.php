@@ -56,7 +56,7 @@ class UserProfileController extends Controller
     {
         $user = $this->userProfileService->indexUser();
         
-        return redirect()->route('user_profile.edit', encrypt($user->id));
+        return redirect()->route('user_profile.edit', $user->id);
     }
 
     /**
@@ -67,7 +67,7 @@ class UserProfileController extends Controller
      */
     public function edit($id)
     {
-        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+        $this->gateService->userIdCheck($id);
         
         $user = $this->userProfileService->indexUser($id);
 
@@ -163,7 +163,7 @@ class UserProfileController extends Controller
 
     public function getPaymentDelete($id)
     {
-        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+        $this->gateService->userIdCheck($id);
         
         $user = $this->userProfileService->indexUser($id);
         $credit_card = $this->creditCardService->findCreditCard($user);

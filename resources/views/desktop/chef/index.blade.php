@@ -53,10 +53,10 @@
                             @endforeach
                         </div>
                         <div class="w3-col l2 m2 w3-padding-small w3-right">
-                            {!! Html::linkRoute('chef.edit', 'Edit', [encrypt($meal->id)], ['class' => 'btn w3-white w3-text-red w3-border w3-border-red btn-block zk-shrink-hover']) !!}
+                            {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-white w3-text-red w3-border w3-border-red btn-block zk-shrink-hover']) !!}
                         </div>
                         <div class="w3-col l2 m2 w3-padding-small w3-right">
-                            {!! Html::linkRoute('chef.show', 'View', [encrypt($meal->id)], ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
+                            {!! Html::linkRoute('chef.show', 'View', [$meal->id], ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
                         </div>
                     </div>
                 </div>

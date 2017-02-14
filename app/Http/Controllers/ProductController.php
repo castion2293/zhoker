@@ -25,9 +25,6 @@ class ProductController extends Controller
 
     public function getProductShow($id, $datetime_id) 
     {   
-        $id = $this->gateService->decrypt($id)->getId();
-        $datetime_id = $this->gateService->decrypt($datetime_id)->getId();
-
         $meal = $this->productService->findMeal($id)->getMeal();
         $datetimepeople = $this->productService->getDateTimePeople($meal, $datetime_id);
         $methods = $this->productService->getMethod($meal);
@@ -48,13 +45,13 @@ class ProductController extends Controller
         if (count($this->productService->getBuyNextTimeItems($user, $datetime_id)))
             $this->productService->buyNextTimeCancel($user, $datetime_id);
 
-        $url = '/product/cart/show/' . encrypt($cart->user_id) . '#shoppingcart';
+        $url = '/product/cart/show/' . $cart->user_id . '#shoppingcart';
         return redirect($url);
     }
 
     public function getCartShow($id)
     {
-        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+        $this->gateService->userIdCheck($id);
 
         $user = $this->productService->getUser($id);
         $carts = $this->productService->getCart($user);
@@ -94,7 +91,7 @@ class ProductController extends Controller
 
     public function getCheckout($id)
     {
-        $id = $this->gateService->decrypt($id)->userIdCheck()->getId();
+        $this->gateService->userIdCheck($id);
        
         $user = $this->productService->getUser($id);
         $carts = $this->productService->getCart($user);
@@ -129,7 +126,6 @@ class ProductController extends Controller
 
     public function getOtherDays($id)
     {
-        $id = $this->gateService->decrypt($id)->getId();
         $meal = $this->productService->findMeal($id)->getMeal();
         $datetimepeoples = $this->productService->getDateTimePeopleOthers($meal);
 

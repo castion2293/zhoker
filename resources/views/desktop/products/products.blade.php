@@ -127,10 +127,10 @@
                           <div class="w3-col l6 m6" style="padding-right:0.5em;">
                               <div id="reserve" class="btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange">Reserve Meal</div>
                               <!--link for going to shoppingcart page, not shown--> 
-                              <a href="{{ url('/product/cart/show/' . encrypt(Auth::user() ? Auth::user()->id : 0) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                              <a href="{{ url('/product/cart/show/' . Auth::user() ? Auth::user()->id : 0 . '#reserve') }}" id="shopping-link" style="display:none;"></a>
                           </div>
                           <div class="w3-col l6 m6" style="padding-left:0.5em;">
-                              <a href="{{ route('product.cart.otherdays', ['meal_id' => encrypt($meal->id)]) }}" class="btn w3-white w3-text-blue w3-border w3-border-blue btn-block w3-large zk-shrink-hover">Other Days</a>
+                              <a href="{{ route('product.cart.otherdays', ['meal_id' => $meal->id]) }}" class="btn w3-white w3-text-blue w3-border w3-border-blue btn-block w3-large zk-shrink-hover">Other Days</a>
                           </div>
                       </div>
                     @endif

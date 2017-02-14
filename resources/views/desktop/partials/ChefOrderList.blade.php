@@ -23,7 +23,16 @@
             <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                 <div class="w3-col l3 m3 w3-padding-right w3-margin-top">
                     @foreach ($cart->meals->images->take(1) as $image)
-                            <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
+                        <div class="w3-row">
+                            <div class="w3-col s10 w3-right w3-margin-top">
+                                <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%;">
+                            </div>
+                            <div class="w3-col s2 w3-right" style="margin-top:2.5em;">
+                                @if (!$cheforder->checked && !$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
+                                    <input class="w3-check w3-text-green" type="checkbox">
+                                @endif 
+                            </div> 
+                        </div>
                     @endforeach
                 </div>
                 <div class="w3-col l3 m3 w3-padding-left">
@@ -93,10 +102,10 @@
                                     <span class="w3-text-grey w3-large">Overdue</span>
                                 @else
                                     <div class="">
-                                        <a href="{!! route('order.accept', ['id' => encrypt($cheforder->id)]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
+                                        <a href="{!! route('order.accept', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
                                     </div>
                                     <div class="w3-padding-left" style="margin-top:6em;">
-                                        <a href="{!! route('order.reject', ['id' => encrypt($cheforder->id)]) !!}" id="warn{{$cheforder->id}}confirm" class="w3-test-grey" style="display:none;">Reject</a>
+                                        <a href="{!! route('order.reject', ['id' => $cheforder->id]) !!}" id="warn{{$cheforder->id}}confirm" class="w3-test-grey" style="display:none;">Reject</a>
                                         <a href="#" id="warn{{$cheforder->id}}" class="w3-test-grey warn">Reject</a>
                                     </div>
                                 @endif

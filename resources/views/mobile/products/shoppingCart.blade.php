@@ -84,9 +84,9 @@
            
             <div class="w3-col s12 w3-margin-top">
                 <!--button id="test">checkout</button-->
-                <a href="{!! route('product.cart.checkout', ['id' => encrypt(Auth::user()->id)]) !!}" id="ckt" class="btn w3-deep-orange w3-large btn-block zk-shrink-hover">Checkout</a>
+                <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt" class="btn w3-deep-orange w3-large btn-block zk-shrink-hover">Checkout</a>
                 <!--link for refresh page after item remove, not shown-->
-                <a href="{!! route('product.cart.show', ['id' => encrypt(Auth::user()->id)]) !!}" id="remove-link" style="display:none;"></a>
+                <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" id="remove-link" style="display:none;"></a>
             </div>
             
             <div class="w3-col s12 w3-margin-top">
@@ -131,7 +131,7 @@
                         <div id="bnt{{ $datetimepeople->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover bnt-btn"><i class="fa fa-heart"></i> Buy Next Time</div>
                     </div>
                     <div class="w3-col s6 w3-padding-12" style="padding-left:0.1em;">
-                        <a href="{{ route('product.show', ['id' => encrypt($datetimepeople->meals->id), 'datetime_id' => encrypt($datetimepeople->id)])}}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover"><i class="fa fa-shopping-cart"></i> Add To Cart</a>
+                        <a href="{{ route('product.show', ['id' => $datetimepeople->meals->id, 'datetime_id' => $datetimepeople->id])}}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover"><i class="fa fa-shopping-cart"></i> Add To Cart</a>
                     </div>
                 </div>
             @endforeach
@@ -168,10 +168,10 @@
                     <div class="w3-col s6 w3-padding-12" style="padding-right:0.1em;">
                         <div id="btn{{ $meal->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-red w3-text-red zk-shrink-hover res-btn">Cancel</div>
                         <!--link for going to shoppingcart page, not shown--> 
-                        <a href="{{ url('/product/cart/show/' . encrypt(Auth::user()->id) . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                        <a href="{{ url('/product/cart/show/' . Auth::user()->id . '#reserve') }}" id="shopping-link" style="display:none;"></a>
                     </div>
                     <div class="w3-col s6 w3-padding-12" style="padding-left:0.1em;">
-                        <a href="{{ route('product.cart.otherdays', ['meal_id' => encrypt($meal->id)]) }}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">Other Days</a>
+                        <a href="{{ route('product.cart.otherdays', ['meal_id' => $meal->id]) }}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">Other Days</a>
                     </div>
                 </div>
             @endforeach

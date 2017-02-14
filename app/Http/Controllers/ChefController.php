@@ -93,8 +93,6 @@ class ChefController extends Controller
      */
     public function show($id)
     {
-        $id = $this->gateService->decrypt($id)->getId();
-
         $meal = $this->chefService->findMeal($id)->getMeal();
 
         $this->gateService->chefIdCheck($meal->chef_id);
@@ -111,8 +109,6 @@ class ChefController extends Controller
      */
     public function edit($id)
     {
-        $id = $this->gateService->decrypt($id)->getId();
-
         $meal = $this->chefService->findMeal($id)->getMeal();
 
         $this->gateService->chefIdCheck($meal->chef_id);
@@ -149,7 +145,7 @@ class ChefController extends Controller
         $this->chefService->connectShift($meal);
         
         flash()->success('Success', 'The meal has been updated successfully!');
-        return redirect()->route('chef.show', encrypt($meal->id));
+        return redirect()->route('chef.show', $meal->id);
     }
 
     /**

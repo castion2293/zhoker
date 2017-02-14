@@ -82,7 +82,7 @@
                                                 @if ($cart->evaluated)
                                                     <span class="w3-text-whtie w3-large">Evaluated</span>
                                                 @else
-                                                    <a href="{{ route('evaluation.create', ['id' => encrypt($cart->id)])}}" class="w3-text-deep-orange w3-large">Evaluate</a>
+                                                    <a href="{{ route('evaluation.create', ['id' => $cart->id])}}" class="w3-text-deep-orange w3-large">Evaluate</a>
                                                 @endif
                                             </div>
                                         @else
@@ -101,7 +101,7 @@
                                             </div>
                                         @endif
                                         <div class="w3-col s12 w3-center w3-margin-top">
-                                            <a href="{{ route('order.cancel', ['id' => encrypt($cart->id)]) }}" id="warn{{$cart->id}}confirm" style="display:none;">Cancel</a>
+                                            <a href="{{ route('order.cancel', ['id' => $cart->id]) }}" id="warn{{$cart->id}}confirm" style="display:none;">Cancel</a>
                                             <a href="#" id="warn{{$cart->id}}" class="w3-text-blue w3-large warn">Cancel</a>
                                         </div>
                                     @endif
