@@ -137,6 +137,10 @@ Route::get('order/accept/{id}', [
     'uses' => 'OrderController@getAccept',
     'as' => 'order.accept'
 ]);
+Route::post('order/accept', [
+    'uses' => 'OrderController@postAccept',
+    'as' => 'order.accept'
+]);
 Route::get('order/reject/{id}', [
     'uses' => 'OrderController@getReject',
     'as' => 'order.reject'

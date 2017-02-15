@@ -55,6 +55,9 @@
         @endif 
 
     </div>
+
+    <!--loader view-->
+    @include('desktop.partials.loader')
 @endsection
 
 @section('scripts')

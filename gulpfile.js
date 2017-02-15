@@ -20,7 +20,8 @@ elixir(mix => {
                 'star-rating.css',
                 'main.css',
                 'styles.css',
-                'jQueryPagination.min.css'])
+                'jQueryPagination.min.css',
+                'loadme.css'])
            .scripts(['0609.js',
                     'JQ.js',
                     'parsley.min.js',

@@ -3,6 +3,11 @@
     @foreach ($cheforders as $cheforder)
         @foreach($cheforder->carts()->withTrashed()->get() as $cart)
             <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
+                <div class="w3-col s12 w3-center">
+                    @if (!$cheforder->checked && !$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
+                        <input id="od{{$cheforder->id}}" class="w3-check w3-text-green ckbox" value="{{$cheforder->id}}" type="checkbox">
+                    @endif 
+                </div>
                 <div class="w3-col s8" style="margin-top:0.2em;">
                     <div class="">
                         <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
@@ -101,6 +106,14 @@
     @endforeach
 </div>
 
+<div class="w3-row" style="margin-top:4em;">
+    <div class="w3-center">
+        <button id="group-accept" class="btn w3-large w3-white w3-text-deep-orange w3-border w3-border-deep-orange zk-shrink-hover" style="width:100%;">Accept</button>
+        <!--for approve link use, not shown-->
+        <a id="approve-link" href="{{ url('/order/chef_order/' . Auth::user()->chef_id . '/?chefOrderType=approve') }}" style="display:none;">approve link</a>
+    </div>
+</div>  
+
 
 <!--delete meal-->
 <script>
@@ -129,4 +142,68 @@
         showFirstLast: true,
         perPage: 2,
     });
+</script>
+
+<!--group accept-->
+<script>
+    var list = [];
+
+    $(".ckbox").change(function(event) {
+        id = "#".concat(event.target.id);
+
+        if( $(id).is(':checked') ) {
+            list[event.target.value] = event.target.value;
+        } else {
+            delete list[event.target.value]; 
+        }
+    });
+
+    $("#group-accept").click(function() {
+        let chef_order_id = clear(list);
+
+        if (chef_order_id == "")
+            errorAlert();
+        else {
+            $("#LoadingModal").modal();
+            postChefOrderId(chef_order_id);
+        }
+        
+    });
+
+    function postChefOrderId(chef_order_id)
+    {
+        var token = '{{ Session::token() }}';
+        var url = '{{ route('order.accept') }}';
+
+        $.ajax({
+            method: 'POST',
+            url: url,
+            data: {chef_order_id: chef_order_id, _token: token},
+            success : function(data){
+                $("#approve-link")[0].click();
+            },
+            error : function(data){
+                alert('fail');
+            },
+        });
+    }
+
+    function errorAlert()
+    {
+        swal({
+            title: "Error",
+            text: "Please select the order",
+            type: "error",
+            timer: 2000,
+        });
+    }
+
+    function clear (arr){
+        var stripped = [];
+        for (i = 0; i < arr.length; i++){
+            if (arr[i])
+                stripped.push(arr[i]);
+        }
+        return stripped;
+    }
 </script>

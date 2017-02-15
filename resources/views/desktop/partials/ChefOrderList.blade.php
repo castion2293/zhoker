@@ -29,7 +29,7 @@
                             </div>
                             <div class="w3-col s2 w3-right" style="margin-top:2.5em;">
                                 @if (!$cheforder->checked && !$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
-                                    <input class="w3-check w3-text-green" type="checkbox">
+                                    <input id="od{{$cheforder->id}}" class="w3-check w3-text-green ckbox" value="{{$cheforder->id}}" type="checkbox">
                                 @endif 
                             </div> 
                         </div>
@@ -119,6 +119,14 @@
     @endforeach
 </div>
 
+<div class="w3-row" style="margin-top:4em;">
+    <div class="w3-center">
+        <button id="group-accept" class="btn w3-large w3-white w3-text-deep-orange w3-border w3-border-deep-orange zk-shrink-hover" style="width:20%;">Accept</button>
+        <!--for approve link use, not shown-->
+        <a id="approve-link" href="{{ url('/order/chef_order/' . Auth::user()->chef_id . '/?chefOrderType=approve') }}" style="display:none;">approve link</a>
+    </div>
+</div>  
+
 
 <!--delete meal-->
 <script>
@@ -147,4 +155,68 @@
         showFirstLast: true,
         perPage: 5,
     });
+</script>
+
+<!--group accept-->
+<script>
+    var list = [];
+
+    $(".ckbox").change(function(event) {
+        id = "#".concat(event.target.id);
+
+        if( $(id).is(':checked') ) {
+            list[event.target.value] = event.target.value;
+        } else {
+            delete list[event.target.value]; 
+        }
+    });
+
+    $("#group-accept").click(function() {
+        let chef_order_id = clear(list);
+
+        if (chef_order_id == "")
+            errorAlert();
+        else {
+            $("#LoadingModal").modal();
+            postChefOrderId(chef_order_id);
+        }
+        
+    });
+
+    function postChefOrderId(chef_order_id)
+    {
+        var token = '{{ Session::token() }}';
+        var url = '{{ route('order.accept') }}';
+
+        $.ajax({
+            method: 'POST',
+            url: url,
+            data: {chef_order_id: chef_order_id, _token: token},
+            success : function(data){
+                $("#approve-link")[0].click();
+            },
+            error : function(data){
+                alert('fail');
+            },
+        });
+    }
+
+    function errorAlert()
+    {
+        swal({
+            title: "Error",
+            text: "Please select the order",
+            type: "error",
+            timer: 2000,
+        });
+    }
+
+    function clear (arr){
+        var stripped = [];
+        for (i = 0; i < arr.length; i++){
+            if (arr[i])
+                stripped.push(arr[i]);
+        }
+        return stripped;
+    }
 </script>

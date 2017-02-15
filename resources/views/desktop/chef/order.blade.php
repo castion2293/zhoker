@@ -18,18 +18,20 @@
             <h1 class="w3-text-green w3-border-green w3-border-bottom">Meal Order<h1>
         </div>
 
-        <div class="w3-margin-top w3-padding-left" style="width:20%;position:absolute">
-            <select id="type-select" class="w3-select w3-large w3-text-grey">
-                <option value="" disabled selected>Type Search</option>
-                <option value="all" class="w3-large w3-text-grey">all</option>
-                <option value="approve" class="w3-large w3-text-grey">approve</option>
-                <option value="reject" class="w3-large w3-text-grey">reject</option>
-                <option value="pending" class="w3-large w3-text-grey">pending</option>
-                <option value="cancel" class="w3-large w3-text-grey">cancel</option>
-                <option value="overdue" class="w3-large w3-text-grey">overdue</option>
-            </select>
-            <!--for refresh the new page, not shown-->
-            <a id="new-page-link" href="" style="display:none;">new page</a> 
+        <div class="w3-margin-top w3-padding-left w3-row" style="width:50%;position:absolute">
+            <div class="w3-col l4 m4">
+                <select id="type-select" class="w3-select w3-large w3-text-grey" style="cursor:pointer;">
+                    <option value="" disabled selected>Type Search</option>
+                    <option value="all" class="w3-large w3-text-grey">all</option>
+                    <option value="approve" class="w3-large w3-text-grey">approve</option>
+                    <option value="reject" class="w3-large w3-text-grey">reject</option>
+                    <option value="pending" class="w3-large w3-text-grey">pending</option>
+                    <option value="cancel" class="w3-large w3-text-grey">cancel</option>
+                    <option value="overdue" class="w3-large w3-text-grey">overdue</option>
+                </select>
+                <!--for refresh the new page, not shown-->
+                <a id="new-page-link" href="" style="display:none;">new page</a> 
+            </div>
         </div>
 
         @if ($cheforders->isEmpty())
@@ -54,6 +56,9 @@
         @endif 
 
     </div>
+
+    <!--loader view-->
+    @include('desktop.partials.loader')
 @endsection
 
 @section('scripts')

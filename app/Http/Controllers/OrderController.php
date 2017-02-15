@@ -58,7 +58,7 @@ class OrderController extends Controller
         $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
         
         $this->gateService->chefIdCheck($chefOrder->chef_id);
-
+        
         $cart = $this->orderService->findCart($chefOrder)->getCart();
         $userOrder = $this->orderService->findUserOrderByCart($cart)->getUserOrder();
         
@@ -73,7 +73,7 @@ class OrderController extends Controller
                 $this->orderService->updateMealPeopleEaten($cart->meals);
 
                 //send user meal confirmed email
-                $user = $this->orderService->getUserByCart($cart);
+                $user = $this->orderService->findCart($chefOrder)->getCart();
                 $this->eventService->chefConFirmEvent($user, $cart);
 
                 flash()->success('Success', 'You have accepted the order successfully!');
@@ -88,19 +88,51 @@ class OrderController extends Controller
         }
     }
 
+    public function postAccept(Request $request)
+    {
+        $this->creditCardService->setAPIKey(config('services.stripe.secret'));
+
+        foreach ($request->chef_order_id as $id)
+        {
+            $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
+            
+            $this->gateService->chefIdCheck($chefOrder->chef_id);
+        
+            $cart = $this->orderService->findCart($chefOrder)->getCart();
+            $userOrder = $this->orderService->findUserOrderByCart($cart)->getUserOrder();
+
+            try {
+                if ($this->orderService->updateChefOrderCheck($chefOrder)) {
+
+                    $this->creditCardService->charge($cart->price, "twd", decrypt($userOrder->cashier_id));
+
+                    $this->orderService->updateChefOrderPaid($chefOrder);
+                    $this->orderService->updateMealPeopleEaten($cart->meals);
+
+                    //send user meal confirmed email
+                    $user = $this->orderService->findUserByCart($cart)->getUser();
+                    $this->eventService->chefConFirmEvent($user, $cart);
+                }
+
+            } catch (\Exception $e) {
+                //flash()->error('Error', $e->getMessage());
+            }
+        }
+
+        flash()->success('Success', 'You have accepted the order successfully!');
+    }
+
     public function getReject($id)
     {
-        $this->gateService->userIdCheck($id);
-
         $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
-
+        
         $this->gateService->chefIdCheck($chefOrder->chef_id);
 
         $cart = $this->orderService->findCart($chefOrder)->getCart();
         $this->orderService->getDateTimePeopleByCart($cart)->updatePeopleOrder($cart, true);
 
         // //send user meal Rejected email
-        $user = $this->orderService->getUserByCart($cart);
+        $user = $this->orderService->findUserByCart($cart)->getUser();
         $this->eventService->chefRejectEvent($user, $cart);
 
         $this->orderService->deleteChefOrder($chefOrder);

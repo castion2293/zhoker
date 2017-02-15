@@ -192,7 +192,7 @@ class OrderService
     */
     public function findChefOrderById($id)
     {
-        $this->ChefOrder = $this->chefOrderRepo->findChefOrderById($id);
+        $this->chefOrder = $this->chefOrderRepo->findChefOrderById($id);
 
         return $this;
     }
