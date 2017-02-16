@@ -9,6 +9,9 @@ use App\Services\ImageService;
 
 class ChefProfileService
 {
+    protected $user;
+    protected $chef;
+
     /**
      * ChefService constructor.
      */
@@ -21,20 +24,41 @@ class ChefProfileService
     }
 
     /**
-     * @return chef_id
+     * @return $this
      */
-    public function index()
+    public function findUser()
     {
-        return $this->userRepo->getChef_id();
+        $this->user = $this->userRepo->findUserById();
+
+        return $this;
+    }
+
+    /**
+     * @return $user
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**
      * @param $id
-     * @return chef
+     * @return $this
      */
-    public function edit($id)
+    public function findChef($id)
     {
-        return $this->chefRepo->findChefById($id);
+        $this->chef = $this->chefRepo->findChefById($id);
+
+        return $this;
+    }
+
+    /**
+     * @param 
+     * @return $chef
+     */
+    public function getChef()
+    {
+        return $this->chef;
     }
 
     /**

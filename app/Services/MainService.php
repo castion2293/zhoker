@@ -10,6 +10,11 @@ class MainService
     protected $userRepo;
     protected $chefRepo;
 
+    protected $user;
+    protected $chef;
+    protected $meal;
+    protected $chefOrder;
+
     /**
      * MainService constructor.
      */
@@ -20,31 +25,87 @@ class MainService
     }
 
     /**
+     * @param 
+     * @return $this
+     */
+    public function findUser()
+    {
+        $this->user = $this->userRepo->findUserById();
+
+        return $this;
+    }
+
+    /**
+     * @param 
+     * @return $user
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param $user
+     * @return $this
+     */
+    public function findChef($user = null)
+    {
+        count($user) ?: $user = $this->user;
+
+        $this->chef = $this->userRepo->forChef($user);
+
+        return $this;
+    }
+
+    /**
      * @return chef
      */
      public function getChef()
      {
-         $user = $this->userRepo->findUserById();
-         $chef = $this->userRepo->forChef($user);
-
-         return $chef;
+         return $this->chef;
      }
 
      /**
      * @param $chef, $qty
+     * @return $this
+     */
+     public function findMeals($chef = null, $qty)
+     {
+         count($chef) ?: $chef = $this->chef;
+
+         $this->meal = $this->chefRepo->forMeals($chef, $qty);
+
+         return $this;
+     }
+
+     /**
+     * @param 
      * @return meals
      */
-     public function getMeals($chef, $qty)
+     public function getMeals()
      {
-         return $this->chefRepo->forMeals($chef, $qty);
+         return $this->meal;
      }
 
      /**
      * @param $chef, $qty
+     * @return $this
+     */
+     public function findChefOrders($chef = null, $qty)
+     {
+        count($chef) ?: $chef = $this->chef;
+
+        $this->chefOrder = $this->chefRepo->forChefOrders($chef, null, $qty);
+
+        return $this;
+     }
+
+     /**
+     * @param 
      * @return cheforders
      */
-     public function getChefOrders($chef, $qty)
+     public function getChefOrders()
      {
-         return $this->chefRepo->forChefOrders($chef, null, $qty);
+         return $this->chefOrder;
      }
 }

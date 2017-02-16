@@ -34,7 +34,7 @@ class CashierController extends Controller
     {
         $this->gateService->userIdCheck($id);
 
-        $user = $this->cashierService->getUser($id);
+        $user = $this->cashierService->findUser($id)->getUser();
         $this->sessionService->put('oldUrl', url()->previous());
 
         //for binding credit card
@@ -44,9 +44,9 @@ class CashierController extends Controller
 
     public function postBindingCheckout(Request $request)
     {
-        $user = $this->cashierService->getUser();
-        $creditCard = $this->cashierService->getCreditCard($user);
-        $carts = $this->cashierService->getCart($user);
+        $user = $this->cashierService->findUser()->getUser();
+        $creditCard = $this->cashierService->findCreditCardByUser($user)->getCreditCard();
+        $carts = $this->cashierService->findCartByUser($user)->getCart();
         $totalPrice = $this->cashierService->getTotalPrice($carts);
 
         $userOrder = $this->cashierService->createUserOrder($user, $creditCard->customer_id, $totalPrice);
@@ -75,12 +75,12 @@ class CashierController extends Controller
 
     public function postOneTimeCheckout(Request $request)
     {
-        $user = $this->cashierService->getUser();
+        $user = $this->cashierService->findUser()->getUser();
 
         $this->creditCardService->setAPIKey(config('services.stripe.secret'));
         try {
             $customer = $this->creditCardService->createCustomer($user, $request);
-            $carts = $this->cashierService->getCart($user);
+            $carts = $this->cashierService->findCartByUser($user)->getCart();
             $totalPrice = $this->cashierService->getTotalPrice($carts);
 
             $userOrder = $this->cashierService->createUserOrder($user, $customer->id, $totalPrice);

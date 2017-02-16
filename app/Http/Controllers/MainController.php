@@ -43,9 +43,9 @@ class MainController extends Controller
             //set flash data with chef login
             $this->sessionService->put('login', 'chef');
 
-            $chef = $this->mainService->getChef();
-            $meals = $this->mainService->getMeals($chef, 6);
-            $cheforders = $this->mainService->getChefOrders($chef, 3);
+            $chef = $this->mainService->findUser()->findChef()->getChef();
+            $meals = $this->mainService->findMeals($chef, 6)->getMeals();
+            $cheforders = $this->mainService->findChefOrders($chef, 3)->getChefOrders();
 
             $agent = $this->agentService->agent();
             return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);
@@ -60,9 +60,9 @@ class MainController extends Controller
 
     public function getChefContent()
     {
-        $chef = $this->mainService->getChef();
-        $meals = $this->mainService->getMeals($chef, 6);
-        $cheforders = $this->mainService->getChefOrders($chef, 3);
+        $chef = $this->mainService->findUser()->findChef()->getChef();
+        $meals = $this->mainService->findMeals($chef, 6)->getMeals();
+        $cheforders = $this->mainService->findChefOrders($chef, 3)->getChefOrders();
 
         $agent = $this->agentService->agent();
         return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);

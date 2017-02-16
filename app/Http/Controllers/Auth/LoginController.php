@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Session;
 
+use App\Services\AgentService;
+
 class LoginController extends Controller
 {
     /*
@@ -33,12 +35,13 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AgentService $agentService)
     {
         $this->middleware('guest', ['except' => 'logout']);
         
-        //$oldUrl = url()->previous();//Session::get('test');
-            
+        if ($agentService->agent() == 'mobile')
+            flash()->success('Success', 'Login Success!!');
+
         $redirectTo = url()->previous();
         //}
     }

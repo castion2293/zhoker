@@ -26,11 +26,6 @@ class UserRepository
             return Auth::user();
     }
 
-    public function getChef_id($id = null)
-    {
-        return $this->findUserById($id)->chef_id;
-    }
-
     /**
      * @param $id
      * @return chef

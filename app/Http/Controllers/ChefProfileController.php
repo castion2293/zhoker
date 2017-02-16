@@ -36,9 +36,9 @@ class ChefProfileController extends Controller
      */
     public function index()
     {
-        $id = $this->chefProfileService->index();
+        $user = $this->chefProfileService->findUser()->getUser();
         
-        return redirect()->route('chef_profile.edit', $id);
+        return redirect()->route('chef_profile.edit', $user->chef_id);
     }
 
     /**
@@ -51,7 +51,7 @@ class ChefProfileController extends Controller
     {
         $this->gateService->chefIdCheck($id);
         
-        $chef = $this->chefProfileService->edit($id);
+        $chef = $this->chefProfileService->findChef($id)->getChef();
 
         $agent = $this->agentService->agent();
         return view($agent . '.chef.edit_profile', ['chef' => $chef]);
@@ -70,8 +70,8 @@ class ChefProfileController extends Controller
         
         $chef = $this->chefProfileService->update($request, $id);
 
-        $meals = $this->mainService->getMeals($chef, 6);
-        $cheforders = $this->mainService->getChefOrders($chef, 3);
+        $meals = $this->mainService->findMeals($chef, 6)->getMeals();
+        $cheforders = $this->mainService->findChefOrders($chef, 3)->getChefOrders();
 
         flash()->success('Success', 'The user profile has been updated successfully!');
 

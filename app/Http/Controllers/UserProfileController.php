@@ -39,9 +39,9 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        $user = $this->userProfileService->indexUser();
-        $carts = $this->userProfileService->indexCart($user);
-        $userorders = $this->userProfileService->indexUserOrder($user, 3);
+        $user = $this->userProfileService->findUser()->getUser();
+        $carts = $this->userProfileService->findCartByUser($user)->getCart();
+        $userorders = $this->userProfileService->findUserOrderByUser($user, 3)->getUserOrder();
 
         $agent = $this->agentService->agent();
         return view($agent . '.user.profile', ['user' => $user, 'carts' => $carts, 'userorders' => $userorders]);
@@ -54,7 +54,7 @@ class UserProfileController extends Controller
      */
     public function create()
     {
-        $user = $this->userProfileService->indexUser();
+        $user = $this->userProfileService->findUser()->getUser();
         
         return redirect()->route('user_profile.edit', $user->id);
     }
@@ -69,7 +69,7 @@ class UserProfileController extends Controller
     {
         $this->gateService->userIdCheck($id);
         
-        $user = $this->userProfileService->indexUser($id);
+        $user = $this->userProfileService->findUser($id)->getUser();
 
         $agent = $this->agentService->agent();
         return view($agent . '.user.setting', ['user' => $user]);
@@ -86,7 +86,7 @@ class UserProfileController extends Controller
     {
         $this->gateService->userIdCheck($id);
 
-        $user = $this->userProfileService->indexUser($id);
+        $user = $this->userProfileService->findUser($id)->getUser();
 
         $this->userProfileService->update($user, $request);
 
@@ -96,7 +96,7 @@ class UserProfileController extends Controller
 
     public function resetPassword(UserResetPasswordRequest $request)
     {
-        $user = $this->userProfileService->indexUser();
+        $user = $this->userProfileService->findUser()->getUser();
 
         if ($this->userProfileService->resetPassword($user, $request)) {
 
@@ -112,7 +112,7 @@ class UserProfileController extends Controller
 
     public function postPaymentCreate(Request $request)
     {
-        $user = $this->userProfileService->indexUser();
+        $user = $this->userProfileService->findUser()->getUser();
 
         $this->creditCardService->setAPIKey(config('services.stripe.secret'));
         try {
@@ -141,7 +141,7 @@ class UserProfileController extends Controller
 
     public function postPaymentEdit(Request $request)
     {
-        $user = $this->userProfileService->indexUser();
+        $user = $this->userProfileService->findUser()->getUser();
         
         $this->creditCardService->setAPIKey(config('services.stripe.secret'));
         try {
@@ -165,7 +165,7 @@ class UserProfileController extends Controller
     {
         $this->gateService->userIdCheck($id);
         
-        $user = $this->userProfileService->indexUser($id);
+        $user = $this->userProfileService->findUser($id)->getUser();
         $credit_card = $this->creditCardService->findCreditCard($user);
 
         $this->creditCardService->deleteCreditCard($credit_card);

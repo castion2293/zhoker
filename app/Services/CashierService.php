@@ -18,6 +18,10 @@ class CashierService
     protected $userOrderRepo;
     protected $chefOrderRepo;
 
+    protected $user;
+    protected $cart;
+    protected $creditCard;
+
     /**
      * CashierService constructor.
      */
@@ -34,29 +38,66 @@ class CashierService
 
     /**
      * @param $id
-     * @return user
+     * @return $this
      */
-    public function getUser($id = null)
+    public function findUser($id = null)
     {
-        return $this->userRepo->findUserById($id);
+        $this->user = $this->userRepo->findUserById($id);
+
+        return $this;
+    }
+
+    /**
+     * @param 
+     * @return $user
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**
      * @param $user
+     * @return $this
+     */
+    public function findCartByUser($user)
+    {
+        count($user) ?: $user = $this->user;
+        
+        $this->cart = $this->userRepo->forCartNotCheck($user);
+
+        return $this;
+    }
+
+    /**
+     * @param 
      * @return cart
      */
-    public function getCart($user)
+    public function getCart()
     {
-        return $this->userRepo->forCartNotCheck($user);
+        return $this->cart;
     }
 
      /**
      * @param $user
-     * @return credit_card
+     * @return $this;
      */
-    public function getCreditCard($user)
+    public function findCreditCardByUser($user = null)
     {
-        return $this->userRepo->forCreditCard($user);
+        count($user) ?: $user = $this->user;
+
+        $this->creditCard = $this->userRepo->forCreditCard($user);
+
+        return $this;
+    }
+
+     /**
+     * @param 
+     * @return $credit_card
+     */
+    public function getCreditCard()
+    {
+        return $this->creditCard;
     }
 
      /**

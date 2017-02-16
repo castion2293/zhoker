@@ -16,6 +16,10 @@ class UserProfileService
 
     protected $imageService;
 
+    protected $user;
+    protected $cart;
+    protected $userOrder;
+
     /**
      * ChefService constructor.
      */
@@ -30,29 +34,66 @@ class UserProfileService
 
     /**
     * @param null
-    * @return user
+    * @return $this
     */
-    public function indexUser($id = null)
+    public function findUser()
     {
-        return $this->userRepo->findUserById($id);
+        $this->user = $this->userRepo->findUserById();
+
+        return $this;
+    }
+
+    /**
+    * @param null
+    * @return $user
+    */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**
     * @param $user
-    * @return cart
+    * @return $this
     */
-    public function indexCart($user)
+    public function findCartByUser($user)
     {
-        return $this->userRepo->forCartNotCheck($user);
+        count($user) ?: $user = $this->user;
+
+        $this->cart = $this->userRepo->forCartNotCheck($user);
+
+        return $this;
     }
 
     /**
-    * @param $user, $seq
-    * @return userorder
+    * @param 
+    * @return $cart
     */
-    public function indexUserOrder($user, $qty=null)
+    public function getCart()
     {
-        return $this->userRepo->forUserOrder($user,null, $qty);
+        return $this->cart;
+    }
+
+    /**
+    * @param $user, $qty
+    * @return $this
+    */
+    public function findUserOrderByUser($user, $qty=null)
+    {
+        count($user) ?: $user = $this->user;
+
+        $this->userOrder = $this->userRepo->forUserOrder($user,null, $qty);
+
+        return $this;
+    }
+
+     /**
+    * @param 
+    * @return $userOrder
+    */
+    public function getUserOrder()
+    {
+        return $this->userOrder;
     }
 
     /**
