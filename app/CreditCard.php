@@ -14,4 +14,15 @@ class CreditCard extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     } 
+
+    /**
+     * Set the customer_id attribute
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setCustomerIdAttribute($value)
+    {
+        $this->attributes['customer_id'] = encrypt($value);
+    }
 }

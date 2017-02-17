@@ -133,13 +133,13 @@ Route::get('order/chef_order/{id}', [
     'uses' => 'OrderController@getChefOrder',
     'as' => 'order.cheforder'
 ]);
-Route::get('order/accept/{id}', [
+Route::get('order/accept/get/{id}', [
     'uses' => 'OrderController@getAccept',
-    'as' => 'order.accept'
+    'as' => 'order.accept.get'
 ]);
-Route::post('order/accept', [
+Route::post('order/accept/post', [
     'uses' => 'OrderController@postAccept',
-    'as' => 'order.accept'
+    'as' => 'order.accept.post'
 ]);
 Route::get('order/reject/{id}', [
     'uses' => 'OrderController@getReject',

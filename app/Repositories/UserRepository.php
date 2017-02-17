@@ -112,15 +112,6 @@ class UserRepository
     }
 
     /**
-     * @param $user, $credit_card
-     * @return 
-     */
-    public function saveCreditCard(User $user, $credit_card)
-    {
-        return $user->creditcards()->save($credit_card);
-    }
-
-    /**
      * @param $user, $meal_id
      * @return 
      */

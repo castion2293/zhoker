@@ -68,41 +68,43 @@
                 </div>
 
                 @foreach ($carts as $cart)
-                    <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
-                        <div class="w3-col l3 m3 w3-padding-right">
-                            @foreach ($cart->meals->images->take(1) as $image)
-                                <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                            @endforeach
-                        </div>
-                        <div class="w3-col l7 m7" style="padding-left:2em;">
-                            <div class="w3-row">
-                                <div class="w3-col l5 m5">
-                                    <div class="">
-                                        <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                    @if (count($cart->meals))
+                        <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
+                            <div class="w3-col l3 m3 w3-padding-right">
+                                @foreach ($cart->meals->images->take(1) as $image)
+                                    <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
+                                @endforeach
+                            </div>
+                            <div class="w3-col l7 m7" style="padding-left:2em;">
+                                <div class="w3-row">
+                                    <div class="w3-col l5 m5">
+                                        <div class="">
+                                            <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                                        </div>
+                                        <div class="">
+                                            <span class="w3-text-green w3-large">${{ $cart->meals->price }}</span>
+                                        </div>
+                                        <div class="">
+                                            <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                                        </div>
                                     </div>
-                                    <div class="">
-                                        <span class="w3-text-green w3-large">${{ $cart->meals->price }}</span>
-                                    </div>
-                                    <div class="">
-                                        <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
-                                    </div>
-                                </div>
-                                <div class="w3-col l7 m7">
-                                    <div class="">
-                                        <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
-                                    </div>
-                                    <div class="w3-margin-top">
-                                        <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
+                                    <div class="w3-col l7 m7">
+                                        <div class="">
+                                            <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
+                                        </div>
+                                        <div class="w3-margin-top">
+                                            <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="w3-col l2 m2" style="padding-left:1em;">
-                            <div class="">
-                                <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
+                            <div class="w3-col l2 m2" style="padding-left:1em;">
+                                <div class="">
+                                    <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
 
                 <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
@@ -173,7 +175,7 @@
                                         @foreach ($userorder->carts()->get() as $cart)
                                             <div class="w3-row w3-padding-24">
                                                 <div class="w3-col l4 m4 w3-padding-right">
-                                                    @foreach ($cart->meals->images->take(1) as $image)
+                                                    @foreach ($UserPresenter->getMealImage($cart) as $image)
                                                         <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
                                                     @endforeach
                                                 </div>
@@ -181,10 +183,10 @@
                                                     <div class="w3-row">
                                                         <div class="w3-col l5 m5">
                                                             <div class="">
-                                                                <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                                                                <span class="w3-text-grey w3-large"><b>{{ $UserPresenter->getMealName($cart) }}</b></span>
                                                             </div>
                                                             <div class="">
-                                                                <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span></span>
+                                                                <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $UserPresenter->getMealPrice($cart) }}</span></span>
                                                             </div>
                                                             <div class="">
                                                                 <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>

@@ -20,4 +20,15 @@ class UserOrder extends Model
     {
         return $this->hasMany('App\Cart');
     }
+
+    /**
+     * Get the userorder's cashier_id.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getCashierIdAttribute($value)
+    {
+        return decrypt($value);
+    }
 }

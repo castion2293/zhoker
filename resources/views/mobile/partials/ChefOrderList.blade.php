@@ -10,10 +10,10 @@
                 </div>
                 <div class="w3-col s8" style="margin-top:0.2em;">
                     <div class="">
-                        <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                        <span class="w3-text-grey w3-large"><b>{{ $OrderPresenter->getMealName($cart) }}</b></span>
                     </div>
                     <div class="">
-                        <span class="w3-text-green w3-medium"><b>${{ $cart->meals->price }}TWD</b></span>
+                        <span class="w3-text-green w3-medium"><b>${{ $OrderPresenter->getMealPrice($cart) }}TWD</b></span>
                     </div>
                     <div class="">
                         <span class="w3-text-grey w3-medium">{{ $cart->people_order }} people order</span>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="w3-col s12">
-                    @foreach ($cart->meals->images->take(1) as $image)
+                    @foreach ($OrderPresenter->getMealImage($cart) as $image)
                             <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
                     @endforeach
                 </div>
@@ -94,7 +94,7 @@
                                     <a href="#" id="warn{{$cheforder->id}}" class="w3-test-grey warn">Reject</a>
                                 </div>
                                 <div class="w3-col s12 w3-padding-8">
-                                    <a href="{!! route('order.accept', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block w3-round-medium zk-shrink-hover">Accept</a>
+                                    <a href="{!! route('order.accept.get', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block w3-round-medium zk-shrink-hover">Accept</a>
                                 </div>
                             @endif
                         @endif
@@ -173,7 +173,7 @@
     function postChefOrderId(chef_order_id)
     {
         var token = '{{ Session::token() }}';
-        var url = '{{ route('order.accept') }}';
+        var url = '{{ route('order.accept.post') }}';
 
         $.ajax({
             method: 'POST',

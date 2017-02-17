@@ -58,53 +58,55 @@
                 </div>
 
                 @foreach ($carts as $cart)
-                    <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
-                        <div class="w3-col l3 m3 w3-padding-right">
-                            @foreach ($cart->meals->images->take(1) as $image)
-                                    <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                            @endforeach
-                        </div>
-                        <div class="w3-col l5 m5 w3-padding-left">
-                            <div class="w3-row">
-                                <div class="w3-col l5 m5">
-                                    <div class="">
-                                        <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                    @if (count($cart->meals))
+                        <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
+                            <div class="w3-col l3 m3 w3-padding-right">
+                                @foreach ($cart->meals->images->take(1) as $image)
+                                        <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
+                                @endforeach
+                            </div>
+                            <div class="w3-col l5 m5 w3-padding-left">
+                                <div class="w3-row">
+                                    <div class="w3-col l5 m5">
+                                        <div class="">
+                                            <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                                        </div>
+                                        <div class="">
+                                            <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span></span>
+                                        </div>
+                                        <div class="">
+                                            <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                                        </div>
                                     </div>
-                                    <div class="">
-                                        <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span></span>
-                                    </div>
-                                    <div class="">
-                                        <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                                    <div class="w3-col l7 m7">
+                                        <div class="">
+                                            <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
+                                        </div>
+                                        <div class="w3-margin-top">
+                                            <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="w3-col l7 m7">
-                                    <div class="">
-                                        <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
-                                    </div>
-                                    <div class="w3-margin-top">
-                                        <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
-                                    </div>
+                            </div>
+                            <div class="w3-col l3 m3 form-input">
+                                <div class="w3-row">
+                                    <a href="#{{ $cart->id }}" id="sub{{ $cart->id }}" class="sub w3-btn w3-transparent w3-text-green w3-medium" style="text-decoration:none;margin-top:0.4em;">-</a>
+                                    <input type="text" name="people_order" class="meal_qty w3-border-grey w3-border w3-medium" id="{{ $cart->id }}qty" required value="{{ $cart->people_order }}" style="width:37px;height:37px;text-align:center">
+                                    <a href="#{{ $cart->id }}" id="add{{ $cart->id }}" class="add w3-btn w3-transparent w3-text-green w3-medium" style="text-decoration:none;margin-top:0.4em;">+</a>
+                                    <!--for datetimepeople->people_left use, not shown-->
+                                    <input type="text" id="{{ $cart->id }}people_left" style="display:none;" value="{{ $cart->datetimepeoples->people_left }}">
+                                </div>
+                            </div>
+                            <div class="w3-col l1 m1">
+                                <div class="">
+                                    <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
+                                </div>
+                                <div class="" id="remove_part" style="margin-top:1.5em;">
+                                    <p id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="w3-col l3 m3 form-input">
-                            <div class="w3-row">
-                                <a href="#{{ $cart->id }}" id="sub{{ $cart->id }}" class="sub w3-btn w3-transparent w3-text-green w3-medium" style="text-decoration:none;margin-top:0.4em;">-</a>
-                                <input type="text" name="people_order" class="meal_qty w3-border-grey w3-border w3-medium" id="{{ $cart->id }}qty" required value="{{ $cart->people_order }}" style="width:37px;height:37px;text-align:center">
-                                <a href="#{{ $cart->id }}" id="add{{ $cart->id }}" class="add w3-btn w3-transparent w3-text-green w3-medium" style="text-decoration:none;margin-top:0.4em;">+</a>
-                                <!--for datetimepeople->people_left use, not shown-->
-                                <input type="text" id="{{ $cart->id }}people_left" style="display:none;" value="{{ $cart->datetimepeoples->people_left }}">
-                            </div>
-                        </div>
-                        <div class="w3-col l1 m1">
-                            <div class="">
-                                <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
-                            </div>
-                            <div class="" id="remove_part" style="margin-top:1.5em;">
-                                <p id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endif
                 @endforeach
 
                 <div class="w3-row">
@@ -116,7 +118,7 @@
                         <!--button id="test">checkout</button-->
                         <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt" class="btn w3-deep-orange btn-block zk-shrink-hover"><i class="fa fa-credit-card"></i> Checkout</a>
                         <!--link for refresh page after item remove, not shown-->
-                        <a href="{{ url('/product/cart/show/' . Auth::user()->id . '#shoppingcart') }}" id="remove-link" style="display:none;"></a>
+                        <a href="{{ url('/product/cart/show/' . Auth::user()->id) }}" id="remove-link" style="display:none;"></a>
                     </div>
                 </div>
             @endif
@@ -234,7 +236,7 @@
                                 <div class="w3-margin-top">  
                                     <div id="btn{{ $meal->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-red w3-text-red zk-shrink-hover res-btn">Cancel</div>
                                     <!--link for going to shoppingcart page, not shown--> 
-                                    <a href="{{ url('/product/cart/show/' . Auth::user()->id . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                                    <a href="{{ url('/product/cart/show/' . Auth::user()->id) }}" id="shopping-link" style="display:none;"></a>
                                 </div>
                                 <div class="" style="margin-top:1em;">  
                                     <a href="{{ route('product.cart.otherdays', ['meal_id' => $meal->id]) }}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">Other Days</a>
@@ -342,45 +344,38 @@
 
         //remove item
         $(".remove").on('click',function(event){
-            id = event.target.id.substring(3);
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover the meal again!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, cancel it!",
+                closeOnConfirm: false
+            },
+            function(){
 
-            //var token = '{{ Session::token() }}';
-            var url = '{{ route('product.cart.remove') }}';
+                id = event.target.id.substring(3);
             
-            $.ajax({
-                method: 'POST',
-                url: url,
-                data: {id: id, qty: Qtys, _token: token},
-                success : function(data){
-                    $("#remove-link")[0].click();
-                    //alert('success');
-                },
-                error : function(data){
-                    //alert('fail');
-                },
+                //var token = '{{ Session::token() }}';
+                var url = '{{ route('product.cart.remove') }}';
+                
+                $.ajax({
+                    method: 'POST',
+                    url: url,
+                    data: {id: id, qty: Qtys, _token: token},
+                    success : function(data){
+                        $("#remove-link")[0].click();
+                        //alert('success');
+                    },
+                    error : function(data){
+                        //alert('fail');
+                    },
+                });
+                // .done(function (msg) {
+                //     alert(msg['message']);
+                // });
             });
-            // .done(function (msg) {
-            //     alert(msg['message']);
-            // });
-        });
-
-        $("#ckt").click(function() {
-            var url = '{{ route('product.cart.remove') }}';
-
-            $.ajax({
-                 method: 'POST',
-                 url: url,
-                 data: {qty: Qtys, _token: token},
-                //  success : function(data){
-                //      alert('success');
-                //  },
-                //  error : function(data){
-                //      alert('fail');
-                //  },
-            });
-            // .done(function (msg) {
-            //     alert(msg['message']);
-            // });
         });
     });
 </script>
@@ -393,13 +388,6 @@
             datetimepeople_id = event.target.id.substring(3);
             
             @if (Auth::check())
-            //   if ($(id).children().hasClass("fa fa-heart-o")) {
-            //     postBuyNextTime(datetimepeople_id);
-            //     $(id).children().removeClass("fa fa-heart-o").addClass("fa fa-heart");
-            //   } else {
-            //     postBuyNextTime(datetimepeople_id);
-            //     $(id).children().removeClass("fa fa-heart").addClass('fa fa-heart-o');
-            //   }
               postBuyNextTime(datetimepeople_id);
             @else
               $("#myModal").modal();

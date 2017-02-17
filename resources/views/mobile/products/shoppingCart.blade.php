@@ -168,7 +168,7 @@
                     <div class="w3-col s6 w3-padding-12" style="padding-right:0.1em;">
                         <div id="btn{{ $meal->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-red w3-text-red zk-shrink-hover res-btn">Cancel</div>
                         <!--link for going to shoppingcart page, not shown--> 
-                        <a href="{{ url('/product/cart/show/' . Auth::user()->id . '#reserve') }}" id="shopping-link" style="display:none;"></a>
+                        <a href="{{ url('/product/cart/show/' . Auth::user()->id) }}" id="shopping-link" style="display:none;"></a>
                     </div>
                     <div class="w3-col s6 w3-padding-12" style="padding-left:0.1em;">
                         <a href="{{ route('product.cart.otherdays', ['meal_id' => $meal->id]) }}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">Other Days</a>
@@ -269,45 +269,58 @@
 
         //remove item
         $(".remove").on('click',function(event){
-            id = event.target.id.substring(3);
-
-            //var token = '{{ Session::token() }}';
-            var url = '{{ route('product.cart.remove') }}';
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover the meal again!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, cancel it!",
+                closeOnConfirm: false
+            },
+            function(){
+                
+                id = event.target.id.substring(3);
             
-            $.ajax({
-                method: 'POST',
-                url: url,
-                data: {id: id, qty: Qtys, _token: token},
-                success : function(data){
-                    $("#remove-link")[0].click();
-                },
-                error : function(data){
-                    // alert('fail');
-                },
+                //var token = '{{ Session::token() }}';
+                var url = '{{ route('product.cart.remove') }}';
+                
+                $.ajax({
+                    method: 'POST',
+                    url: url,
+                    data: {id: id, qty: Qtys, _token: token},
+                    success : function(data){
+                        $("#remove-link")[0].click();
+                        //alert('success');
+                    },
+                    error : function(data){
+                        //alert('fail');
+                    },
+                });
+                // .done(function (msg) {
+                //     alert(msg['message']);
+                // });
             });
-            // .done(function (msg) {
-            //     alert(msg['message']);
-            // });
         });
 
-        $("#ckt").click(function() {
-            var url = '{{ route('product.cart.remove') }}';
+        // $("#ckt").click(function() {
+        //     var url = '{{ route('product.cart.remove') }}';
 
-            $.ajax({
-                 method: 'POST',
-                 url: url,
-                 data: {qty: Qtys, _token: token},
-                //  success : function(data){
-                //      alert('success');
-                //  },
-                //  error : function(data){
-                //      alert('fail');
-                //  },
-            });
-            // .done(function (msg) {
-            //     alert(msg['message']);
-            // });
-        });
+        //     $.ajax({
+        //          method: 'POST',
+        //          url: url,
+        //          data: {qty: Qtys, _token: token},
+        //         //  success : function(data){
+        //         //      alert('success');
+        //         //  },
+        //         //  error : function(data){
+        //         //      alert('fail');
+        //         //  },
+        //     });
+        //     // .done(function (msg) {
+        //     //     alert(msg['message']);
+        //     // });
+        // });
     });
 </script>
 

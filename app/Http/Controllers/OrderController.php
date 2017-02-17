@@ -56,7 +56,7 @@ class OrderController extends Controller
     public function getAccept($id)
     {
         $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
-        
+       
         $this->gateService->chefIdCheck($chefOrder->chef_id);
         
         $cart = $this->orderService->findCart($chefOrder)->getCart();
@@ -67,7 +67,7 @@ class OrderController extends Controller
         try {
             if ($this->orderService->updateChefOrderCheck($chefOrder)) {
 
-                $this->creditCardService->charge($cart->price, "twd", decrypt($userOrder->cashier_id));
+                $this->creditCardService->charge($cart->price, "twd", $userOrder->cashier_id);
 
                 $this->orderService->updateChefOrderPaid($chefOrder);
                 $this->orderService->updateMealPeopleEaten($cart->meals);
@@ -104,7 +104,7 @@ class OrderController extends Controller
             try {
                 if ($this->orderService->updateChefOrderCheck($chefOrder)) {
 
-                    $this->creditCardService->charge($cart->price, "twd", decrypt($userOrder->cashier_id));
+                    $this->creditCardService->charge($cart->price, "twd", $userOrder->cashier_id);
 
                     $this->orderService->updateChefOrderPaid($chefOrder);
                     $this->orderService->updateMealPeopleEaten($cart->meals);

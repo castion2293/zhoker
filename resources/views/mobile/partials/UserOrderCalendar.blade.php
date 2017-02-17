@@ -45,13 +45,13 @@
                             @foreach ($userorder->carts()->withTrashed()->get() as $cart)
                                 <div class="w3-row w3-padding-tiny w3-margin-top">
                                     <div class="w3-col s8" style="padding-left:0.5em;">
-                                        <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                                        <span class="w3-text-grey w3-large"><b>{{ $OrderPresenter->getMealName($cart) }}</b></span>
                                     </div>
                                         <div class="w3-col s4">
-                                        <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span>TWD</span>
+                                        <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $OrderPresenter->getMealPrice($cart) }}</span>TWD</span>
                                     </div>
                                     <div class="w3-col s12">
-                                        @foreach ($cart->meals->images->take(1) as $image)
+                                        @foreach ($OrderPresenter->getMealImage($cart) as $image)
                                                 <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
                                         @endforeach
                                     </div>
@@ -164,7 +164,7 @@
                 @foreach($userorders as $userorder)
                     @foreach($userorder->carts()->withTrashed()->get() as $cart)
                         {
-                            title: '{{ $cart->meals->name }} / {{ $cart->people_order }} people',
+                            title: '{{ $OrderPresenter->getMealName($cart) }} / {{ $cart->people_order }} people',
                             start: '{{ $cart->date }} {{ $cart->time }}',
                             item_id: '{{ $cart->userorders->id }}',
                         },

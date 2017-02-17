@@ -116,9 +116,7 @@ class UserProfileController extends Controller
 
         $this->creditCardService->setAPIKey(config('services.stripe.secret'));
         try {
-            $customer = $this->creditCardService->createCustomer($user, $request);
-            
-            $this->creditCardService->createCreditCard($user, $customer);
+            $this->creditCardService->createCustomer($user, $request)->createCreditCard($user);
 
             if ($this->sessionService->has('oldUrl')) {
                 $oldUrl = $this->sessionService->get('oldUrl');
@@ -145,10 +143,9 @@ class UserProfileController extends Controller
         
         $this->creditCardService->setAPIKey(config('services.stripe.secret'));
         try {
-            $customer = $this->creditCardService->createCustomer($user, $request);
-            
-            $creditCard = $this->creditCardService->findCreditCard($user);
-            $this->creditCardService->updateCreditCard($creditCard, $user, $customer);
+            $this->creditCardService->createCustomer($user, $request)
+                                    ->findCreditCardByUser($user)
+                                    ->updateCreditCard();
 
             flash()->success('Success', 'The credit card has been updated successfully!');
             $url = url()->previous() . "#payment";
@@ -166,9 +163,7 @@ class UserProfileController extends Controller
         $this->gateService->userIdCheck($id);
         
         $user = $this->userProfileService->findUser($id)->getUser();
-        $credit_card = $this->creditCardService->findCreditCard($user);
-
-        $this->creditCardService->deleteCreditCard($credit_card);
+        $credit_card = $this->creditCardService->findCreditCardByUser($user)->deleteCreditCard();
 
         flash()->success('Success', 'The credit card has been deleted successfully!');
         $url = url()->previous() . "#payment";

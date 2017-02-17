@@ -13,6 +13,9 @@ class CreditCardService
     protected $userRepo;
     protected $creditCardRepo;
 
+    protected $creditCard;
+    protected $customer;
+
     /**
      * CreditCardService constructor.
      */
@@ -33,15 +36,17 @@ class CreditCardService
 
     /**
     * @param $user, $request
-    * @return customer
+    * @return $this
     */
     public function createCustomer($user, $request)
     {
-        return Customer::create([
+        $this->customer = Customer::create([
             "email" => $user->email,
             "source" => $request->stripeToken,
             "description" => $user->first_name,
         ]);
+
+        return $this;
     }
 
     /**
@@ -61,45 +66,45 @@ class CreditCardService
     * @param $user
     * @return 
     */
-    public function findCreditCard($user)
+    public function findCreditCardByUser($user)
     {
-        return $this->userRepo->forCreditCard($user);
+        $this->creditCard = $this->userRepo->forCreditCard($user);
+
+        return $this;
     }
 
     /**
     * @param $user, $customer
     * @return 
     */
-    public function createCreditCard($user, $customer)
+    public function createCreditCard($user, $customer = null)
     {
+        count($customer) ?: $customer = $this->customer;
+
         return $this->creditCardRepo->create($user->id, $customer);
     }
 
     /**
-    * @param $credit_card, $user, $customer
+    * @param $creditCard, $user, $customer
     * @return 
     */
-    public function updateCreditCard($credit_card, $user, $customer)
+    public function updateCreditCard($creditCard = null, $customer = null)
     {
-        $credit_card->customer_id = encrypt($customer->id);
-        $credit_card->brand =  $customer->sources->data[0]->brand;
-        $credit_card->cvc_check = $customer->sources->data[0]->cvc_check;
-        $credit_card->exp_month = $customer->sources->data[0]->exp_month;
-        $credit_card->exp_year = $customer->sources->data[0]->exp_year;
-        $credit_card->card_name = $customer->sources->data[0]->name;
-        $credit_card->funding = $customer->sources->data[0]->funding;
-        $credit_card->last4 = $customer->sources->data[0]->last4;
+        count($creditCard) ?: $creditCard = $this->creditCard;
+        count($customer) ?: $customer = $this->customer;
 
-        return $this->userRepo->saveCreditCard($user, $credit_card);
+        return $this->creditCardRepo->update($creditCard, $customer);
     }
 
     /**
-    * @param $credit_card
+    * @param $creditCard
     * @return 
     */
-    public function deleteCreditCard($credit_card)
+    public function deleteCreditCard($creditCard = null)
     {
-        return $this->creditCardRepo->delete($credit_card);
+        count($creditCard) ?: $creditCard = $this->creditCard;
+
+        return $this->creditCardRepo->delete($creditCard);
     }
 
     

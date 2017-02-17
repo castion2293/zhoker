@@ -22,7 +22,7 @@
         @foreach($cheforder->carts()->withTrashed()->get() as $cart)
             <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                 <div class="w3-col l3 m3 w3-padding-right w3-margin-top">
-                    @foreach ($cart->meals->images->take(1) as $image)
+                    @foreach ($OrderPresenter->getMealImage($cart) as $image)
                         <div class="w3-row">
                             <div class="w3-col s10 w3-right w3-margin-top">
                                 <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%;">
@@ -37,10 +37,10 @@
                 </div>
                 <div class="w3-col l3 m3 w3-padding-left">
                     <div class="">
-                        <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                        <span class="w3-text-grey w3-large"><b>{{ $OrderPresenter->getMealName($cart) }}</b></span>
                     </div>
                     <div class="">
-                        <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}</span></span>
+                        <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $OrderPresenter->getMealPrice($cart) }}</span></span>
                     </div>
                     <div class="">
                         <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
@@ -102,7 +102,7 @@
                                     <span class="w3-text-grey w3-large">Overdue</span>
                                 @else
                                     <div class="">
-                                        <a href="{!! route('order.accept', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
+                                        <a href="{!! route('order.accept.get', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
                                     </div>
                                     <div class="w3-padding-left" style="margin-top:6em;">
                                         <a href="{!! route('order.reject', ['id' => $cheforder->id]) !!}" id="warn{{$cheforder->id}}confirm" class="w3-test-grey" style="display:none;">Reject</a>
@@ -186,7 +186,7 @@
     function postChefOrderId(chef_order_id)
     {
         var token = '{{ Session::token() }}';
-        var url = '{{ route('order.accept') }}';
+        var url = '{{ route('order.accept.post') }}';
 
         $.ajax({
             method: 'POST',

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddCoverImgToMealsTable' => $baseDir . '/database/migrations/2017_02_16_134106_add_cover_img_to_meals_table.php',
     'AddEvalutedToCartsTable' => $baseDir . '/database/migrations/2017_02_02_205522_add_evaluted_to_carts_table.php',
     'CategoryTableSeeder' => $baseDir . '/database/seeds/CategoryTableSeeder.php',
     'CreateCartsTable' => $baseDir . '/database/migrations/2016_11_08_030915_create_carts_table.php',

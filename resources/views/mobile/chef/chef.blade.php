@@ -97,73 +97,75 @@
             @else
                 @foreach ($cheforders as $cheforder)
                     @foreach($cheforder->carts()->get() as $cart)
-                        <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
-                            
-                            <div class="w3-col s9 w3-margin-top">
-                                <div class="">
-                                    <p class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></p>
+                        @if (count($cart->meals))
+                            <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
+                                
+                                <div class="w3-col s9 w3-margin-top">
+                                    <div class="">
+                                        <p class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></p>
+                                    </div>
+                                    <div class="">
+                                        <p class="w3-text-green w3-medium"><b>${{ $cart->meals->price }}TWD</b></p>
+                                    </div>
+                                    <div class="">
+                                        <p class="w3-text-grey w3-medium">{{ $cart->people_order }} people order</p>
+                                    </div>
+                                    <div class="">
+                                        <p class="w3-text-grey w3-medium">{{ $cart->date }} / {{ $cart->time }}</p>
+                                    </div>
                                 </div>
-                                <div class="">
-                                    <p class="w3-text-green w3-medium"><b>${{ $cart->meals->price }}TWD</b></p>
+                                <div class="w3-col s3">
+                                    <div class="">
+                                        <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
+                                    </div>
+                                    <div class="" style="margin-top:0.2em;">
+                                        <label class="w3-text-grey w3-medium">Subtotal:</label>
+                                        <p class="w3-text-green w3-medium"><b>${{ $cart->price }}TWD</b></p>
+                                    </div>
                                 </div>
-                                <div class="">
-                                    <p class="w3-text-grey w3-medium">{{ $cart->people_order }} people order</p>
-                                </div>
-                                <div class="">
-                                    <p class="w3-text-grey w3-medium">{{ $cart->date }} / {{ $cart->time }}</p>
-                                </div>
-                            </div>
-                            <div class="w3-col s3">
-                                <div class="">
-                                    <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
-                                </div>
-                                <div class="" style="margin-top:0.2em;">
-                                    <label class="w3-text-grey w3-medium">Subtotal:</label>
-                                    <p class="w3-text-green w3-medium"><b>${{ $cart->price }}TWD</b></p>
-                                </div>
-                            </div>
-                            <div class="w3-col s12" style="margin-top:0.1em;">
-                                 @foreach ($cart->meals->images->take(1) as $image)
-                                        <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                 @endforeach
-                            </div>
-                            <div class="w3-col s12">
-                                <div class="w3-margin-top">
-                                    @foreach ($cart->userorders()->get() as $userorder)
-                                        <div class="">
-                                            <p class="w3-text-grey w3-medium">{{ $userorder->contact_first_name }} {{ $userorder->contact_last_name }}</p>
-                                        </div>
-                                        <div class="">
-                                            <span class="w3-text-grey w3-medium">{{ $userorder->contact_phone_number }}</span>
-                                        </div>
-                                        <div class="">
-                                            <span class="w3-text-grey w3-medium">{{ $userorder->contact_email }}</span>
-                                        </div>
-                                        <div class="">
-                                            <span class="w3-text-grey w3-medium">{{ $userorder->contact_address }}</span>
-                                        </div>
+                                <div class="w3-col s12" style="margin-top:0.1em;">
+                                    @foreach ($cart->meals->images->take(1) as $image)
+                                            <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
                                     @endforeach
                                 </div>
+                                <div class="w3-col s12">
+                                    <div class="w3-margin-top">
+                                        @foreach ($cart->userorders()->get() as $userorder)
+                                            <div class="">
+                                                <p class="w3-text-grey w3-medium">{{ $userorder->contact_first_name }} {{ $userorder->contact_last_name }}</p>
+                                            </div>
+                                            <div class="">
+                                                <span class="w3-text-grey w3-medium">{{ $userorder->contact_phone_number }}</span>
+                                            </div>
+                                            <div class="">
+                                                <span class="w3-text-grey w3-medium">{{ $userorder->contact_email }}</span>
+                                            </div>
+                                            <div class="">
+                                                <span class="w3-text-grey w3-medium">{{ $userorder->contact_address }}</span>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                
+                                @if ($cheforder->checked)
+                                    <div class="w3-col s6 w3-center">
+                                        <span class="w3-text-grey w3-medium">Approved</span>
+                                    </div>
+                                    <div class="w3-col s6 w3-center">
+                                        @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
+                                        <span class="w3-text-grey w3-medium">{{ $ChefPresenter->paidCheck($cheforder->paid) }}</span>
+                                    </div>
+                                @else
+                                    <div class="w3-col s6 w3-center">
+                                        <span class="w3-text-grey w3-large">Pendding</span>
+                                    </div>
+                                    <div class="w3-col s6 w3-center">
+                                        <span class="w3-text-grey w3-large">Not Pay</span>
+                                    </div>
+                                @endif
+                                
                             </div>
-                            
-                            @if ($cheforder->checked)
-                                <div class="w3-col s6 w3-center">
-                                    <span class="w3-text-grey w3-medium">Approved</span>
-                                </div>
-                                <div class="w3-col s6 w3-center">
-                                    @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
-                                    <span class="w3-text-grey w3-medium">{{ $ChefPresenter->paidCheck($cheforder->paid) }}</span>
-                                </div>
-                            @else
-                                <div class="w3-col s6 w3-center">
-                                    <span class="w3-text-grey w3-large">Pendding</span>
-                                </div>
-                                <div class="w3-col s6 w3-center">
-                                    <span class="w3-text-grey w3-large">Not Pay</span>
-                                </div>
-                            @endif
-                            
-                        </div>
+                        @endif
                     @endforeach
                 @endforeach
 

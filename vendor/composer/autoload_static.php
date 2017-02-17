@@ -479,6 +479,7 @@ class ComposerStaticInit1b23bb16302a8a4ba371e6ce21bcba78
     );
 
     public static $classMap = array (
+        'AddCoverImgToMealsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_16_134106_add_cover_img_to_meals_table.php',
         'AddEvalutedToCartsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_205522_add_evaluted_to_carts_table.php',
         'CategoryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoryTableSeeder.php',
         'CreateCartsTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_08_030915_create_carts_table.php',
