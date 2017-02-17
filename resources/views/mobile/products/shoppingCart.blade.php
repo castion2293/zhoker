@@ -83,8 +83,11 @@
             </div>
            
             <div class="w3-col s12 w3-margin-top">
-                <!--button id="test">checkout</button-->
-                <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt" class="btn w3-deep-orange w3-large btn-block zk-shrink-hover">Checkout</a>
+                
+                <a href="#" id="ckt" class="btn w3-deep-orange w3-large btn-block zk-shrink-hover">Checkout</a>
+                <!--link for chectout, not shown-->
+                <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt_link" style="display:none;"></a>
+                
                 <!--link for refresh page after item remove, not shown-->
                 <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" id="remove-link" style="display:none;"></a>
             </div>
@@ -178,6 +181,8 @@
         @endif
     </div>
 
+    <!--loader view-->
+    @include('desktop.partials.loader')
 @endsection
 
 @section('scripts')
@@ -267,6 +272,28 @@
 
         }
 
+        // checkout the cart
+        $("#ckt").click(function() {
+            $("#LoadingModal").modal(); //loader
+
+            var url = '{{ route('product.cart.store') }}';
+
+            $.ajax({
+                    method: 'POST',
+                    url: url,
+                    data: {qty: Qtys, _token: token},
+                    success : function(data){
+                        $("#ckt_link")[0].click();
+                    },
+                    error : function(data){
+                        //alert('fail');
+                    },
+            });
+            // .done(function (msg) {
+            //     alert(msg['message']);
+            // });
+        });
+
         //remove item
         $(".remove").on('click',function(event){
             swal({
@@ -303,24 +330,6 @@
             });
         });
 
-        // $("#ckt").click(function() {
-        //     var url = '{{ route('product.cart.remove') }}';
-
-        //     $.ajax({
-        //          method: 'POST',
-        //          url: url,
-        //          data: {qty: Qtys, _token: token},
-        //         //  success : function(data){
-        //         //      alert('success');
-        //         //  },
-        //         //  error : function(data){
-        //         //      alert('fail');
-        //         //  },
-        //     });
-        //     // .done(function (msg) {
-        //     //     alert(msg['message']);
-        //     // });
-        // });
     });
 </script>
 

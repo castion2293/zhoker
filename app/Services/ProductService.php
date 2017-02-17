@@ -12,7 +12,9 @@ class ProductService
     protected $mealRepo;
     protected $cartRepo;
 
+    protected $user;
     protected $meal;
+    protected $cart;
 
     /**
      * ProductService constructor.
@@ -26,11 +28,22 @@ class ProductService
 
     /**
      * @param null
-     * @return user
+     * @return $this
      */
-    public function getUser($id = null)
+    public function findUser($id = null)
     {
-        return $this->userRepo->findUserById($id);
+        $this->user = $this->userRepo->findUserById($id);
+
+        return $this;
+    }
+
+    /**
+     * @param 
+     * @return $user
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**
@@ -86,20 +99,35 @@ class ProductService
 
     /**
      * @param $user
-     * @return cart
+     * @return $this
      */
-    public function getCart($user)
+    public function findCartByUser($user = null)
     {
-        return $this->userRepo->forCartNotCheck($user);
+        count($user) ?: $user = $this->user;
+
+        $this->cart = $this->userRepo->forCartNotCheck($user);
+
+        return $this;
     }
 
     /**
      * @param $id
      * @return cart
      */
-    public function getCartById($id)
+    public function findCartById($id)
     {
-        return $this->cartRepo->findCartById($id);
+        $this->cart = $this->cartRepo->findCartById($id);
+
+        return $this;
+    }
+
+    /**
+     * @param 
+     * @return cart
+     */
+    public function getCart()
+    {
+        return $this->cart;
     }
 
     /**
@@ -115,8 +143,10 @@ class ProductService
      * @param $carts, request
      * @return 
      */
-    public function updateEachCart($carts, $request)
+    public function updateEachCart($request, $carts = null)
     {
+        count($carts) ?: $carts = $this->cart;
+
         foreach ($carts as $cart) {
             $this->cartRepo->update($cart, $request);
         }
@@ -126,8 +156,10 @@ class ProductService
      * @param $carts, request
      * @return 
      */
-    public function deleteCart($cart)
+    public function deleteCart($cart = null)
     {
+        count($cart) ?: $cart = $this->cart;
+
         return $this->cartRepo->delete($cart);
     }
 

@@ -58,15 +58,6 @@ class UserRepository
     }
 
     /**
-     * @param $user, $qty
-     * @return userorder
-     */
-    // public function forUserOrderPaginate(User $user, $qty)
-    // {
-    //     return $user->userorders()->latest('id')->with('carts')->paginate($qty);
-    // }
-
-    /**
      * @param $user, $datetimepeople_id
      * @return $datetimepeople
      */

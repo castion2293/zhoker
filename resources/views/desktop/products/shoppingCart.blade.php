@@ -115,8 +115,10 @@
                         <span class="w3-text-grey w3-large" style="padding-left:5em;">Subtotal: <span class="w3-text-green w3-large">$<span id="total_price">{{ $totalPrice }}</span></span></span>
                         <!--for totalPrice post use, not shown-->
                         <input type="text" name="totalPrice" id="totalPrice" style="display:none;" value="{{ $totalPrice }}">
-                        <!--button id="test">checkout</button-->
-                        <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt" class="btn w3-deep-orange btn-block zk-shrink-hover"><i class="fa fa-credit-card"></i> Checkout</a>
+                        
+                        <a href="#" id="ckt" class="btn w3-deep-orange btn-block zk-shrink-hover"><i class="fa fa-credit-card"></i> Checkout</a>
+                        <!--link for chectout, not shown-->
+                        <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt_link" style="display:none;"></a>
                         <!--link for refresh page after item remove, not shown-->
                         <a href="{{ url('/product/cart/show/' . Auth::user()->id) }}" id="remove-link" style="display:none;"></a>
                     </div>
@@ -250,6 +252,9 @@
         </div>
         
     </div>
+
+    <!--loader view-->
+    @include('desktop.partials.loader')
 @endsection
 
 @section('scripts')
@@ -341,6 +346,28 @@
             $("#total_price").text(totalPrice.toString());
 
         }
+
+        // checkout the cart
+        $("#ckt").click(function() {
+            $("#LoadingModal").modal(); //loader
+
+            var url = '{{ route('product.cart.store') }}';
+
+            $.ajax({
+                 method: 'POST',
+                 url: url,
+                 data: {qty: Qtys, _token: token},
+                 success : function(data){
+                     $("#ckt_link")[0].click();
+                 },
+                 error : function(data){
+                     //alert('fail');
+                 },
+            });
+            // .done(function (msg) {
+            //     alert(msg['message']);
+            // });
+        });
 
         //remove item
         $(".remove").on('click',function(event){

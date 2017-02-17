@@ -35,7 +35,7 @@ class ProductController extends Controller
 
     public function postAddToCart(Request $request, $id, $datetime_id)
     {
-        $user = $this->productService->getUser();
+        $user = $this->productService->findUser()->getUser();
         $meal = $this->productService->findMeal($id)->getMeal();
         $datetime = $this->productService->getDateTimePeople($meal, $datetime_id);
         $method = $this->productService->getMethod($meal, $request->method_way);
@@ -53,8 +53,8 @@ class ProductController extends Controller
     {
         $this->gateService->userIdCheck($id);
 
-        $user = $this->productService->getUser($id);
-        $carts = $this->productService->getCart($user);
+        $user = $this->productService->findUser($id)->getUser();
+        $carts = $this->productService->findCartByUser($user)->getCart();
         $cartQtyArray = $this->productService->getCartQtyArray($carts);
         $totalPrice = $this->productService->getTotalPrice($carts);
 
@@ -72,29 +72,23 @@ class ProductController extends Controller
 
     public function postCartRemove(Request $request)
     {
-        $user = $this->productService->getUser();
-        $carts = $this->productService->getCart($user);
-        $this->productService->updateEachCart($carts, $request);
-        
-        $item = $this->productService->getCartById($request->id);
-        $this->productService->deleteCart($item);
+        $this->productService->findUser()->findCartByUser()->updateEachCart($request);
+        $this->productService->findCartById($request->id)->deleteCart();
 
         flash()->success('Success', 'Your item has been removed from your shopping cart!');
     }
 
     public function postCartStore(Request $request)
     {
-        $user = $this->productService->getUser();
-        $carts = $this->productService->getCart($user);
-        $this->productService->updateEachCart($carts, $request);
+        $this->productService->findUser()->findCartByUser()->updateEachCart($request);
     }
 
     public function getCheckout($id)
     {
         $this->gateService->userIdCheck($id);
        
-        $user = $this->productService->getUser($id);
-        $carts = $this->productService->getCart($user);
+        $user = $this->productService->findUser($id)->getUser();
+        $carts = $this->productService->findCartByUser($user)->getCart();
 
         if ($carts->isEmpty()) {
             dd("empty");
@@ -108,19 +102,19 @@ class ProductController extends Controller
 
     public function postAddToBuyNextTime(Request $request)
     {
-        $user = $this->productService->getUser($request->user_id);
+        $user = $this->productService->findUser($request->user_id)->getUser();
         $this->productService->buyNextTimeToggle($user, $request->datetimepeople_id);
     }
 
     public function postAddReserveMeal(Request $request)
     {
-        $user = $this->productService->getUser($request->user_id);
+        $user = $this->productService->findUser($request->user_id)->getUser();
         $this->productService->reserveMealAdd($user, $request->meal_id);
     }
 
     public function postCancelReserveMeal(Request $request)
     {
-        $user = $this->productService->getUser($request->user_id);
+        $user = $this->productService->findUser($request->user_id)->getUser();
         $this->productService->reserveMealCancel($user, $request->meal_id);
     }
 
