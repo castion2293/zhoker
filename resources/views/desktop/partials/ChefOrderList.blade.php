@@ -28,7 +28,7 @@
                                 <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%;">
                             </div>
                             <div class="w3-col s2 w3-right" style="margin-top:2.5em;">
-                                @if (!$cheforder->checked && !$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
+                                @if (!$cheforder->checked && !$cart->deleted_at && !$OrderPresenter->overTime($cart, $now))
                                     <input id="od{{$cheforder->id}}" class="w3-check w3-text-green ckbox" value="{{$cheforder->id}}" type="checkbox">
                                 @endif 
                             </div> 
@@ -74,7 +74,7 @@
                                     <span class="w3-text-grey w3-large">{{ $userorder->contact_address }}</span>
                                 </div>
                             @else
-                                @if (!$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
+                                @if (!$cart->deleted_at && !$OrderPresenter->overTime($cart, $now))
                                     <div class="">
                                         <span class="w3-text-deep-orange w3-large">Not Approve Yet!</span>
                                     </div>
@@ -98,7 +98,7 @@
                                     <span class="w3-text-grey w3-large">{{ $OrderPresenter->paidCheck($cheforder->paid) }}</span>
                                 </div>
                             @else
-                                @if ($OrderPresenter->compareDateTime($cart, $now))
+                                @if ($OrderPresenter->overTime($cart, $now))
                                     <span class="w3-text-grey w3-large">Overdue</span>
                                 @else
                                     <div class="">

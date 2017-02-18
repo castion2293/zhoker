@@ -85,7 +85,7 @@
                                                 </div>
                                             @endif
                                         @else
-                                            @if ($OrderPresenter->compareDateTime($cart, $now))
+                                            @if ($OrderPresenter->overTime($cart, $now))
                                                 @if ($OrderPresenter->chefOrderCheck($cart))
                                                     <div class="w3-deep-orange">
                                                         <span class="w3-text-whtie w3-large">Approved</span>

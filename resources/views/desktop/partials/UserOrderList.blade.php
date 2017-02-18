@@ -89,7 +89,7 @@
                                         <span class="w3-text-grey w3-large">Canceled</span>
                                     @endif
                                 @else
-                                    @if ($OrderPresenter->compareDateTime($cart, $now))
+                                    @if ($OrderPresenter->overTime($cart, $now))
                                         @if ($OrderPresenter->chefOrderCheck($cart))
                                             <span class="w3-text-grey w3-large">Approved</span>
                                             <div class="" style="margin-top:2em;">                                           

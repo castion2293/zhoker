@@ -286,12 +286,12 @@
             if (this.hash !== "") {
                 var qty = this.hash.concat("qty");
                 var people_left = this.hash.concat("people_left");
-                
-                if ($(qty).val() < $(people_left).val()) {
+               
+                if ($(qty).val() < parseInt($(people_left).val()) ) {
                     $(qty).val( parseInt($(qty).val()) + 1 );
                     changePrice(this.hash);
                 } else {
-                    alert("Too large")
+                    alert("Too large");
                 }
             }
         });

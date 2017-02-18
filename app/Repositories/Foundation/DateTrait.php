@@ -19,7 +19,7 @@ trait DateTrait
      * @param $cart, $now
      * @return boolean
      */
-     public function compareDateTime($cart, $now = null)
+     public function overTime($cart, $now = null)
      {
          count($now) ?: $now = Carbon::now();
 

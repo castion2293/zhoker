@@ -4,14 +4,17 @@ namespace App\Repositories;
 
 use Auth;
 use App\User;
+use App\Repositories\Foundation\CartFilters;
 
 class UserRepository
 {
     protected $user;
+    protected $fitler;
 
-    public function __construct(User $user)
+    public function __construct(User $user, CartFilters $filter)
     {
         $this->user = $user;
+        $this->filter = $filter;
     }
 
     /**
@@ -41,7 +44,11 @@ class UserRepository
      */
     public function forCartNotCheck(User $user)
     {
-        return $user->carts()->where('checked', '0')->get();
+        return  $this->filter->applyCart($user->carts())
+                            ->uncheck()
+                            ->fresh()
+                            ->getQuery()
+                            ->get();
     }
 
     /**

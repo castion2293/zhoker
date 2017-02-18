@@ -4,7 +4,7 @@
         @foreach($cheforder->carts()->withTrashed()->get() as $cart)
             <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
                 <div class="w3-col s12 w3-center">
-                    @if (!$cheforder->checked && !$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
+                    @if (!$cheforder->checked && !$cart->deleted_at && !$OrderPresenter->overTime($cart, $now))
                         <input id="od{{$cheforder->id}}" class="w3-check w3-text-green ckbox" value="{{$cheforder->id}}" type="checkbox">
                     @endif 
                 </div>
@@ -53,7 +53,7 @@
                                     <span class="w3-text-grey w3-medium">{{ $userorder->contact_address }}</span>
                                 </div>
                             @else
-                                @if (!$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
+                                @if (!$cart->deleted_at && !$OrderPresenter->overTime($cart, $now))
                                     <div class="">
                                         <span class="w3-text-deep-orange w3-medium">Not Approve Yet!</span>
                                     </div>
@@ -83,7 +83,7 @@
                                 <span class="w3-text-grey w3-large">{{ $OrderPresenter->paidCheck($cheforder->paid) }}</span>
                             </div>
                         @else
-                            @if ($OrderPresenter->compareDateTime($cart, $now))
+                            @if ($OrderPresenter->overTime($cart, $now))
                                 <div class="w3-col s12 w3-center">
                                     <span class="w3-text-grey w3-large">Overdue</span>
                                 </div>

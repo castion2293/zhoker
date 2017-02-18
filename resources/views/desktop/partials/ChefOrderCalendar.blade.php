@@ -78,7 +78,7 @@
                                             <span class="w3-text-grey w3-large">{{ $userorder->contact_address }}</span>
                                         </div>
                                     @else
-                                        @if (!$cart->deleted_at && !$OrderPresenter->compareDateTime($cart, $now))
+                                        @if (!$cart->deleted_at && !$OrderPresenter->overTime($cart, $now))
                                             <div class="">
                                                 <span class="w3-text-deep-orange w3-large">Not Approve Yet!</span>
                                             </div>
@@ -102,7 +102,7 @@
                                             <span class="w3-text-grey w3-large">{{ $OrderPresenter->paidCheck($cheforder->paid) }}</span>
                                         </div>
                                     @else
-                                        @if ($OrderPresenter->compareDateTime($cart, $now))
+                                        @if ($OrderPresenter->overTime($cart, $now))
                                             <span class="w3-text-grey w3-large">Overdue</span>
                                         @else
                                             <div class="">
