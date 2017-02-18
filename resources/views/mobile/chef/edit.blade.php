@@ -100,6 +100,8 @@
   @include('mobile.partials.ChefEditFullCalendar');
   <!--Image Select-->
   @include('mobile.partials.ChefEditImageSelect');
+  <!--loader modal-->
+  @include('desktop.partials.loader');
 
 @endsection
 
@@ -114,4 +116,9 @@
         });
     </script>
 
+    <script>
+        $("#submit").click(function() {
+            $("#LoadingModal").modal();
+        });
+    </script>
 @endsection

@@ -106,7 +106,7 @@ class ProductService
         count($user) ?: $user = $this->user;
 
         $this->cart = $this->userRepo->forCartNotCheck($user);
-
+        
         return $this;
     }
 

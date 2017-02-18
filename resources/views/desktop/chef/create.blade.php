@@ -108,7 +108,7 @@
                 <div class="w3-row w3-margin-top w3-border-green w3-border-top" style="padding-top:1em;">
                     <div class="w3-rest"></div>
                     <div class="w3-col l3 m3 w3-right">
-                        {!! Form::submit('Create Menu', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
+                        {!! Form::submit('Create Menu', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'create-btn']) !!}
                     </div>
                 </div>  
             {!! Form::close() !!}
@@ -121,6 +121,8 @@
   @include('desktop.partials.ChefCreateFullCalendar');
   <!--Image select-->
   @include('desktop.partials.ChefCreateImageSelect');
+  <!--loader modal-->
+  @include('desktop.partials.loader');
 
 @endsection
 
@@ -129,6 +131,11 @@
         $(function () {
             // Select-2
             $(".js-example-basic-multiple").select2();
+
+            // loader
+            $("#create-btn").click(function() {
+                $("#LoadingModal").modal();
+            });
         });
     </script>
 @endsection

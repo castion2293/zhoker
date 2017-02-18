@@ -47,6 +47,8 @@ class UserRepository
         return  $this->filter->applyCart($user->carts())
                             ->uncheck()
                             ->fresh()
+                            ->hasMeal()
+                            ->hasDateTimePeople()
                             ->getQuery()
                             ->get();
     }

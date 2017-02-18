@@ -52,6 +52,47 @@ class CartFilters extends QueryFilter
 
     /**
      * @param 
+     * @return $this
+     */
+    public function hasMeal()
+    {
+        $this->builder->where(function ($query) {
+            $cart_id = [];
+
+            foreach ($this->builder->get() as $cart) {
+                if ($cart->meals)
+                    $cart_id = array_prepend($cart_id, $cart->id);
+            }
+
+            $query->whereIn('id', $cart_id);
+        });
+
+        return $this;
+    }
+
+    /**
+     * @param 
+     * @return $this
+     */
+    public function hasDateTimePeople()
+    {
+        $this->builder->where(function ($query) {
+            $cart_id = [];
+
+            foreach ($this->builder->get() as $cart) {
+                if ($cart->datetimepeoples) {
+                    $cart_id = array_prepend($cart_id, $cart->id);
+                }
+            }
+           
+            $query->whereIn('id', $cart_id);
+        });
+
+        return $this;
+    }
+
+    /**
+     * @param 
      * @return $builrder
      */
     public function getQuery()

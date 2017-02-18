@@ -124,7 +124,7 @@
                         <div class="w3-row">
                             <div class="w3-rest"></div> 
                             <div class="w3-col l4 m4 w3-right w3-margin-top">
-                                {!! Form::submit('Confirm & Set', ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
+                                {!! Form::submit('Confirm & Set', ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover confirm-credit-btn']) !!}
                             </div>
                         </div> 
                     {!! Form::close() !!}
@@ -203,6 +203,10 @@
 
     </div>
   </div>
+
+    <!--loader modal-->
+    @include('desktop.partials.loader')
+
 @endsection
 
 @section('scripts')
@@ -284,6 +288,13 @@
                 $("#delete-confirm")[0].click();
               });
             });
+        });
+    </script>
+
+    <!--loader-->
+    <script>
+        $(".confirm-credit-btn").click(function() {
+            $("#LoadingModal").modal();
         });
     </script>
 @endsection

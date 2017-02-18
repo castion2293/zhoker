@@ -58,7 +58,6 @@
                 </div>
 
                 @foreach ($carts as $cart)
-                    @if (count($cart->meals))
                         <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                             <div class="w3-col l3 m3 w3-padding-right">
                                 @foreach ($cart->meals->images->take(1) as $image)
@@ -106,7 +105,6 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
                 @endforeach
 
                 <div class="w3-row">

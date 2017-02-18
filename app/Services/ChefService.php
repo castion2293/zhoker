@@ -133,7 +133,7 @@ class ChefService
 
          $meal = $this->mealRepo->NewMeal();
         
-         $meal->chef_id = $this->userRepo->getChef_id();
+         $meal->chef_id = $this->userRepo->findUserById()->chef_id;
          $meal->name = $this->request->name;
          $meal->price = $this->request->price;
          $meal->description = Purifier::clean($this->request->description);
