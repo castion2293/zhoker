@@ -73,7 +73,6 @@ class ChefController extends Controller
     public function store(MealCreateRequest $request)
     {
         $meal = $this->chefService->createMeal($request)->getMeal();
-        $this->chefService->createDatetimePeople($meal);
         $this->chefService->connectImage($meal);
         $this->chefService->connectCategory($meal);
         $this->chefService->connectMethod($meal);
@@ -117,13 +116,12 @@ class ChefController extends Controller
         $images = $this->imageService->findImageByChef($chef)->getImage();
 
         $mealImages = $this->chefService->editImage($meal);
-        $datetimepeoples = $this->chefService->findDatetimePeople($meal)->getDateTimePeople();
         $shiftarray = $this->chefService->editShift();
         $categoryarray = $this->chefService->editCategory();
         $methodarray = $this->chefService->editMethod();
         
         $agent = $this->agentService->agent();
-        return view($agent . '.chef.edit', ['meal' => $meal, 'datetimepeoples' => $datetimepeoples, 'images' => $images, 'mealImages' => $mealImages,
+        return view($agent . '.chef.edit', ['meal' => $meal, 'images' => $images, 'mealImages' => $mealImages,
                                             'shifts' => $shiftarray, 'categories' => $categoryarray, 'methods' => $methodarray]);
     }
 
@@ -138,7 +136,7 @@ class ChefController extends Controller
     {
         $meal = $this->chefService->findMeal($id)->getMeal();
         $meal = $this->chefService->updateMeal($meal, $request)->getMeal();
-        $this->chefService->findDatetimePeople($meal)->deleteDateTimePeople()->createDatetimePeople($meal);
+        //$this->chefService->findDatetimePeople($meal)->deleteDateTimePeople()->createDatetimePeople($meal);
         $this->chefService->connectImage($meal);
         $this->chefService->connectCategory($meal);
         $this->chefService->connectMethod($meal);

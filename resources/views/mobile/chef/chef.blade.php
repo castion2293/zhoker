@@ -59,9 +59,7 @@
                                     </div>
                                     <p class="w3-text-grey w3-xlarge">{{ $meal->name }}</p>
                                     <div class="img-wrapper">
-                                        @foreach ($meal->images->take(1) as $image)
-                                                <img src="{{ asset($image->image_path) }}" alt="meal" style="width:100%;" class="zk-enlarge-hover">
-                                        @endforeach
+                                       <img src="{{ asset($meal->cover_img) }}" alt="meal photo" style="width:100%;" class="zk-enlarge-hover">
                                     </div>
                                     <div class="caption w3-row w3-round-large">
                                         <div class="w3-col s9">

@@ -22,24 +22,40 @@
             
             {!! Form::open(['route' => 'chef.store', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                 <div class="w3-row" style="padding-bottom: 2em;">
+                    <div class="w3-col l12 m12">    
+                        <div class="w3-padding-8">
+                            <label class="w3-text-gery" style="font-family:cursive">Meal Name</label> 
+                            {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'menu-name', 'placeholder' => 'Menu Name', 'required' => '', 'maxlength' => '255']) }}   
+                        </div>
+                    </div>
+
                     <div class="w3-col l5 m5">
-                        <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1026201601.png') }}" alt="profile" style="width:100%">
+                        <div class="w3-padding-8" id="cover-form">
+                            <label class="w3-text-gery" style="font-family:cursive">Cover Image</label>
+                            <div id="" class="w3-padding-large cover-select-modal-trigger" style="cursor:pointer;">
+                                <img src="{{ URL::to('img/cover_image.jpg') }}" id="cover-image-origin" alt="meal-image" style="width:100%">
+                                <!--for cover image picture, not shown in the previous-->
+                                @foreach ($images as $image)
+                                    <div id="cover-image-show{{ $image->id }}" class="w3-padding-48 cover-image-show cover-select-modal-trigger" style="display:none;">
+                                        <img src="{{ asset($image->image_path) }}" alt="meal-image" style="width:100%;">
+                                    </div>
+                                @endforeach
+                                <!--for cover image input, not shown-->
+                                {{ Form::text('cover_img', null, ['class' => '', 'id'=>'cover-image-input', 'style'=>'display:none;']) }} 
+                            </div>
+                        </diV>
                     </div>
                     <div class="w3-col l7 m7" style="padding-left:2em;">
                         
-                        <div class="" style="padding-right:0.5em;">
-                            {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'menu-name', 'placeholder' => 'Menu Name', 'required' => '', 'maxlength' => '255']) }}   
-                        </div>
-
-                        <div class="w3-padding-8 w3-margin-top" style="padding-right:0.5em;">
+                        <div class="w3-padding-8">
+                            <label class="w3-text-gery" style="font-family:cursive">Meal Price</label>  
                             {{ Form::text('price', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'menu-price', 'placeholder' => 'Menu Price', 'required' => '', 'maxlength' => '11']) }}              
                         </div>
                         
-                                
-                        <div class="input-group w3-padding-8 w3-margin-top">
+                        <!--div class="input-group w3-padding-8 w3-margin-top">
                             <span class="input-group-addon" id="modal-picker" style="cursor:pointer;"><span class="glyphicon glyphicon-calendar"></span></span>   
                             {{ Form::text('datetimepeople', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey w3-white', 'id' => 'dtp-result', 'placeholder' => 'Date', 'required' => '', 'readonly' => '']) }}
-                        </div>
+                        </div-->
 
                         <div class=" w3-padding-8">
                             <label class="w3-text-gery" style="font-family:cursive">Time</label>               
@@ -90,7 +106,7 @@
                                             <i id="lko{{ $image->id }}" class="fa fa-link zk-enlarge-hover"></i>
                                         </div>
                                     </div>
-                                    <!--for copy link use, not shown-->
+                                    <!--for copy link use, not show-->
                                     <p id="lko{{ $image->id }}_catch" style="display:none;">{{ $image->ori_image_path }}</p>
                                 </div>
                             @endforeach
@@ -115,10 +131,8 @@
         </div>
     </div>  
 
-    
-
-  <!--Data Time People Modal -->
-  @include('desktop.partials.ChefCreateFullCalendar');
+  <!--Cover Image Select-->
+  @include('desktop.partials.ChefCreateCoverImageSelect');
   <!--Image select-->
   @include('desktop.partials.ChefCreateImageSelect');
   <!--loader modal-->

@@ -34,6 +34,6 @@ $factory->define(App\Chef::class, function (Faker\Generator $faker) {
         'city' => "Salt Lake City",
         'state' => "Utah",
         'zip_code' => 84111,
-        'profile_img' => 'https://s3-us-west-2.amazonaws.com/zhoker/profile_images/default-user-icon-profile.png',
+        'profile_img' => 'https://s3-us-west-2.amazonaws.com/zhoker/profile_images/1487625456.jpg',
     ];
 });

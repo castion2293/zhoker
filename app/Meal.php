@@ -10,7 +10,7 @@ class Meal extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'chef_id', 'name', 'date', 'time', 'price', 'people_left',  'evaluation', 'description', 'cover_img',
+        'chef_id', 'name', 'date', 'time', 'price', 'people_left',  'evaluation', 'description', 'cover_img_id', 'cover_img',
     ];
 
     protected $dates = ['deleted_at'];

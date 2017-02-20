@@ -137,6 +137,8 @@ class ChefService
          $meal->name = $this->request->name;
          $meal->price = $this->request->price;
          $meal->description = Purifier::clean($this->request->description);
+         $meal->cover_img_id = $request->cover_img;
+         $meal->cover_img = $this->imageService->findImageById($request->cover_img)->getImage()->image_path;
 
          $this->mealRepo->save($meal);
 
@@ -156,6 +158,8 @@ class ChefService
           $meal->name = $this->request->name;
           $meal->price = $this->request->price;
           $meal->description = Purifier::clean($this->request->description);
+          $meal->cover_img_id = $request->cover_img;
+          $meal->cover_img = $this->imageService->findImageById($request->cover_img)->getImage()->image_path;
 
           $this->mealRepo->save($meal);
 
@@ -177,62 +181,62 @@ class ChefService
      * $meal, $request
      * @return $meals
      */
-     public function createDatetimePeople($meal, $request = null)
-     {
-        count($request) ?: $request = $this->request;
+    //  public function createDatetimePeople($meal, $request = null)
+    //  {
+    //     count($request) ?: $request = $this->request;
 
-        $dtp_array = explode(";", $request->datetimepeople);
+    //     $dtp_array = explode(";", $request->datetimepeople);
         
-        for($i=0; $i < count($dtp_array) - 1; $i++)
-        { 
-            $datetimepeople = $this->datetimepeopleRepo->NewDateTimePeople();
+    //     for($i=0; $i < count($dtp_array) - 1; $i++)
+    //     { 
+    //         $datetimepeople = $this->datetimepeopleRepo->NewDateTimePeople();
             
-            $dpt_split_array = explode(",", $dtp_array[$i]);
+    //         $dpt_split_array = explode(",", $dtp_array[$i]);
 
-            //$datetimepeople->meal_id = $meal->id;
-            $datetimepeople->date = $dpt_split_array[0];
-            $datetimepeople->time = $dpt_split_array[1];
-            $datetimepeople->end_date = $dpt_split_array[2];
-            $datetimepeople->end_time = $dpt_split_array[3];
-            $datetimepeople->people_left = $dpt_split_array[4];
-            $this->datetimepeopleRepo->mealAssociate($datetimepeople, $meal);
+    //         //$datetimepeople->meal_id = $meal->id;
+    //         $datetimepeople->date = $dpt_split_array[0];
+    //         $datetimepeople->time = $dpt_split_array[1];
+    //         $datetimepeople->end_date = $dpt_split_array[2];
+    //         $datetimepeople->end_time = $dpt_split_array[3];
+    //         $datetimepeople->people_left = $dpt_split_array[4];
+    //         $this->datetimepeopleRepo->mealAssociate($datetimepeople, $meal);
 
-            $this->datetimepeopleRepo->save($datetimepeople);
-        }
+    //         $this->datetimepeopleRepo->save($datetimepeople);
+    //     }
 
-        return $this;
-     }
+    //     return $this;
+    //  }
 
      /**
      * $datetimepeople
      * @return $this
      */
-     public function deleteDateTimePeople($datetimepeoples = null)
-     {
-         count($datetimepeoples) ?: $datetimepeoples = $this->datetimepeople;
+    //  public function deleteDateTimePeople($datetimepeoples = null)
+    //  {
+    //      count($datetimepeoples) ?: $datetimepeoples = $this->datetimepeople;
 
-         foreach ($datetimepeoples as $datetimepeople) {
-            $this->datetimepeopleRepo->delete($datetimepeople);
-         }
+    //      foreach ($datetimepeoples as $datetimepeople) {
+    //         $this->datetimepeopleRepo->delete($datetimepeople);
+    //      }
 
-         return $this;
-     }
+    //      return $this;
+    //  }
 
      /**
      * @param $meal
      * @return datetimepeople
      */
-     public function findDatetimePeople($meal)
-     {
-        $this->datetimepeople = $this->mealRepo->forDateTimePeople($meal);
+    //  public function findDatetimePeople($meal)
+    //  {
+    //     $this->datetimepeople = $this->mealRepo->forDateTimePeople($meal);
 
-        return $this;
-     }
+    //     return $this;
+    //  }
 
-     public function getDateTimePeople()
-     {
-         return $this->datetimepeople;
-     }
+    //  public function getDateTimePeople()
+    //  {
+    //      return $this->datetimepeople;
+    //  }
 
      /**
      * $meal, $request

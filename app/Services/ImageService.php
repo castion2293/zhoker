@@ -47,6 +47,17 @@ class ImageService
      }
 
     /**
+     * $id
+     * @return $this
+     */     
+    public function findImageById($id)
+    {
+        $this->images = $this->imageRepo->findImageById($id);
+
+        return $this;
+    }
+
+    /**
      * $chef
      * @return images
      */

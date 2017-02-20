@@ -21,9 +21,7 @@
         @foreach ($meals as $meal)
             <div class="w3-row w3-white w3-border w3-border-green w3-round-large w3-margin-top w3-padding-medium">
                 <div class="w3-col l4 m4 w3-padding-12">
-                    @foreach ($meal->images->take(1) as $image)
-                            <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                    @endforeach
+                    <img src="{{ asset($meal->cover_img) }}" alt="meal photo" style="width:100%;">
                 </div>
                 <div class="w3-col l8 m8" style="padding-left:2em;">
                     <div class="w3-row">

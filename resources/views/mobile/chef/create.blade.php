@@ -22,9 +22,6 @@
 
             {!! Form::open(['route' => 'chef.store', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                 <div class="w3-row" style="padding-bottom: 2em;">
-                    <div class="w3-col l5 m5">
-                        <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1026201601.png') }}" alt="profile" style="width:100%">
-                    </div>
                     <div class="w3-col s12">
                         <div class="w3-row" id="name-form">
                             <div class="w3-col s12" style="margin-top:1.5em;">
@@ -35,10 +32,10 @@
                             </div>
                         </div>
                                 
-                        <div class="input-group" style="margin-top:1.5em;">    
+                        <!--div class="input-group" style="margin-top:1.5em;">    
                             {{ Form::text('datetimepeople', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey w3-white', 'id' => 'dtp-result', 'placeholder' => 'Date', 'required' => '']) }}
                             <span class="input-group-addon" id="modal-picker" style="cursor:pointer;"><span class="glyphicon glyphicon-calendar"></span></span>   
-                        </div>
+                        </div-->
 
                         <div class="" style="margin-top:1em;">
                             <label class="w3-text-gery w3-large" style="font-family:cursive">Time</label>               
@@ -69,15 +66,23 @@
                     </div>
                 </div>
 
-                <div class="w3-padding-12" id="image-form">
-                    <div class="w3-row">
-                        <div class="w3-col l2 m2">
-                            <div id="select-modal-trigger" class="btn w3-large w3-white w3-text-grey w3-border w3-border-grey btn-block zk-shrink-hover"><i class="fa fa-picture-o"></i> Phote</div>
-                        </div>
+                <div class="w3-padding-12" id="cover-form">
+                    <label class="w3-text-gery w3-large" style="font-family:cursive">Cover Image</label>  
+                    <div id="" class="w3-padding-medium cover-select-modal-trigger" style="cursor:pointer;">
+                        <img src="{{ URL::to('img/cover_image.jpg') }}" id="cover-image-origin" alt="meal-image" style="width:100%">
                     </div>
+                    <!--for cover image picture, not shown in the previous-->
+                    @foreach ($images as $image)
+                        <div id="cover-image-show{{ $image->id }}" class="w3-padding-48 cover-image-show cover-select-modal-trigger" style="display:none;">
+                            <img src="{{ asset($image->image_path) }}" alt="meal-image" style="width:100%;">
+                        </div>
+                    @endforeach
+                    <!--for cover image input, not shown-->
+                    {{ Form::text('cover_img', null, ['class' => '', 'id'=>'cover-image-input', 'style'=>'display:none;']) }} 
+                </div>
 
-                    <!--for image input, not shown-->
-                    {{ Form::text('img', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'image-input', 'style'=>'display:none;']) }} 
+                <div class="w3-padding-12" id="image-form">
+                    <label class="w3-text-gery w3-large" style="font-family:cursive">Meal Images</label>  
 
                     <div class="w3-border w3-border-grey w3-round-large w3-padding-24 w3-margin-top">
                         <div class="w3-row-padding">
@@ -95,6 +100,15 @@
                             @endforeach
                         </div>
                     </div>
+
+                    <div class="w3-row w3-margin-top">
+                        <div class="w3-col s12">
+                            <div id="select-modal-trigger" class="btn w3-large w3-white w3-text-grey w3-border w3-border-grey btn-block zk-shrink-hover"><i class="fa fa-picture-o"></i> Phote</div>
+                        </div>
+                    </div>
+
+                    <!--for image input, not shown-->
+                    {{ Form::text('img', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'id'=>'image-input', 'style'=>'display:none;']) }} 
                 </div>
 
                 <div class="">
@@ -113,8 +127,8 @@
         </div>
     </div>  
 
-  <!--Data Time People Modal -->
-  @include('mobile.partials.ChefCreateFullCalendar');
+  <!--Cover Image Select-->
+  @include('mobile.partials.ChefCreateCoverImageSelect');
   <!--Image select-->
   @include('mobile.partials.ChefCreateImageSelect') 
   <!--loader modal-->
