@@ -4,9 +4,12 @@ namespace App\Repositories\Foundation;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use App\Repositories\Foundation\DateTrait;
 
 abstract class QueryFilter
 {
+    use DateTrait;
+
     protected $request;
     protected $builder;
 

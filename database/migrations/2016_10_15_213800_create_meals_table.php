@@ -22,6 +22,7 @@ class CreateMealsTable extends Migration
             $table->integer('people_eva')->default(0)->unsigned();
             $table->tinyInteger('evaluation')->default(0)->unsigned();
             $table->text('description');
+            $table->string('cover_img')->default("");
             $table->softDeletes();
             $table->timestamps();
         });

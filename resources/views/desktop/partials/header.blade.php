@@ -24,7 +24,7 @@
               <a href="{{ url('/chef') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_menu" ><i class="fa fa-th-list"></i><span class="w3-large"> Menu</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="{{ url('/order/chef_order/' . Auth::user()->chef_id . '/?chefOrderType=all') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>
+              <a href="{{ url('/order/chef_order/' . Auth::user()->chef_id . '/?chefOrderType=All') }}" class="w3-padding-large w3-xlarge listcolor" id="chef_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>
             </li>
             <li class="w3-hide-small w3-right">
               <a href="{{ url('/chef_content') }}" class="w3-padding-large w3-xlarge listcolor"><i class="fa fa-cutlery"></i><span class="w3-large"> Chef</span></a>
@@ -44,7 +44,7 @@
               <a href="{{ url('/user_profile/create') }}" class="w3-padding-large w3-xlarge listcolor" id="setUp" ><i class="fa fa-cog"></i><span class="w3-large"> Setting</span></a>
             </li>
             <li class="w3-hide-small w3-right">
-              <a href="{{ url('/order/user_order/' . Auth::user()->id . '/?userOrderType=all') }}" class="w3-padding-large w3-xlarge listcolor" id="user_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>
+              <a href="{{ url('/order/user_order/' . Auth::user()->id . '/?userOrderType=All') }}" class="w3-padding-large w3-xlarge listcolor" id="user_order" ><i class="fa fa-credit-card"></i><span class="w3-large"> Order</span></a>
             </li>
             <li class="w3-hide-small w3-right">
               <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="w3-padding-large w3-xlarge listcolor" id="shoppingCart" ><i class="fa fa-shopping-cart"></i><span class="w3-large"> Shopping Cart</span></a>

@@ -270,7 +270,7 @@ class OrderService
     public function updatePeopleOrder($cart, $rcv, $datetimepeople = null)
     {
         count($datetimepeople) ?: $datetimepeople = $this->datetimepeople;
-
+        
         $this->dateTimePeopleRepo->updatePeople($datetimepeople, $cart, $rcv);
 
         return $this;

@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Auth;
 use App\User;
-use App\Repositories\Foundation\CartFilters;
+use App\Repositories\Foundation\CartFilter\CartFilters;
 
 class UserRepository
 {

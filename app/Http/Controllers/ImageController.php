@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeleteImageRequest;
 
 use App\Services\ImageService;
 use App\Services\AgentService;
@@ -42,7 +43,7 @@ class ImageController extends Controller
         $chef = $this->imageService->findChef($id)->uploadImage($request);
     }
 
-    public function delete(Request $request, $id)
+    public function delete(DeleteImageRequest $request, $id)
     {
         $this->gateService->chefIdCheck($id);
         

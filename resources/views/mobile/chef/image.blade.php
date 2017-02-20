@@ -32,7 +32,7 @@
                             <ul>
                                 @foreach ($imagesChunk as $image)
                                     <li>
-                                        <input type="checkbox" name="image[]" id="cb{{ $image->id }}" value="{{ $image->id }}" />
+                                        <input type="checkbox" name="image[]" id="cb{{ $image->id }}" value="{{ $image->id }}"/>
                                         <label for="cb{{ $image->id }}"><img src="{{ asset($image->image_path) }}" /></label>
                                     </li>
                                 @endforeach
@@ -44,7 +44,9 @@
                 {!! Form::close() !!}
             </div>
             <div id="more-images" class="w3-center">
-                <button class="btn w3-large w3-white w3-border w3-border-green w3-text-green zk-shrink-hover" style="width:60%">More...</button>
+                @if (count($images) > 0)
+                    <button class="btn w3-large w3-white w3-border w3-border-green w3-text-green zk-shrink-hover" style="width:60%">More...</button>
+                @endif
             </div>
         </div>
 
@@ -103,7 +105,18 @@
 
             // trigger delte button
             $("#trash-trigger").click(function() {
-                $("#delete-img").click();
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover the images!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false
+                },
+                function(){
+                    $("#delete-img").click();
+                });
             })
         });
     </script>

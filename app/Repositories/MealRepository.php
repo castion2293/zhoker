@@ -79,6 +79,7 @@ class MealRepository
      }
 
      /**
+     * $others is for getting other days of meal
      * @param $meal
      * @return datetimepeople
      */

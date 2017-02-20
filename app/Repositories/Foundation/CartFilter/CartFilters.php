@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Repositories\Foundation;
+namespace App\Repositories\Foundation\CartFilter;
 
-use App\Repositories\Foundation\DateTrait;
+use App\Repositories\Foundation\QueryFilter;
 
 class CartFilters extends QueryFilter
 {
-    use DateTrait;
-
     /**
      * @param $builder
      * @return $this

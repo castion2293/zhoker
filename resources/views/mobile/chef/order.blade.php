@@ -22,12 +22,12 @@
         <div class="w3-margin-top" style="width:100%;">
             <select id="type-select" class="w3-select w3-large w3-text-grey">
                 <option value="" disabled selected>Type Search</option>
-                <option value="all" class="w3-large w3-text-grey">all</option>
-                <option value="approve" class="w3-large w3-text-grey">approve</option>
-                <option value="reject" class="w3-large w3-text-grey">reject</option>
-                <option value="pending" class="w3-large w3-text-grey">pending</option>
-                <option value="cancel" class="w3-large w3-text-grey">cancel</option>
-                <option value="overdue" class="w3-large w3-text-grey">overdue</option>
+                <option value="All" class="w3-large w3-text-grey">All</option>
+                <option value="Approve" class="w3-large w3-text-grey">Approve</option>
+                <option value="Reject" class="w3-large w3-text-grey">Reject</option>
+                <option value="Pending" class="w3-large w3-text-grey">Pending</option>
+                <option value="Cancel" class="w3-large w3-text-grey">Cancel</option>
+                <option value="Overdue" class="w3-large w3-text-grey">Overdue</option>
             </select>
             <!--for refresh the new page, not shown-->
             <a id="new-page-link" href="" style="display:none;">new page</a> 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Foundation\OrderFilters;
+use App\Repositories\Foundation\OrderFilter\OrderFilters;
 
 use App\Services\OrderService;
 use App\Services\CreditCardService;

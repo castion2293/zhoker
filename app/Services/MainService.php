@@ -53,7 +53,7 @@ class MainService
         count($user) ?: $user = $this->user;
 
         $this->chef = $this->userRepo->forChef($user);
-
+        
         return $this;
     }
 
@@ -72,7 +72,7 @@ class MainService
      public function findMeals($chef = null, $qty)
      {
          count($chef) ?: $chef = $this->chef;
-
+         
          $this->meal = $this->chefRepo->forMeals($chef, $qty);
 
          return $this;

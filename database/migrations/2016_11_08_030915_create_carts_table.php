@@ -25,6 +25,7 @@ class CreateCartsTable extends Migration
             $table->string('time');
             $table->string('method');
             $table->boolean('checked')->default(0);
+            $table->boolean('evaluated')->default(0);
             $table->integer('user_order_id')->index()->unsigned()->nullable();
             $table->integer('chef_order_id')->index()->unsigned()->nullable();
             $table->softDeletes();
