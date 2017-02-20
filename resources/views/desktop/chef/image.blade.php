@@ -72,17 +72,18 @@
                 <label class="w3-text-gery w3-large" style="font-family:cursive">Upload Photos(10 max)</label> 
                 <div class="dropzone" id="my-dropzone">
                     <div class="fallback">
-                        <input name="img" type="file" multiple  required="" />
+                        <input id="image-zone" name="img" type="file" multiple  required="" />
                     </div>
                 </div>
                 
             </div>
             <div class="modal-footer">
                 <div class="w3-center">
-                    <a href="{{ url('image/index/' . $chef->id . '/#title') }}" class="btn w3-large w3-green zk-shrink-hover" id="finish-upload" style="width:20%;display:none;">Finish</a>
+                    <a href="{{ url('image/finish/' . $chef->id) }}" class="btn w3-large w3-green zk-shrink-hover" id="finish-upload" style="width:20%;display:none;">Finish</a>
                 </div>
                 <div class="w3-center w3-margin-top">
                     <button class="btn w3-large w3-white w3-text-green w3-border w3-border-green zk-shrink-hover" id="upload-img" style="width:20%;">Upload</button>
+                    <!--for uplaod image use, not shown in previous-->
                     <button class="btn w3-large w3-white w3-text-white w3-border w3-border-white" style="width:20%;display:none;" id="hide-btn" disabled>Upload</button>
                     <div class="" id="loader" style="left:47%;margin-top:-3em;display:none;"></div>
                 </div>
@@ -142,14 +143,13 @@
                     e.preventDefault();
                     e.stopPropagation();
                     dzClosure.processQueue();
-                    $("#upload-img").hide();
-                    $("#hide-btn").show();
-                    $("#loader").show();
                 });
 
                 //send all the form data along with the files:
                 this.on("sendingmultiple", function(data, xhr, formData) {
-                
+                    $("#upload-img").hide();
+                    $("#hide-btn").show();
+                    $("#loader").show();
                 });
             },
             success: function(file, response){

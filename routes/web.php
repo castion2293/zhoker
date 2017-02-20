@@ -182,6 +182,9 @@ Route::get('image/index/{id}', [
     'uses' => 'ImageController@index',
     'as' => 'image.index'
 ]);
+Route::get('image/finish/{id}/', function($id) {
+    return redirect("image/index/" . $id . "#title");
+});
 Route::post('image/upload/{chef_id}', [
     'uses' => 'ImageController@upload',
     'as' => 'image.upload'

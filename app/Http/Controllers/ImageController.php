@@ -37,7 +37,7 @@ class ImageController extends Controller
     }
 
     public function upload(Request $request, $id)
-    {
+    {        
         $this->gateService->chefIdCheck($id);
 
         $chef = $this->imageService->findChef($id)->uploadImage($request);
