@@ -181,62 +181,52 @@ class ChefService
      * $meal, $request
      * @return $meals
      */
-    //  public function createDatetimePeople($meal, $request = null)
-    //  {
-    //     count($request) ?: $request = $this->request;
+     public function updateDatetimePeople($meal, $oldDateTimePeople, $request)
+     {
+        $dtp_array = explode(";", $request->datetimepeople);
 
-    //     $dtp_array = explode(";", $request->datetimepeople);
+        $newDateTimePeopleArrays = [];
+        for ($i=0; $i < count($dtp_array) - 1; $i++) { 
+            $dpt_split_array = explode(",", $dtp_array[$i]);
+            $newDateTimePeopleArrays = array_prepend($newDateTimePeopleArrays, $dpt_split_array);
+        }
+
+        foreach ($newDateTimePeopleArrays as $newDateTimePeopleArray) {
+            if ($newDateTimePeopleArray[0] == "undefined") 
+                $this->datetimepeopleRepo->create($meal, $newDateTimePeopleArray);
+        }
+
+        $newDateTimePeopleId = array_pluck($newDateTimePeopleArrays, 0);
+        $oldDateTimepeopleId = array_pluck($oldDateTimePeople->toArray(), 'id');
+        $delete_ids = array_diff($oldDateTimepeopleId, $newDateTimePeopleId); //delete old
         
-    //     for($i=0; $i < count($dtp_array) - 1; $i++)
-    //     { 
-    //         $datetimepeople = $this->datetimepeopleRepo->NewDateTimePeople();
-            
-    //         $dpt_split_array = explode(",", $dtp_array[$i]);
-
-    //         //$datetimepeople->meal_id = $meal->id;
-    //         $datetimepeople->date = $dpt_split_array[0];
-    //         $datetimepeople->time = $dpt_split_array[1];
-    //         $datetimepeople->end_date = $dpt_split_array[2];
-    //         $datetimepeople->end_time = $dpt_split_array[3];
-    //         $datetimepeople->people_left = $dpt_split_array[4];
-    //         $this->datetimepeopleRepo->mealAssociate($datetimepeople, $meal);
-
-    //         $this->datetimepeopleRepo->save($datetimepeople);
-    //     }
-
-    //     return $this;
-    //  }
-
-     /**
-     * $datetimepeople
-     * @return $this
-     */
-    //  public function deleteDateTimePeople($datetimepeoples = null)
-    //  {
-    //      count($datetimepeoples) ?: $datetimepeoples = $this->datetimepeople;
-
-    //      foreach ($datetimepeoples as $datetimepeople) {
-    //         $this->datetimepeopleRepo->delete($datetimepeople);
-    //      }
-
-    //      return $this;
-    //  }
+        foreach ($delete_ids as $delete_id) {
+            $datetimepeople = $this->datetimepeopleRepo->findDateTimePeopleById($delete_id);
+            $this->datetimepeopleRepo->delete($datetimepeople);
+        }
+        
+        return $this;
+     }
 
      /**
      * @param $meal
      * @return datetimepeople
      */
-    //  public function findDatetimePeople($meal)
-    //  {
-    //     $this->datetimepeople = $this->mealRepo->forDateTimePeople($meal);
+     public function findDatetimePeople($meal)
+     {
+        $this->datetimepeople = $this->mealRepo->forDateTimePeople($meal);
 
-    //     return $this;
-    //  }
+        return $this;
+     }
 
-    //  public function getDateTimePeople()
-    //  {
-    //      return $this->datetimepeople;
-    //  }
+     /**
+     * @param 
+     * @return datetimepeople
+     */
+     public function getDateTimePeople()
+     {
+         return $this->datetimepeople;
+     }
 
      /**
      * $meal, $request

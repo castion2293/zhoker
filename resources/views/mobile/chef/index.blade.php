@@ -51,10 +51,13 @@
                                 <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
                             @endforeach
                         </div>
-                        <div class="w3-col s6 w3-padding-tiny">
+                        <div class="w3-col s4 w3-padding-tiny">
                             {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-white w3-text-red w3-border w3-border-red w3-large btn-block zk-shrink-hover']) !!}
                         </div>
-                        <div class="w3-col s6 w3-padding-tiny">
+                        <div class="w3-col s4 w3-padding-tiny">
+                            {!! Html::linkRoute('chef.datetimepeople.get', 'Date', [$meal->id], ['class' => 'btn w3-white w3-text-blue w3-border w3-border-blue w3-large btn-block zk-shrink-hover']) !!}
+                        </div>
+                        <div class="w3-col s4 w3-padding-tiny">
                             {!! Html::linkRoute('chef.show', 'View', [$meal->id], ['class' => 'btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover']) !!}
                         </div>
                     </div>

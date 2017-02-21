@@ -162,4 +162,28 @@ class ChefController extends Controller
         flash()->success('Success', 'The meal has been deleted successfully!');
         return redirect()->route('chef.index');
     }
+
+    public function getDateTimePeople($id)
+    {
+        $meal = $this->chefService->findMeal($id)->getMeal();
+        $this->gateService->chefIdCheck($meal->chef_id);
+
+        $datetimepeople = $this->chefService->findDatetimePeople($meal)->getDateTimePeople();
+
+        $agent = $this->agentService->agent();
+        return view($agent . '.chef.datetimepeople', ['meal' => $meal, 'datetimepeoples' => $datetimepeople]);
+    }
+
+    public function postDateTimePeople(Request $request, $id)
+    {
+        $meal = $this->chefService->findMeal($id)->getMeal();
+        $this->gateService->chefIdCheck($meal->chef_id);
+
+        $datetimepeople = $this->chefService->findDatetimePeople($meal)->getDateTimePeople();
+
+        $this->chefService->updateDatetimePeople($meal, $datetimepeople, $request);
+
+        flash()->success('Success', 'The Date/Time/People have been updated successfully!');
+        return redirect()->route('chef.show', $meal->id);
+    }
 }

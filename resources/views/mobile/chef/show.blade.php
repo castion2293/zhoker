@@ -47,28 +47,8 @@
                     </div>
               </div>
               <div class="w3-col s12">
-                  <div class="w3-border-bottom w3-border-grey w3-padding-12">
-                    <table class="w3-table w3-medium">
-                        <thead>
-                          <th>Date</th>
-                          <th>Time</th>
-                          <th>People Left</th>
-                          <th>People Orders</th>
-                        </thead>
-                        <tbody>
-                          @foreach ($meal->datetimepeoples->take(5) as $datetimepeople)
-                            <tr>
-                              <td>{{ $datetimepeople->date }}</td>
-                              <td>{{ date("g:i a", strtotime($datetimepeople->time)) }}</td>
-                              <td class="w3-center">{{ $datetimepeople->people_left }}</td>
-                              <td class="w3-center"><span class="w3-badge w3-red">{{ $datetimepeople->people_order }}</span></td>
-                            </tr>
-                          @endforeach
-                        </tbody>
-                    </table>
-                  </div>
                   <div class="w3-margin-top w3-border-bottom w3-border-grey"> 
-                    <label>Mathod:   
+                    <label>Method:   
                       @foreach ($meal->methods as $method)
                           <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
                       @endforeach
@@ -98,6 +78,29 @@
                             <span class="w3-text-orange w3-large">New Meal</span>
                         @endif
                     </label>
+                  </div>
+                  <div class="w3-border-bottom w3-border-grey w3-padding-12">
+                    <table class="w3-table w3-medium">
+                        <thead>
+                          <th style="padding-left:0;">Date</th>
+                          <th>Time</th>
+                          <th>People Left</th>
+                          <th>People Orders</th>
+                        </thead>
+                        <tbody>
+                          @foreach ($meal->datetimepeoples->take(5) as $datetimepeople)
+                            <tr>
+                              <td>{{ $datetimepeople->date }}</td>
+                              <td>{{ date("g:i a", strtotime($datetimepeople->time)) }}</td>
+                              <td class="w3-center">{{ $datetimepeople->people_left }}</td>
+                              <td class="w3-center"><span class="w3-badge w3-red">{{ $datetimepeople->people_order }}</span></td>
+                            </tr>
+                          @endforeach
+                        </tbody>
+                    </table>
+                  </div>
+                  <div class="w3-right w3-margin-top">
+                      <a href="{{ route('chef.datetimepeople.get', ['id' => $meal->id]) }}" class="btn w3-white w3-text-blue w3-border w3-border-blue btn-block zk-shrink-hover">Date/Time<a>
                   </div>
               </div>  
             </div>

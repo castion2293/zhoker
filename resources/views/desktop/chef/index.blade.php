@@ -45,10 +45,13 @@
                         <p class="w3-text-grey" style="font-family:cursive;">{!! substr(strip_tags($meal->description), 0, 150) !!}{{ strlen(strip_tags($meal->description)) > 150 ? '...' : "" }}</p>
                     </div>
                     <div class="w3-row">
-                        <div class="w3-col l8 m8">
+                        <div class="w3-col l6 m6">
                             @foreach ($meal->methods as $method)
                                 <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
                             @endforeach
+                        </div>
+                        <div class="w3-col l2 m2 w3-padding-small w3-right">
+                            {!! Html::linkRoute('chef.datetimepeople.get', 'Date/Time', [$meal->id], ['class' => 'btn w3-white w3-text-blue w3-border w3-border-blue btn-block zk-shrink-hover']) !!}
                         </div>
                         <div class="w3-col l2 m2 w3-padding-small w3-right">
                             {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-white w3-text-red w3-border w3-border-red btn-block zk-shrink-hover']) !!}

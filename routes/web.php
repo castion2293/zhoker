@@ -173,6 +173,14 @@ Route::get('auth/facebook/callback', 'Auth\OAuthController@handleProviderCallbac
 //Chef CRUD and profile
 Route::get('/chef_content', 'MainController@getChefContent');
 Route::resource('chef', 'ChefController');
+Route::get('chef/datetimepeople/get/{id}', [
+    'uses' => 'ChefController@getDateTimePeople',
+    'as' => 'chef.datetimepeople.get'
+]);
+Route::post('chef/datetimepeople/post/{id}', [
+    'uses' => 'ChefController@postDateTimePeople',
+    'as' => 'chef.datetimepeople.post'
+]);
 Route::resource('chef_profile', 'ChefProfileController', [
     'only' => ['index', 'edit', 'update', 'destroy']
 ]);

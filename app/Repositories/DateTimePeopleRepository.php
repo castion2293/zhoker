@@ -16,21 +16,13 @@ class DateTimePeopleRepository
         $this->datetimepeople = $datetimepeople;
     }
 
-    /**
-     * @return datetimepeople
-     */
-     public function NewDateTimePeople()
-     {
-        return new DateTimePeople();
-     }
-
      /**
      * @param $id
-     * @return datetimepeople
+     * @return $this
      */
      public function findDateTimePeopleById($id)
      {
-        return $this->datetimepeople->findOrFail($id);
+        return $this->datetimepeople->find($id);
      }
 
      /**
@@ -60,6 +52,18 @@ class DateTimePeopleRepository
                                      ->get();
      }
 
+     public function create($meal, $newDateTimePeopleArray)
+     {
+        return DateTimePeople::create([
+            'meal_id' => $meal->id,
+            'date' => $newDateTimePeopleArray[1],
+            'time' => $newDateTimePeopleArray[2],
+            'end_date' => $newDateTimePeopleArray[3],
+            'end_time' => $newDateTimePeopleArray[4],
+            'people_left' => $newDateTimePeopleArray[5],
+        ]);
+     }
+
       /**
      * @param $datetimepeople, $cart
      * @return 
@@ -83,26 +87,8 @@ class DateTimePeopleRepository
      * @param $datetimepeople
      * @return 
      */
-     public function save(DatetimePeople $datetimepeople)
-     {
-        return $datetimepeople->save();
-     }
-
-     /**
-     * @param $datetimepeople, $meal
-     * @return 
-     */
-     public function mealAssociate(DatetimePeople $datetimepeople, $meal)
-     {
-        return $datetimepeople->meals()->associate($meal);
-     }
-
-     /**
-     * @param $datetimepeople
-     * @return 
-     */
      public function delete(DatetimePeople $datetimepeople)
      {
-         return $datetimepeople->delete();
+        return $datetimepeople->delete();
      }
 }
