@@ -183,13 +183,7 @@ class ChefService
      */
      public function updateDatetimePeople($meal, $oldDateTimePeople, $request)
      {
-        $dtp_array = explode(";", $request->datetimepeople);
-
-        $newDateTimePeopleArrays = [];
-        for ($i=0; $i < count($dtp_array) - 1; $i++) { 
-            $dpt_split_array = explode(",", $dtp_array[$i]);
-            $newDateTimePeopleArrays = array_prepend($newDateTimePeopleArrays, $dpt_split_array);
-        }
+         $newDateTimePeopleArrays = $this->getNewDateTimePeopleArray($request);
 
         foreach ($newDateTimePeopleArrays as $newDateTimePeopleArray) {
             if ($newDateTimePeopleArray[0] == "undefined") 
@@ -357,4 +351,20 @@ class ChefService
 
         return $shiftarray;
      }
+
+    /**
+     * @param $request
+     * @return array
+     */
+    private function getNewDateTimePeopleArray($request)
+    {
+        $dtp_array = explode(";", $request->datetimepeople);
+
+        $newDateTimePeopleArrays = [];
+        for ($i = 0; $i < count($dtp_array) - 1; $i++) {
+            $dpt_split_array = explode(",", $dtp_array[$i]);
+            $newDateTimePeopleArrays = array_prepend($newDateTimePeopleArrays, $dpt_split_array);
+        }
+        return $newDateTimePeopleArrays;
+    }
 }
