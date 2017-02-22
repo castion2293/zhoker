@@ -90,8 +90,7 @@ class CartFilters extends QueryFilter
     }
 
     /**
-     * @param 
-     * @return $builrder
+     * @return mixed
      */
     public function getQuery()
     {

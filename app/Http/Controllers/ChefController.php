@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Filesystem\Filesystem;
-
 use App\Services\ChefService;
 use App\Services\AgentService;
 use App\Services\GateService;
@@ -12,8 +10,6 @@ use App\Services\ImageService;
 
 use App\Http\Requests;
 use App\Http\Requests\MealCreateRequest;
-
-use Carbon\Carbon;
 
 class ChefController extends Controller
 {
@@ -136,7 +132,6 @@ class ChefController extends Controller
     {
         $meal = $this->chefService->findMeal($id)->getMeal();
         $meal = $this->chefService->updateMeal($meal, $request)->getMeal();
-        //$this->chefService->findDatetimePeople($meal)->deleteDateTimePeople()->createDatetimePeople($meal);
         $this->chefService->connectImage($meal);
         $this->chefService->connectCategory($meal);
         $this->chefService->connectMethod($meal);
@@ -147,10 +142,8 @@ class ChefController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -163,6 +156,10 @@ class ChefController extends Controller
         return redirect()->route('chef.index');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getDateTimePeople($id)
     {
         $meal = $this->chefService->findMeal($id)->getMeal();
@@ -174,6 +171,11 @@ class ChefController extends Controller
         return view($agent . '.chef.datetimepeople', ['meal' => $meal, 'datetimepeoples' => $datetimepeople]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postDateTimePeople(Request $request, $id)
     {
         $meal = $this->chefService->findMeal($id)->getMeal();

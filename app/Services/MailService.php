@@ -10,8 +10,8 @@ use Carbon\Carbon;
 class MailService
 {
     /**
-     * @param $date
-     * @return 
+     * @param $data
+     * @return mixed
      */
     public function sendContactMail($data)
     {
@@ -19,8 +19,8 @@ class MailService
     }
 
     /**
-     * @param $date
-     * @return 
+     * @param $data
+     * @return mixed
      */
     public function sendContactCustomerMail($data)
     {

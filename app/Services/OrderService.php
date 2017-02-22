@@ -27,6 +27,12 @@ class OrderService
 
     /**
      * OrderService constructor.
+     * @param UserRepository $userRepo
+     * @param ChefRepository $chefRepo
+     * @param MealRepository $mealRepo
+     * @param DateTimePeopleRepository $dateTimePeopleRepo
+     * @param CartRepository $cartRepo
+     * @param ChefOrderRepository $chefOrderRepo
      */
     public function __construct(UserRepository $userRepo, ChefRepository $chefRepo, MealRepository $mealRepo, DateTimePeopleRepository $dateTimePeopleRepo, 
                                 CartRepository $cartRepo, ChefOrderRepository $chefOrderRepo)
@@ -64,9 +70,9 @@ class OrderService
     }
 
     /**
-    * @param $cart
-    * @return user
-    */
+     * @param $cart
+     * @return $this
+     */
     public function findUserByCart($cart)
     {
         count($cart) ?: $cart = $this->cart;
@@ -110,9 +116,8 @@ class OrderService
     }
 
     /**
-    * @param $id
-    * @return chef
-    */
+     * @return mixed
+     */
     public function getChef()
     {
         return $this->chef;
@@ -130,9 +135,9 @@ class OrderService
     }
 
     /**
-    * @param $cheforder
-    * @return $this
-    */
+     * @param null $chefOrder
+     * @return $this
+     */
     public function findCart($chefOrder = null)
     {
         count($chefOrder) ?: $chefOrder = $this->chefOrder;
@@ -143,9 +148,8 @@ class OrderService
     }
 
     /**
-    * @param 
-    * @return cart
-    */
+     * @return mixed
+     */
     public function getCart()
     {
         return $this->cart;
@@ -164,10 +168,10 @@ class OrderService
         return $this;
     }
 
-     /**
-    * @param $cart
-    * @return userOrder
-    */
+    /**
+     * @param null $cart
+     * @return $this
+     */
     public function findUserOrderByCart($cart = null)
     {
         count($cart) ?: $cart = $this->cart;
@@ -186,10 +190,10 @@ class OrderService
         return $this->userOrder;
     }
 
-     /**
-    * @param $id
-    * @return this
-    */
+    /**
+     * @param $id
+     * @return $this
+     */
     public function findChefOrderById($id)
     {
         $this->chefOrder = $this->chefOrderRepo->findChefOrderById($id);
@@ -197,10 +201,10 @@ class OrderService
         return $this;
     }
 
-     /**
-    * @param $cart
-    * @return this
-    */
+    /**
+     * @param $cart
+     * @return $this
+     */
     public function findChefOrderByCart($cart)
     {
         count($cart) ?: $cart = $this->cart;
@@ -232,10 +236,10 @@ class OrderService
         return $this->chefOrder;
     }
 
-     /**
-    * @param $cart
-    * @return datetimepeople
-    */
+    /**
+     * @param $cart
+     * @return $this
+     */
     public function getDateTimePeopleByCart($cart)
     {
         count($cart) ?: $cart = $this->cart;
@@ -245,28 +249,30 @@ class OrderService
         return $this;
     }
 
-     /**
-    * @param $chefOrder
-    * @return 
-    */
+    /**
+     * @param $chefOrder
+     * @return bool
+     */
     public function updateChefOrderCheck($chefOrder)
     {
         return $this->chefOrderRepo->updateCheck($chefOrder);
     }
 
-     /**
-    * @param $chefOrder
-    * @return 
-    */
+    /**
+     * @param $chefOrder
+     * @return bool
+     */
     public function updateChefOrderPaid($chefOrder)
     {
         return $this->chefOrderRepo->updatePaid($chefOrder);
     }
 
-     /**
-    * @param $datetimepeople, $cart, $rcv
-    * @return 
-    */
+    /**
+     * @param $cart
+     * @param $rcv
+     * @param null $datetimepeople
+     * @return $this
+     */
     public function updatePeopleOrder($cart, $rcv, $datetimepeople = null)
     {
         count($datetimepeople) ?: $datetimepeople = $this->datetimepeople;
@@ -277,27 +283,27 @@ class OrderService
     }
 
     /**
-    * @param $meal
-    * @return 
-    */
+     * @param $meal
+     * @return int
+     */
     public function updateMealPeopleEaten($meal)
     {
         return $this->mealRepo->updatePeopleEaten($meal);
     }
 
-     /**
-    * @param $cheforder
-    * @return 
-    */
+    /**
+     * @param $chefOrder
+     * @return bool|null
+     */
     public function deleteChefOrder($chefOrder)
     {
         return $this->chefOrderRepo->delete($chefOrder);
     }
 
     /**
-    * @param $cart
-    * @return 
-    */
+     * @param null $cart
+     * @return bool|null
+     */
     public function deleteCart($cart = null)
     {
         count($cart) ?: $cart = $this->cart;

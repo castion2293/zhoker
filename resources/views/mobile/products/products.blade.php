@@ -11,7 +11,7 @@
 @section('content')
     <!--header picture-->
     <div class="w3-row" id="top-pic">
-        @foreach ($meal->images()->skip(1)->take(1)->get() as $image)
+        @foreach ($meal->images()->take(1)->get() as $image)
             <div class="w3-col s12">
                 <img src="{{ asset($image->image_path) }}" alt="profile" style="width:100%">
             </div>
@@ -35,20 +35,17 @@
                 <div class="w3-padding-4 w3-display-container">
 
                     <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                            <a id="image_link" href="{{ $meal->cover_img }}" itemprop="contentUrl" data-size="1024x575">
+                                <img src="{{ asset($meal->cover_img) }}" alt="this is a photo" style="width:100%;">
+                            </a>
+                        </figure>
                         @foreach ($meal->images as $image)
-                            @if ($loop->first)
-                              <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                                <a id="image_link" href="{{ $image->image_path }}" itemprop="contentUrl" data-size="1024x575">
-                                    <img src="{{ asset($image->image_path) }}" alt="this is a photo" style="width:100%">
-                                </a>                                   
-                              </figure>
-                            @else
                               <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                                 <a href="{{ $image->image_path }}" itemprop="contentUrl" data-size="1024x575">
                                     <img src="{{ asset($image->image_path) }}" alt="this is a photo" style="width:100%;display:none;">
                                 </a>                                   
                               </figure>
-                            @endif
                         @endforeach
                     </div>
                     @include('desktop.partials.photoswipe')

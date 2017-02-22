@@ -18,6 +18,13 @@ class EvaluationService
     protected $meal;
     protected $cart;
 
+    /**
+     * EvaluationService constructor.
+     * @param UserRepository $userRepo
+     * @param MealRepository $mealRepo
+     * @param CartRepository $cartRepo
+     * @param CommentRepository $commentRepo
+     */
     public function __construct(UserRepository $userRepo, MealRepository $mealRepo, CartRepository $cartRepo, CommentRepository $commentRepo)
     {
         $this->userRepo = $userRepo;

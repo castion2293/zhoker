@@ -35,6 +35,15 @@ class ChefService
 
     /**
      * ChefService constructor.
+     * @param UserRepository $userRepo
+     * @param ChefRepository $chefRepo
+     * @param CategoryRepository $categoryRepo
+     * @param MethodRepository $methodRepo
+     * @param ShiftRepository $shiftRepo
+     * @param MealRepository $mealRepo
+     * @param DateTimePeopleRepository $datetimepeopleRepo
+     * @param ImageRepository $imageRepo
+     * @param \App\Services\ImageService $imageService
      */
     public function __construct(UserRepository $userRepo, ChefRepository $chefRepo, CategoryRepository $categoryRepo, MethodRepository $methodRepo, ShiftRepository $shiftRepo,
                                MealRepository $mealRepo, DateTimePeopleRepository $datetimepeopleRepo, ImageRepository $imageRepo, ImageService $imageService)
@@ -51,9 +60,8 @@ class ChefService
         $this->imageService = $imageService;
     }
 
-     /**
-     * @param $id
-     * @return 
+    /**
+     * @param $meal
      */
      public function destroy($meal)
      {
@@ -65,9 +73,7 @@ class ChefService
         $this->mealRepo->delete($meal);
      }
 
-
-     //New version
-     /**
+    /**
      * @return $this
      */
      public function findUser()
@@ -185,26 +191,18 @@ class ChefService
      {
          $newDateTimePeopleArrays = $this->getNewDateTimePeopleArray($request);
 
-        foreach ($newDateTimePeopleArrays as $newDateTimePeopleArray) {
-            if ($newDateTimePeopleArray[0] == "undefined") 
-                $this->datetimepeopleRepo->create($meal, $newDateTimePeopleArray);
-        }
+         $this->CreateNewDateTimePeople($meal, $newDateTimePeopleArrays);
 
-        $newDateTimePeopleId = array_pluck($newDateTimePeopleArrays, 0);
-        $oldDateTimepeopleId = array_pluck($oldDateTimePeople->toArray(), 'id');
-        $delete_ids = array_diff($oldDateTimepeopleId, $newDateTimePeopleId); //delete old
-        
-        foreach ($delete_ids as $delete_id) {
-            $datetimepeople = $this->datetimepeopleRepo->findDateTimePeopleById($delete_id);
-            $this->datetimepeopleRepo->delete($datetimepeople);
-        }
-        
-        return $this;
+         $delete_ids = $this->getDeleteId($oldDateTimePeople, $newDateTimePeopleArrays);
+
+         $this->deleteDateTimePeople($delete_ids);
+
+         return $this;
      }
 
-     /**
+    /**
      * @param $meal
-     * @return datetimepeople
+     * @return $this
      */
      public function findDatetimePeople($meal)
      {
@@ -213,9 +211,8 @@ class ChefService
         return $this;
      }
 
-     /**
-     * @param 
-     * @return datetimepeople
+    /**
+     * @return mixed
      */
      public function getDateTimePeople()
      {
@@ -238,17 +235,17 @@ class ChefService
         return $this;
      }
 
-     /**
-     * $meal
-     * @return $images
+    /**
+     * @param $meal
+     * @return \App\Repositories\image
      */
      public function editImage($meal)
      {
          return $this->mealRepo->forImage($meal);
      }
 
-     /**
-     * @return category
+    /**
+     * @return \App\Category
      */
      public function getCategory()
      {
@@ -268,8 +265,8 @@ class ChefService
          return $this;
      }
 
-     /**
-     * @return category
+    /**
+     * @return array
      */
      public function editCategory()
      {
@@ -282,8 +279,8 @@ class ChefService
         return $categoryarray;
      }
 
-     /**
-     * @return method
+    /**
+     * @return \App\Method
      */
      public function getMethod()
      {
@@ -303,8 +300,8 @@ class ChefService
          return $this;
      }
 
-     /**
-     * @return method
+    /**
+     * @return array
      */
      public function editMethod()
      {
@@ -317,16 +314,17 @@ class ChefService
         return $methodarray;
      }
 
-     /**
-     * @return shift
+    /**
+     * @return \App\Shift
      */
      public function getShift()
      {
          return $this->shiftRepo->findShiftByShiftName();
      }
 
-     /**
-     * $meal, $request
+    /**
+     * @param $meal
+     * @param null $request
      * @return $this
      */
      public function connectShift($meal, $request = null)
@@ -338,18 +336,18 @@ class ChefService
          return $this;
      }
 
-      /**
-     * @return shift
+    /**
+     * @return array
      */
      public function editShift()
      {
         $shifts = $this->shiftRepo->findShiftByShiftName();
-        $shiftarray = [];
+        $shiftArray = [];
         foreach($shifts as $shift) {
-            $shiftarray[$shift->id] = $shift->shift;
+            $shiftArray[$shift->id] = $shift->shift;
         }
 
-        return $shiftarray;
+        return $shiftArray;
      }
 
     /**
@@ -366,5 +364,51 @@ class ChefService
             $newDateTimePeopleArrays = array_prepend($newDateTimePeopleArrays, $dpt_split_array);
         }
         return $newDateTimePeopleArrays;
+    }
+
+    /**
+     * @param $meal
+     * @param $newDateTimePeopleArrays
+     */
+    private function CreateNewDateTimePeople($meal, $newDateTimePeopleArrays)
+    {
+        foreach ($newDateTimePeopleArrays as $newDateTimePeopleArray) {
+            if ($newDateTimePeopleArray[0] == "undefined")
+                $this->datetimepeopleRepo->create($meal, $newDateTimePeopleArray);
+        }
+    }
+
+    /**
+     * @param $oldDateTimePeople
+     * @param $newDateTimePeopleArrays
+     * @return array
+     */
+    private function getDeleteId($oldDateTimePeople, $newDateTimePeopleArrays)
+    {
+        $newDateTimePeopleId = array_pluck($newDateTimePeopleArrays, 0);
+        $oldDateTimepeopleId = array_pluck($oldDateTimePeople->toArray(), 'id');
+        return array_diff($oldDateTimepeopleId, $newDateTimePeopleId);
+    }
+
+    /**
+     * @param $delete_ids
+     */
+    private function deleteDateTimePeople($delete_ids)
+    {
+        foreach ($delete_ids as $delete_id) {
+            $datetimepeople = $this->datetimepeopleRepo->findDateTimePeopleById($delete_id);
+
+            if ($this->noOneOrder($datetimepeople))
+                $this->datetimepeopleRepo->delete($datetimepeople);
+        }
+    }
+
+    /**
+     * @param $datetimepeople
+     * @return bool
+     */
+    private function noOneOrder($datetimepeople)
+    {
+        return !count($datetimepeople->carts) || !$datetimepeople->carts->checked;
     }
 }

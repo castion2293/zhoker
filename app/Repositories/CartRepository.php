@@ -46,8 +46,9 @@ class CartRepository
     }
 
     /**
-     * @param $carts, $request
-     * @return 
+     * @param Cart $cart
+     * @param $request
+     * @return bool
      */
     public function update(Cart $cart, $request)
     {
@@ -58,8 +59,8 @@ class CartRepository
     }
 
     /**
-     * @param $carts
-     * @return 
+     * @param Cart $cart
+     * @return bool
      */
     public function updateCheck(Cart $cart)
     {
@@ -69,8 +70,8 @@ class CartRepository
     }
 
     /**
-     * @param $cart
-     * @return 
+     * @param Cart $cart
+     * @return bool
      */
     public function updateEvaluated(Cart $cart)
     {
@@ -80,8 +81,8 @@ class CartRepository
     }
 
     /**
-     * @param $cart
-     * @return 
+     * @param Cart $cart
+     * @return bool|null
      */
     public function delete(Cart $cart)
     {
@@ -89,8 +90,8 @@ class CartRepository
     }
 
     /**
-     * @param $cart
-     * @return user
+     * @param Cart $cart
+     * @return mixed
      */
     public function forUser(Cart $cart)
     {
@@ -107,8 +108,8 @@ class CartRepository
     }
 
     /**
-     * @param $cart
-     * @return datetimepeople
+     * @param Cart $cart
+     * @return mixed
      */
     public function forDateTimePeople(Cart $cart)
     {
@@ -116,8 +117,8 @@ class CartRepository
     }
 
     /**
-     * @param $cart
-     * @return userorder
+     * @param Cart $cart
+     * @return mixed
      */
     public function forUserOrder(Cart $cart)
     {
@@ -125,8 +126,8 @@ class CartRepository
     }
 
     /**
-     * @param $cart
-     * @return cheforder
+     * @param Cart $cart
+     * @return mixed
      */
     public function forChefOrder(Cart $cart)
     {
@@ -134,8 +135,9 @@ class CartRepository
     }
 
     /**
-     * @param $cart, $userOrder
-     * @return $
+     * @param Cart $cart
+     * @param $userOrder
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function forUserOrderAssoci(Cart $cart, $userOrder)
     {
@@ -143,8 +145,9 @@ class CartRepository
     }
 
     /**
-     * @param $cart, $chefOrder
-     * @return $meal
+     * @param Cart $cart
+     * @param $chefOrder
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function forChefOrderAssoci(Cart $cart, $chefOrder)
     {

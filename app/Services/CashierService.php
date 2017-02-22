@@ -24,6 +24,12 @@ class CashierService
 
     /**
      * CashierService constructor.
+     * @param UserRepository $userRepo
+     * @param ChefRepository $chefRepo
+     * @param CartRepository $cartRepo
+     * @param DateTimePeopleRepository $dateTimePeopleRepo
+     * @param UserOrderRepository $userOrderRepo
+     * @param ChefOrderRepository $chefOrderRepo
      */
     public function __construct(UserRepository $userRepo, ChefRepository $chefRepo, CartRepository $cartRepo, DateTimePeopleRepository $dateTimePeopleRepo, 
                                 UserOrderRepository $userOrderRepo, ChefOrderRepository $chefOrderRepo)
@@ -37,7 +43,7 @@ class CashierService
     }
 
     /**
-     * @param $id
+     * @param null $id
      * @return $this
      */
     public function findUser($id = null)
@@ -70,8 +76,7 @@ class CashierService
     }
 
     /**
-     * @param 
-     * @return cart
+     * @return mixed
      */
     public function getCart()
     {
@@ -91,18 +96,17 @@ class CashierService
         return $this;
     }
 
-     /**
-     * @param 
-     * @return $credit_card
+    /**
+     * @return mixed
      */
     public function getCreditCard()
     {
         return $this->creditCard;
     }
 
-     /**
-     * @param $cart
-     * @return totalprice
+    /**
+     * @param $carts
+     * @return int
      */
     public function getTotalPrice($carts)
     {
@@ -117,7 +121,7 @@ class CashierService
 
     /**
      * @param $chefOrder
-     * @return user
+     * @return \App\Repositories\user
      */
     public function getChefUser($chefOrder)
     {
@@ -127,8 +131,10 @@ class CashierService
 
 
     /**
-     * @param $user, $creditCard, $totalPrice
-     * @return userorder
+     * @param $user
+     * @param $cashier_id
+     * @param $totalPrice
+     * @return \App\UserOrder
      */
     public function createUserOrder($user, $cashier_id, $totalPrice)
     {
@@ -137,7 +143,7 @@ class CashierService
 
     /**
      * @param $cart
-     * @return cheforder
+     * @return \App\ChefOrder
      */
     public function createChefOrder($cart)
     {
@@ -147,8 +153,9 @@ class CashierService
     }
 
     /**
-     * @param $cart, $userOrder, $chefOrder
-     * @return 
+     * @param $cart
+     * @param $userOrder
+     * @param $chefOrder
      */
     public function orderUpdate($cart, $userOrder, $chefOrder)
     {
@@ -159,7 +166,6 @@ class CashierService
 
     /**
      * @param $cart
-     * @return 
      */
     public function peopleOrderUpdate($cart)
     {

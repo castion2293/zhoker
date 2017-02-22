@@ -23,7 +23,7 @@ class MethodRepository
      */
      public function findMethodById($id)
      {
-        return $this->method->finOrFail($id);
+        return $this->method->find($id);
      }
 
      /**
@@ -35,9 +35,10 @@ class MethodRepository
         return $this->method->findMethod($method_name);
      }
 
-     /**
-     * @param $method
-     * @return meal
+    /**
+     * @param Method $method
+     * @param null $qty
+     * @return \Illuminate\Database\Eloquent\Collection
      */
      public function forMeals(Method $method, $qty = null)
      {

@@ -18,8 +18,10 @@ class CommentRepository
     }
 
     /**
-     * @param $user_id, $meal_id, $request
-     * @return 
+     * @param $user_id
+     * @param $meal_id
+     * @param $request
+     * @return static
      */
      public function createComment($user_id, $meal_id, $request)
      {

@@ -9,6 +9,10 @@ class AuthenticateService
 {
     use ThrottlesLogins;
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function chefLogin($request)
     {
         return Auth::attempt([
@@ -18,6 +22,10 @@ class AuthenticateService
         ], true);
     }
 
+    /**
+     * @param $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function throttlesLogins($request)
     {
         if ($this->hasTooManyLoginAttempts($request)) {
@@ -27,6 +35,9 @@ class AuthenticateService
         }
     }
 
+    /**
+     * @param $request
+     */
     public function incrementLoginAttempt($request) {
         $this->incrementLoginAttempts($request);
     }

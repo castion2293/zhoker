@@ -17,7 +17,7 @@
     <div class="w3-content w3-container w3-padding-32">
             <div class="w3-row w3-border-green w3-border-bottom">
                 <div class="w3-col s12 w3-center">
-                    <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}<h1>
+                    <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}</h1>
                 </div>
                 <div class="w3-rest"></div>
                 <div class="w3-col s4 w3-right">

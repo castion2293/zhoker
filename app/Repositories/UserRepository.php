@@ -11,6 +11,11 @@ class UserRepository
     protected $user;
     protected $fitler;
 
+    /**
+     * UserRepository constructor.
+     * @param User $user
+     * @param CartFilters $filter
+     */
     public function __construct(User $user, CartFilters $filter)
     {
         $this->user = $user;
@@ -24,14 +29,14 @@ class UserRepository
     public function findUserById($id = null)
     {
         if($id)
-            return $this->user->findOrFail($id);
+            return $this->user->find($id);
         else
             return Auth::user();
     }
 
     /**
-     * @param $id
-     * @return chef
+     * @param User $user
+     * @return mixed
      */
     public function forChef(User $user)
     {
@@ -39,8 +44,8 @@ class UserRepository
     }
 
     /**
-     * @param $user
-     * @return cart
+     * @param User $user
+     * @return mixed
      */
     public function forCartNotCheck(User $user)
     {
@@ -54,8 +59,10 @@ class UserRepository
     }
 
     /**
-     * @param $user, $qty
-     * @return userorder
+     * @param User $user
+     * @param null $filter
+     * @param null $qty
+     * @return mixed
      */
     public function forUserOrder(User $user, $filter = null, $qty = null)
     {
@@ -67,8 +74,9 @@ class UserRepository
     }
 
     /**
-     * @param $user, $datetimepeople_id
-     * @return $datetimepeople
+     * @param User $user
+     * @param null $datetimepeople_id
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
      */
     public function forDateTimePeopleByUser(User $user, $datetimepeople_id = null)
     {
@@ -80,8 +88,9 @@ class UserRepository
     }
 
     /**
-     * @param $user, $meal_id
-     * @return $meal
+     * @param User $user
+     * @param null $meal_id
+     * @return mixed
      */
     public function forMealByUser(User $user, $meal_id = null)
     {
@@ -94,8 +103,8 @@ class UserRepository
 
 
     /**
-     * @param $user
-     * @return carditcard
+     * @param User $user
+     * @return mixed
      */
     public function forCreditCard(User $user)
     {
@@ -103,8 +112,8 @@ class UserRepository
     }
 
     /**
-     * @param $user
-     * @return 
+     * @param User $user
+     * @return bool
      */
     public function save(User $user)
     {
@@ -112,17 +121,18 @@ class UserRepository
     }
 
     /**
-     * @param $user, $meal_id
-     * @return 
+     * @param User $user
+     * @param $meal_id
      */
     public function mealAttach(User $user, $meal_id)
     {
         return $user->meals()->attach($meal_id);
     }
 
-     /**
-     * @param $user, $meal_id
-     * @return 
+    /**
+     * @param User $user
+     * @param $meal_id
+     * @return int
      */
     public function mealDetach(User $user, $meal_id)
     {
@@ -130,8 +140,9 @@ class UserRepository
     }
 
     /**
-     * @param $user, $datetimepeople_id
-     * @return 
+     * @param User $user
+     * @param $datetimepeople_id
+     * @return array
      */
     public function dataTimePeopleToggle(User $user, $datetimepeople_id)
     {
@@ -139,8 +150,9 @@ class UserRepository
     }
 
     /**
-     * @param $user, $datetimepeople_id
-     * @return 
+     * @param User $user
+     * @param $datetimepeople_id
+     * @return int
      */
     public function dateTimePeopleDetach(User $user, $datetimepeople_id)
     {

@@ -13,7 +13,10 @@ class ChefProfileService
     protected $chef;
 
     /**
-     * ChefService constructor.
+     * ChefProfileService constructor.
+     * @param UserRepository $userRepo
+     * @param ChefRepository $chefRepo
+     * @param \App\Services\ImageService $imageService
      */
     public function __construct(UserRepository $userRepo, ChefRepository $chefRepo, ImageService $imageService)
     {
@@ -62,10 +65,10 @@ class ChefProfileService
     }
 
     /**
-     * @param $request, $id
-     * @return chef
+     * @param $request
+     * @param $id
+     * @return \App\Chef
      */
-
      public function update($request, $id)
      {
         

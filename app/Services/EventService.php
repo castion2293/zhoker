@@ -13,7 +13,7 @@ class EventService
 {
     /**
      * @param $user
-     * @return 
+     * @return array|null
      */
     public function chefOrderEvent($user)
     {
@@ -21,8 +21,9 @@ class EventService
     }
 
     /**
-     * @param $user, $carts
-     * @return 
+     * @param $user
+     * @param $carts
+     * @return array|null
      */
     public function userOrderEvent($user, $carts)
     {
@@ -30,8 +31,9 @@ class EventService
     }
 
     /**
-     * @param $user, $carts
-     * @return 
+     * @param $user
+     * @param $cart
+     * @return array|null
      */
     public function chefConFirmEvent($user, $cart)
     {
@@ -39,8 +41,9 @@ class EventService
     }
 
     /**
-     * @param $user, $carts
-     * @return 
+     * @param $user
+     * @param $cart
+     * @return array|null
      */
     public function chefRejectEvent($user, $cart)
     {
@@ -48,8 +51,9 @@ class EventService
     }
 
     /**
-     * @param $user, $carts
-     * @return 
+     * @param $user
+     * @param $cart
+     * @return array|null
      */
     public function ChefCancelEvent($user, $cart)
     {
@@ -57,8 +61,9 @@ class EventService
     }
 
     /**
-     * @param $user, $carts
-     * @return 
+     * @param $user
+     * @param $cart
+     * @return array|null
      */
     public function userCancelEvent($user, $cart)
     {

@@ -17,7 +17,7 @@
     <div class="w3-content w3-container w3-padding-64">
             <div class="w3-row w3-margin-top w3-border-green w3-border-bottom">
                 <div class="w3-col l10 m10">
-                    <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}<h1>
+                    <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}</h1>
                 </div>
                 <div class="w3-col l2 m2">
                     <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}TWD</b>
@@ -47,7 +47,7 @@
               </div>
               <div class="w3-col l5 m5 w3-padding-large">
                   <div class="w3-margin-top w3-border-bottom w3-border-grey"> 
-                    <label>Mathod:   
+                    <label>Method:
                       @foreach ($meal->methods as $method)
                           <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
                       @endforeach

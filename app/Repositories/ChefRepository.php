@@ -24,7 +24,7 @@ class ChefRepository
      */
      public function findChefById($id)
      {
-        return $this->chef->findOrFail($id);
+        return $this->chef->find($id);
      }
 
      /**
@@ -36,18 +36,19 @@ class ChefRepository
          return $this->chef->where('city', $city)->get();
      }
 
-     /**
-     * @param $chef
-     * @return user
+    /**
+     * @param Chef $chef
+     * @return mixed
      */
      public function forUser(Chef $chef)
      {
          return $chef->users()->first();
      }
 
-     /**
-     * @param $chef
-     * @return meals
+    /**
+     * @param Chef $chef
+     * @param null $qty
+     * @return mixed
      */
      public function forMeals(Chef $chef, $qty = null)
      {
@@ -58,18 +59,21 @@ class ChefRepository
          }
      }
 
-     /**
-     * @param $chef
-     * @return meals
+    /**
+     * @param Chef $chef
+     * @param $qty
+     * @return mixed
      */
      public function forMealsPaginate(Chef $chef, $qty)
      {
          return $chef->meals()->latest('updated_at')->with(['methods', 'images'])->paginate($qty);
      }
 
-     /**
-     * @param $chef
-     * @return cheforder
+    /**
+     * @param Chef $chef
+     * @param null $filter
+     * @param null $qty
+     * @return mixed
      */
      public function forChefOrders(Chef $chef, $filter = null, $qty = null)
      {
@@ -80,18 +84,9 @@ class ChefRepository
          }
      }
 
-     /**
-     * @param $chef
-     * @return cheforder
-     */
-    //  public function forChefOrdersPaginate(Chef $chef, $filter, $qty = null)
-    //  {
-    //      return $filter->apply($chef->cheforders()->newQuery())->paginate($qty);
-    //  }
-
-     /**
-     * @param $chef
-     * @return images
+    /**
+     * @param Chef $chef
+     * @return mixed
      */
      public function forImages(Chef $chef)
      {
@@ -99,8 +94,9 @@ class ChefRepository
      }
 
     /**
-     * @param $chef
-     * @return images
+     * @param Chef $chef
+     * @param $qty
+     * @return mixed
      */
      public function forImagesPaginate(Chef $chef, $qty)
      {

@@ -60,9 +60,7 @@
                 @foreach ($carts as $cart)
                         <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                             <div class="w3-col l3 m3 w3-padding-right">
-                                @foreach ($cart->meals->images->take(1) as $image)
-                                        <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                @endforeach
+                                <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%">
                             </div>
                             <div class="w3-col l5 m5 w3-padding-left">
                                 <div class="w3-row">
@@ -148,9 +146,7 @@
                     @foreach ($buyNextTimeItems as $datetimepeople)
                         <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                             <div class="w3-col l3 m3 w3-padding-right">
-                                @foreach ($datetimepeople->meals->images->take(1) as $image)
-                                        <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                @endforeach
+                                <img src="{{ asset($datetimepeople->meals->cover_img) }}" alt="meal photo" style="width:100%">
                             </div>
                             <div class="w3-col l7 m7 w3-padding-left">
                                 <div class="w3-row">
@@ -215,9 +211,7 @@
                      @foreach ($reserveItems as $meal)
                         <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                             <div class="w3-col l3 m3 w3-padding-right">
-                                @foreach ($meal->images->take(1) as $image)
-                                    <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                @endforeach
+                                <img src="{{ asset($meal->cover_img) }}" alt="meal photo" style="width:100%">
                             </div>
                             <div class="w3-col l7 m7" style="padding-left:2em;">
                                 <div class="">

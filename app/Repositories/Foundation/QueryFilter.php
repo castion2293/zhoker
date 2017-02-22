@@ -13,11 +13,19 @@ abstract class QueryFilter
     protected $request;
     protected $builder;
 
+    /**
+     * QueryFilter constructor.
+     * @param Request $request
+     */
     public function __construct(Request $request)
     {
         $this->request = $request;
     }
 
+    /**
+     * @param $builder
+     * @return mixed
+     */
     public function apply($builder)
     {
         $this->builder = $builder;
@@ -31,6 +39,9 @@ abstract class QueryFilter
         return $this->builder;
     }
 
+    /**
+     * @return array
+     */
     public function filters()
     {
         return $this->request->all();

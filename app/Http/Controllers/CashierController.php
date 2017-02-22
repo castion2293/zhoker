@@ -19,6 +19,14 @@ class CashierController extends Controller
     protected $sessionService;
     protected $gateService;
 
+    /**
+     * CashierController constructor.
+     * @param CashierService $cashierService
+     * @param CreditCardService $creditCardService
+     * @param EventService $eventService
+     * @param SessionService $sessionService
+     * @param GateService $gateService
+     */
     public function __construct(CashierService $cashierService, CreditCardService $creditCardService, EventService $eventService, SessionService $sessionService,
                                 GateService $gateService) {
         $this->middleware('auth');
@@ -30,6 +38,10 @@ class CashierController extends Controller
         $this->gateService = $gateService;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function getBindingCard($id)
     {
         $this->gateService->userIdCheck($id);
@@ -42,6 +54,10 @@ class CashierController extends Controller
         return redirect($url);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postBindingCheckout(Request $request)
     {
         $user = $this->cashierService->findUser()->getUser();
@@ -73,6 +89,10 @@ class CashierController extends Controller
         return redirect($url);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postOneTimeCheckout(Request $request)
     {
         $user = $this->cashierService->findUser()->getUser();

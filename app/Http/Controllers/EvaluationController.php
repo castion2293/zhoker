@@ -17,6 +17,13 @@ class EvaluationController extends Controller
     protected $agentService;
     protected $gateService;
 
+    /**
+     * EvaluationController constructor.
+     * @param EvaluationService $evaluationService
+     * @param OrderService $orderService
+     * @param AgentService $agentService
+     * @param GateService $gateService
+     */
     public function __construct(EvaluationService $evaluationService, OrderService $orderService, AgentService $agentService, GateService $gateService)
     {
         $this->middleware('auth');
@@ -27,6 +34,10 @@ class EvaluationController extends Controller
         $this->gateService = $gateService;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create($id)
     {
         $cart = $this->evaluationService->findCart($id)->getCart();
@@ -34,7 +45,12 @@ class EvaluationController extends Controller
         $agent = $this->agentService->agent();
         return view($agent . '.products.evaluation', ['cart' => $cart]); 
     }
-    
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function store(Request $request, $id)
     {
         $user = $this->evaluationService->findUser()->getUser();

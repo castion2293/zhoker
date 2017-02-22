@@ -18,8 +18,8 @@ class CategoryRepository
     }
 
     /**
-     * @param $id
-     * @return category
+     * @param null $id
+     * @return mixed
      */
      public function findCategoryById($id = null)
      {

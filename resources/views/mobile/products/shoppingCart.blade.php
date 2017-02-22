@@ -29,9 +29,7 @@
                          <!--span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span-->
                     </div>
                     <div class="w3-col s12">
-                        @foreach ($cart->meals->images->take(1) as $image)
-                                <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                        @endforeach
+                        <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%">
                     </div>
                     <div class="w3-col s9" style="margin-top:1em;padding-left:0.5em;">
                         <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
@@ -115,9 +113,7 @@
                         <span class="w3-text-green w3-large">${{ $datetimepeople->meals->price }}TWD</span>
                     </div>
                     <div class="w3-col s12">
-                        @foreach ($datetimepeople->meals->images->take(1) as $image)
-                                <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                        @endforeach
+                        <img src="{{ asset($datetimepeople->meals->cover_img) }}" alt="meal photo" style="width:100%">
                     </div>
                     <div class="w3-col s12" style="padding-left:0.5em;">
                         @foreach ($datetimepeople->meals->methods as $method)
@@ -159,9 +155,7 @@
                         <span class="w3-text-green w3-large">${{ $meal->price }}TWD</span>
                     </div>
                     <div class="w3-col s12">
-                        @foreach ($meal->images->take(1) as $image)
-                            <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                        @endforeach
+                        <img src="{{ asset($meal->cover_img) }}" alt="meal photo" style="width:100%">
                     </div>
                     <div class="w3-col s12" style="padding-left:0.5em;">
                         @foreach ($meal->methods as $method)

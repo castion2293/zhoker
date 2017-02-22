@@ -32,9 +32,7 @@
                     </div>
                 </div>
                 <div class="w3-col s12">
-                    @foreach ($OrderPresenter->getMealImage($cart) as $image)
-                            <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                    @endforeach
+                    <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%">
                 </div>
                 <div class="w3-col s12 w3-margin-top">
                     <div>

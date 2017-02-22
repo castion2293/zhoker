@@ -6,6 +6,10 @@ use Carbon\Carbon;
 
 trait DateTrait
 {
+    /**
+     * @param $date
+     * @return false|string
+     */
     public function CheckDate($date)
     {
         if ($date == $this->getTodayDate()) {
@@ -43,6 +47,10 @@ trait DateTrait
             return false;
      }
 
+    /**
+     * @param null $now
+     * @return false|string
+     */
     public function getTodayDate($now = null)
     {
         count($now) ?: $now = Carbon::now();
@@ -50,6 +58,10 @@ trait DateTrait
         return date("Y-m-d" , strtotime($now) );
     }
 
+    /**
+     * @param null $now
+     * @return false|string
+     */
     public function getTodayTime($now = null)
     {
         count($now) ?: $now = Carbon::now();

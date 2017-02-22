@@ -53,9 +53,7 @@
                                 <span class="w3-text-green w3-large">${{ $cart->unite_price }}TWD</span>
                             </div>
                             <div class="w3-col s12">
-                                @foreach ($cart->meals->images->take(1) as $image)
-                                    <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                @endforeach
+                                <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%">
                             </div>
                             <div class="w3-col s9" style="padding-left:0.5em;">
                                 <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
@@ -136,9 +134,7 @@
                                                     <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $UserPresenter->getMealPrice($cart) }}</span>TWD</span>
                                                 </div>
                                                 <div class="w3-col s12">
-                                                    @foreach ($UserPresenter->getMealImage($cart) as $image)
-                                                        <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                                    @endforeach
+                                                    <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%">
                                                 </div>
                                                 <div class="w3-col s9" style="padding-left:0.5em;">
                                                     <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>

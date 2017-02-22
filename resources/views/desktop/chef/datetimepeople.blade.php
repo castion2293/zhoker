@@ -9,21 +9,56 @@
 @section('content')
     <!--header picture-->
     <div class="" id="top-pic">
-        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1031201602.JPG" alt="profile" style="width:100%">
+        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/0221201702.JPG" alt="profile" style="width:100%">
     </div>
 
     <!--content-->
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-padding-12">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Date/Time/People<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Date/Time/People</h1>
         </div>
 
-        <div class="w3-margin-top" id='calendar'></div>
+        <div class="w3-row w3-margin-top w3-padding-medium">
+            <div class="w3-col l5 m5">
+                <img src="{{ asset($meal->cover_img) }}" alt="this is a photo" style="width:100%;">
+            </div>
+            <div class="w3-col l7 m7" style="padding-left:2em;">
+                <div class=>
+                    <label class="w3-large">{{ $meal->name }}</label>
+                </div>
+                <div class=>
+                    <label class="w3-large w3-text-green">${{ $meal->price }}</label>
+                </div>
+                <div class="">
+                    <label class="w3-large">Method:
+                        @foreach ($meal->methods as $method)
+                            <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
+                        @endforeach
+                    </label>
+                </div>
+                <div class="">
+                    <label class="w3-large">Time:
+                        @foreach ($meal->shifts as $shift)
+                            <p class="w3-tag w3-teal w3-tiny">{{ $shift->shift }}</p>
+                        @endforeach
+                    </label>
+                </div>
+                <div class="">
+                    <label class="w3-large">Type:
+                        @foreach ($meal->categories as $category)
+                            <p class="w3-tag w3-teal w3-tiny">{{ $category->category }}</p>
+                        @endforeach
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="" id='calendar' style="margin-top:7em;"></div>
 
         <div class="w3-padding-8 w3-margin-top">
             {!! Form::model($meal, ['route' => ['chef.datetimepeople.post', $meal->id], 'method' => 'POST', 'files' => true]) !!}
                 {{ Form::text('datetimepeople', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey w3-white', 'id' => 'dtp-result', 'required' => '', 'style' => 'display:none;']) }}
-                 <div class="w3-row w3-margin-top">
+                 <div class="w3-row w3-padding-top w3-border-top w3-border-green">
                     <div class="w3-rest"></div>
                     <div class="w3-col l2 m2 w3-right">
                         {!! Form::submit('Confirm', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'confirm-btn']) !!}
@@ -34,7 +69,7 @@
     </div>
 
     <!--loader modal-->
-    @include('desktop.partials.loader');
+    @include('desktop.partials.loader')
 
 @endsection
 

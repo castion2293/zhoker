@@ -21,7 +21,11 @@ class UserProfileService
     protected $userOrder;
 
     /**
-     * ChefService constructor.
+     * UserProfileService constructor.
+     * @param UserRepository $userRepo
+     * @param CartRepository $cartRepo
+     * @param UserOrderRepository $userOrderRepo
+     * @param \App\Services\ImageService $imageService
      */
     public function __construct(UserRepository $userRepo, CartRepository $cartRepo, UserOrderRepository $userOrderRepo, ImageService $imageService)
     {

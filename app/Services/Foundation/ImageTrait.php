@@ -9,6 +9,13 @@ use Image;
 
 trait ImageTrait
 {
+    /**
+     * @param $image
+     * @param $path
+     * @param $counter
+     * @param $action
+     * @return string
+     */
     public function save($image, $path, $counter, $action)
     {
         $filename = $action . time() . $counter . '.' . $image->getClientOriginalExtension();
@@ -21,6 +28,12 @@ trait ImageTrait
         return 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
     }
 
+    /**
+     * @param $image
+     * @param $oldFilename
+     * @param $path
+     * @return string
+     */
     public function update($image, $oldFilename, $path)
     {
         $filename = time() . '.' . $image->getClientOriginalExtension();
@@ -38,6 +51,9 @@ trait ImageTrait
         return 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
     }
 
+    /**
+     * @param $Filename
+     */
     public function delete($Filename)
     {
         $leng = strlen('https://s3-us-west-2.amazonaws.com/zhoker');
@@ -46,6 +62,11 @@ trait ImageTrait
         dispatch(new DeleteImagetoS3($Filepath));
     }
 
+    /**
+     * @param $image
+     * @param null $action
+     * @return mixed
+     */
     protected function streamImage($image, $action = null)
     {
         if ($action == 'resize') {

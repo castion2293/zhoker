@@ -15,6 +15,12 @@ class MapListController extends Controller
     protected $sessionService;
     protected $agentService;
 
+    /**
+     * MapListController constructor.
+     * @param MapListService $mapListService
+     * @param SessionService $sessionService
+     * @param AgentService $agentService
+     */
     public function __construct(MapListService $mapListService, SessionService $sessionService, AgentService $agentService) 
     {
         $this->mapListService = $mapListService;
@@ -22,6 +28,10 @@ class MapListController extends Controller
         $this->agentService = $agentService;
     }
 
+    /**
+     * @param MapListRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function postMaplist(MapListRequest $request)
     {
         $this->sessionService->requestFlash($request);
@@ -35,6 +45,10 @@ class MapListController extends Controller
         return view($agent . '.main.map_list', ['meals' => $meals, 'date' => $request->input('date')]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function postMaplistDetailed(Request $request)
     {
         $this->sessionService->requestFlash($request);
@@ -53,6 +67,9 @@ class MapListController extends Controller
         return view($agent . '.main.map_list', ['meals' => $meals, 'date' => $request->input('date')]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getMaplistSearch()
     {
          $agent = $this->agentService->agent();

@@ -18,8 +18,9 @@ class CreditCardRepository
     }
 
     /**
-     * @param $id, $customer
-     * @return chef
+     * @param $id
+     * @param $customer
+     * @return mixed
      */
     public function create($id, $customer)
     {
@@ -37,8 +38,9 @@ class CreditCardRepository
     }
 
     /**
-     * @param $credit_card, $customer
-     * @return chef
+     * @param $credit_card
+     * @param $customer
+     * @return mixed
      */
     public function update($credit_card, $customer)
     {
@@ -56,7 +58,7 @@ class CreditCardRepository
 
     /**
      * @param $credit_card
-     * @return 
+     * @return mixed
      */
     public function delete($credit_card)
     {

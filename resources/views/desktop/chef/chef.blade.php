@@ -127,9 +127,7 @@
                             @if (count($cart->meals))
                                 <div class="w3-row w3-padding-12 w3-border-grey w3-border-bottom">
                                     <div class="w3-col l3 m3 w3-padding-right">
-                                        @foreach ($cart->meals->images->take(1) as $image)
-                                                <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">                                       
-                                        @endforeach
+                                        <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%">
                                     </div>
                                     <div class="w3-col l3 m3 w3-padding-left">
                                         <div class="">

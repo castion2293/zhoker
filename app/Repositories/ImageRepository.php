@@ -8,6 +8,10 @@ class ImageRepository
 {
     protected $image;
 
+    /**
+     * ImageRepository constructor.
+     * @param Image $image
+     */
     public function __construct(Image $image)
     {
         $this->image = $image;
@@ -19,12 +23,12 @@ class ImageRepository
      */
      public function findImageById($id)
      {
-        return $this->image->findOrFail($id);
+        return $this->image->find($id);
      }
 
     /**
-     * @param $image
-     * @return 
+     * @param Image $image
+     * @return bool|null
      */
      public function delete(Image $image)
      {

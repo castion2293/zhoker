@@ -17,6 +17,8 @@ class MainService
 
     /**
      * MainService constructor.
+     * @param UserRepository $userRepo
+     * @param ChefRepository $chefRepo
      */
     public function __construct(UserRepository $userRepo,ChefRepository $chefRepo)
     {
@@ -58,7 +60,7 @@ class MainService
     }
 
     /**
-     * @return chef
+     * @return mixed
      */
      public function getChef()
      {
@@ -78,9 +80,8 @@ class MainService
          return $this;
      }
 
-     /**
-     * @param 
-     * @return meals
+    /**
+     * @return mixed
      */
      public function getMeals()
      {
@@ -100,9 +101,8 @@ class MainService
         return $this;
      }
 
-     /**
-     * @param 
-     * @return cheforders
+    /**
+     * @return mixed
      */
      public function getChefOrders()
      {

@@ -19,11 +19,11 @@ class ChefOrderRepository
 
     /**
      * @param $id
-     * @return chefOrder
+     * @return mixed
      */
     public function findChefOrderById($id)
     {
-        return $this->chefOrder->findOrFail($id);
+        return $this->chefOrder->find($id);
     }
 
     /**
@@ -38,8 +38,8 @@ class ChefOrderRepository
     }
 
     /**
-     * @param $chefOrder
-     * @return 
+     * @param ChefOrder $chefOrder
+     * @return bool
      */
     public function updateCheck(ChefOrder $chefOrder)
     {
@@ -49,8 +49,8 @@ class ChefOrderRepository
     }
 
     /**
-     * @param $chefOrder
-     * @return 
+     * @param ChefOrder $chefOrder
+     * @return bool
      */
     public function updatePaid(ChefOrder $chefOrder)
     {
@@ -60,8 +60,8 @@ class ChefOrderRepository
     }
 
     /**
-     * @param $chefOrder
-     * @return chef
+     * @param ChefOrder $chefOrder
+     * @return mixed
      */
     public function forChef(ChefOrder $chefOrder)
     {
@@ -69,17 +69,17 @@ class ChefOrderRepository
     }
 
     /**
-     * @param $chefOrder
-     * @return cart
+     * @param ChefOrder $chefOrder
+     * @return mixed
      */
     public function forCart(ChefOrder $chefOrder)
     {
         return $chefOrder->carts()->first();
     }
 
-     /**
-     * @param $chefOrder
-     * @return 
+    /**
+     * @param ChefOrder $chefOrder
+     * @return bool|null
      */
      public function delete(ChefOrder $chefOrder)
      {

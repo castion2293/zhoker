@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Filesystem\Filesystem;
 
 use App\Services\ChefProfileService;
 use App\Services\MainService;
@@ -20,6 +19,13 @@ class ChefProfileController extends Controller
     protected $agentService;
     protected $gateService;
 
+    /**
+     * ChefProfileController constructor.
+     * @param ChefProfileService $chefProfileService
+     * @param MainService $mainService
+     * @param AgentService $agentService
+     * @param GateService $gateService
+     */
     public function __construct(ChefProfileService $chefProfileService, MainService $mainService, AgentService $agentService, GateService $gateService) {
         $this->middleware('chef');
 

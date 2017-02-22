@@ -25,15 +25,12 @@
                     <a id="{{ $meal->id }}" href="#{{ $meal->id }}" class="w3-white w3-btn-block w3-left-align dropDownList w3-leftbar w3-border-light-grey" style="margin:4px 0 4px 0;">
                       <div class="w3-row">
                         <div class="w3-col s12" id="title_img">
-                            @foreach ($meal->images->take(1) as $image)
-                                  <img src="{{ asset($image->image_path) }}" alt="Food1" style="width:100%">
-                            @endforeach
+                            <img src="{{ asset($meal->cover_img) }}" alt="Food1" style="width:100%">
                         </div>
                         <div class="w3-col s12" style="margin-top:5px;">
                             <div class="w3-row">
                               <div class="w3-rest"></div>
                               <div class="w3-col s4 w3-right">
-                                @for ($i = 0; $i < 5; $i++)
                                   @if ($meal->people_eva > 0)
                                       @for ($i = 0; $i < $ProductPresenter->getEvaluateScore($meal->evaluation, $meal->people_eva); $i++)
                                           <span class="w3-text-deep-orange star w3-medium"><i class="fa fa-star"></i></span>
@@ -41,15 +38,14 @@
                                   @else
                                       <span class="w3-text-deep-orange w3-medium">New Meal</span>
                                   @endif
-                                @endfor
                               </div>
                             </div>
-                            <div><span class="w3-text-grey w3-large" id="meal-name"><b>{{ $meal->name }}<b></span></div>
+                            <div><span class="w3-text-grey w3-large" id="meal-name"><b>{{ $meal->name }}</b></span></div>
                             <div class="w3-row">
                                 <div class="w3-col s2">
                                   <span class="w3-text-green w3-medium" id="meal-price">${{ $meal->price }}</span>
                                 </div>
-                                <div class="w3-col s4"
+                                <div class="w3-col s4">
                                     <span class="w3-text-grey w3-medium w3-right" style="padding-left:2px;" id="meal-people">{{ $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->people_left }} people left</span>
                                 </div>
                                 <div class="w3-col s6" id="eaten">
@@ -68,12 +64,10 @@
                       <div class="w3-row">
                           <div class="w3-col s12 w3-padding-12">
                             <a href="#" class="w3-white">
-                              @foreach ($meal->images->take(4) as $image)
-                                  @if ($loop->iteration > 1)
-                                    <div class="content-img w3-padding-8">
-                                        <img src="{{ asset($image->image_path) }}" alt="Food{{ $image->id }}" style="width:100%">
-                                    </div>
-                                  @endif
+                              @foreach ($meal->images->take(3) as $image)
+                                <div class="content-img w3-padding-8">
+                                    <img src="{{ asset($image->image_path) }}" alt="Food{{ $image->id }}" style="width:100%">
+                                </div>
                               @endforeach
                             </a> 
                           </div>
@@ -87,7 +81,7 @@
 
                       <a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->id])}}" target="_blank" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">Read More</a>
                       
-                      </div>
+                    </div>
                   @endforeach
               </div>
           </div>

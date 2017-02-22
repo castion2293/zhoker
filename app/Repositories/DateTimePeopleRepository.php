@@ -25,9 +25,9 @@ class DateTimePeopleRepository
         return $this->datetimepeople->find($id);
      }
 
-     /**
+    /**
      * @param $date
-     * @return datetimepeople
+     * @return mixed
      */
      public function findDateTimePeopleByDate($date)
      {
@@ -38,9 +38,10 @@ class DateTimePeopleRepository
                                       ->get();
      }
 
-     /**
-     * @param $date, $people
-     * @return datetimepeople
+    /**
+     * @param $date
+     * @param $people
+     * @return mixed
      */
      public function findDateTimePeopleByDateAndPeople($date, $people)
      {
@@ -52,6 +53,11 @@ class DateTimePeopleRepository
                                      ->get();
      }
 
+    /**
+     * @param $meal
+     * @param $newDateTimePeopleArray
+     * @return static
+     */
      public function create($meal, $newDateTimePeopleArray)
      {
         return DateTimePeople::create([
@@ -64,9 +70,11 @@ class DateTimePeopleRepository
         ]);
      }
 
-      /**
-     * @param $datetimepeople, $cart
-     * @return 
+    /**
+     * @param DateTimePeople $datetimepeople
+     * @param $cart
+     * @param null $rcv
+     * @return bool
      */
     public function updatePeople(DatetimePeople $datetimepeople, $cart, $rcv = null)
     {
@@ -83,9 +91,9 @@ class DateTimePeopleRepository
         }
     }
 
-     /**
-     * @param $datetimepeople
-     * @return 
+    /**
+     * @param DateTimePeople $datetimepeople
+     * @return bool|null
      */
      public function delete(DatetimePeople $datetimepeople)
      {

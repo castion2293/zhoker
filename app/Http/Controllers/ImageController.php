@@ -16,6 +16,12 @@ class ImageController extends Controller
     protected $agentService;
     protected $gateService;
 
+    /**
+     * ImageController constructor.
+     * @param ImageService $imageService
+     * @param AgentService $agentService
+     * @param GateService $gateService
+     */
     public function __construct(ImageService $imageService, AgentService $agentService, GateService $gateService) 
     {
         $this->middleware('chef');
@@ -25,6 +31,10 @@ class ImageController extends Controller
         $this->gateService = $gateService;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index($id)
     {
         $this->gateService->chefIdCheck($id);
@@ -36,6 +46,10 @@ class ImageController extends Controller
         return view($agent . '.chef.image', ['chef' => $chef, 'images' => $images]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     */
     public function upload(Request $request, $id)
     {        
         $this->gateService->chefIdCheck($id);
@@ -43,6 +57,11 @@ class ImageController extends Controller
         $chef = $this->imageService->findChef($id)->uploadImage($request);
     }
 
+    /**
+     * @param DeleteImageRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function delete(DeleteImageRequest $request, $id)
     {
         $this->gateService->chefIdCheck($id);

@@ -19,6 +19,8 @@ class ImageService
 
     /**
      * ImageService constructor.
+     * @param ChefRepository $chefRepo
+     * @param ImageRepository $imageRepo
      */
     public function __construct(ChefRepository $chefRepo, ImageRepository $imageRepo)
     {
@@ -27,8 +29,8 @@ class ImageService
     }
 
     /**
-     * $id
-     * @return chef
+     * @param $id
+     * @return $this
      */
     public function findChef($id)
     {
@@ -37,9 +39,8 @@ class ImageService
         return $this;
     }
 
-     /**
-     * 
-     * @return chef
+    /**
+     * @return mixed
      */
      public function getChef()
      {
@@ -58,8 +59,9 @@ class ImageService
     }
 
     /**
-     * $chef
-     * @return images
+     * @param $chef
+     * @param null $qty
+     * @return $this
      */
      public function findImageByChef($chef, $qty = null)
      {
@@ -71,9 +73,8 @@ class ImageService
          return $this;
      }
 
-     /**
-     * 
-     * @return images
+    /**
+     * @return mixed
      */
      public function getImage()
      {
@@ -81,8 +82,7 @@ class ImageService
      }
 
     /**
-     * $request, $chef
-     * @return 
+     * @param $request
      */
     public function uploadImage($request)
     {
@@ -104,8 +104,7 @@ class ImageService
     }
 
     /**
-     * $request, $chef
-     * @return 
+     * @param $images_id
      */
     public function deleteImage($images_id)
     {

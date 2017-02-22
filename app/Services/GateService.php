@@ -15,19 +15,15 @@ class GateService
         
     }
 
-    public function decrypt($param)
-    {
-        $this->id = decrypt($param);
-
-        // return decrypt($param);
-        return $this;
-    }
-
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @param null $id
+     * @return $this
+     */
     public function userIdCheck($id = null)
     {
         count($id) ?: $id = $this->id;
@@ -39,6 +35,10 @@ class GateService
         return $this;
     }
 
+    /**
+     * @param null $id
+     * @return $this
+     */
     public function chefIdCheck($id = null)
     {
         count($id) ?: $id = $this->id;

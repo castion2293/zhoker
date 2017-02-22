@@ -20,6 +20,14 @@ class UserProfileController extends Controller
     protected $sessionService;
     protected $gateService;
 
+    /**
+     * UserProfileController constructor.
+     * @param UserProfileService $userProfileService
+     * @param AgentService $agentService
+     * @param CreditCardService $creditCardService
+     * @param SessionService $sessionService
+     * @param GateService $gateService
+     */
     public function __construct(UserProfileService $userProfileService, AgentService $agentService, CreditCardService $creditCardService, SessionService $sessionService,
                                 GateService $gateService) 
     {
@@ -94,6 +102,10 @@ class UserProfileController extends Controller
         return redirect()->route('user_profile.index');
     }
 
+    /**
+     * @param UserResetPasswordRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function resetPassword(UserResetPasswordRequest $request)
     {
         $user = $this->userProfileService->findUser()->getUser();
@@ -110,6 +122,10 @@ class UserProfileController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postPaymentCreate(Request $request)
     {
         $user = $this->userProfileService->findUser()->getUser();
@@ -137,6 +153,10 @@ class UserProfileController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postPaymentEdit(Request $request)
     {
         $user = $this->userProfileService->findUser()->getUser();
@@ -158,6 +178,10 @@ class UserProfileController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function getPaymentDelete($id)
     {
         $this->gateService->userIdCheck($id);

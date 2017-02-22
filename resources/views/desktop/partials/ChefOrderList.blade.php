@@ -22,18 +22,16 @@
         @foreach($cheforder->carts()->withTrashed()->get() as $cart)
             <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                 <div class="w3-col l3 m3 w3-padding-right w3-margin-top">
-                    @foreach ($OrderPresenter->getMealImage($cart) as $image)
-                        <div class="w3-row">
-                            <div class="w3-col s10 w3-right w3-margin-top">
-                                <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%;">
-                            </div>
-                            <div class="w3-col s2 w3-right" style="margin-top:2.5em;">
-                                @if (!$cheforder->checked && !$cart->deleted_at && !$OrderPresenter->overTime($cart, $now))
-                                    <input id="od{{$cheforder->id}}" class="w3-check w3-text-green ckbox" value="{{$cheforder->id}}" type="checkbox">
-                                @endif 
-                            </div> 
+                    <div class="w3-row">
+                        <div class="w3-col s10 w3-right w3-margin-top">
+                            <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%;">
                         </div>
-                    @endforeach
+                        <div class="w3-col s2 w3-right" style="margin-top:2.5em;">
+                            @if (!$cheforder->checked && !$cart->deleted_at && !$OrderPresenter->overTime($cart, $now))
+                                <input id="od{{$cheforder->id}}" class="w3-check w3-text-green ckbox" value="{{$cheforder->id}}" type="checkbox">
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 <div class="w3-col l3 m3 w3-padding-left">
                     <div class="">

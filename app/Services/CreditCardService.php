@@ -18,6 +18,8 @@ class CreditCardService
 
     /**
      * CreditCardService constructor.
+     * @param UserRepository $userRepo
+     * @param CreditCardRepository $creditCardRepo
      */
     public function __construct(UserRepository $userRepo, CreditCardRepository $creditCardRepo)
     {
@@ -26,9 +28,8 @@ class CreditCardService
     }
 
     /**
-    * @param $key
-    * @return 
-    */
+     * @param $key
+     */
     public function setAPIKey($key)
     {
         return Stripe::setApiKey($key);
@@ -50,9 +51,11 @@ class CreditCardService
     }
 
     /**
-    * @param $price, $currency, $customer_id
-    * @return 
-    */
+     * @param $price
+     * @param $currency
+     * @param $customer_id
+     * @return Charge
+     */
     public function charge($price, $currency, $customer_id)
     {
         return Charge::create([
@@ -63,9 +66,9 @@ class CreditCardService
     }
 
     /**
-    * @param $user
-    * @return 
-    */
+     * @param $user
+     * @return $this
+     */
     public function findCreditCardByUser($user)
     {
         $this->creditCard = $this->userRepo->forCreditCard($user);
@@ -74,9 +77,10 @@ class CreditCardService
     }
 
     /**
-    * @param $user, $customer
-    * @return 
-    */
+     * @param $user
+     * @param null $customer
+     * @return \App\Repositories\chef
+     */
     public function createCreditCard($user, $customer = null)
     {
         count($customer) ?: $customer = $this->customer;
@@ -85,9 +89,10 @@ class CreditCardService
     }
 
     /**
-    * @param $creditCard, $user, $customer
-    * @return 
-    */
+     * @param null $creditCard
+     * @param null $customer
+     * @return \App\Repositories\chef
+     */
     public function updateCreditCard($creditCard = null, $customer = null)
     {
         count($creditCard) ?: $creditCard = $this->creditCard;
@@ -97,9 +102,9 @@ class CreditCardService
     }
 
     /**
-    * @param $creditCard
-    * @return 
-    */
+     * @param null $creditCard
+     * @return mixed
+     */
     public function deleteCreditCard($creditCard = null)
     {
         count($creditCard) ?: $creditCard = $this->creditCard;

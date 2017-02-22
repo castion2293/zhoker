@@ -17,8 +17,7 @@ class AgentService
     }
 
     /**
-     * AgentService Agent().
-     * @param 
+     * @return string
      */
     public function agent()
     {

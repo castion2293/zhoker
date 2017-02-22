@@ -20,6 +20,14 @@ class OrderController extends Controller
     protected $agentService;
     protected $gateService;
 
+    /**
+     * OrderController constructor.
+     * @param OrderService $orderService
+     * @param CreditCardService $creditCardService
+     * @param AgentService $agentService
+     * @param EventService $eventService
+     * @param GateService $gateService
+     */
     public function __construct(OrderService $orderService, CreditCardService $creditCardService, AgentService $agentService, EventService $eventService, GateService $gateService) {
         $this->middleware('auth', ['only' => ['getUserOrder', 'getCancel']]);
         $this->middleware('chef', ['except' => ['getUserOrder', 'getCancel']]);
@@ -31,6 +39,11 @@ class OrderController extends Controller
         $this->gateService = $gateService;
     }
 
+    /**
+     * @param $id
+     * @param OrderFilters $filter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getUserOrder($id, OrderFilters $filter)
     {
         $this->gateService->userIdCheck($id);
@@ -42,6 +55,11 @@ class OrderController extends Controller
         return view($agent . '.user.order', ['userorders' => $userorders]);
     }
 
+    /**
+     * @param $id
+     * @param OrderFilters $filter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getChefOrder($id, OrderFilters $filter)
     {
         $this->gateService->chefIdCheck($id);
@@ -53,6 +71,10 @@ class OrderController extends Controller
         return view($agent . '.chef.order', ['cheforders'=> $cheforders]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function getAccept($id)
     {
         $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
@@ -88,6 +110,9 @@ class OrderController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     */
     public function postAccept(Request $request)
     {
         $this->creditCardService->setAPIKey(config('services.stripe.secret'));
@@ -122,6 +147,10 @@ class OrderController extends Controller
         flash()->success('Success', 'You have accepted the order successfully!');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function getReject($id)
     {
         $chefOrder = $this->orderService->findChefOrderById($id)->getChefOrder();
@@ -144,6 +173,10 @@ class OrderController extends Controller
         return redirect($url);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function getCancel($id)
     {
         $cart = $this->orderService->findCartById($id)->getCart();

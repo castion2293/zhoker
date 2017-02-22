@@ -21,6 +21,13 @@ class MainController extends Controller
 
     private $attempt_key;
 
+    /**
+     * MainController constructor.
+     * @param MainService $mainService
+     * @param AgentService $agentService
+     * @param AuthenticateService $authenticateService
+     * @param SessionService $sessionService
+     */
     public function __construct(MainService $mainService, AgentService $agentService, AuthenticateService $authenticateService, SessionService $sessionService)
     {
         $this->mainService = $mainService;
@@ -31,12 +38,19 @@ class MainController extends Controller
         $this->attempt_key = 0;
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getIndex()
     {
         $agent = $this->agentService->agent();
         return view($agent . '/index');
     }
 
+    /**
+     * @param ChefSignInRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function chefLogin(ChefSignInRequest $request)
     {
         if ($this->authenticateService->chefLogin($request->all())) {
@@ -58,6 +72,9 @@ class MainController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getChefContent()
     {
         $chef = $this->mainService->findUser()->findChef()->getChef();

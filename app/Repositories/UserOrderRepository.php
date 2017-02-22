@@ -18,8 +18,10 @@ class UserOrderRepository
     }
 
     /**
-     * @param $user, $creditCard, $totalPrice
-     * @return userorder
+     * @param $user
+     * @param $cashier_id
+     * @param $totalPrice
+     * @return static
      */
     public function create($user, $cashier_id, $totalPrice)
     {

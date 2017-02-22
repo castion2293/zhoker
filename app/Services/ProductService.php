@@ -18,6 +18,9 @@ class ProductService
 
     /**
      * ProductService constructor.
+     * @param UserRepository $userRepo
+     * @param MealRepository $mealRepo
+     * @param CartRepository $cartRepo
      */
     public function __construct(UserRepository $userRepo, MealRepository $mealRepo, CartRepository $cartRepo)
     {
@@ -58,8 +61,7 @@ class ProductService
     }
 
     /**
-     * @param 
-     * @return meal
+     * @return mixed
      */
     public function getMeal()
     {
@@ -67,8 +69,9 @@ class ProductService
     }
 
     /**
-     * @param $meal, $datetime_id
-     * @return datetimepeople
+     * @param $meal
+     * @param $datetime_id
+     * @return \App\Repositories\datetimepeople
      */
     public function getDateTimePeople($meal, $datetime_id)
     {
@@ -77,17 +80,18 @@ class ProductService
 
     /**
      * @param $meal
-     * @return datetimepeople
+     * @return \App\Repositories\datetimepeople
      */
     public function getDateTimePeopleOthers($meal)
     {
         return $this->mealRepo->forDateTimePeople($meal, true);
     }
-    
+
 
     /**
      * @param $meal
-     * @return method
+     * @param null $id
+     * @return \App\Repositories\method
      */
     public function getMethod($meal, $id = null)
     {
@@ -112,7 +116,7 @@ class ProductService
 
     /**
      * @param $id
-     * @return cart
+     * @return $this
      */
     public function findCartById($id)
     {
@@ -122,8 +126,7 @@ class ProductService
     }
 
     /**
-     * @param 
-     * @return cart
+     * @return mixed
      */
     public function getCart()
     {
@@ -131,8 +134,12 @@ class ProductService
     }
 
     /**
-     * @param $user, $meal, $datetime, $method, $request
-     * @return cart
+     * @param $user
+     * @param $meal
+     * @param $datetime
+     * @param $method
+     * @param $request
+     * @return \App\Cart
      */
     public function createCart($user, $meal, $datetime, $method, $request)
     {
@@ -140,8 +147,8 @@ class ProductService
     }
 
     /**
-     * @param $carts, request
-     * @return 
+     * @param $request
+     * @param null $carts
      */
     public function updateEachCart($request, $carts = null)
     {
@@ -153,8 +160,8 @@ class ProductService
     }
 
     /**
-     * @param $carts, request
-     * @return 
+     * @param null $cart
+     * @return bool|null
      */
     public function deleteCart($cart = null)
     {
@@ -164,8 +171,8 @@ class ProductService
     }
 
     /**
-     * @param $cart
-     * @return cartQtyArray
+     * @param $carts
+     * @return array
      */
     public function getCartQtyArray($carts)
     {
@@ -179,8 +186,8 @@ class ProductService
     }
 
     /**
-     * @param $cart
-     * @return totalprice
+     * @param $carts
+     * @return int
      */
     public function getTotalPrice($carts)
     {
@@ -194,8 +201,9 @@ class ProductService
     }
 
     /**
-     * @param $user, $datetimepeople_id
-     * @return 
+     * @param $user
+     * @param $datetimepeople_id
+     * @return array
      */
     public function buyNextTimeToggle($user, $datetimepeople_id)
     {
@@ -203,26 +211,28 @@ class ProductService
     }
 
     /**
-     * @param $user, $datetimepeople_id
-     * @return 
+     * @param $user
+     * @param $datetimepeople_id
+     * @return int
      */
     public function buyNextTimeCancel($user, $datetimepeople_id)
     {
         return $this->userRepo->dateTimePeopleDetach($user, $datetimepeople_id);
     }
 
-     /**
+    /**
      * @param $user
-     * @return 
+     * @param null $datetimepeople_id
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
      */
     public function getBuyNextTimeItems($user, $datetimepeople_id = null)
     {
         return $this->userRepo->forDateTimePeopleByUser($user, $datetimepeople_id);
     }
 
-     /**
-     * @param $user, $meal_id
-     * @return 
+    /**
+     * @param $user
+     * @param $meal_id
      */
     public function reserveMealAdd($user, $meal_id)
     {
@@ -231,16 +241,18 @@ class ProductService
 
     /**
      * @param $user
-     * @return 
+     * @param $meal_id
+     * @return int
      */
     public function reserveMealCancel($user, $meal_id)
     {
         return $this->userRepo->mealDetach($user, $meal_id);
     }
 
-     /**
+    /**
      * @param $user
-     * @return 
+     * @param null $meal_id
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
      */
     public function getReserveItems($user, $meal_id = null)
     {

@@ -31,6 +31,12 @@ class MapListService
 
     /**
      * MapListService constructor.
+     * @param ChefRepository $chefRepo
+     * @param CategoryRepository $categoryRepo
+     * @param MethodRepository $methodRepo
+     * @param ShiftRepository $shiftRepo
+     * @param MealRepository $mealRepo
+     * @param DateTimePeopleRepository $datetimepeopleRepo
      */
     public function __construct(ChefRepository $chefRepo, CategoryRepository $categoryRepo, MethodRepository $methodRepo, ShiftRepository $shiftRepo,
                                MealRepository $mealRepo, DateTimePeopleRepository $datetimepeopleRepo)
@@ -259,7 +265,7 @@ class MapListService
 
     /**
      * @param $instances
-     * @return $arrayId
+     * @return array
      */
     private function ToArrayId($instances)
     {
@@ -275,7 +281,7 @@ class MapListService
 
     /**
      * @param $instances
-     * @return $arrayId
+     * @return array
      */
     private function ToArrayMealId($instances)
     {
@@ -291,7 +297,7 @@ class MapListService
 
     /**
      * @param $instances
-     * @return $array_unique
+     * @return array
      */
     private function ToMultiArrayMealID($instances)
     {

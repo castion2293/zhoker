@@ -14,6 +14,12 @@ class ProductController extends Controller
     protected $agentService;
     protected $gateService;
 
+    /**
+     * ProductController constructor.
+     * @param ProductService $productService
+     * @param AgentService $agentService
+     * @param GateService $gateService
+     */
     public function __construct(ProductService $productService, AgentService $agentService, GateService $gateService) 
     {
         $this->middleware('auth', ['except' => ['getProductShow']]);
@@ -23,6 +29,11 @@ class ProductController extends Controller
         $this->gateService = $gateService;
     }
 
+    /**
+     * @param $id
+     * @param $datetime_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getProductShow($id, $datetime_id) 
     {   
         $meal = $this->productService->findMeal($id)->getMeal();
@@ -33,6 +44,12 @@ class ProductController extends Controller
         return view($agent . '.products.products', ['meal' => $meal, 'datetimepeople' => $datetimepeople, 'methods' => $methods]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @param $datetime_id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postAddToCart(Request $request, $id, $datetime_id)
     {
         $user = $this->productService->findUser()->getUser();
@@ -49,6 +66,10 @@ class ProductController extends Controller
         return redirect($url);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getCartShow($id)
     {
         $this->gateService->userIdCheck($id);
@@ -70,6 +91,9 @@ class ProductController extends Controller
                                                        ]);
     }
 
+    /**
+     * @param Request $request
+     */
     public function postCartRemove(Request $request)
     {
         $this->productService->findUser()->findCartByUser()->updateEachCart($request);
@@ -83,6 +107,10 @@ class ProductController extends Controller
         $this->productService->findUser()->findCartByUser()->updateEachCart($request);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getCheckout($id)
     {
         $this->gateService->userIdCheck($id);
@@ -100,24 +128,37 @@ class ProductController extends Controller
         return view($agent . '.products.checkout', ['user' => $user, 'carts'=> $carts, 'totalPrice' => $totalPrice] );
     }
 
+    /**
+     * @param Request $request
+     */
     public function postAddToBuyNextTime(Request $request)
     {
         $user = $this->productService->findUser($request->user_id)->getUser();
         $this->productService->buyNextTimeToggle($user, $request->datetimepeople_id);
     }
 
+    /**
+     * @param Request $request
+     */
     public function postAddReserveMeal(Request $request)
     {
         $user = $this->productService->findUser($request->user_id)->getUser();
         $this->productService->reserveMealAdd($user, $request->meal_id);
     }
 
+    /**
+     * @param Request $request
+     */
     public function postCancelReserveMeal(Request $request)
     {
         $user = $this->productService->findUser($request->user_id)->getUser();
         $this->productService->reserveMealCancel($user, $request->meal_id);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getOtherDays($id)
     {
         $meal = $this->productService->findMeal($id)->getMeal();

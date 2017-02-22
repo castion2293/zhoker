@@ -30,7 +30,7 @@
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-row w3-padding-128" id="user-profile">
             <div class="w3-padding-12">
-                <h1 class="w3-text-green w3-border-green w3-border-bottom">User Profile<h1>
+                <h1 class="w3-text-green w3-border-green w3-border-bottom">User Profile</h1>
             </div>
             <div class="w3-display-container">
                 <div class="w3-col l3 m3">
@@ -71,9 +71,7 @@
                     @if (count($cart->meals))
                         <div class="w3-row w3-padding-24 w3-border-grey w3-border-bottom">
                             <div class="w3-col l3 m3 w3-padding-right">
-                                @foreach ($cart->meals->images->take(1) as $image)
-                                    <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                @endforeach
+                                <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%">
                             </div>
                             <div class="w3-col l7 m7" style="padding-left:2em;">
                                 <div class="w3-row">
@@ -175,9 +173,7 @@
                                         @foreach ($userorder->carts()->get() as $cart)
                                             <div class="w3-row w3-padding-24">
                                                 <div class="w3-col l4 m4 w3-padding-right">
-                                                    @foreach ($UserPresenter->getMealImage($cart) as $image)
-                                                        <img src="{{ asset($image->image_path) }}" alt="meal photo" style="width:100%">
-                                                    @endforeach
+                                                    <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%">
                                                 </div>
                                                 <div class="w3-col l6 m6 w3-padding-left">
                                                     <div class="w3-row">
