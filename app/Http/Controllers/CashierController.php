@@ -85,7 +85,7 @@ class CashierController extends Controller
 
         flash()->success('Success', 'Your order has been created successfully!');
 
-        $url = "order/user_order/" . $user->id . "?userOrderType=all";
+        $url = "order/user_order/" . $user->id . "?userOrderType=All";
         return redirect($url);
     }
 
@@ -123,7 +123,7 @@ class CashierController extends Controller
 
             flash()->success('Success', 'Your order has been created successfully!');
 
-            $url = "order/user_order/" . $user->id . "?userOrderType=all";
+            $url = "order/user_order/" . $user->id . "?userOrderType=All";
             return redirect($url);
 
         } catch (\Exception $e) {

@@ -99,7 +99,7 @@ class UserProfileController extends Controller
         $this->userProfileService->update($user, $request);
 
         flash()->success('Success', 'Your profile has been updated successfully!');
-        return redirect()->route('user_profile.index');
+        return redirect()->action('UserProfileController@index');
     }
 
     /**

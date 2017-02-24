@@ -83,18 +83,8 @@
                         return false;
                     }
 
-                    var People = prompt('People');
-                    var eventData;
-                    if (People) {
-                        var title = People.concat(" People");
-                        eventData = {
-                            title: title,
-                            start: start,
-                            end: end
-                        };
-                        $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                    }
-                    $('#calendar').fullCalendar('unselect');
+                    // prompt window for people order
+                    promptUp(start, end)
                 },
                 eventClick: function(event){
                     // var People = prompt('People');
@@ -138,6 +128,43 @@
             });
         });
 
+        function promptUp(start, end){
+            dialog.prompt({
+                title: "People",
+                message: "How many people can order this meal in this day",
+                button: "confirm",
+                required: true,
+                position: "absolute",
+                animation: "slide",
+                input: {
+                    type: "text",
+                    placeholder: ""
+                },
+                validate: function(value){
+                    if( $.trim(value) === "" ){
+                        return false;
+                    }
+                },
+                callback: function(value){
+                    var People = value;
+
+                    var eventData;
+                    if (People) {
+
+                        var title = People.concat(" People");
+                        eventData = {
+                            title: title,
+                            start: start,
+                            end: end
+                        };
+                        $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                    }
+
+                    $('#calendar').fullCalendar('unselect');
+                }
+            });
+        }
+
         //confirm button
         $("#confirm-btn").click(function() {
 
@@ -160,5 +187,19 @@
             $("#dtp-result").val(list);
         });
 
+    </script>
+
+    <!--prompt up window-->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
     </script>
 @endsection

@@ -71,4 +71,13 @@ class ImageController extends Controller
         $url = "image/index/" . $id . "#title";
         return redirect($url);
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function finish($id)
+    {
+        return redirect("image/index/" . $id . "#title");
+    }
 }

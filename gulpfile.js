@@ -21,7 +21,8 @@ elixir(mix => {
                 'main.css',
                 'styles.css',
                 'jQueryPagination.min.css',
-                'loadme.css'])
+                'loadme.css',
+                'jquery.dialog.min.css'])
            .scripts(['0609.js',
                     'JQ.js',
                     'parsley.min.js',
@@ -29,7 +30,8 @@ elixir(mix => {
                     'bootstrap-datetimepicker.min.js',
                     'jquery.tabslet.min.js',
                     'initializers.js',
-                    'jQueryPagination.min.js']);
+                    'jQueryPagination.min.js',
+                    'jquery.dialog.min.js']);
            //.webpack('app.js');
     
 });

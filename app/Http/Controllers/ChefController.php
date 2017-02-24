@@ -77,7 +77,8 @@ class ChefController extends Controller
         flash()->success('Success', 'The meal has been created successfully!');
 
         $agent = $this->agentService->agent();
-        return view($agent . '.chef.show',['meal' => $meal]);
+        //return view($agent . '.chef.show',['meal' => $meal]);
+        return redirect()->action('ChefController@show', ['id' => $meal->id]);
     }
 
     /**
@@ -138,7 +139,7 @@ class ChefController extends Controller
         $this->chefService->connectShift($meal);
         
         flash()->success('Success', 'The meal has been updated successfully!');
-        return redirect()->route('chef.show', $meal->id);
+        return redirect()->action('ChefController@show', ['id' => $meal->id]);
     }
 
     /**
@@ -153,7 +154,8 @@ class ChefController extends Controller
         $this->chefService->destroy($meal);
 
         flash()->success('Success', 'The meal has been deleted successfully!');
-        return redirect()->route('chef.index');
+        //return redirect()->route('chef.index');
+        return redirect()->action('ChefController@index');
     }
 
     /**
@@ -186,6 +188,8 @@ class ChefController extends Controller
         $this->chefService->updateDatetimePeople($meal, $datetimepeople, $request);
 
         flash()->success('Success', 'The Date/Time/People have been updated successfully!');
-        return redirect()->route('chef.show', $meal->id);
+        return redirect()->action(
+            'ChefController@show', ['id' => $meal->id]
+        );
     }
 }

@@ -172,15 +172,15 @@ Route::get('auth/facebook/callback', 'Auth\OAuthController@handleProviderCallbac
 
 //Chef CRUD and profile
 Route::get('/chef_content', 'MainController@getChefContent');
-Route::resource('chef', 'ChefController');
-Route::get('chef/datetimepeople/get/{id}', [
+Route::get('chef/datetimepeople/{id}', [
     'uses' => 'ChefController@getDateTimePeople',
     'as' => 'chef.datetimepeople.get'
 ]);
-Route::post('chef/datetimepeople/post/{id}', [
+Route::post('chef/datetimepeople/{id}', [
     'uses' => 'ChefController@postDateTimePeople',
     'as' => 'chef.datetimepeople.post'
 ]);
+Route::resource('chef', 'ChefController');
 Route::resource('chef_profile', 'ChefProfileController', [
     'only' => ['index', 'edit', 'update', 'destroy']
 ]);
@@ -190,9 +190,10 @@ Route::get('image/index/{id}', [
     'uses' => 'ImageController@index',
     'as' => 'image.index'
 ]);
-Route::get('image/finish/{id}/', function($id) {
-    return redirect("image/index/" . $id . "#title");
-});
+Route::get('image/finish/{id}/', [
+    'uses' => 'ImageController@finish',
+    'as' => 'image.finish'
+]);
 Route::post('image/upload/{chef_id}', [
     'uses' => 'ImageController@upload',
     'as' => 'image.upload'
