@@ -14,13 +14,14 @@ class ProductController extends Controller
     protected $agentService;
     protected $gateService;
 
+
     /**
      * ProductController constructor.
      * @param ProductService $productService
      * @param AgentService $agentService
      * @param GateService $gateService
      */
-    public function __construct(ProductService $productService, AgentService $agentService, GateService $gateService) 
+    public function __construct(ProductService $productService, AgentService $agentService, GateService $gateService)
     {
         $this->middleware('auth', ['except' => ['getProductShow']]);
 

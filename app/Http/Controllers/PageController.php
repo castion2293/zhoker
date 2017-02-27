@@ -30,6 +30,7 @@ class PageController extends Controller
      */
     public function getContact() 
     {
+
         $agent = $this->agentService->agent();
         return view($agent . '.others.contact');
     }

@@ -4,6 +4,36 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\CreditCard
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $customer_id
+ * @property string $brand
+ * @property string $cvc_check
+ * @property string $last4
+ * @property string $exp_month
+ * @property string $exp_year
+ * @property string $card_name
+ * @property string $funding
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\User $users
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereBrand($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereCardName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereCustomerId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereCvcCheck($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereExpMonth($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereExpYear($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereFunding($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereLast4($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\CreditCard whereUserId($value)
+ * @mixin \Eloquent
+ */
 class CreditCard extends Model
 {
     protected $fillable = [
