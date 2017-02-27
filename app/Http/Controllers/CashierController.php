@@ -52,6 +52,8 @@ class CashierController extends Controller
         //for binding credit card
         $url = "user_profile/" . $user->id . "/edit#payment";
         return redirect($url);
+
+
     }
 
     /**

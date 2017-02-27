@@ -24,11 +24,6 @@
 
         {!! Form::open(['route' => 'maplist.detailed', 'data-parsley-validate' => '', null, 'method' => 'POST']) !!}
             <div class="w3-row">
-               <div class="w3-col s12">
-                  <div class="w3-margin-top">
-                    <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1026201601.png') }}" alt="profile" style="width:100%">
-                  </div>
-                </div>
                 <div class="w3-col s12">
                   <div style="margin-top:1em;">
                       <label class="w3-text-grey w3-large" style="font-family:cursive">City</label>
