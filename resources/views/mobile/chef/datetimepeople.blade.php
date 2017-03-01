@@ -68,7 +68,7 @@
                     center: 'title',
                     //right: 'month,agendaWeek,agendaDay'
                 },
-                height: 1480,
+                height: 480,
                 defaultView: 'agendaWeek',
                 defaultDate: '{{ $now }}',
                 navLinks: true, // can click day/week names to navigate views

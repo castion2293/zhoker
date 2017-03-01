@@ -38,11 +38,7 @@ class LoginController extends Controller
     public function __construct(AgentService $agentService)
     {
         $this->middleware('guest', ['except' => 'logout']);
-        
-        if ($agentService->agent() == 'mobile')
-            flash()->success('Success', 'Login Success!!');
 
         $redirectTo = url()->previous();
-        //}
     }
 }

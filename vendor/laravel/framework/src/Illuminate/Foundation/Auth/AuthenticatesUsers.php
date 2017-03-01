@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Session;
+use App;
+use App\Services\AgentService;
 
 trait AuthenticatesUsers
 {
@@ -89,6 +91,11 @@ trait AuthenticatesUsers
         $request->session()->regenerate();
  
         $this->clearLoginAttempts($request);
+
+        $agentService = App::make(AgentService::class);
+
+        if ($agentService->agent() == 'mobile')
+            flash()->success('Success', 'Login Success!!');
 
         if (Session::has('oldUrl')) {
             $oldUrl = Session::get('oldUrl');

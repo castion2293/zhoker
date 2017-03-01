@@ -20,7 +20,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => "castion2293@yahoo.com.tw",
         'phone_number' => "8018823718",
         'password' => bcrypt('123456789'),
-        'user_profile_img' => 'https://s3-us-west-2.amazonaws.com/zhoker/profile_images/default-user-icon-profile.png',
         'chef_id' => 1,
         'chef_psw' => 'Q123751139',
         'role' => 1,
