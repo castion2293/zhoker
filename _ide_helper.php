@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.3.21 on 2017-02-25.
+ * Generated for Laravel 5.3.21 on 2017-04-06.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -1838,6 +1838,18 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if the current user is authenticated.
          *
+         * @return \App\User 
+         * @throws \Illuminate\Auth\AuthenticationException
+         * @static 
+         */
+        public static function authenticate()
+        {
+            return \Illuminate\Auth\SessionGuard::authenticate();
+        }
+        
+        /**
+         * Determine if the current user is authenticated.
+         *
          * @return bool 
          * @static 
          */
@@ -1855,18 +1867,6 @@ namespace Illuminate\Support\Facades {
         public static function guest()
         {
             return \Illuminate\Auth\SessionGuard::guest();
-        }
-        
-        /**
-         * Determine if the current user is authenticated.
-         *
-         * @return \App\User 
-         * @throws \Illuminate\Auth\AuthenticationException
-         * @static 
-         */
-        public static function authenticate()
-        {
-            return \Illuminate\Auth\SessionGuard::authenticate();
         }
         
     }         
@@ -5698,7 +5698,7 @@ namespace Illuminate\Support\Facades {
          */
         public static function size($queue = null)
         {
-            return \Illuminate\Queue\SyncQueue::size($queue);
+            return \Illuminate\Queue\BeanstalkdQueue::size($queue);
         }
         
         /**
@@ -5708,12 +5708,11 @@ namespace Illuminate\Support\Facades {
          * @param mixed $data
          * @param string $queue
          * @return mixed 
-         * @throws \Exception|\Throwable
          * @static 
          */
         public static function push($job, $data = '', $queue = null)
         {
-            return \Illuminate\Queue\SyncQueue::push($job, $data, $queue);
+            return \Illuminate\Queue\BeanstalkdQueue::push($job, $data, $queue);
         }
         
         /**
@@ -5727,7 +5726,7 @@ namespace Illuminate\Support\Facades {
          */
         public static function pushRaw($payload, $queue = null, $options = array())
         {
-            return \Illuminate\Queue\SyncQueue::pushRaw($payload, $queue, $options);
+            return \Illuminate\Queue\BeanstalkdQueue::pushRaw($payload, $queue, $options);
         }
         
         /**
@@ -5742,7 +5741,7 @@ namespace Illuminate\Support\Facades {
          */
         public static function later($delay, $job, $data = '', $queue = null)
         {
-            return \Illuminate\Queue\SyncQueue::later($delay, $job, $data, $queue);
+            return \Illuminate\Queue\BeanstalkdQueue::later($delay, $job, $data, $queue);
         }
         
         /**
@@ -5754,7 +5753,43 @@ namespace Illuminate\Support\Facades {
          */
         public static function pop($queue = null)
         {
-            return \Illuminate\Queue\SyncQueue::pop($queue);
+            return \Illuminate\Queue\BeanstalkdQueue::pop($queue);
+        }
+        
+        /**
+         * Delete a message from the Beanstalk queue.
+         *
+         * @param string $queue
+         * @param string $id
+         * @return void 
+         * @static 
+         */
+        public static function deleteMessage($queue, $id)
+        {
+            \Illuminate\Queue\BeanstalkdQueue::deleteMessage($queue, $id);
+        }
+        
+        /**
+         * Get the queue or return the default.
+         *
+         * @param string|null $queue
+         * @return string 
+         * @static 
+         */
+        public static function getQueue($queue)
+        {
+            return \Illuminate\Queue\BeanstalkdQueue::getQueue($queue);
+        }
+        
+        /**
+         * Get the underlying Pheanstalk instance.
+         *
+         * @return \Pheanstalk\Pheanstalk 
+         * @static 
+         */
+        public static function getPheanstalk()
+        {
+            return \Illuminate\Queue\BeanstalkdQueue::getPheanstalk();
         }
         
         /**
@@ -5769,7 +5804,7 @@ namespace Illuminate\Support\Facades {
         public static function pushOn($queue, $job, $data = '')
         {
             //Method inherited from \Illuminate\Queue\Queue            
-            return \Illuminate\Queue\SyncQueue::pushOn($queue, $job, $data);
+            return \Illuminate\Queue\BeanstalkdQueue::pushOn($queue, $job, $data);
         }
         
         /**
@@ -5785,7 +5820,7 @@ namespace Illuminate\Support\Facades {
         public static function laterOn($queue, $delay, $job, $data = '')
         {
             //Method inherited from \Illuminate\Queue\Queue            
-            return \Illuminate\Queue\SyncQueue::laterOn($queue, $delay, $job, $data);
+            return \Illuminate\Queue\BeanstalkdQueue::laterOn($queue, $delay, $job, $data);
         }
         
         /**
@@ -5800,7 +5835,7 @@ namespace Illuminate\Support\Facades {
         public static function bulk($jobs, $data = '', $queue = null)
         {
             //Method inherited from \Illuminate\Queue\Queue            
-            return \Illuminate\Queue\SyncQueue::bulk($jobs, $data, $queue);
+            return \Illuminate\Queue\BeanstalkdQueue::bulk($jobs, $data, $queue);
         }
         
         /**
@@ -5813,7 +5848,7 @@ namespace Illuminate\Support\Facades {
         public static function setContainer($container)
         {
             //Method inherited from \Illuminate\Queue\Queue            
-            \Illuminate\Queue\SyncQueue::setContainer($container);
+            \Illuminate\Queue\BeanstalkdQueue::setContainer($container);
         }
         
     }         
@@ -5982,6 +6017,64 @@ namespace Illuminate\Support\Facades {
         public static function setSession($session)
         {
             \Illuminate\Routing\Redirector::setSession($session);
+        }
+        
+    }         
+
+    class Redis {
+        
+        /**
+         * Get a specific Redis connection instance.
+         *
+         * @param string $name
+         * @return \Predis\ClientInterface|null 
+         * @static 
+         */
+        public static function connection($name = 'default')
+        {
+            return \Illuminate\Redis\Database::connection($name);
+        }
+        
+        /**
+         * Run a command against the Redis database.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @static 
+         */
+        public static function command($method, $parameters = array())
+        {
+            return \Illuminate\Redis\Database::command($method, $parameters);
+        }
+        
+        /**
+         * Subscribe to a set of given channels for messages.
+         *
+         * @param array|string $channels
+         * @param \Closure $callback
+         * @param string $connection
+         * @param string $method
+         * @return void 
+         * @static 
+         */
+        public static function subscribe($channels, $callback, $connection = null, $method = 'subscribe')
+        {
+            \Illuminate\Redis\Database::subscribe($channels, $callback, $connection, $method);
+        }
+        
+        /**
+         * Subscribe to a set of given channels with wildcards.
+         *
+         * @param array|string $channels
+         * @param \Closure $callback
+         * @param string $connection
+         * @return void 
+         * @static 
+         */
+        public static function psubscribe($channels, $callback, $connection = null)
+        {
+            \Illuminate\Redis\Database::psubscribe($channels, $callback, $connection);
         }
         
     }         
@@ -12648,6 +12741,8 @@ namespace {
     class Queue extends \Illuminate\Support\Facades\Queue {}
     
     class Redirect extends \Illuminate\Support\Facades\Redirect {}
+    
+    class Redis extends \Illuminate\Support\Facades\Redis {}
     
     class Request extends \Illuminate\Support\Facades\Request {}
     

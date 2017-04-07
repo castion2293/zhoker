@@ -249,3 +249,9 @@ Route::get('help', [
     'uses' => 'PageController@getHelp',
     'as' => 'help.get'
 ]);
+
+// Chang Language
+Route::get('/language', [
+    'uses' => 'LangController@changeLang',
+    'as' => 'language.change'
+]);
