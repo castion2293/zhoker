@@ -6,6 +6,7 @@ use Cache;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
+use App\Presenters\Lang\LangPresenterfactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('now', Carbon::now());
-        View::share('lang', $this->localeLang(request()->has('lang')));
+        View::share('lang', LangPresenterfactory::create( Cache::get('lang', 'en')));
     }
 
     /**
@@ -31,17 +32,5 @@ class AppServiceProvider extends ServiceProvider
         {
             $this->app->register('Barryvdh\Debugbar\ServiceProvider');
         }
-    }
-
-    /**
-     * @param $hasLanguage
-     * @return mixed
-     */
-    protected function localeLang($hasLanguage)
-    {
-        if ($hasLanguage)
-            Cache::forever('lang', request('lang'));
-
-        return Cache::get('lang', 'en');
     }
 }
