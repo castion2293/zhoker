@@ -4,11 +4,14 @@ namespace App\Presenters\Lang;
 
 class LangPresenter_zh_tw implements LangPresenterInterface
 {
+    /**
+     * @return array
+     */
     public function desktop()
     {
         return [
             'header' => [
-                'zhoker' => '作客',
+                'zhoker' => 'Zhoker',
                 'signin' => '登入',
                 'signup' => '註冊',
                 'help' => '協助',
@@ -69,6 +72,15 @@ class LangPresenter_zh_tw implements LangPresenterInterface
                 'title1' => '享受',
                 'title2' => '美味及健康',
                 'order' => '開始預購',
+
+                'search_city' => '台中',
+                'search_all' => '全部',
+                'search_dinner' => '晚餐',
+                'search_lunch' => '午餐',
+                'search_brunch' => '早午餐',
+                'search_breakfast' => '早餐',
+                'search_teatime' => '下午茶',
+                'search_date' => '日期',
             ],
             
         ];

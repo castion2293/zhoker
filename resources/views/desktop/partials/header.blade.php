@@ -84,7 +84,7 @@
           <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
         </div>
         <div>
-          <h1 class="text-center w3-padding-8 w3-text-green">{{ $lang->desktop()['header']['sign_in_form_title'] }}</h1>
+          <h1 class="text-center w3-padding-8 w3-text-green" style="padding-left:1em;">{{ $lang->desktop()['header']['sign_in_form_title'] }}</h1>
         </div>
         <div class="modal-body" style="padding:10px 50px;">
           {!! Form::open(['route' => 'login', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
@@ -130,7 +130,7 @@
           <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
         </div>
         <div>
-          <h1 class="w3-xxlarge w3-text-green w3-center">{{ $lang->desktop()['header']['forgot_form_title'] }}</h1>
+          <h1 class="w3-xxlarge w3-text-green w3-center" style="padding-left: 1em;">{{ $lang->desktop()['header']['forgot_form_title'] }}</h1>
         </div>
         <div class="modal-body" style="padding:10px 50px;">
           <div class="w3-center">
@@ -145,7 +145,7 @@
               {{ Form::submit($lang->desktop()['header']['forgot_form_send'], ['class' => 'w3-btn w3-green w3-round w3-medium col-sm-2 w3-hover-dark-grey', 'style' => 'height:35px']) }}
             </div>
           {!! Form::close() !!}
-          <div style="margin-left:10px">
+          <div class="w3-center">
             <span class="w3-large w3-text-green" data-dismiss="modal" data-toggle="modal" data-target="#myModal" style="cursor:pointer;">{{ $lang->desktop()['header']['forgot_form_back_sign_in'] }}</span>
           </div>
         </div>
@@ -164,7 +164,7 @@
           <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
         </div>
         <div>
-          <h1 class="w3-xxlarge w3-text-green w3-center">{{ $lang->desktop()['header']['sign_up_form_title'] }}</h1>
+          <h1 class="w3-xxlarge w3-text-green w3-center" style="padding-left: 1em;">{{ $lang->desktop()['header']['sign_up_form_title'] }}</h1>
         </div>
         <div class="modal-body" style="padding:10px 50px;">
           <div class="w3-center">
@@ -224,7 +224,7 @@
           <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
         </div>
         <div>
-          <h1 class="text-center w3-padding-8 w3-text-green">{{ $lang->desktop()['header']['chef_sign_in_form_title'] }}</h1>
+          <h1 class="text-center w3-padding-8 w3-text-green" style="padding-left: 1em;">{{ $lang->desktop()['header']['chef_sign_in_form_title'] }}</h1>
         </div>
         <div class="modal-body" style="padding:10px 50px;">
           {!! Form::open(['route' => 'main.cheflogin', 'data-parsley-validate' => '', 'method' => 'POST']) !!}

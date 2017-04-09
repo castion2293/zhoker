@@ -4,6 +4,9 @@ namespace App\Presenters\Lang;
 
 class LangPresenter_en implements LangPresenterInterface
 {
+    /**
+     * @return array
+     */
     public function desktop()
     {
         return [
@@ -69,7 +72,16 @@ class LangPresenter_en implements LangPresenterInterface
                 'title1' => 'Eating',
                 'title2' => 'Tasty and Fresh',
                 'order' => 'Order Now',
-            ],
+
+                'search_city' => 'Salt Lake City',
+                'search_all' => 'All',
+                'search_dinner' => 'Dinner',
+                'search_lunch' => 'Lunch',
+                'search_brunch' => 'Brunch',
+                'search_breakfast' => 'Breakfast',
+                'search_teatime' => 'Tea Time',
+                'search_date' => 'Date',
+             ],
             
         ];
     }
