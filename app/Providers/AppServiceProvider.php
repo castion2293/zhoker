@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use Cache;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
+use App\Presenters\Lang\LangPresenterfactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('now', Carbon::now());
+        View::share('lang', LangPresenterfactory::create( Cache::get('lang', 'en')));
     }
 
     /**

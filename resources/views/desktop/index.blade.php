@@ -12,12 +12,12 @@
     <!-- First Parallax Image with Logo Text -->
     <div id="font" class="bgimg-1 w3-opacity w3-display-container">
         <div class="w3-center" style="padding-top:16em">
-            <span class="w3-center w3-padding-xlarge w3-text-white w3-xxlarge w3-wide w3-text-shadow w3-animate-opacity">EATING</span><br>
+            <span class="w3-center w3-padding-xlarge w3-text-white w3-xxlarge w3-wide w3-text-shadow w3-animate-opacity">{{ $lang->desktop()['index']['title1'] }}</span><br>
             <span class="w3-center w3-padding-xlarge w3-text-white w3-xxlarge w3-wide w3-text-shadow w3-animate-opacity w3-hide-small
-                ">Tasty and Fresh</span><br>
+                ">{{ $lang->desktop()['index']['title2'] }}</span><br>
             <!--<span class="w3-center w3-text-white w3-xlarge w3-animate-opacity">-->
             <a href="{{ route('maplist.search.get') }}" class="w3-btn w3-transparent w3-border w3-round w3-xlarge w3-card-16 w3-hover-green w3-hover-border-green" id="orderbtn">
-                <span class="w3-text-shadow">Order Now</span>
+                <span class="w3-text-shadow">{{ $lang->desktop()['index']['order'] }}</span>
             </a>
         </div>
 
@@ -29,17 +29,17 @@
                 </div>
                 <div class="w3-col l2 m2">
                     <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic clickdown" name="shift" style="height:50px">
-                        <option class="w3-text-black w3-white w3-large">All</option>
-                        <option class="w3-text-black w3-white w3-large">Dinner</option>
-                        <option class="w3-text-black w3-white w3-large">Lunch</option>
-                        <option class="w3-text-black w3-white w3-large">Brunch</option>
-                        <option class="w3-text-black w3-white w3-large">Breakfast</option>
-                        <option class="w3-text-black w3-white w3-large">Tea Time</option>
+                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_all'] }}</option>
+                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_dinner'] }}</option>
+                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_lunch'] }}</option>
+                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_brunch'] }}</option>
+                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_breakfast'] }}</option>
+                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_teatime'] }}</option>
                     </select>
                 </div>
                 <div class="input-group w3-col l4 m4">
                     <span class="input-group-addon inputbkg clickdown"><span class="glyphicon glyphicon-calendar"></span></span>
-                    {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'id' => 'datepicker', 'required' => '', 'placeholder' => 'Date', 'style' => 'font-weight:bold;cursor:pointer;"']) }}
+                    {{ Form::text('date', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'id' => 'datepicker', 'required' => '', 'placeholder' => $lang->desktop()['index']['search_date'] , 'style' => 'font-weight:bold;cursor:pointer;"']) }}
                 </div>
                 <button class="w3-col l1 m1 w3-btn w3-border-green w3-large w3-green" style="height:50px">
                     <i class="w3-text-shadow fa fa-search"></i>
@@ -222,6 +222,18 @@
         $("#datepicker").datetimepicker({
             format: 'YYYY-MM-DD',
             minDate: moment()
+        });
+
+        $("#eatlocation").val("{{ $lang->desktop()['index']['search_city'] }}");
+
+        $("#eatlocation").focus(function(){
+            if( $("#eatlocation").val() == "{{ $lang->desktop()['index']['search_city'] }}")
+                $("#eatlocation").val("");
+        });
+
+        $("#eatlocation").focusout(function(){
+            if( $("#eatlocation").val() == '')
+                $("#eatlocation").val("{{ $lang->desktop()['index']['search_city'] }}");
         });
     })
     </script>

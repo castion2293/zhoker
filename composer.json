@@ -20,7 +20,8 @@
         "nexmo/client": "@beta",
         "nexmo/laravel": "1.0.0-beta3",
         "backup-manager/laravel": "^1.1",
-        "pda/pheanstalk": "^3.1"
+        "pda/pheanstalk": "^3.1",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
