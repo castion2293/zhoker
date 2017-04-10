@@ -31,7 +31,7 @@ elixir(mix => {
                     'jquery.tabslet.min.js',
                     'initializers.js',
                     'jQueryPagination.min.js',
-                    'jquery.dialog.min.js']);
-           //.webpack('app.js');
+                    'jquery.dialog.min.js'])
+           .webpack('app.js');
     
 });

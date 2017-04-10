@@ -10,6 +10,8 @@ class LangPresenter_en implements LangPresenterInterface
     public function desktop()
     {
         return [
+            'language' => 'en',
+
             'header' => [
                 'zhoker' => 'zhoker',
                 'signin' => 'SignIn',
@@ -68,6 +70,21 @@ class LangPresenter_en implements LangPresenterInterface
                 'chef_sign_in_form_become_a_chef' => 'Become a Chef',
             ],
 
+            'footer' => [
+                'company' => 'Company',
+                'about' => 'About',
+                'press' => 'Press',
+                'blog' => 'Blog',
+                'contact_us' => 'Contact us',
+
+                'cus_chef' => 'Customer & Chef',
+                'policy' => 'Policy',
+                'career' => 'Career',
+                'help' => 'Help',
+
+                'follow' => 'Follow us on',
+            ],
+
             'index' => [
                 'title1' => 'Eating',
                 'title2' => 'Tasty and Fresh',
@@ -81,6 +98,12 @@ class LangPresenter_en implements LangPresenterInterface
                 'search_breakfast' => 'Breakfast',
                 'search_teatime' => 'Tea Time',
                 'search_date' => 'Date',
+
+                'work_title' => 'HOW IT WORKS',
+                'work_description' => 'Only three steps easy ways to make a order on zhoker.com',
+                'work_search' => 'Search online',
+                'work_pay' => 'pay online',
+                'work_enjoy' => 'Enjoy the meal',
              ],
             
         ];

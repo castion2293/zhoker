@@ -60,6 +60,29 @@
            healthy and delicious meal is still very important for everyone. That is a brand new life experience and don't hesitate, come trying out!</p>
     </div>
 
+    <!-- Container (Portfolio Section) -->
+    <div class="w3-padding64 w3-content w3-container" style="margin-top:5em;margin-bottom: 10em;">
+        <h3 class="w3-center ">{{ $lang->desktop()['index']['work_title'] }}</h3>
+        <p class="w3-center "><em>{{ $lang->desktop()['index']['work_description'] }}</em></p><br>
+
+        <div class="w3-row-padding">
+            <div class="w3-col l4 m4 w3-center">
+                <i class="fa fa-television w3-text-green" style="font-size:100px;"></i>
+                <p class="w3-text-green w3-large"><b>1. {{ $lang->desktop()['index']['work_search'] }}</b></p>
+            </div>
+
+            <div class="w3-col l4 m4 w3-center">
+                <i class="fa fa-credit-card w3-text-green" style="font-size:100px;"></i>
+                <p class="w3-text-green w3-large"><b>2. {{ $lang->desktop()['index']['work_pay'] }}</b></p>
+            </div>
+
+            <div class="w3-col l4 m4 w3-center">
+                <i class="fa fa-cutlery w3-text-green" style="font-size:100px;"></i>
+                <p class="w3-text-green w3-large"><b>3. {{ $lang->desktop()['index']['work_enjoy'] }}</b></p>
+            </div>
+        </div>
+    </div>
+
     <!--Carousel Photo show-->
     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
 
@@ -101,29 +124,6 @@
     <div class="w3-padding64 w3-content w3-container" style="margin-top:5em;">
         <h3 class="w3-center ">OUR CHEF</h3>
         <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
-    </div>
-
-    <!-- Container (Portfolio Section) -->
-    <div class="w3-padding64 w3-content w3-container" style="margin-top:5em;">
-        <h3 class="w3-center ">HOW TO WORK</h3>
-        <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
-
-        <div class="w3-row-padding">
-            <div class="w3-col l4 m4 w3-center">
-                <i class="fa fa-television w3-text-green" style="font-size:100px;"></i>
-                <p class="w3-text-green w3-large"><b>1. Search online</b></p>
-            </div>
-
-            <div class="w3-col l4 m4 w3-center">
-                <i class="fa fa-credit-card w3-text-green" style="font-size:100px;"></i>
-                <p class="w3-text-green w3-large"><b>2. pay online</b></p>
-            </div>
-
-            <div class="w3-col l4 m4 w3-center">
-                <i class="fa fa-cutlery w3-text-green" style="font-size:100px;"></i>
-                <p class="w3-text-green w3-large"><b>3. Enjoy the meal</b></p>
-            </div>
-        </div>
     </div>
 
     <!-- Container (Portfolio Section) -->

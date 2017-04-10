@@ -10,6 +10,8 @@ class LangPresenter_zh_tw implements LangPresenterInterface
     public function desktop()
     {
         return [
+            'language' => 'zh_tw',
+
             'header' => [
                 'zhoker' => 'Zhoker',
                 'signin' => '登入',
@@ -68,6 +70,21 @@ class LangPresenter_zh_tw implements LangPresenterInterface
                 'chef_sign_in_form_become_a_chef' => '成為一名廚師',
             ],
 
+            'footer' => [
+                'company' => '公司',
+                'about' => '關於',
+                'press' => '媒體',
+                'blog' => '部落格',
+                'contact_us' => '與我們聯絡',
+
+                'cus_chef' => '顧客與廚師',
+                'policy' => '政策',
+                'career' => '工作',
+                'help' => '協助',
+
+                'follow' => '追蹤我們',
+            ],
+
             'index' => [
                 'title1' => '享受',
                 'title2' => '美味及健康',
@@ -81,6 +98,12 @@ class LangPresenter_zh_tw implements LangPresenterInterface
                 'search_breakfast' => '早餐',
                 'search_teatime' => '下午茶',
                 'search_date' => '日期',
+
+                'work_title' => '如何訂餐',
+                'work_description' => '只需要三個步驟就可以在Zhoker.com訂餐',
+                'work_search' => '線上搜尋',
+                'work_pay' => '線上繳費',
+                'work_enjoy' => '享用美食',
             ],
             
         ];

@@ -27,6 +27,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script><!--sweetalert-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js'></script><!--photoswipe-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js'></script><!--photoswipe-->
+    <script src="{{ URL::to('js/app.js') }}"></script><!--vue component-->
 
     @yield('styles')
 </head>

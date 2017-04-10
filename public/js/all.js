@@ -65,7 +65,17 @@ $(function () {
     });
 
     //Click erease the text
+    $("#eatlocation").val("Salt lake city");
 
+    $("#eatlocation").focus(function(){
+      if( $("#eatlocation").val() == "Salt lake city")
+      $("#eatlocation").val("");
+    });
+
+    $("#eatlocation").focusout(function(){
+      if( $("#eatlocation").val() == '') 
+        $("#eatlocation").val("Salt lake city");
+    });
 
     $("#eatlocationSmall").focus(function(){
       if( $("#eatlocationSmall").val() == "Salt lake city")

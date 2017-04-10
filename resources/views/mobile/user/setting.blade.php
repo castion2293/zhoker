@@ -214,7 +214,6 @@
 @endsection
 
 @section('scripts')
-    //stripe
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script>
         Stripe.setPublishableKey('{{ config('services.stripe.key') }}');
