@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Session;
 use App;
+use Cache;
 use App\Services\AgentService;
+use App\Presenters\Lang\LangPresenterfactory;
 
 trait AuthenticatesUsers
 {
@@ -94,8 +96,11 @@ trait AuthenticatesUsers
 
         $agentService = App::make(AgentService::class);
 
-        if ($agentService->agent() == 'mobile')
-            flash()->success('Success', 'Login Success!!');
+        if ($agentService->agent() == 'mobile') {
+            $lang = LangPresenterfactory::create( Cache::get('lang', 'en'));
+            flash()->success($lang->desktop()['flash']['success'], $lang->desktop()['flash']['login']);
+        }
+
 
         if (Session::has('oldUrl')) {
             $oldUrl = Session::get('oldUrl');

@@ -38,6 +38,8 @@ class UserProfileController extends Controller
         $this->agentService = $agentService;
         $this->sessionService = $sessionService;
         $this->gateService = $gateService;
+
+        parent::boot();
     }
 
     /**
@@ -98,7 +100,7 @@ class UserProfileController extends Controller
 
         $this->userProfileService->update($user, $request);
 
-        flash()->success('Success', 'Your profile has been updated successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['update_user_profile']);
         return redirect()->action('UserProfileController@index');
     }
 
@@ -112,12 +114,12 @@ class UserProfileController extends Controller
 
         if ($this->userProfileService->resetPassword($user, $request)) {
 
-            flash()->success('Success', 'Password has been reseted successfully!');
+            flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['reset_password']);
             $agent = $this->agentService->agent();
             return view($agent . '.user.setting', ['user' => $user]);
         } else {
 
-            flash()->error('Error', 'The specified password does not match the database password');
+            flash()->error(Self::$lang->desktop()['flash']['error'], Self::$lang->desktop()['flash']['not_match_password']);
             return redirect()->back();
         }
     }
@@ -138,17 +140,17 @@ class UserProfileController extends Controller
                 $oldUrl = $this->sessionService->get('oldUrl');
                 $this->sessionService->forget('oldUrl');
                 
-                flash()->success('Success', 'The credit card has been binded successfully!');
+                flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['bind_card']);
                 return redirect($oldUrl);
             }
 
-            flash()->success('Success', 'The credit card has been binded successfully!');
+            flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['bind_card']);
             $url = url()->previous() . "#payment";
             return redirect($url);
 
         } catch (\Exception $e) {
 
-            flash()->error('Error', $e->getMessage());
+            flash()->error(Self::$lang->desktop()['flash']['error'], $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -167,13 +169,13 @@ class UserProfileController extends Controller
                                     ->findCreditCardByUser($user)
                                     ->updateCreditCard();
 
-            flash()->success('Success', 'The credit card has been updated successfully!');
+            flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['update_card']);
             $url = url()->previous() . "#payment";
             return redirect($url);
 
         } catch (\Exception $e) {
 
-            flash()->error('Error', $e->getMessage());
+            flash()->error(Self::$lang->desktop()['flash']['error'], $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -189,7 +191,7 @@ class UserProfileController extends Controller
         $user = $this->userProfileService->findUser($id)->getUser();
         $credit_card = $this->creditCardService->findCreditCardByUser($user)->deleteCreditCard();
 
-        flash()->success('Success', 'The credit card has been deleted successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['delete_card']);
         $url = url()->previous() . "#payment";
         return redirect($url);
     }

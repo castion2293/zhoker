@@ -15,7 +15,7 @@
     <!--content-->
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-padding-12">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Date/Time/People</h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['chef_datetimepeople']['title'] }}</h1>
         </div>
 
         <div class="w3-row w3-padding-8">
@@ -31,7 +31,7 @@
                 {{ Form::text('datetimepeople', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey w3-white', 'id' => 'dtp-result', 'required' => '', 'style' => 'display:none;']) }}
                 <div class="w3-row w3-padding-top w3-border-top w3-border-green">
                     <div class="w3-col s12">
-                        {!! Form::submit('Confirm', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'confirm-btn']) !!}
+                        {!! Form::submit($lang->desktop()['chef_datetimepeople']['confirm'], ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'confirm-btn']) !!}
                     </div>
                 </div>
             {!! Form::close() !!}

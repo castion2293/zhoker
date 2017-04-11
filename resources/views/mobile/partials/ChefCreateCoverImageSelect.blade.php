@@ -8,7 +8,7 @@
             <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
         </div>
         <div class="modal-header">
-            <h1 class="text-center w3-padding-8 w3-text-green">Select Images</h1>
+            <h1 class="text-center w3-padding-8 w3-text-green">{{ $lang->desktop()['chef_create']['create_cover_img'] }}</h1>
         </div>
         <div class="modal-body" style="padding:10px 10px;">
             <div id="cover-paginatepaginate">

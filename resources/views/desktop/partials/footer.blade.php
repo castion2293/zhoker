@@ -1,4 +1,5 @@
 <!-- Footer large and medium screen-->
+
   <footer class="w3-center w3-green w3-padding-48 w3-hide-small">
 
     <div class="w3-content w3-container">
@@ -8,7 +9,7 @@
           <p class="w3-medium footlink">
             <a href="{{ route('about.get') }}" class="w3-text-white w3-hover-opacity" >{{ $lang->desktop()['footer']['about'] }}</a><br>
             <a href="{{ route('press.get') }}" class="w3-text-white w3-hover-opacity" >{{ $lang->desktop()['footer']['press'] }}</a><br>
-            <a href="{{ route('career.get') }}" class="w3-text-white w3-hover-opacity" >{{ $lang->desktop()['footer']['press'] }}</a><br>
+            <a href="{{ route('career.get') }}" class="w3-text-white w3-hover-opacity" >{{ $lang->desktop()['footer']['blog'] }}</a><br>
             <!--a href="#" class="w3-text-white w3-hover-opacity" >Help</a><br-->
             <a href="{{ route('contact.get') }}" class="w3-text-white w3-hover-opacity" >{{ $lang->desktop()['footer']['contact_us'] }}</a>
           </p>
@@ -28,6 +29,10 @@
           </select>
           <!--for refresh the new page, not shown-->
           <a id="language-page-link" href="" style="display:none;">language page</a>
+
+          <div id="myvue">
+            <example></example>
+          </div>
         </div>
         <div class="w3-col l12 m12 w3-center w3-padding-16 w3-border-top" style="margin-top:40px;">
           <p class="w3-large">{{ $lang->desktop()['footer']['follow'] }}</p>

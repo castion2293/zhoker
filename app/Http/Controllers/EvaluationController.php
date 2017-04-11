@@ -32,6 +32,8 @@ class EvaluationController extends Controller
         $this->evaluationService = $evaluationService;
         $this->agentService = $agentService;
         $this->gateService = $gateService;
+
+        parent::boot();
     }
 
     /**
@@ -59,11 +61,8 @@ class EvaluationController extends Controller
         $this->evaluationService->updateMealEvaluate($cart->meals, $request->score);
         $this->evaluationService->updateCartEvaluated($cart);
 
-        $userorders = $this->orderService->getUserOrderByUser($user, 'desc');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['submit_evaluation']);
 
-        flash()->success('Success', 'The Evaluation has been submitted!');
-
-        $agent = $this->agentService->agent();
-        return view($agent . '.user.order', ['userorders' => $userorders]);
+        return redirect('order/user_order/' . $user->id . '/?userOrderType=evaluated');
     }
 }

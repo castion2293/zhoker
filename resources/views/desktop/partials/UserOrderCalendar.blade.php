@@ -19,23 +19,23 @@
                     <a class="w3-btn-block w3-left-align w3-green" style="border-radius:18px 18px 0 0;">
                         <div class="w3-row">
                             <div class="w3-col l3 m3">
-                                <label>Order Number #{{ $userorder->id }}</label>
+                                <label>{{ $lang->desktop()['user_order']['order_number'] }} #{{ $userorder->id }}</label>
                             </div>
                             <div class="w3-col l2 m2">
-                                <label>Total Price</label>
+                                <label>{{ $lang->desktop()['user_order']['total_price'] }}</label>
                             </div>
                             <div class="w3-col l2 m2">
-                                <label>Pay Way</label>
+                                <label>{{ $lang->desktop()['user_order']['pay_way'] }}</label>
                             </div>
                             <div class="w3-col l3 m3">
-                                <label>Order Date</label>
+                                <label>{{ $lang->desktop()['user_order']['order_date'] }}</label>
                             </div>
                             <div class="w3-col l2 m2" style="padding-right:4em;">
-                                <label>Order Details</label>
+                                <label>{{ $lang->desktop()['user_order']['order_detail'] }}</label>
                             </div>
                         </div>
                         <div class="w3-row">
-                            <div class="w3-col l6 m6" style="padding-left:16em;">
+                            <div class="w3-col l6 m6" style="padding-left: 19em;">
                                 <span style="font-family:cursive;">${{ $userorder->total_price }}</span>
                             </div>
                             <div class="w3-col l5 m5" style="padding-left:5.5em;">
@@ -46,16 +46,16 @@
                     <div class="w3-container w3-display-container">
                         <div class="w3-row w3-margin-top w3-padding-medium w3-border-grey w3-border-bottom">
                             <div class="w3-col l4 m4">
-                                <label class="w3-text-grey" style="font-family:cursive;">MEAL</label>
+                                <label class="w3-text-grey" style="font-family:cursive;">{{ $lang->desktop()['user_order']['meal'] }}</label>
                             </div>
                             <div class="w3-col l6 m6" style="padding-left:1em;">
-                                <label class="w3-text-grey" style="font-family:cursive;">ITEM</label>
+                                <label class="w3-text-grey" style="font-family:cursive;">{{ $lang->desktop()['user_order']['item'] }}</label>
                             </div>
                             <div class="w3-col l1 m1" style="padding-left:0.5em;">
-                                <label class="w3-text-grey" style="font-family:cursive;">TOTAL</label>
+                                <label class="w3-text-grey" style="font-family:cursive;">{{ $lang->desktop()['user_order']['total'] }}</label>
                             </div>
                             <div class="w3-col l1 m1" style="padding-left:1em;">
-                                <label class="w3-text-grey" style="font-family:cursive;">STATUS</label>
+                                <label class="w3-text-grey" style="font-family:cursive;">{{ $lang->desktop()['user_order']['status'] }}</label>
                             </div>
                         </div>
 
@@ -68,16 +68,16 @@
                                     <div class="w3-row">
                                         <div class="w3-col l5 m5">
                                             <div class="">
-                                                <span class="w3-text-grey w3-large"><b>{{ $OrderPresenter->getMealName($cart) }}</b></span>
+                                                <span class="w3-text-grey w3-large"><b>{{ str_limit($OrderPresenter->getMealName($cart), 24) }}</b></span>
                                             </div>
                                             <div class="">
                                                 <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $OrderPresenter->getMealPrice($cart) }}</span></span>
                                             </div>
                                             <div class="">
-                                                <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                                                <span class="w3-text-grey w3-large">{{ $cart->people_order }} {{ $lang->desktop()['user_order']['people_order'] }}</span>
                                             </div>
                                         </div>
-                                        <div class="w3-col l7 m7">
+                                        <div class="w3-col l6 m6 w3-right">
                                             <div class="">
                                                 <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
                                             </div>
@@ -96,33 +96,33 @@
                                     <div class="">
                                         @if ($cart->deleted_at)
                                             @if ($OrderPresenter->chefDeleteCheck($cart))
-                                                <span class="w3-text-grey w3-large">Rejected</span>
+                                                <span class="w3-text-grey w3-large">{{ $lang->desktop()['user_order']['rejected'] }}</span>
                                             @else
-                                                <span class="w3-text-grey w3-large">Canceled</span>
+                                                <span class="w3-text-grey w3-large">{{ $lang->desktop()['user_order']['canceled'] }}</span>
                                             @endif
                                         @else
                                             @if ($OrderPresenter->overTime($cart, $now))
                                                 @if ($OrderPresenter->chefOrderCheck($cart))
-                                                    <span class="w3-text-grey w3-large">Approved</span>
+                                                    <span class="w3-text-grey w3-large">{{ $lang->desktop()['user_order']['approved'] }}</span>
                                                     <div class="" style="margin-top:2em;">                                           
                                                         @if ($cart->evaluated)
-                                                            <span class="w3-text-grey w3-large">Evaluated</span>
+                                                            <span class="w3-text-grey w3-large">{{ $lang->desktop()['user_order']['evaluated'] }}</span>
                                                         @else
-                                                            <a href="{{ route('evaluation.create', ['id' => $cart->id])}}" class="w3-text-deep-orange w3-large">Evaluate</a>
+                                                            <a href="{{ route('evaluation.create', ['id' => $cart->id])}}" class="w3-text-deep-orange w3-large">{{ $lang->desktop()['user_order']['evaluate'] }}</a>
                                                         @endif
                                                     </div>
                                                 @else
-                                                    <span class="w3-text-grey w3-large">Overdue</span>
+                                                    <span class="w3-text-grey w3-large">{{ $lang->desktop()['user_order']['overdue'] }}</span>
                                                 @endif
                                             @else
                                                 @if ($OrderPresenter->chefOrderCheck($cart))
-                                                    <span class="w3-text-grey w3-large">Approved</span>
+                                                    <span class="w3-text-grey w3-large">{{ $lang->desktop()['user_order']['approved'] }}</span>
                                                 @else
-                                                    <span class="w3-text-grey w3-large">Pending</span>
+                                                    <span class="w3-text-grey w3-large">{{ $lang->desktop()['user_order']['pending'] }}</span>
                                                 @endif
                                                 <div style="margin-top:2em;">
-                                                    <a href="{{ route('order.cancel', ['id' => $cart->id]) }}" id="warn{{$cart->id}}confirm" style="display:none;">Cancel</a>
-                                                    <a href="#" id="warn{{$cart->id}}" class="w3-text-blue w3-medium warn">Cancel</a>
+                                                    <a href="{{ route('order.cancel', ['id' => $cart->id]) }}" id="warn{{$cart->id}}confirm" style="display:none;">{{ $lang->desktop()['user_order']['cancel'] }}</a>
+                                                    <a href="#" id="warn{{$cart->id}}" class="w3-text-blue w3-medium warn">{{ $lang->desktop()['user_order']['cancel'] }}</a>
                                                 </div>
                                             @endif
                                         @endif
@@ -143,6 +143,7 @@
 </div>
 
 <!--datatimepeople modal-->
+<script src="{{ URL::to('js/fullcalendar/locale/zh-tw.js') }}"></script>
 <script>
     $(function () {
 
@@ -155,6 +156,7 @@
 
         //FullCalendar
         $('#calendar').fullCalendar({
+            locale: '{{ $lang->desktop()['language'] }}',
             header: {
                 left: 'prev,next today',
                 center: 'title',

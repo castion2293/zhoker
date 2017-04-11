@@ -47,44 +47,44 @@
               </div>
               <div class="w3-col l5 m5 w3-padding-large">
                   <div class="w3-margin-top w3-border-bottom w3-border-grey"> 
-                    <label>Method:
+                    <label>{{ $lang->desktop()['chef_show']['method'] }}:
                       @foreach ($meal->methods as $method)
                           <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
                       @endforeach
                     </label>
                   </div>
                   <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Time:
+                    <label>{{ $lang->desktop()['chef_show']['time'] }}:
                       @foreach ($meal->shifts as $shift)
                           <p class="w3-tag w3-teal w3-tiny">{{ $shift->shift }}</p>
                       @endforeach
                     </label>
                   </div>
                   <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Type:
+                    <label>{{ $lang->desktop()['chef_show']['type'] }}:
                       @foreach ($meal->categories as $category)
                           <p class="w3-tag w3-teal w3-tiny">{{ $category->category }}</p>
                       @endforeach
                     </label>
                   </div>
                   <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Evaluation:  
+                    <label>{{ $lang->desktop()['chef_show']['evaluation'] }}:
                         @if ($meal->people_eva > 0)
                             @for ($i = 0; $i < $ProductPresenter->getEvaluateScore($meal->evaluation, $meal->people_eva); $i++)
                                 <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
                             @endfor
                         @else
-                            <span class="w3-text-orange w3-large">New Meal</span>
+                            <span class="w3-text-orange w3-large">{{ $lang->desktop()['chef_show']['new_meal'] }}</span>
                         @endif
                     </label>
                   </div>
                   <div class="w3-border-bottom w3-border-grey w3-padding-12">
                     <table class="w3-table w3-small">
                         <thead>
-                          <th style="padding-left:0;">Date</th>
-                          <th>Time</th>
-                          <th>People Left</th>
-                          <th>People Orders</th>
+                          <th style="padding-left:0;">{{ $lang->desktop()['chef_show']['date'] }}</th>
+                          <th>{{ $lang->desktop()['chef_show']['time'] }}</th>
+                          <th>{{ $lang->desktop()['chef_show']['people_left'] }}</th>
+                          <th>{{ $lang->desktop()['chef_show']['people_order'] }}</th>
                         </thead>
                         <tbody>
                           @foreach ($meal->datetimepeoples()->latest('updated_at')->take(5)->get() as $datetimepeople)
@@ -99,7 +99,7 @@
                     </table>
                   </div>
                   <div class="w3-right w3-margin-top">
-                      <a href="{{ route('chef.datetimepeople.get', ['id' => $meal->id]) }}" class="btn w3-white w3-text-blue w3-border w3-border-blue btn-block zk-shrink-hover">Date/Time<a>
+                      <a href="{{ route('chef.datetimepeople.get', ['id' => $meal->id]) }}" class="btn w3-white w3-text-blue w3-border w3-border-blue btn-block zk-shrink-hover">{{ $lang->desktop()['chef_show']['date_time'] }}</a>
                   </div>
               </div>  
             </div>
@@ -116,10 +116,10 @@
                     {!! Form::submit('Delete', ['class' => 'btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block w3-margin-top zk-shrink-hover', 'id' => 'delete-confirm', 'style' => 'display:none;']) !!}
 
                  {!! Form::close() !!}
-                 <button id="delete-warn" class="btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block w3-margin-top zk-shrink-hover">Delete</button>
+                 <button id="delete-warn" class="btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block w3-margin-top zk-shrink-hover">{{ $lang->desktop()['chef_show']['delete'] }}</button>
               </div>
               <div class="w3-col l2 m2 w3-right w3-margin-top w3-padding-small">
-                {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-white w3-large w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
+                {!! Html::linkRoute('chef.edit', $lang->desktop()['chef_show']['edit'] , [$meal->id], ['class' => 'btn w3-white w3-large w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
               </div>
             </div>
     </div>
@@ -131,12 +131,13 @@
         $(function () {
             $("#delete-warn").click(function () {
               swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover the meal!",
+                title: "{{ $lang->desktop()['flash']['are_you_sure'] }}",
+                text: "{{ $lang->desktop()['flash']['meal_remove_warn'] }}",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
+                confirmButtonText: "{{ $lang->desktop()['flash']['delete_confirm_btn'] }}",
+                cancelButtonText: "{{ $lang->desktop()['flash']['cancel_btn'] }}",
                 closeOnConfirm: false
               },
               function(){

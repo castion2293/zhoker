@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ URL::to('css/component.css') }}"><!--side direction dot-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" /><!--Select-2-->
     <link rel="stylesheet" href="{{ URL::to('css/bootstrap-datetimepicker.min.css') }}"><!--Bootstrap DateTimePicker-->
+    <link rel="stylesheet" href="{{ URL::to('css/all.css') }}">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -22,6 +23,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script><!--Select-2-->
     <!--TinyMCE-->
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script src="{{ URL::to('js/all.js') }}"></script>
     
     @yield('styles')
 </head>

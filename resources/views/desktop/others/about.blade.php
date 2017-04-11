@@ -15,7 +15,7 @@
     <!--content-->
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-padding-12 w3-margin-top">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">About Us<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">About Us</h1>
         </div>
     </div>
 @endsection

@@ -25,16 +25,16 @@
         <div class="w3-content w3-container w3-hide-small" style="padding-top:9em">
             {!! Form::open(['route' => 'maplist', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
                 <div class="w3-col l5 m5">
-                    {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'required' => '', 'id' => 'eatlocation', 'style' => 'font-weight:bold;']) }}
+                    {{ Form::text('city', null, ['class' => 'w3-input w3-border w3-large w3-text-black inputbkg clickdown', 'required' => '', 'id' => 'eat-location', 'style' => 'font-weight:bold;']) }}
                 </div>
                 <div class="w3-col l2 m2">
                     <select class="w3-select w3-border w3-text-black w3-large inputbkg cs-select cs-skin-elastic clickdown" name="shift" style="height:50px">
-                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_all'] }}</option>
-                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_dinner'] }}</option>
-                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_lunch'] }}</option>
-                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_brunch'] }}</option>
-                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_breakfast'] }}</option>
-                        <option class="w3-text-black w3-white w3-large">{{ $lang->desktop()['index']['search_teatime'] }}</option>
+                        <option class="w3-text-black w3-white w3-large" value="All">{{ $lang->desktop()['index']['search_all'] }}</option>
+                        <option class="w3-text-black w3-white w3-large" value="Dinner">{{ $lang->desktop()['index']['search_dinner'] }}</option>
+                        <option class="w3-text-black w3-white w3-large" value="Lunch">{{ $lang->desktop()['index']['search_lunch'] }}</option>
+                        <option class="w3-text-black w3-white w3-large" value="Brunch">{{ $lang->desktop()['index']['search_brunch'] }}</option>
+                        <option class="w3-text-black w3-white w3-large" value="Breakfast">{{ $lang->desktop()['index']['search_breakfast'] }}</option>
+                        <option class="w3-text-black w3-white w3-large" value="Tea Time">{{ $lang->desktop()['index']['search_teatime'] }}</option>
                     </select>
                 </div>
                 <div class="input-group w3-col l4 m4">
@@ -52,12 +52,7 @@
      <!-- Container (About Section) -->
     <div class="w3-content w3-container w3-padding-64" id="about ">
         <h3 class="w3-center "><em>Zhoker</em></h3>
-        <p>Zhoker.com is the first brand of eating in sharing economics. As a leader of the household kitchen and food sharing platform, we devote our efforts to 
-           find those outstanding chefs to work with us. our purpose is to help everyone can taste delicious meal and share with someon. We guarantee that we inspect
-           every chef's kitchen and make them to fullfil the high quality standard, so please enjoy any meal we offer to you. we still provide some professional training
-           for chef and delicate meal photo taken service. You can get meals from deliver or take out, even you can have the meal in chef's house. that give you opportunity
-           social with someone who has same interestings with you. We like to help those busy people who don't have time to cook. Even though the life is busy, taking the 
-           healthy and delicious meal is still very important for everyone. That is a brand new life experience and don't hesitate, come trying out!</p>
+        <p>  {{ $lang->desktop()['index']['about_description'] }}</p>
     </div>
 
     <!-- Container (Portfolio Section) -->
@@ -122,14 +117,14 @@
 
     <!-- Container (Portfolio Section) -->
     <div class="w3-padding64 w3-content w3-container" style="margin-top:5em;">
-        <h3 class="w3-center ">OUR CHEF</h3>
-        <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
+        <h3 class="w3-center ">{{ $lang->desktop()['index']['chef_title'] }}</h3>
+        <p class="w3-center "><em>{{ $lang->desktop()['index']['chef_description'] }}</em></p><br>
     </div>
 
     <!-- Container (Portfolio Section) -->
     <div class="w3-padding-jumbo" style="margin-top:5em;margin-bottom:5em;">
-        <h3 class="w3-center ">WHAT WE SERVE</h3>
-        <p class="w3-center "><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them bigger</em></p><br>
+        <h3 class="w3-center ">{{ $lang->desktop()['index']['serve_title'] }}</h3>
+        <p class="w3-center "><em>{{ $lang->desktop()['index']['serve_description'] }}</em></p><br>
 
         <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
         <div class="w3-row-padding">
@@ -138,7 +133,7 @@
                     <div class="w3-display-container img-wrapper">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201606.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Chinese</b></h3>
+                            <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_chinese'] }}</b></h3>
                         </div>
                     </div>
                 </a>
@@ -149,7 +144,7 @@
                     <div class="w3-display-container img-wrapper">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201607.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>French</b></h3>
+                            <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_french'] }}</b></h3>
                         </div>
                     </div>
                 </a>
@@ -160,7 +155,7 @@
                     <div class="w3-display-container img-wrapper">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201608.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Barbecu</b></h3>
+                            <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_barbecu'] }}</b></h3>
                         </div>
                     </div>
                 </a>
@@ -171,7 +166,7 @@
                     <div class="w3-display-container img-wrapper">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201609.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Seafood</b></h3>
+                            <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_seafood'] }}</b></h3>
                         </div>
                     </div>
                 </a>
@@ -182,7 +177,7 @@
                     <div class="w3-display-container img-wrapper">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201610.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Japanese</b></h3>
+                            <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_japanese'] }}</b></h3>
                         </div>
                     </div>
                 </a>
@@ -193,7 +188,7 @@
                     <div class="w3-display-container img-wrapper">
                         <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201611.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
-                            <h3 class="w3-xxlarge"><b>Korean</b></h3>
+                            <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_korean'] }}</b></h3>
                         </div>
                     </div>
                 </a>
@@ -224,16 +219,16 @@
             minDate: moment()
         });
 
-        $("#eatlocation").val("{{ $lang->desktop()['index']['search_city'] }}");
+        $("#eat-location").val("{{ $lang->desktop()['index']['search_city'] }}");
 
-        $("#eatlocation").focus(function(){
-            if( $("#eatlocation").val() == "{{ $lang->desktop()['index']['search_city'] }}")
-                $("#eatlocation").val("");
+        $("#eat-location").focus(function(){
+            if( $("#eat-location").val() == "{{ $lang->desktop()['index']['search_city'] }}")
+                $("#eat-location").val("");
         });
 
-        $("#eatlocation").focusout(function(){
-            if( $("#eatlocation").val() == '')
-                $("#eatlocation").val("{{ $lang->desktop()['index']['search_city'] }}");
+        $("#eat-location").focusout(function(){
+            if( $("#eat-location").val() == '')
+                $("#eat-location").val("{{ $lang->desktop()['index']['search_city'] }}");
         });
     })
     </script>

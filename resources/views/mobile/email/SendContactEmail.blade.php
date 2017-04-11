@@ -15,8 +15,8 @@
     <!--content-->
     <div class="w3-content w3-container w3-center w3-border-green w3-border-bottom">
         <div class="w3-padding-24">
-            <p class="w3-large">Your Contact Email has already been Sent</p>
-            <a href="{{ route('home.index') }}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Home Page</b></a>
+            <p class="w3-large">{{ $lang->desktop()['send_contact_email']['title'] }}</p>
+            <a href="{{ route('home.index') }}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>{{ $lang->desktop()['send_contact_email']['home'] }}</b></a>
         </div>
     </div>
     

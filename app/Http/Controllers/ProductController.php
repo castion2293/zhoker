@@ -28,6 +28,8 @@ class ProductController extends Controller
         $this->productService = $productService;
         $this->agentService = $agentService;
         $this->gateService = $gateService;
+
+        parent::boot();
     }
 
     /**
@@ -100,7 +102,7 @@ class ProductController extends Controller
         $this->productService->findUser()->findCartByUser()->updateEachCart($request);
         $this->productService->findCartById($request->id)->deleteCart();
 
-        flash()->success('Success', 'Your item has been removed from your shopping cart!');
+        flash()->success(self::$lang->desktop()['flash']['success'], self::$lang->desktop()['flash']['product_remove']);
     }
 
     public function postCartStore(Request $request)

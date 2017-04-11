@@ -15,19 +15,19 @@
         <div class="modal-body" style="padding:10px 50px;">
             <div class="w3-row w3-padding-medium w3-border-grey w3-border-bottom">
                 <div class="w3-col l3 m3">
-                    <label class="w3-text-grey" style="font-family:cursive;">MEAL</label>
+                    <label class="w3-text-grey" style="font-family:cursive;">{{ $lang->desktop()['chef_order']['meal'] }}</label>
                 </div>
                 <div class="w3-col l3 m3" style="padding-left:1em;">
-                    <label class="w3-text-grey" style="font-family:cursive;">ITEM</label>
+                    <label class="w3-text-grey" style="font-family:cursive;">{{ $lang->desktop()['chef_order']['item'] }}</label>
                 </div>
                 <div class="w3-col l1 m1" style="">
-                    <label class="w3-text-grey" style="font-family:cursive;">TOTAL</label>
+                    <label class="w3-text-grey" style="font-family:cursive;">{{ $lang->desktop()['chef_order']['total'] }}</label>
                 </div>
                 <div class="w3-col l4 m4" style="padding-left:2.5em;">
-                    <label class="w3-text-grey" style="font-family:cursive;">CONTACT</label>
+                    <label class="w3-text-grey" style="font-family:cursive;">{{ $lang->desktop()['chef_order']['contact'] }}</label>
                 </div>
                 <div class="w3-col l1 m1" style="padding-left:1.5em;">
-                    <label class="w3-text-grey" style="font-family:cursive;">ACTION</label>
+                    <label class="w3-text-grey" style="font-family:cursive;">{{ $lang->desktop()['chef_order']['action'] }}</label>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                                 <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $OrderPresenter->getMealPrice($cart) }}</span></span>
                             </div>
                             <div class="">
-                                <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                                <span class="w3-text-grey w3-large">{{ $cart->people_order }} {{ $lang->desktop()['chef_order']['people_order'] }}</span>
                             </div>
                             <div class="">
                                 <span class="w3-text-grey w3-large">{{ $cart->date }} / {{ $cart->time }}</span>
@@ -78,7 +78,7 @@
                                     @else
                                         @if (!$cart->deleted_at && !$OrderPresenter->overTime($cart, $now))
                                             <div class="">
-                                                <span class="w3-text-deep-orange w3-large">Not Approve Yet!</span>
+                                                <span class="w3-text-deep-orange w3-large">{{ $lang->desktop()['chef_order']['not_approve'] }}!</span>
                                             </div>
                                         @endif
                                     @endif
@@ -88,26 +88,26 @@
                         <div class="w3-col l1 m1">
                             @if ($cheforder->deleted_at)
                                 @if ($cart->deleted_at)
-                                    <span class="w3-text-grey w3-large">Rejected</span>
+                                    <span class="w3-text-grey w3-large">{{ $lang->desktop()['chef_order']['rejected'] }}</span>
                                 @endif
                             @else
                                 @if ($cart->deleted_at)
-                                    <span class="w3-text-grey w3-large">Canceled</span>
+                                    <span class="w3-text-grey w3-large">{{ $lang->desktop()['chef_order']['canceled'] }}</span>
                                 @else
                                     @if ($cheforder->checked)
-                                        <span class="w3-text-grey w3-large">Approved</span>
+                                        <span class="w3-text-grey w3-large">{{ $lang->desktop()['chef_order']['approved'] }}</span>
                                         <div class="w3-margin-top">
-                                            <span class="w3-text-grey w3-large">{{ $OrderPresenter->paidCheck($cheforder->paid) }}</span>
+                                            <span class="w3-text-grey w3-large">{{ $cheforder->paid ? $lang->desktop()['chef_profile']['order_pay'] : $lang->desktop()['chef_profile']['order_not_pay']}}</span>
                                         </div>
                                     @else
                                         @if ($OrderPresenter->overTime($cart, $now))
-                                            <span class="w3-text-grey w3-large">Overdue</span>
+                                            <span class="w3-text-grey w3-large">{{ $lang->desktop()['chef_order']['overdue'] }}</span>
                                         @else
                                             <div class="">
-                                                <a href="{!! route('order.accept.get', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">Accept</a>
+                                                <a href="{!! route('order.accept.get', ['id' => $cheforder->id]) !!}" class="w3-btn w3-deep-orange w3-btn-block zk-shrink-hover">{{ $lang->desktop()['chef_order']['accept'] }}</a>
                                             </div>
                                             <div class="w3-padding-left" style="margin-top:6em;">
-                                                <a href="{!! route('order.reject', ['id' => $cheforder->id]) !!}" id="warn{{$cheforder->id}}confirm" class="w3-test-grey" style="display:none;">Reject</a>
+                                                <a href="{!! route('order.reject', ['id' => $cheforder->id]) !!}" id="warn{{$cheforder->id}}confirm" class="w3-test-grey" style="display:none;">{{ $lang->desktop()['chef_order']['reject'] }}</a>
                                                 <a href="#" id="warn{{$cheforder->id}}" class="w3-test-grey warn">Reject</a>
                                             </div>
                                         @endif
@@ -126,6 +126,7 @@
 </div>
 
 <!--datatimepeople modal-->
+<script src="{{ URL::to('js/fullcalendar/locale/zh-tw.js') }}"></script>
 <script>
     $(function () {
 
@@ -138,6 +139,7 @@
 
         //FullCalendar
         $('#calendar').fullCalendar({
+            locale: '{{ $lang->desktop()['language'] }}',
             header: {
                 left: 'prev,next today',
                 center: 'title',

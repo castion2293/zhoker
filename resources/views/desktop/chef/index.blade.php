@@ -16,7 +16,7 @@
     @inject('ProductPresenter', 'App\Presenters\ProductPresenter')
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-padding-12">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Menu Lists<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['chef_index']['title'] }}<h1>
         </div>
         @foreach ($meals as $meal)
             <div class="w3-row w3-white w3-border w3-border-green w3-round-large w3-margin-top w3-padding-medium">
@@ -26,7 +26,7 @@
                 <div class="w3-col l8 m8" style="padding-left:2em;">
                     <div class="w3-row">
                         <div class="w3-col l10 m10">
-                            <span class="w3-text-grey w3-xlarge" style="font-family:cursive;"><b>{{ $meal->name }}<b></span>
+                            <span class="w3-text-grey w3-xlarge" style="font-family:cursive;"><b>{{ $meal->name }}</b></span>
                         </div>
                         <div class="w3-col l2 m2" style="padding-top:5px;">
                             @if ($meal->people_eva > 0)
@@ -34,7 +34,7 @@
                                     <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
                                 @endfor
                             @else
-                                <span class="w3-text-orange w3-large">New Meal</span>
+                                <span class="w3-text-orange w3-large">{{ $lang->desktop()['chef_index']['new_meal'] }}</span>
                             @endif
                         </div>
                     </div>
@@ -51,13 +51,13 @@
                             @endforeach
                         </div>
                         <div class="w3-col l2 m2 w3-padding-small w3-right">
-                            {!! Html::linkRoute('chef.datetimepeople.get', 'Date/Time', [$meal->id], ['class' => 'btn w3-white w3-text-blue w3-border w3-border-blue btn-block zk-shrink-hover']) !!}
+                            {!! Html::linkRoute('chef.datetimepeople.get', $lang->desktop()['chef_index']['date_time'], [$meal->id], ['class' => 'btn w3-white w3-text-blue w3-border w3-border-blue btn-block zk-shrink-hover']) !!}
                         </div>
                         <div class="w3-col l2 m2 w3-padding-small w3-right">
-                            {!! Html::linkRoute('chef.edit', 'Edit', [$meal->id], ['class' => 'btn w3-white w3-text-red w3-border w3-border-red btn-block zk-shrink-hover']) !!}
+                            {!! Html::linkRoute('chef.edit', $lang->desktop()['chef_index']['edit'], [$meal->id], ['class' => 'btn w3-white w3-text-red w3-border w3-border-red btn-block zk-shrink-hover']) !!}
                         </div>
                         <div class="w3-col l2 m2 w3-padding-small w3-right">
-                            {!! Html::linkRoute('chef.show', 'View', [$meal->id], ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
+                            {!! Html::linkRoute('chef.show', $lang->desktop()['chef_index']['view'], [$meal->id], ['class' => 'btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
                         </div>
                     </div>
                 </div>

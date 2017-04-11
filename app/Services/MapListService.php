@@ -247,7 +247,7 @@ class MapListService
     {
         if ($sort == '1') {
             $this->meal = $this->mealRepo->findMealByIdAndPriceOrder($this->id, 'asc');
-        } else if($request->input('sort') == '2') {
+        } else if($sort == '2') {
             $this->meal = $this->mealRepo->findMealByIdAndPriceOrder($this->id, 'desc');
         }
 

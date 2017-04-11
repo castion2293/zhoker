@@ -15,7 +15,7 @@
     <!--content-->
     <div class="w3-content w3-container w3-padding-32">
         <div class="w3-padding-4">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Evaluation<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['evaluation']['title'] }}</h1>
         </div>
 
         <div class="w3-border-grey w3-border-bottom">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="w3-border-grey w3-border-bottom" style="margin-top:4em;">
-            <h1 class="w3-text-grey w3-large w3-margin-left" style="font-family: cursive">Chef</h1>
+            <h1 class="w3-text-grey w3-large w3-margin-left" style="font-family: cursive">{{ $lang->desktop()['evaluation']['chef'] }}</h1>
         </div>
         <div class="w3-padding-left">
             <div class="w3-padding-12 w3-border-bottom w3-border-ligth-grey">
@@ -66,17 +66,17 @@
         <div class="w3-margin-top">
             {!! Form::open(['route' => ['evaluation.store', $cart->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                 <div class="w3-padding-12">
-                    <label class="w3-text-gery w3-large" style="font-family:cursive">Give the score for this meal:</label> 
+                    <label class="w3-text-gery w3-large" style="font-family:cursive">{{ $lang->desktop()['evaluation']['give_score'] }}:</label>
                     <input id="score" name="score" value="3" type="number" class="rating" min=0 max=5 step=1 data-size="xs">
                 </div>
                 <div class="w3-padding-12">
-                    <label class="w3-text-gery w3-large" style="font-family:cursive">Leave Your Comment</label> 
+                    <label class="w3-text-gery w3-large" style="font-family:cursive">{{ $lang->desktop()['evaluation']['comment'] }}</label>
                     {{ Form::textarea('content', null, ['class' => 'form-control', 'id' => 'evalue-content', 'rows' => '10', 'required' => '']) }}
                 </div>
                 <div class="w3-row w3-margin-top w3-border-green w3-border-top" style="padding-top:1em;">
                     <div class="w3-rest"></div>
                     <div class="w3-col l3 m3 w3-right">
-                        {!! Form::submit('submit', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
+                        {!! Form::submit($lang->desktop()['evaluation']['submit'], ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
                     </div>
                 </div>
             {!! Form::close() !!}

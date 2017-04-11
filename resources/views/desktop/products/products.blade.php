@@ -26,7 +26,7 @@
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-row w3-margin-top w3-border-green w3-border-bottom">
             <div class="w3-col l10 m10">
-                <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}<h1>
+                <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}</h1>
             </div>
             <div class="w3-col l2 m2">
                 <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}TWD</b>
@@ -57,55 +57,55 @@
                 </div>
                 <div class="w3-right" style="padding-right:3em;">
                     @if (Auth::check())
-                      <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="{{ $ProductPresenter->checkUserBuyNextTimeItem(Auth::user(), $datetimepeople->id) ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i> Buy Next Time</div>
+                      <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="{{ $ProductPresenter->checkUserBuyNextTimeItem(Auth::user(), $datetimepeople->id) ? 'fa fa-heart' : 'fa fa-heart-o' }}"></i> {{ $lang->desktop()['product']['buy_next_time'] }}</div>
                     @else
-                      <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="fa fa-heart-o"></i> Buy Next Time</div>
+                      <div id="bnt-btn" class="btn w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover"><i class="fa fa-heart-o"></i> {{ $lang->desktop()['product']['buy_next_time'] }}</div>
                     @endif  
                 </div>
             </div>
             <div class="w3-col l5 m5 w3-padding-large">
               {!! Form::open(['route' => ['product.cart', $meal->id, $datetimepeople->id], 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
                 <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Evaluation:  
+                    <label>{{ $lang->desktop()['product']['evaluation'] }}:
                         @if ($meal->people_eva > 0)
                             @for ($i = 0; $i < $ProductPresenter->getEvaluateScore($meal->evaluation, $meal->people_eva); $i++)
                               <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
                             @endfor
                         @else
-                              <span class="w3-text-orange w3-large">New Meal</span>
+                              <span class="w3-text-orange w3-large">{{ $lang->desktop()['product']['new_meal'] }}</span>
                         @endif
                     </label>
                 </div>
                 <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Eaten:
-                        <span class="w3-text-grey w3-large">{{ $meal->people_eaten }} {{str_plural('person', $meal->people_eaten)}}</span>
+                    <label>{{ $lang->desktop()['product']['eaten'] }}:
+                        <span class="w3-text-grey w3-large">{{ $meal->people_eaten }} {{str_plural($lang->desktop()['product']['person'], $meal->people_eaten)}}</span>
                     </label>
                 </div>
                 <div class="w3-margin-top w3-border-bottom w3-border-grey">
-                    <label>Type:
+                    <label>{{ $lang->desktop()['product']['type'] }}:
                       @foreach ($meal->categories as $category)
                           <p class="w3-tag w3-teal w3-tiny">{{ $category->category }}</p>
                       @endforeach
                     </label>
                 </div>
                 <div class="w3-padding-12 w3-border-bottom w3-border-grey">
-                    <label>Date/time:
-                        <sapn class="w3-text-grey w3-large">{{ $datetimepeople->date }} / {{ $datetimepeople->time }}</span>
+                    <label>{{ $lang->desktop()['product']['date_time'] }}:
+                        <span class="w3-text-grey w3-large">{{ $datetimepeople->date }} / {{ $datetimepeople->time }}</span>
                     </label>
                 </div>
                 <div class="w3-row w3-padding-12 w3-border-bottom w3-border-grey">
                     <div class="w3-col l3 m3" style="margin-top:0.5em;">
-                      <label>How Many:</label>
+                      <label>{{ $lang->desktop()['product']['how_many'] }}:</label>
                     </div>
                     <div class="w3-col l3 m3">
                       <select class="w3-select w3-border w3-text-grey w3-medium" id="people_order" name="people_order" required="" > 
                           @for ($i = 0;$i < $datetimepeople->people_left;$i++)
-                              <option value='{{ $i + 1 }}'>{{ $i+1 }} people</option>
+                              <option value='{{ $i + 1 }}'>{{ $i+1 }} {{ $lang->desktop()['product']['people'] }}</option>
                           @endfor
                       </select>
                     </div>
                     <div class="w3-col l3 m3 w3-center" style="margin-top:0.5em;">
-                      <label>Method:</label>
+                      <label>{{ $lang->desktop()['product']['method'] }}:</label>
                     </div>
                     <div class="w3-col l3 m3">
                       <select class="w3-select w3-border w3-text-grey w3-medium" id="method_way" name="method_way" required="" > 
@@ -117,16 +117,16 @@
                 </div>
                 <div class="w3-row w3-padding-12">
                     @if ($datetimepeople->people_left != 0)
-                      {!! Form::submit('ADD TO CART', ['id' => 'add-to-cart', 'class' => 'btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange']) !!}
+                      {!! Form::submit( $lang->desktop()['product']['add_to_cart'] , ['id' => 'add-to-cart', 'class' => 'btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange']) !!}
                     @else
                       <div class="w3-row">
                           <div class="w3-col l6 m6" style="padding-right:0.5em;">
-                              <div id="reserve" class="btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange">Reserve Meal</div>
+                              <div id="reserve" class="btn w3-deep-orange w3-border w3-border-deep-orange btn-block w3-large zk-shrink-hover w3-hover-deep-orange">{{ $lang->desktop()['product']['reserve_meal'] }}</div>
                               <!--link for going to shoppingcart page, not shown--> 
                               <a href="{{ url('/product/cart/show/' . Auth::user() ? Auth::user()->id : 0 . '#reserve') }}" id="shopping-link" style="display:none;"></a>
                           </div>
                           <div class="w3-col l6 m6" style="padding-left:0.5em;">
-                              <a href="{{ route('product.cart.otherdays', ['meal_id' => $meal->id]) }}" class="btn w3-white w3-text-blue w3-border w3-border-blue btn-block w3-large zk-shrink-hover">Other Days</a>
+                              <a href="{{ route('product.cart.otherdays', ['meal_id' => $meal->id]) }}" class="btn w3-white w3-text-blue w3-border w3-border-blue btn-block w3-large zk-shrink-hover">{{ $lang->desktop()['product']['other_day'] }}</a>
                           </div>
                       </div>
                     @endif
@@ -136,8 +136,8 @@
 
             <div class="w3-col l12 m12 w3-padding-large">
                  <div>
-                    <label class="w3-text-grey w3-large" style="font-family: cursive">meal description</label>
-                    <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   Share</p>
+                    <label class="w3-text-grey w3-large" style="font-family: cursive">{{ $lang->desktop()['product']['meal_description'] }}</label>
+                    <p id="shareBtn" class="w3-small w3-tag w3-center w3-round-medium" style="padding-top:2px;background-color:#3b5998;cursor:pointer;"><i class="fa fa-facebook-square w3-medium w3--text-indigo" style=""></i>   {{ $lang->desktop()['product']['share'] }}</p>
                  </div>
                  <div class="w3-padding-small">
                     <p>{!! $meal->description !!}</p>
@@ -145,7 +145,7 @@
             </div>
 
             <div class="w3-col l12 m12 w3-padding-large">
-                 <label class="w3-text-grey w3-large" style="font-family: cursive">Comments</label>
+                 <label class="w3-text-grey w3-large" style="font-family: cursive">{{ $lang->desktop()['product']['comment'] }}</label>
                  <div id="comment-content" class="w3-padding-small">
                     @foreach ($meal->comments()->latest('created_at')->get() as $comment)             
                         <div id="comment{{ $loop->iteration }}" class="w3-padding-12 w3-border-bottom w3-border-light-grey" style="display:none;">
@@ -170,7 +170,7 @@
                     @endforeach
                  </div>
                  <div id="more-comments" class="w3-center w3-margin-top">
-                    <button class="btn w3-large w3-white w3-border w3-border-green w3-text-green zk-shrink-hover" style="width:15%">More...</button>
+                    <button class="btn w3-large w3-white w3-border w3-border-green w3-text-green zk-shrink-hover" style="width:15%">{{ $lang->desktop()['product']['more'] }}...</button>
                 </div>
              </div>
 

@@ -29,6 +29,8 @@ class ImageController extends Controller
         $this->imageService =$imageService;
         $this->agentService = $agentService;
         $this->gateService = $gateService;
+
+        parent::boot();
     }
 
     /**

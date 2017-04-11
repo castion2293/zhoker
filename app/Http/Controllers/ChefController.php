@@ -26,6 +26,8 @@ class ChefController extends Controller
         $this->agentService = $agentService;
         $this->gateService = $gateService;
         $this->imageService = $imageService;
+
+        parent::boot();
     }
 
     /**
@@ -74,7 +76,7 @@ class ChefController extends Controller
         $this->chefService->connectMethod($meal);
         $this->chefService->connectShift($meal);
 
-        flash()->success('Success', 'The meal has been created successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['create_meal']);
 
         $agent = $this->agentService->agent();
         //return view($agent . '.chef.show',['meal' => $meal]);
@@ -138,7 +140,7 @@ class ChefController extends Controller
         $this->chefService->connectMethod($meal);
         $this->chefService->connectShift($meal);
         
-        flash()->success('Success', 'The meal has been updated successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['update_meal']);
         return redirect()->action('ChefController@show', ['id' => $meal->id]);
     }
 
@@ -153,7 +155,7 @@ class ChefController extends Controller
 
         $this->chefService->destroy($meal);
 
-        flash()->success('Success', 'The meal has been deleted successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['delete_meal']);
         //return redirect()->route('chef.index');
         return redirect()->action('ChefController@index');
     }
@@ -187,7 +189,7 @@ class ChefController extends Controller
 
         $this->chefService->updateDatetimePeople($meal, $datetimepeople, $request);
 
-        flash()->success('Success', 'The Date/Time/People have been updated successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['update_datetimepeople']);
         return redirect()->action(
             'ChefController@show', ['id' => $meal->id]
         );

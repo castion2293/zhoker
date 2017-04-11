@@ -36,6 +36,8 @@ class CashierController extends Controller
         $this->eventService = $eventService;
         $this->sessionService = $sessionService;
         $this->gateService = $gateService;
+
+        parent::boot();
     }
 
     /**
@@ -85,7 +87,7 @@ class CashierController extends Controller
         //send user order email
         $this->eventService->userOrderEvent($user, $carts);
 
-        flash()->success('Success', 'Your order has been created successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['create_order']);
 
         $url = "order/user_order/" . $user->id . "?userOrderType=All";
         return redirect($url);
@@ -123,13 +125,13 @@ class CashierController extends Controller
             //send user order email
             $this->eventService->userOrderEvent($user, $carts);
 
-            flash()->success('Success', 'Your order has been created successfully!');
+            flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['create_order']);
 
             $url = "order/user_order/" . $user->id . "?userOrderType=All";
             return redirect($url);
 
         } catch (\Exception $e) {
-            flash()->error('Error', $e->getMessage());
+            flash()->error(Self::$lang->desktop()['flash']['error'], $e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

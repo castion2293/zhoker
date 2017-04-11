@@ -1,4 +1,4 @@
-<h3>We already received your questions and we'll reply you as soon as possible!</h3>
+<h3>{{ $lang->desktop()['contact_customer_mail']['title'] }}!</h3>
 
-<P>we thank again for using the Zhoker.com service</p>
-<p>This is a system mail. please don't reply it</p>
+<P>{{ $lang->desktop()['contact_customer_mail']['p1'] }}</p>
+<p>{{ $lang->desktop()['contact_customer_mail']['p2'] }}</p>

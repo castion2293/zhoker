@@ -33,6 +33,8 @@ class ChefProfileController extends Controller
         $this->mainService = $mainService;
         $this->agentService = $agentService;
         $this->gateService = $gateService;
+
+        parent::boot();
     }
 
     /**
@@ -79,7 +81,7 @@ class ChefProfileController extends Controller
         $meals = $this->mainService->findMeals($chef, 6)->getMeals();
         $cheforders = $this->mainService->findChefOrders($chef, 3)->getChefOrders();
 
-        flash()->success('Success', 'The user profile has been updated successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['update_user_profile']);
 
         $agent = $this->agentService->agent();
         return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);

@@ -16,13 +16,13 @@
     <div id="shoppingcart" class="w3-content w3-container w3-padding-64">
         @if ($carts->isEmpty())
             <div class="w3-center">
-                <h1 style="font-family:cursive;">Sorry! Please Add Your Items first!</h1>
+                <h1 style="font-family:cursive;">{{ $lang->desktop() ['shopping_cart']['no_cart'] }}</h1>
             </div>
         @else
             @foreach ($carts as $cart)
                 <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
                     <div class="w3-col s8" style="margin-top:0.5em;padding-left:0.5em;">
-                        <span class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></span>
+                        <span class="w3-text-grey w3-large"><b>{{ str_limit($cart->meals->name,24) }}</b></span>
                     </div>
                     <div class="w3-col s4" style="margin-top:0.5em;">
                         <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}TWD</span></span>
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="w3-col s4 w3-center w3-right" style="margin-top:1.3em;">
-                            <span class="w3-text-grey w3-large">QUANTITY:</span>
+                            <span class="w3-text-grey w3-large">{{ $lang->desktop() ['shopping_cart']['quantity'] }}:</span>
                         </div>
                     </div>
 
@@ -60,14 +60,14 @@
                             <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
                         </div>
                         <div class="w3-col s4 w3-center w3-right" style="margin-top:1em;">
-                            <span class="w3-text-grey w3-large">TOTAL:</span>
+                            <span class="w3-text-grey w3-large">{{ $lang->desktop() ['shopping_cart']['total'] }}:</span>
                         </div>
                     </div>
 
                     <div class="w3-row">
                         <div class="w3-rest"></div>
                         <div id="remove_part" class="w3-col s4 w3-right">
-                            <p id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">Remove Item</p>
+                            <p id="rmv{{ $cart->id }}" class="remove w3-text-grey w3-small" style="cursor:pointer;">{{ $lang->desktop() ['shopping_cart']['remove_item'] }}</p>
                         </div>
                     </div>
 
@@ -75,14 +75,14 @@
             @endforeach
 
             <div class="w3-col s12 w3-center w3-margin-top">
-                <span class="w3-text-grey w3-xlarge">Subtotal: <span class="w3-text-green w3-xlarge">$<span id="total_price">{{ $totalPrice }}</span></span></span>
+                <span class="w3-text-grey w3-xlarge">{{ $lang->desktop() ['shopping_cart']['subtotal'] }}: <span class="w3-text-green w3-xlarge">$<span id="total_price">{{ $totalPrice }}</span></span></span>
                 <!--for totalPrice post use, not shown-->
                 <input type="text" name="totalPrice" id="totalPrice" style="display:none;" value="{{ $totalPrice }}">
             </div>
            
             <div class="w3-col s12 w3-margin-top">
                 
-                <a href="#" id="ckt" class="btn w3-deep-orange w3-large btn-block zk-shrink-hover">Checkout</a>
+                <a href="#" id="ckt" class="btn w3-deep-orange w3-large btn-block zk-shrink-hover">{{ $lang->desktop() ['shopping_cart']['checkout'] }}</a>
                 <!--link for chectout, not shown-->
                 <a href="{!! route('product.cart.checkout', ['id' => Auth::user()->id]) !!}" id="ckt_link" style="display:none;"></a>
                 
@@ -91,23 +91,23 @@
             </div>
             
             <div class="w3-col s12 w3-margin-top">
-                <a href="{{ route('maplist.search.get')}}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover">Keep Shopping</a>
+                <a href="{{ route('maplist.search.get')}}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover">{{ $lang->desktop() ['shopping_cart']['keep_shopping'] }}</a>
             </div>
         @endif
     </div>
 
     <div id="buynexttime" class="w3-content w3-container w3-padding-64">
-        <h3 class="w3-text-green w3-border-green w3-border-bottom">Buy Next Time Items<h3>
+        <h3 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop() ['shopping_cart']['buy_next_time_item'] }}<h3>
 
         @if ($buyNextTimeItems->isEmpty())
             <div class="w3-center">
-                <h3 style="font-family:cursive;">Sorry! You don't have any buy next time items now!</h3>
+                <h3 style="font-family:cursive;">{{ $lang->desktop() ['shopping_cart']['no_next_time'] }}</h3>
             </div>
         @else
             @foreach ($buyNextTimeItems as $datetimepeople)
                 <div class="w3-row w3-border w3-border-green w3-round-large w3-padding-tiny w3-margin-top">
                     <div class="w3-col s8" style="margin-top:0.5em;padding-left:0.5em;">
-                        <span class="w3-text-grey w3-large"><b>{{ $datetimepeople->meals->name }}</b></span>
+                        <span class="w3-text-grey w3-large"><b>{{ str_limit($datetimepeople->meals->name, 24) }}</b></span>
                     </div>
                     <div class="w3-col s4" style="margin-top:0.5em;">
                         <span class="w3-text-green w3-large">${{ $datetimepeople->meals->price }}TWD</span>
@@ -124,13 +124,13 @@
                         <span class="w3-text-grey w3-large">{{ $datetimepeople->date }} / {{ $datetimepeople->time }}</span>
                     </div>
                     <div class="w3-col s12" style="padding-left:0.5em;">
-                        <span class="w3-text-grey w3-large">{{ $datetimepeople->people_left }} People Left</span>
+                        <span class="w3-text-grey w3-large">{{ $datetimepeople->people_left }} {{ $lang->desktop() ['shopping_cart']['people_left'] }}</span>
                     </div>
                     <div class="w3-col s6 w3-padding-12" style="padding-right:0.1em;">
-                        <div id="bnt{{ $datetimepeople->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover bnt-btn"><i class="fa fa-heart"></i> Buy Next Time</div>
+                        <div id="bnt{{ $datetimepeople->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-green w3-text-green zk-shrink-hover bnt-btn"><i class="fa fa-heart"></i> {{ $lang->desktop() ['shopping_cart']['buy_next_time'] }}</div>
                     </div>
                     <div class="w3-col s6 w3-padding-12" style="padding-left:0.1em;">
-                        <a href="{{ route('product.show', ['id' => $datetimepeople->meals->id, 'datetime_id' => $datetimepeople->id])}}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover"><i class="fa fa-shopping-cart"></i> Add To Cart</a>
+                        <a href="{{ route('product.show', ['id' => $datetimepeople->meals->id, 'datetime_id' => $datetimepeople->id])}}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover"><i class="fa fa-shopping-cart"></i> {{ $lang->desktop() ['shopping_cart']['add_to_cart'] }}</a>
                     </div>
                 </div>
             @endforeach
@@ -139,11 +139,11 @@
     </div>
 
     <div id="reserve" class="w3-content w3-container w3-padding-64">
-        <h3 class="w3-text-green w3-border-green w3-border-bottom">Reserve Items<h3>
+        <h3 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop() ['shopping_cart']['reserve_item'] }}<h3>
 
          @if ($reserveItems->isEmpty())
             <div class="w3-center">
-                <h3 style="font-family:cursive;">Sorry! You don't have any reserve items now!</h3>
+                <h3 style="font-family:cursive;">{{ $lang->desktop() ['shopping_cart']['no_reserve'] }}</h3>
             </div>
         @else
             @foreach ($reserveItems as $meal)
@@ -163,12 +163,12 @@
                         @endforeach
                     </div>
                     <div class="w3-col s6 w3-padding-12" style="padding-right:0.1em;">
-                        <div id="btn{{ $meal->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-red w3-text-red zk-shrink-hover res-btn">Cancel</div>
+                        <div id="btn{{ $meal->id }}" class="btn btn-block w3-medium w3-white w3-border w3-border-red w3-text-red zk-shrink-hover res-btn">{{ $lang->desktop() ['shopping_cart']['cancel'] }}</div>
                         <!--link for going to shoppingcart page, not shown--> 
                         <a href="{{ url('/product/cart/show/' . Auth::user()->id) }}" id="shopping-link" style="display:none;"></a>
                     </div>
                     <div class="w3-col s6 w3-padding-12" style="padding-left:0.1em;">
-                        <a href="{{ route('product.cart.otherdays', ['meal_id' => $meal->id]) }}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">Other Days</a>
+                        <a href="{{ route('product.cart.otherdays', ['meal_id' => $meal->id]) }}" class="btn btn-block w3-medium w3-deep-orange zk-shrink-hover">{{ $lang->desktop() ['shopping_cart']['other_day'] }}</a>
                     </div>
                 </div>
             @endforeach
@@ -291,12 +291,13 @@
         //remove item
         $(".remove").on('click',function(event){
             swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover the meal again!",
+                title: "{{ $lang->desktop()['flash']['are_you_sure'] }}",
+                text: "{{ $lang->desktop()['flash']['product_remove_warn'] }}",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, cancel it!",
+                confirmButtonText: "{{ $lang->desktop()['flash']['cancel_confirm_btn'] }}",
+                cancelButtonText: "{{ $lang->desktop()['flash']['cancel_btn'] }}",
                 closeOnConfirm: false
             },
             function(){

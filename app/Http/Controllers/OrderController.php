@@ -37,6 +37,8 @@ class OrderController extends Controller
         $this->eventService = $eventService;
         $this->agentService = $agentService;
         $this->gateService = $gateService;
+
+        parent::boot();
     }
 
     /**
@@ -95,10 +97,11 @@ class OrderController extends Controller
                 $this->orderService->updateMealPeopleEaten($cart->meals);
 
                 //send user meal confirmed email
-                $user = $this->orderService->findCart($chefOrder)->getCart();
+
+                $user = $this->orderService->findUserByCart($cart)->getUser();
                 $this->eventService->chefConFirmEvent($user, $cart);
 
-                flash()->success('Success', 'You have accepted the order successfully!');
+                flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['accept_order']);
 
                 $url = "order/chef_order/" . $chefOrder->chef_id . "?chefOrderType=approve";
                 return redirect($url);
@@ -144,7 +147,7 @@ class OrderController extends Controller
             }
         }
 
-        flash()->success('Success', 'You have accepted the order successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['accept_order']);
     }
 
     /**
@@ -167,7 +170,7 @@ class OrderController extends Controller
         $this->orderService->deleteChefOrder($chefOrder);
         $this->orderService->deleteCart($cart);
         
-        flash()->success('Success', 'You have rejected the order successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['reject_order']);
         
         $url = "order/chef_order/" . $chefOrder->chef_id . "?chefOrderType=reject";
         return redirect($url);
@@ -191,7 +194,7 @@ class OrderController extends Controller
 
         $this->orderService->deleteCart($cart);
 
-        flash()->success('Success', 'You have rejected the order successfully!');
+        flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['cancel_order']);
        
         $url = "order/user_order/" . $user->id . "?userOrderType=cancel";
         return redirect($url);

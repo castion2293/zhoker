@@ -16,12 +16,12 @@
     <div class="w3-content w3-container w3-padding-64">
 
         <div class="w3-padding-12 w3-margin-top" id="title">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Image<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['chef_image']['title'] }}<h1>
         </div>
 
         
         <div class="">
-            <div id="upload-modal-trigger" class="btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><i class="fa fa-cloud-upload"></i> Upload</div>
+            <div id="upload-modal-trigger" class="btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><i class="fa fa-cloud-upload"></i> {{ $lang->desktop()['chef_image']['image_upload'] }}</div>
         </div>
         
         <div class="w3-border w3-border-grey w3-round-large w3-padding-24 w3-margin-top">
@@ -45,13 +45,13 @@
             </div>
             <div id="more-images" class="w3-center">
                 @if (count($images) > 0)
-                    <button class="btn w3-large w3-white w3-border w3-border-green w3-text-green zk-shrink-hover" style="width:60%">More...</button>
+                    <button class="btn w3-large w3-white w3-border w3-border-green w3-text-green zk-shrink-hover" style="width:60%">{{ $lang->desktop()['chef_image']['more'] }}...</button>
                 @endif
             </div>
         </div>
 
         <div class="w3-margin-top">
-            <div id="trash-trigger" class="btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block zk-shrink-hover"><i class="fa fa-trash"></i> Remove</div>
+            <div id="trash-trigger" class="btn w3-large w3-white w3-text-red w3-border w3-border-red btn-block zk-shrink-hover"><i class="fa fa-trash"></i> {{ $lang->desktop()['chef_image']['image_remove'] }}</div>
         </div>
 
     </div>
@@ -66,10 +66,10 @@
                 <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
             </div>
             <div>
-                <h1 class="text-center w3-padding-8 w3-text-green">Upload Images</h1>
+                <h1 class="text-center w3-padding-8 w3-text-green" style="padding-left: 1em;">{{ $lang->desktop()['chef_image']['modal_title'] }}</h1>
             </div>
             <div class="modal-body w3-center" style="padding:10px 10px;">
-                <label class="w3-text-gery w3-large" style="font-family:cursive">Upload Photos(10 max)</label> 
+                <label class="w3-text-gery w3-large" style="font-family:cursive">{{ $lang->desktop()['chef_image']['modal_photos'] }}</label>
                 <div class="dropzone" id="my-dropzone">
                     <div class="fallback">
                         <input name="img" type="file" multiple  required="" />
@@ -79,12 +79,12 @@
             </div>
             <div class="modal-footer">
                 <div class="w3-center">
-                    <a href="{{ url('image/finish/' . $chef->id) }}" class="btn w3-large w3-green zk-shrink-hover" id="finish-upload" style="width:80%;display:none;">Finish</a>
+                    <a href="{{ url('image/finish/' . $chef->id) }}" class="btn w3-large w3-green zk-shrink-hover" id="finish-upload" style="width:80%;display:none;">{{ $lang->desktop()['chef_image']['modal_finish'] }}</a>
                 </div>
                 <div class="w3-center w3-margin-top">
-                    <button class="btn w3-large w3-white w3-text-green w3-border w3-border-green zk-shrink-hover" id="upload-img" style="width:80%;">Upload</button>
+                    <button class="btn w3-large w3-white w3-text-green w3-border w3-border-green zk-shrink-hover" id="upload-img" style="width:80%;">{{ $lang->desktop()['chef_image']['modal_upload'] }}</button>
                     <!--for uplaod image use, not shown in previous-->
-                    <button class="btn w3-large w3-white w3-text-white w3-border w3-border-white" style="width:20%;display:none;" id="hide-btn" disabled>Upload</button>
+                    <button class="btn w3-large w3-white w3-text-white w3-border w3-border-white" style="width:20%;display:none;" id="hide-btn" disabled>{{ $lang->desktop()['chef_image']['modal_upload'] }}</button>
                     <div class="" id="loader" style="left:43%;margin-top:-3em;display:none;"></div>
                 </div>
             </div>
@@ -107,12 +107,13 @@
             // trigger delte button
             $("#trash-trigger").click(function() {
                 swal({
-                    title: "Are you sure?",
-                    text: "You will not be able to recover the images!",
+                    title: "{{ $lang->desktop()['flash']['are_you_sure'] }}",
+                    text: "{{ $lang->desktop()['flash']['image_remove_warn'] }}",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
+                    confirmButtonText: "{{ $lang->desktop()['flash']['delete_confirm_btn'] }}",
+                    cancelButtonText: "{{ $lang->desktop()['flash']['cancel_btn'] }}",
                     closeOnConfirm: false
                 },
                 function(){

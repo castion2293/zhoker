@@ -15,18 +15,18 @@
     <!--content-->
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-padding-12 w3-margin-top">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Contact Us<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['contact']['title'] }}<h1>
         </div>
         {!! Form::open(['route' => 'contact.post', 'data-parsley-validate' => '', 'files' => true, 'method' => 'POST']) !!}
             <div class="w3-row-padding w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
                 <div class="w3-col l3 m3">
-                    {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Name', 'required' => '', 'maxlength' => '255']) }}   
+                    {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => $lang->desktop()['contact']['name'], 'required' => '', 'maxlength' => '255']) }}
                 </div>
                 <div class="w3-col l5 m5">
-                    {{ Form::text('email', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Email', 'required' => '']) }}   
+                    {{ Form::text('email', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => $lang->desktop()['contact']['email'], 'required' => '']) }}
                 </div>
                 <div class="w3-col l4 m4">
-                    {{ Form::text('subject', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Subject', 'required' => '', 'maxlength' => '255']) }}   
+                    {{ Form::text('subject', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => $lang->desktop()['contact']['subject'], 'required' => '', 'maxlength' => '255']) }}
                 </div>
                 <div class="w3-col l12 m12 w3-margin-top">
                     <textarea name="content" class="w3-input w3-border w3-border-grey w3-large w3-text-grey" rows="10" required></textarea>
@@ -41,7 +41,7 @@
             <div class="w3-row w3-margin-top">
                 <div class="w3-rest"></div>
                 <div class="w3-col l3 m3 w3-right">
-                    {!! Form::submit('Submit', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
+                    {!! Form::submit($lang->desktop()['contact']['submit'], ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover']) !!}
                 </div>
             </div> 
         {!! Form::close() !!}

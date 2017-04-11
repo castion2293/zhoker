@@ -23,6 +23,8 @@ class PageController extends Controller
     {
         $this->mailService = $mailService;
         $this->agentService = $agentService;
+
+        parent::boot();
     }
 
     /**

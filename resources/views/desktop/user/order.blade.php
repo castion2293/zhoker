@@ -16,20 +16,20 @@
     <div class="w3-content w3-container w3-padding-64">
         
         <div class="w3-padding-12">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Order<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['user_order']['title'] }}</h1>
         </div>
 
         <div class="w3-margin-top w3-padding-left" style="width:20%;position:absolute">
-            <select id="type-select" class="w3-select w3-large w3-text-grey">
-                <option value="" disabled selected>Type Search</option>
-                <option value="All" class="w3-large w3-text-grey">All</option>
-                <option value="Approve" class="w3-large w3-text-grey">Approve</option>
-                <option value="Reject" class="w3-large w3-text-grey">Reject</option>
-                <option value="Pending" class="w3-large w3-text-grey">Pending</option>
-                <option value="Cancel" class="w3-large w3-text-grey">Cancel</option>
-                <option value="Overdue" class="w3-large w3-text-grey">Overdue</option>
-                <option value="Evaluation" class="w3-large w3-text-grey">Evaluation</option>
-                <option value="Evaluated" class="w3-large w3-text-grey">Evaluated</option>
+            <select id="type-select" class="w3-select w3-large w3-text-grey" style="cursor:pointer;">
+                <option value="" disabled selected>{{ $lang->desktop()['user_order']['type_search'] }}</option>
+                <option value="All" class="w3-large w3-text-grey">{{ $lang->desktop()['user_order']['type_all'] }}</option>
+                <option value="Approve" class="w3-large w3-text-grey">{{ $lang->desktop()['user_order']['type_approved'] }}</option>
+                <option value="Reject" class="w3-large w3-text-grey">{{ $lang->desktop()['user_order']['type_reject'] }}</option>
+                <option value="Pending" class="w3-large w3-text-grey">{{ $lang->desktop()['user_order']['type_pending'] }}</option>
+                <option value="Cancel" class="w3-large w3-text-grey">{{ $lang->desktop()['user_order']['type_cancel'] }}</option>
+                <option value="Overdue" class="w3-large w3-text-grey">{{ $lang->desktop()['user_order']['type_overdue'] }}</option>
+                <option value="Evaluation" class="w3-large w3-text-grey">{{ $lang->desktop()['user_order']['type_evaluation'] }}</option>
+                <option value="Evaluated" class="w3-large w3-text-grey">{{ $lang->desktop()['user_order']['type_evaluated'] }}</option>
             </select>
             <!--for refresh the new page, not shown-->
             <a id="new-page-link" href="" style="display:none;">new page</a> 
@@ -37,13 +37,13 @@
 
         @if ($userorders->isEmpty())
             <div class="w3-center" style="margin-top:8em;">
-                <h1 style="font-family:cursive;">Sorry! You don't have any order right now!</h1>
+                <h1 style="font-family:cursive;">{{ $lang->desktop()['user_order']['no_order'] }}</h1>
             </div>
         @else
             <div class='tabs tabs_active'>
                     <ul class='horizontal w3-right'>
-                        <li><a id="calendar-link" href="#tab-1" class="w3-small tab-link">Calendar</a></li>
-                        <li><a href="#tab-2" class="w3-small tab-link">list</a></li>
+                        <li><a id="calendar-link" href="#tab-1" class="w3-small tab-link">{{ $lang->desktop()['user_order']['calendar'] }}</a></li>
+                        <li><a href="#tab-2" class="w3-small tab-link">{{ $lang->desktop()['user_order']['list'] }}</a></li>
                     </ul>
                 <div id='tab-1' class="w3-content w3-container">
                     <!--Chef Order Calendar View -->

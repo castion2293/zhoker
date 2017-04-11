@@ -15,7 +15,7 @@
     <!--content-->
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-padding-12">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Date/Time/People</h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['chef_datetimepeople']['title'] }}</h1>
         </div>
 
         <div class="w3-row w3-margin-top w3-padding-medium">
@@ -30,21 +30,21 @@
                     <label class="w3-large w3-text-green">${{ $meal->price }}</label>
                 </div>
                 <div class="">
-                    <label class="w3-large">Method:
+                    <label class="w3-large">{{ $lang->desktop()['chef_datetimepeople']['method'] }}:
                         @foreach ($meal->methods as $method)
                             <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
                         @endforeach
                     </label>
                 </div>
                 <div class="">
-                    <label class="w3-large">Time:
+                    <label class="w3-large">{{ $lang->desktop()['chef_datetimepeople']['time'] }}:
                         @foreach ($meal->shifts as $shift)
                             <p class="w3-tag w3-teal w3-tiny">{{ $shift->shift }}</p>
                         @endforeach
                     </label>
                 </div>
                 <div class="">
-                    <label class="w3-large">Type:
+                    <label class="w3-large">{{ $lang->desktop()['chef_datetimepeople']['type'] }}:
                         @foreach ($meal->categories as $category)
                             <p class="w3-tag w3-teal w3-tiny">{{ $category->category }}</p>
                         @endforeach
@@ -61,7 +61,7 @@
                  <div class="w3-row w3-padding-top w3-border-top w3-border-green">
                     <div class="w3-rest"></div>
                     <div class="w3-col l2 m2 w3-right">
-                        {!! Form::submit('Confirm', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'confirm-btn']) !!}
+                        {!! Form::submit( $lang->desktop()['chef_datetimepeople']['confirm'] , ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'confirm-btn']) !!}
                     </div>
                 </div>    
             {!! Form::close() !!}
@@ -160,9 +160,9 @@
 
             function promptUp(start, end){
                 dialog.prompt({
-                    title: "People",
-                    message: "How many people can order this meal in this day",
-                    button: "confirm",
+                    title: "{{ $lang->desktop()['chef_datetimepeople']['prop_title'] }}",
+                    message: "{{ $lang->desktop()['chef_datetimepeople']['prop_message'] }}",
+                    button: "{{ $lang->desktop()['chef_datetimepeople']['prop_confirm'] }}",
                     required: true,
                     position: "absolute",
                     animation: "slide",
@@ -181,7 +181,7 @@
                         var eventData;
                         if (People) {
 
-                            var title = People.concat(" People");
+                            var title = People.concat(" {{ $lang->desktop()['chef_datetimepeople']['people'] }}");
                             eventData = {
                                 title: title,
                                 start: start,

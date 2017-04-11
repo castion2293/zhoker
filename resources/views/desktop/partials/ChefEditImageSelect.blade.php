@@ -8,7 +8,7 @@
                 <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
             </div>
             <div class="modal-header">
-                <h1 class="text-center w3-padding-8 w3-text-green">Select Images</h1>
+                <h1 class="text-center w3-padding-8 w3-text-green">{{ $lang->desktop()['chef_edit']['select_img'] }}</h1>
             </div>
             <div class="modal-body" style="padding:10px 10px;">
                 <div id="paginate">
@@ -28,7 +28,7 @@
             </div>
             <div class="modal-footer">
                 <div class="w3-center w3-margin-top">
-                    <a href="#image-form" class="btn w3-large w3-green w3-text-white w3-border w3-border-green zk-shrink-hover" id="select-img" style="width:20%;" data-dismiss="modal">Select</a>
+                    <a href="#image-form" class="btn w3-large w3-green w3-text-white w3-border w3-border-green zk-shrink-hover" id="select-img" style="width:20%;" data-dismiss="modal">{{ $lang->desktop()['chef_edit']['select'] }}</a>
                 </div>
             </div>
         </div>

@@ -8,14 +8,14 @@
             <span class="glyphicon glyphicon-remove pull-right w3-large" data-dismiss="modal" style="cursor:pointer;margin-right:20px;margin-top:10px"></span>
         </div>
         <div class="modal-header">
-            <h1 class="text-center w3-padding-8 w3-text-green">Select Cover Images</h1>
+            <h1 class="text-center w3-padding-8 w3-text-green">{{ $lang->desktop()['chef_create']['create_cover_img'] }}</h1>
         </div>
         <div class="modal-body" style="padding:10px 10px;">
             <div id="cover-paginate">
                 @foreach ($images->chunk(15) as $imagesChunk)
                     <div class="w3-row-padding">
                         @foreach ($imagesChunk as $image)
-                            <div class="w3-col l2 m2 zk-shrink-hover cover-ckb" style="cursor:pointer;">
+                            <div class="w3-col l2 m2 w3-padding-8 zk-shrink-hover cover-ckb" style="cursor:pointer;">
                                 <img src="{{ asset($image->image_path) }}" id="cover-{{$image->id}}"  alt="image" style="width:100%;">
                             </div>
                         @endforeach

@@ -6,23 +6,23 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+                <div class="panel-heading">{{ $lang->desktop()['reset_password']['title'] }}</div>
 
                 <div class="panel-body">
                     {!! Form::open(['route' => 'postPasswordReset', 'method' =>'POST']) !!}
                     
                     {{ Form::hidden('token', $token) }}
 
-                    {{ Form::label('email', 'Email Address:') }}
+                    {{ Form::label('email', $lang->desktop()['reset_password']['email']) }}
                     {{ Form::email('email', $email, ['class' => 'form-control']) }}
 
-                    {{ Form::label('password', 'New Password:') }}
+                    {{ Form::label('password', $lang->desktop()['reset_password']['password']) }}
                     {{ Form::password('password', ['class' => 'form-control']) }}
 
-                    {{ Form::label('password_confirmation', 'Confirm New Password') }}
+                    {{ Form::label('password_confirmation', $lang->desktop()['reset_password']['password_confirm']) }}
                     {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
 
-                    {{ Form::submit('Reset Password', ['class' => 'btn btn-primary']) }}
+                    {{ Form::submit($lang->desktop()['reset_password']['title'], ['class' => 'btn btn-primary']) }}
                 
                     {!! Form::close() !!}
                 </div>

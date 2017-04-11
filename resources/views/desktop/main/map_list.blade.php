@@ -35,20 +35,20 @@
                                         <span class="w3-text-deep-orange star"><i class="fa fa-star"></i></span>
                                       @endfor
                                   @else
-                                        <span class="w3-text-deep-orange w3-medium">New Meal</span>
+                                        <span class="w3-text-deep-orange w3-medium">{{ $lang->desktop()['product']['new_meal'] }}</span>
                                   @endif
                                 </div>
                               </div>
-                              <div><span class="w3-text-grey w3-xlarge" id="meal-name"><b>{{ $meal->name }}<b></span></div>
+                              <div><span class="w3-text-grey w3-xlarge" id="meal-name"><b>{{ str_limit($meal->name, 24) }}</b></span></div>
                               <div class="row">
                                 <div class="col-md-6">
                                   <section>
                                     <span class="w3-text-green w3-large" id="meal-price">${{ $meal->price }}</span>
-                                    <span class="w3-text-grey w3-slim w3-right" style="padding-top:2px" id="meal-people">{{ $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->people_left }} people left</span>
+                                    <span class="w3-text-grey w3-slim w3-right" style="padding-top:2px" id="meal-people">{{ $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->people_left }} {{ $lang->desktop()['product']['people_left'] }}</span>
                                   </section>
                                 </div>
                                 <div id="eaten" class="col-md-6">
-                                    <p class="w3-text-grey w3-slim">{{ $meal->people_eaten }} {{ str_plural('person', $meal->people_eaten) }} eaten</p>
+                                    <p class="w3-text-grey w3-slim">{{ $meal->people_eaten }} {{ str_plural( $lang->desktop()['product']['person'] , $meal->people_eaten) }} {{ $lang->desktop()['product']['people_eaten'] }}</p>
                                 </div>
                                 <div id="method-label" class="col-md-6" style="display: none">
                                   @foreach ($meal->methods as $method)
@@ -78,7 +78,7 @@
                             </div>
                         </div>
 
-                        <a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->id])}}" target="_blank" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">Read More</a>
+                        <a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $meal->datetimepeoples()->where('meal_id', $meal->id)->where('date', $date)->first()->id])}}" target="_blank" class="w3-display-bottomright w3-white w3-text-blue w3-large zk-shrink-hover" style="margin-right:12px;margin-bottom:12px">{{ $lang->desktop()['product']['read_more'] }}</a>
                         
                        </div>
                     @endforeach

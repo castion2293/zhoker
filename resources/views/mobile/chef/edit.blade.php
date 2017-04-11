@@ -16,17 +16,17 @@
      <!--content-->
      <div class="w3-content w3-container w3-padding-32" id="chef-create">
          <div class="">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Edit Menu<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['chef_edit']['title'] }}<h1>
          </div>
          {!! Form::model($meal, ['route' => ['chef.update', $meal->id], 'method' => 'PUT', 'files' => true]) !!}
             <div class="w3-row w3-border-grey w3-border-bottom" style="padding-bottom: 2em;">
                 <div class="w3-col s12">
                     <div class="w3-row" id="name-form">
                         <div class="w3-col s12">
-                            {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Menu Name', 'required' => '', 'maxlength' => '255']) }}   
+                            {{ Form::text('name', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => $lang->desktop()['chef_edit']['meal_name'], 'required' => '', 'maxlength' => '255']) }}
                         </div>
                         <div class="w3-col s12" style="margin-top:1.5em;">
-                            {{ Form::text('price', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => 'Menu Price', 'required' => '', 'maxlength' => '11']) }}              
+                            {{ Form::text('price', null, ['class' => 'w3-input w3-border w3-border-grey w3-large w3-text-grey', 'placeholder' => $lang->desktop()['chef_edit']['meal_price'], 'required' => '', 'maxlength' => '11']) }}
                         </div>
                     </div>
 
@@ -36,24 +36,24 @@
                     </div-->
 
                     <div class=" w3-padding-8">
-                        <label class="w3-text-gery w3-large" style="font-family:cursive">Time</label>                
+                        <label class="w3-text-gery w3-large" style="font-family:cursive">{{ $lang->desktop()['chef_edit']['time'] }}</label>
                         {{ Form::select('shifts[]', $shifts, null, ['id' => 'shift-select2', 'class' => 'form-control js-example-basic-multiple', 'multiple' => 'multiple']) }}
                     </div>
 
                     <div class=" w3-padding-8">
-                        <label class="w3-text-gery w3-large" style="font-family:cursive">Category</label>  
+                        <label class="w3-text-gery w3-large" style="font-family:cursive">{{ $lang->desktop()['chef_edit']['category'] }}</label>
                         {{ Form::select('categories[]', $categories, null, ['id' => 'category-select2', 'class' => 'form-control js-example-basic-multiple', 'multiple' => 'multiple']) }}
                     </div>
                                
                     <div class=" w3-padding-8">
-                        <label class="w3-text-gery w3-large" style="font-family:cursive">Method</label>  
+                        <label class="w3-text-gery w3-large" style="font-family:cursive">{{ $lang->desktop()['chef_edit']['method'] }}</label>
                         {{ Form::select('methods[]', $methods, null, ['id' => 'method-select2', 'class' => 'form-control js-example-basic-multiple', 'multiple' => 'multiple']) }}
                     </div> 
                 </div>
             </div>
 
             <div class="w3-padding-12" id="cover-form">
-                <label class="w3-text-gery w3-large" style="font-family:cursive">Cover Image</label>  
+                <label class="w3-text-gery w3-large" style="font-family:cursive">{{ $lang->desktop()['chef_edit']['cover_image'] }}</label>
                 <div id="" class="w3-padding-medium cover-select-modal-trigger" style="cursor:pointer;">
                     <img src="{{ $meal->cover_img }}" id="cover-image-origin" alt="meal-image" style="width:100%">
                 </div>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="w3-padding-12" id="image-form">
-                <label class="w3-text-gery w3-large" style="font-family:cursive">Meal Images</label>
+                <label class="w3-text-gery w3-large" style="font-family:cursive">{{ $lang->desktop()['chef_edit']['meal_image'] }}</label>
 
                 <div class="w3-border w3-border-grey w3-round-large w3-padding-24 w3-margin-top">
                     <div class="w3-row-padding">
@@ -89,7 +89,7 @@
 
                 <div class="w3-row w3-margin-top">
                     <div class="w3-col l2 m2">
-                        <div id="select-modal-trigger" class="btn w3-large w3-white w3-text-grey w3-border w3-border-grey btn-block zk-shrink-hover"><i class="fa fa-picture-o"></i> Phote</div>
+                        <div id="select-modal-trigger" class="btn w3-large w3-white w3-text-grey w3-border w3-border-grey btn-block zk-shrink-hover"><i class="fa fa-picture-o"></i> {{ $lang->desktop()['chef_edit']['photo'] }}</div>
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@
 
             <div class="w3-border-green w3-border-bottom w3-padding-12">
                 <div class="form-group">
-                    <label class="w3-text-gery w3-large" style="font-family:cursive">Menu Description</label> 
+                    <label class="w3-text-gery w3-large" style="font-family:cursive">{{ $lang->desktop()['chef_edit']['meal_description'] }}</label>
                     {{ Form::textarea('description', null, ['class' => 'form-control', 'rows' => '30']) }}
                 </div>
             </div>
@@ -107,7 +107,7 @@
             <div class="w3-row w3-margin-top">
                 <div class="w3-rest"></div>
                 <div class="w3-col l2 m2 w3-right">
-                    {!! Form::submit('Save Menu', ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'submit']) !!}
+                    {!! Form::submit($lang->desktop()['chef_edit']['save_meal'] , ['class' => 'btn w3-large w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover', 'id' => 'submit']) !!}
                 </div>
             </div>  
          {!! Form::close() !!}

@@ -14,10 +14,11 @@
 
     <!--content-->
     @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
+    @inject('ProductPresenter', 'App\Presenters\ProductPresenter')
     <div class="w3-content w3-container w3-padding-32">
         <div class="w3-row" id="profile">
             <div class="">
-                <h1 class="w3-text-green w3-border-green w3-border-bottom">Profile<h1>
+                <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['chef_profile']['profile'] }}</h1>
             </div>
             
             <div class="w3-col s12" style="">
@@ -34,13 +35,13 @@
 
             <div class="w3-row w3-margin-top w3-border-grey w3-border-top"> 
                 <div class="w3-col s12 w3-margin-top">
-                    <a href="{{ url('/chef_profile') }}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover"><b>Edit Profile</b></a>
+                    <a href="{{ url('/chef_profile') }}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover"><b>{{ $lang->desktop()['chef_profile']['edit_profile'] }}</b></a>
                 </div>
             </div>
         </div>
        
-        <div class="w3-padding-12" id="menu">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Menu<h1>
+        <div class="w3-padding-12" id="menu" style="margin-top:3em;">
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['chef_profile']['menu'] }}<h1>
 
             @foreach ($meals->chunk(3) as $mealchunk)
                 <div class="w3-row">
@@ -52,9 +53,13 @@
                                     <div class="w3-row">
                                         <div class="w3-rest"></div>
                                         <div class="w3-col s6 w3-right">
-                                            @for ($i = 0; $i < 5; $i++)
-                                                <span class="w3-text-orange w3-right w3-large"><i class="fa fa-star"></i></span>
-                                            @endfor
+                                            @if ($meal->people_eva > 0)
+                                                @for ($i = 0; $i < $ProductPresenter->getEvaluateScore($meal->evaluation, $meal->people_eva); $i++)
+                                                    <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
+                                                @endfor
+                                            @else
+                                                <span class="w3-text-orange w3-large">{{ $lang->desktop()['chef_index']['new_meal'] }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <p class="w3-text-grey w3-xlarge">{{ $meal->name }}</p>
@@ -81,16 +86,16 @@
 
             <div class="w3-row w3-border-grey w3-border-top"> 
                 <div class="w3-col s12 w3-margin-top">
-                    <a href="{{ url('/chef') }}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover"><b>Go To Menu</b></a>
+                    <a href="{{ url('/chef') }}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover"><b>{{ $lang->desktop()['chef_profile']['go_menu'] }}</b></a>
                 </div>
             </div> 
 
         </div>
-        <div class="w3-padding-12" id="order">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Order<h1>
+        <div class="w3-padding-12" id="order" style="margin-top:3em;">
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['chef_profile']['order'] }}<h1>
             @if ($cheforders->isEmpty())
                 <div class="w3-center">
-                    <p class="w3-large" style="font-family:cursive;">Sorry! There is no one order your meal yet!</p>
+                    <p class="w3-large" style="font-family:cursive;">{{ $lang->desktop()['chef_profile']['no_order'] }}</p>
                 </div>
             @else
                 @foreach ($cheforders as $cheforder)
@@ -100,13 +105,13 @@
                                 
                                 <div class="w3-col s9 w3-margin-top">
                                     <div class="">
-                                        <p class="w3-text-grey w3-large"><b>{{ $cart->meals->name }}</b></p>
+                                        <p class="w3-text-grey w3-large"><b>{{ str_limit($cart->meals->name, 24) }}</b></p>
                                     </div>
                                     <div class="">
                                         <p class="w3-text-green w3-medium"><b>${{ $cart->meals->price }}TWD</b></p>
                                     </div>
                                     <div class="">
-                                        <p class="w3-text-grey w3-medium">{{ $cart->people_order }} people order</p>
+                                        <p class="w3-text-grey w3-medium">{{ $cart->people_order }} {{ $lang->desktop()['chef_profile']['people_order'] }}</p>
                                     </div>
                                     <div class="">
                                         <p class="w3-text-grey w3-medium">{{ $cart->date }} / {{ $cart->time }}</p>
@@ -117,7 +122,7 @@
                                         <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
                                     </div>
                                     <div class="" style="margin-top:0.2em;">
-                                        <label class="w3-text-grey w3-medium">Subtotal:</label>
+                                        <label class="w3-text-grey w3-medium">{{ $lang->desktop()['chef_profile']['order_total'] }}:</label>
                                         <p class="w3-text-green w3-medium"><b>${{ $cart->price }}TWD</b></p>
                                     </div>
                                 </div>
@@ -145,18 +150,18 @@
                                 
                                 @if ($cheforder->checked)
                                     <div class="w3-col s6 w3-center">
-                                        <span class="w3-text-grey w3-medium">Approved</span>
+                                        <span class="w3-text-grey w3-medium">{{ $lang->desktop()['chef_profile']['order_approved'] }}</span>
                                     </div>
                                     <div class="w3-col s6 w3-center">
                                         @inject('ChefPresenter', 'App\Presenters\ChefPresenter')
-                                        <span class="w3-text-grey w3-medium">{{ $ChefPresenter->paidCheck($cheforder->paid) }}</span>
+                                        <span class="w3-text-grey w3-medium">{{ $cheforder->paid ? $lang->desktop()['chef_profile']['order_pay'] : $lang->desktop()['chef_profile']['order_not_pay']}}</span>
                                     </div>
                                 @else
                                     <div class="w3-col s6 w3-center">
-                                        <span class="w3-text-grey w3-large">Pendding</span>
+                                        <span class="w3-text-grey w3-large">{{ $lang->desktop()['chef_profile']['order_pending'] }}</span>
                                     </div>
                                     <div class="w3-col s6 w3-center">
-                                        <span class="w3-text-grey w3-large">Not Pay</span>
+                                        <span class="w3-text-grey w3-large">{{ $lang->desktop()['chef_profile']['order_not_pay'] }}</span>
                                     </div>
                                 @endif
                                 
@@ -167,14 +172,14 @@
 
                 <div class="w3-row">
                     <div class="w3-col s12 w3-margin-top">
-                        <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover"><b>Go To Order</b></a>
+                        <a href="{!! route('order.cheforder', ['id' => Auth::user()->chef_id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green w3-large btn-block zk-shrink-hover"><b>{{ $lang->desktop()['chef_profile']['go_order'] }}</b></a>
                     </div>
                 </div> 
             @endif
         </div>
 
-        <div class="w3-padding-12" id="account">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Account<h1>
+        <div class="w3-padding-12" id="account" style="margin-top:3em;">
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['chef_profile']['account'] }}<h1>
         </div>
     </div>
 @endsection

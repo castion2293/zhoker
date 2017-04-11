@@ -26,6 +26,8 @@ class MapListController extends Controller
         $this->mapListService = $mapListService;
         $this->sessionService = $sessionService;
         $this->agentService = $agentService;
+
+        parent::boot();
     }
 
     /**

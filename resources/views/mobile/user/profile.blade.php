@@ -17,30 +17,30 @@
     <div class="w3-content w3-container w3-padding-32">
         <div class="w3-row" id="user-profile">
             <div class="">
-                <h1 class="w3-text-green w3-border-green w3-border-bottom">User Profile<h1>
+                <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['user_profile']['profile_title'] }}</h1>
             </div>
             <div class="w3-col s12">
                 <img src="{{ $user->user_profile_img }}" alt="profile" style="width:100%">
             </div> 
             <div class="w3-col s12 w3-center w3-panel w3-light-grey w3-padding-small w3-margin-top">
-                <h2 class="w3-text-grey">Hello, {{ $user->first_name }}</h2>
-                <span class="w3-text-grey">Member since {{ date('F d, Y', strtotime($user->created_at)) }}</span><br>
-                <span class="w3-text-grey">Email: {{ $user->email }}</span><br>
-                <span class="w3-text-grey">Phone Number:: {{ $user->phone_number }}</span>
+                <h2 class="w3-text-grey">{{ $lang->desktop()['user_profile']['profile_hello'] }}, {{ $user->first_name }}</h2>
+                <span class="w3-text-grey">{{ $lang->desktop()['user_profile']['profile_member_since'] }} {{ date('F d, Y', strtotime($user->created_at)) }}</span><br>
+                <span class="w3-text-grey">{{ $lang->desktop()['user_profile']['profile_email'] }}: {{ $user->email }}</span><br>
+                <span class="w3-text-grey">{{ $lang->desktop()['user_profile']['profile_phone_number'] }}: {{ $user->phone_number }}</span>
             </div>
 
             <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
                 <div class="w3-col s12 w3-margin-top">
-                    <a href="{{ url('/user_profile/create') }}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Edit Profile</b></a>
+                    <a href="{{ url('/user_profile/create') }}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>{{ $lang->desktop()['user_profile']['profile_edit'] }}</b></a>
                 </div>
             </div>  
         </div>
 
         <div class="w3-padding-12" id="shopping-cart" style="margin-top:3em;">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Shopping Cart<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['user_profile']['cart_title'] }}<h1>
             @if ($carts->isEmpty())
                 <div class="w3-center">
-                    <h1 style="font-family:cursive;">Sorry! Please Add Your Items first!</h1>
+                    <h1 style="font-family:cursive;">{{ $lang->desktop()['user_profile']['cart_no_cart'] }}</h1>
                 </div>
             @else
                 @foreach ($carts as $cart)
@@ -62,7 +62,7 @@
                                 <p class="w3-tag w3-teal w3-small">{{ $cart->method }}</p>
                             </div>
                             <div class="w3-col s12 w3-center">
-                                <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                                <span class="w3-text-grey w3-large">{{ $cart->people_order }} {{ $lang->desktop()['user_profile']['order_people'] }}</span>
                             </div>
                             
                             <div class="w3-row">
@@ -71,7 +71,7 @@
                                     <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
                                 </div>
                                 <div class="w3-col s3 w3-right">
-                                    <span class="w3-text-grey w3-large">TOTAL:</span>
+                                    <span class="w3-text-grey w3-large">{{ $lang->desktop()['user_profile']['cart_total'] }}:</span>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
 
                     <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
                         <div class="w3-col s12 w3-margin-top">
-                            <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Shopping Cart</b></a>
+                            <a href="{!! route('product.cart.show', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>{{ $lang->desktop()['user_profile']['go_cart'] }}</b></a>
                         </div>
                     </div>  
 
@@ -88,11 +88,11 @@
         </div>
 
         <div class="w3-padding-12" id="order-history" style="margin-top:3em;">
-            <h1 class="w3-text-green w3-border-green w3-border-bottom">Order History<h1>
+            <h1 class="w3-text-green w3-border-green w3-border-bottom">{{ $lang->desktop()['user_profile']['order_title'] }}<h1>
             <div class="">
                 @if ($userorders->isEmpty())
                     <div class="w3-center">
-                        <h1 style="font-family:cursive;">Sorry! You don't have any order right now!</h1>
+                        <h1 style="font-family:cursive;">{{ $lang->desktop()['user_profile']['order_no_order'] }}</h1>
                     </div>
                 @else
                     <div class="">
@@ -102,25 +102,25 @@
                                     <a class="w3-btn-block w3-left-align w3-green" style="border-radius:18px 18px 0 0;">
                                         <div class="w3-row">
                                             <div class="w3-col s12 w3-medium w3-padding-4">
-                                                <label>Order Number #{{ $userorder->id }}</label>
+                                                <label>{{ $lang->desktop()['user_profile']['order_number'] }} #{{ $userorder->id }}</label>
                                             </div>
                                             <div class="w3-col s5 w3-medium w3-padding-4">
-                                                <label>Total Price:</label>
+                                                <label>{{ $lang->desktop()['user_profile']['order_price'] }}:</label>
                                             </div>
                                             <div class="w3-col s7 w3-medium w3-padding-4">
                                                 <span>${{ $userorder->total_price }}TWD</span>
                                             </div>
                                             <div class="w3-col s12 w3-medium w3-padding-4">
-                                                <label>Pay Way:</label>
+                                                <label>{{ $lang->desktop()['user_profile']['order_pay'] }}:</label>
                                             </div>
                                             <div class="w3-col s5 w3-medium w3-padding-4">
-                                                <label>Order Date:</label>
+                                                <label>{{ $lang->desktop()['user_profile']['order_date'] }}:</label>
                                             </div>
                                             <div class="w3-col s7 w3-medium w3-padding-4">
                                                 <span>{{ date('M j, Y - g:iA', strtotime($userorder->created_at)) }}</span>
                                             </div>
                                             <div class="w3-col s12 w3-medium w3-padding-4">
-                                                <label>Order Details</label>
+                                                <label>{{ $lang->desktop()['user_profile']['order_detail'] }}</label>
                                             </div>
                                         </div>
                                     </a>
@@ -128,7 +128,7 @@
                                         @foreach ($userorder->carts as $cart)
                                             <div class="w3-row w3-padding-tiny">
                                                 <div class="w3-col s8" style="padding-left:0.5em;">
-                                                    <span class="w3-text-grey w3-large"><b>{{ $UserPresenter->getMealName($cart) }}</b></span>
+                                                    <span class="w3-text-grey w3-large"><b>{{ str_limit($UserPresenter->getMealName($cart), 24) }}</b></span>
                                                 </div>
                                                 <div class="w3-col s4">
                                                     <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $UserPresenter->getMealPrice($cart) }}</span>TWD</span>
@@ -143,7 +143,7 @@
                                                     <p class="w3-tag w3-teal w3-tiny">{{ $cart->method }}</p>
                                                 </div>
                                                  <div class="w3-col s12 w3-center">
-                                                    <span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span>
+                                                    <span class="w3-text-grey w3-large">{{ $cart->people_order }} {{ $lang->desktop()['user_profile']['order_people'] }}</span>
                                                 </div>
                                                 <div class="w3-row">
                                                     <div class="w3-rest"></div>
@@ -151,19 +151,19 @@
                                                         <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}price" class="w3-text-green w3-large">{{ $cart->price }}</span></span>
                                                     </div>
                                                     <div class="w3-col s3 w3-right">
-                                                        <span class="w3-text-grey w3-large">TOTAL:</span>
+                                                        <span class="w3-text-grey w3-large">{{ $lang->desktop()['user_profile']['order_total'] }}:</span>
                                                     </div>
                                                 </div>
                                                 <div class="w3-col s12 w3-center w3-margin-bottom w3-padding-bottom w3-border-grey w3-border-bottom">
                                                     @if ($cart->cheforders()->withTrashed()->first()->checked)
                                                         <div class="">
-                                                            <span class="w3-text-whtie w3-large">Approved</span>
+                                                            <span class="w3-text-whtie w3-large">{{ $lang->desktop()['user_profile']['order_approved'] }}</span>
                                                         </div>
                                                     @else
                                                         @if ($cart->cheforders()->withTrashed()->first()->deleted_at)
-                                                            <span class="w3-text-whtie w3-large">Rejected</span>
+                                                            <span class="w3-text-whtie w3-large">{{ $lang->desktop()['user_profile']['order_rejected'] }}</span>
                                                         @else
-                                                            <span class="w3-text-whtie w3-large">Pending</span>
+                                                            <span class="w3-text-whtie w3-large">{{ $lang->desktop()['user_profile']['order_pending'] }}</span>
                                                         @endif
                                                     @endif
                                                 </div>
@@ -179,7 +179,7 @@
 
                     <div class="w3-row w3-margin-top w3-border-grey w3-border-top">
                         <div class="w3-col s12 w3-margin-top">
-                            <a href="{!! route('order.userorder', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>Go To Order</b></a>
+                            <a href="{!! route('order.userorder', ['id' => Auth::user()->id]) !!}" class="btn w3-white w3-text-green w3-border w3-border-green btn-block zk-shrink-hover"><b>{{ $lang->desktop()['user_profile']['go_order'] }}</b></a>
                         </div>
                     </div> 
 

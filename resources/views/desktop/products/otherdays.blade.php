@@ -22,7 +22,7 @@
     <div class="w3-content w3-container w3-padding-64">
         <div class="w3-row w3-margin-top w3-border-green w3-border-bottom">
             <div class="w3-col l10 m10">
-                <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}<h1>
+                <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}</h1>
             </div>
             <div class="w3-col l2 m2">
                 <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}TWD</b>
@@ -59,28 +59,32 @@
             </div>
             <div class="w3-col l5 m5 w3-padding-large">
                 <div class="w3-border-bottom w3-border-grey" style="margin-top:1.5em;">
-                    <label>Evaluation:  
-                        @for ($i = 0; $i < 5; $i++)
-                          <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
-                        @endfor
+                    <label>{{ $lang->desktop()['other_day']['evaluation'] }}:
+                        @if ($meal->people_eva > 0)
+                            @for ($i = 0; $i < $ProductPresenter->getEvaluateScore($meal->evaluation, $meal->people_eva); $i++)
+                                <span class="w3-text-orange w3-large"><i class="fa fa-star"></i></span>
+                            @endfor
+                        @else
+                            <span class="w3-text-orange w3-large">{{ $lang->desktop()['product']['new_meal'] }}</span>
+                        @endif
                     </label>
                 </div>
                 <div class="w3-border-bottom w3-border-grey" style="margin-top:1.5em;">
-                    <label>Type:
+                    <label>{{ $lang->desktop()['other_day']['type'] }}:
                       @foreach ($meal->categories as $category)
                           <p class="w3-tag w3-teal w3-tiny">{{ $category->category }}</p>
                       @endforeach
                     </label>
                 </div>
                 <div class="w3-border-bottom w3-border-grey" style="margin-top:1.5em;">
-                    <label>Method:
+                    <label>{{ $lang->desktop()['other_day']['method'] }}:
                       @foreach ($meal->methods as $method)
                           <p class="w3-tag w3-teal w3-tiny">{{ $method->method }}</p>
                       @endforeach
                     </label>
                 </div>
                 <div class="w3-border-bottom w3-border-grey" style="margin-top:1.5em;">
-                    <label>Time:
+                    <label>{{ $lang->desktop()['other_day']['time'] }}:
                       @foreach ($meal->shifts as $shift)
                           <p class="w3-tag w3-teal w3-tiny">{{ $shift->shift }}</p>
                       @endforeach
@@ -92,17 +96,17 @@
         <div class="w3-padding-xlarge">
             <table class="w3-table w3-bordered w3-large">
                 <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th class="w3-center">people left</th>
-                    <th class="w3-right" style="padding-right:1.5em;">Action</th>
+                    <th>{{ $lang->desktop()['other_day']['date'] }}</th>
+                    <th>{{ $lang->desktop()['other_day']['time'] }}</th>
+                    <th class="w3-center">{{ $lang->desktop()['other_day']['people_left'] }}</th>
+                    <th class="w3-right" style="padding-right:1.5em;">{{ $lang->desktop()['other_day']['action'] }}</th>
                 </tr>
                 @foreach ($datetimepeoples as $datetimepeople)
                     <tr>
                         <td>{{ $datetimepeople->date }}</td>
                         <td>{{ $datetimepeople->time }}</td>
                         <td class="w3-center">{{ $datetimepeople->people_left }}</td>
-                        <td class="w3-right"><a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $datetimepeople->id])}}" class="btn w3-deep-orange zk-shrink-hover">Add to Cart</a></td>
+                        <td class="w3-right"><a href="{{ route('product.show', ['id' => $meal->id, 'datetime_id' => $datetimepeople->id])}}" class="btn w3-deep-orange zk-shrink-hover">{{ $lang->desktop()['other_day']['add_to_cart'] }}</a></td>
                     </tr>
                 @endforeach
             </table>

@@ -36,6 +36,8 @@ class MainController extends Controller
         $this->sessionService = $sessionService;
 
         $this->attempt_key = 0;
+
+        parent::boot();
     }
 
     /**
@@ -62,7 +64,8 @@ class MainController extends Controller
             $cheforders = $this->mainService->findChefOrders($chef, 3)->getChefOrders();
 
             $agent = $this->agentService->agent();
-            return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);
+            return redirect('/chef_content');
+            //return view($agent . '.chef.chef', ['chef' => $chef, 'meals' => $meals, 'cheforders' => $cheforders]);
         }
 
         $this->authenticateService->throttlesLogins($request);
