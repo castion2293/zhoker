@@ -10,8 +10,9 @@ class LangController extends Controller
 {
     public function changeLang()
     {
-        if (request()->has('lang'))
-            Cache::forever('lang', request('lang'));
+        if (request()->has('lang')) {
+            Cache::put(request()->getClientIp(), request('lang'), 60);
+        }
 
         return redirect(url()->previous());
     }
