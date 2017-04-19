@@ -9,7 +9,7 @@ use Session;
 use App;
 use Cache;
 use App\Services\AgentService;
-use App\Presenters\Lang\LangPresenterfactory;
+use App\Presenters\Lang\LangPresenterFactory;
 
 trait AuthenticatesUsers
 {

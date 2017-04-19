@@ -6,7 +6,7 @@ use Cache;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
-use App\Presenters\Lang\LangPresenterfactory;
+use App\Presenters\Lang\LangPresenterFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
