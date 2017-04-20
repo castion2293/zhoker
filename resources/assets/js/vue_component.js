@@ -5,7 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -14,9 +14,9 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
-Vue.component('LangSelect', require('./components/LangSelect.vue'));
+Vue.component('lang-select', require('./components/LangSelect.vue'));
 
-const app = new Vue({
+new Vue({
     el: '#app'
 });
 

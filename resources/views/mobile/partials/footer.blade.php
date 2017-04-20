@@ -22,15 +22,15 @@
           </p>
         </div>
         <div>
-          <select class="w3-select w3-border w3-text-black w3-large w3-white" id="lang-selector">
-            <option class="w3-text-black w3-white w3-large" value="en">English</option>
-            <option class="w3-text-black w3-white w3-large" value="zh_tw">繁體中文</option>
-          </select>
-          <!--for refresh the new page, not shown-->
-          <a id="language-page-link" href="" style="display:none;">language page</a>
+          {{--<select class="w3-select w3-border w3-text-black w3-large w3-white" id="lang-selector">--}}
+            {{--<option class="w3-text-black w3-white w3-large" value="en">English</option>--}}
+            {{--<option class="w3-text-black w3-white w3-large" value="zh_tw">繁體中文</option>--}}
+          {{--</select>--}}
+          {{--<!--for refresh the new page, not shown-->--}}
+          {{--<a id="language-page-link" href="" style="display:none;">language page</a>--}}
 
-          <div id="myvue">
-            <example></example>
+          <div id="app">
+            <lang-select default_value="{{ $lang->desktop()['language'] }}"></lang-select>
           </div>
         </div>
         <div class="" style="margin-top:40px;">
@@ -52,15 +52,15 @@
 
   </footer>
 
-  <script>
-    $(function () {
-        $("#lang-selector").val("{{ $lang->desktop()['language'] }}");
+  {{--<script>--}}
+    {{--$(function () {--}}
+        {{--$("#lang-selector").val("{{ $lang->desktop()['language'] }}");--}}
 
-        $("#lang-selector").change(function() {
-            url = "{{ url('/language?lang=' ) }}" + $("#lang-selector").val();
+        {{--$("#lang-selector").change(function() {--}}
+            {{--url = "{{ url('/language?lang=' ) }}" + $("#lang-selector").val();--}}
 
-            $("#language-page-link").attr({"href": url});
-            $("#language-page-link")[0].click();
-        });
-    })
-  </script>
+            {{--$("#language-page-link").attr({"href": url});--}}
+            {{--$("#language-page-link")[0].click();--}}
+        {{--});--}}
+    {{--})--}}
+  {{--</script>--}}

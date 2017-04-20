@@ -32,6 +32,6 @@ elixir(mix => {
                     'initializers.js',
                     'jQueryPagination.min.js',
                     'jquery.dialog.min.js'])
-           .webpack('app.js');
+           .webpack('vue_component.js', 'public\\js\\vue_component.js');
     
 });

@@ -19,7 +19,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-    <script src="{{ URL::to('js/all.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script><!--Select-2-->
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script><!--TinyMCE-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script><!--FullCalendar-->
@@ -27,6 +26,8 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js'></script><!--sweetalert-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js'></script><!--photoswipe-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js'></script><!--photoswipe-->
+    <script src="https://unpkg.com/vue@2.1.8/dist/vue.js"></script>
+    <script src="{{ URL::to('js/all.js') }}"></script>
     @yield('styles')
 </head>
 
@@ -40,5 +41,7 @@
     @include('desktop.partials.footer')
     
     @yield('scripts')
+
+    <script src="{{ URL::to('js/vue_component.js') }}"></script>
 </body>
 </html>
