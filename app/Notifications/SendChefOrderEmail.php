@@ -21,6 +21,8 @@ class SendChefOrderEmail extends Notification implements ShouldQueue
     public function __construct($chef_id)
     {
         $this->chef_id = $chef_id;
+
+        parent::boot();
     }
 
     /**
@@ -44,10 +46,10 @@ class SendChefOrderEmail extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->success()
-                    ->subject('Zhoker.com Chef Order Confirmation')
-                    ->line('You have couple meals need to approve. please click the link below and approve that.')
-                    ->action('Approval', url('/order/chef_order/'.$this->chef_id))
-                    ->line('Thanks choose Zhoker.com and please feel free to ask if you have any question.');
+                    ->subject(self::$lang->desktop()['notification']['cheforder_title'])
+                    ->line(self::$lang->desktop()['notification']['cheforder_p1'])
+                    ->action(self::$lang->desktop()['notification']['cheforder_action'], url('/order/chef_order/'.$this->chef_id))
+                    ->line(self::$lang->desktop()['notification']['cheforder_p2']);
     }
 
     /**

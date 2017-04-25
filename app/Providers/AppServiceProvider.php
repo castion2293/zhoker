@@ -2,12 +2,9 @@
 
 namespace App\Providers;
 
-use Cache;
-use Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
-use App\Presenters\Lang\LangPresenterFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::share('now', Carbon::now());
-        View::share('lang', LangPresenterfactory::create( Cache::get(request()->getClientIp(), 'en')));
+        View::share('lang', getLocaleLang());
     }
 
     /**

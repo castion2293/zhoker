@@ -21,6 +21,8 @@ class SendUserRejectEmail extends Notification implements ShouldQueue
     public function __construct($cart)
     {
         $this->cart = $cart;
+
+        parent::boot();
     }
 
     /**
@@ -43,11 +45,11 @@ class SendUserRejectEmail extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Zhoker.com Meal Order Confirmation')
-                    ->line('Welcome use Zhoker.com')
-                    ->line('Sorry, Your meal order: ' . $this->cart->meals()->first()->name . ' was rejected.')
-                    ->line('But do not worry about that. We will not charge any bill from the meal order and you still can use our platform to order other meals')
-                    ->line('Thank you again for using our application!');
+                    ->subject(self::$lang->desktop()['notification']['userreject_title'])
+                    ->line(self::$lang->desktop()['notification']['userreject_p1'])
+                    ->line(self::$lang->desktop()['notification']['userreject_p2'] . $this->cart->meals()->first()->name . self::$lang->desktop()['notification']['userreject_reject'])
+                    ->line(self::$lang->desktop()['notification']['userreject_p3'])
+                    ->line(self::$lang->desktop()['notification']['userreject_p4']);
     }
 
     /**

@@ -22,6 +22,8 @@ class SendUserOrderEmail extends Notification implements ShouldQueue
     public function __construct($carts)
     {
         $this->carts = $carts;
+
+        parent::boot();
     }
 
     /**
@@ -45,25 +47,25 @@ class SendUserOrderEmail extends Notification implements ShouldQueue
     {
         $this->carts->each(function($cart) {
 
-            $this->message = $this->message . "Meal Name: " . $cart->meals()->first()->name . "\r\n" .
-                            "Unite Price:" . $cart->unite_price . "\r\n" .
-                            "People order: " . $cart->people_order . "\r\n" .
-                            "Total Price: " . $cart->price . "\r\n" .
-                            "in " . $cart->method . " method" . "\r\n" .
-                            "on " . $cart->datetimepeoples()->first()->date . "\r\n" .
-                            "at " . $cart->datetimepeoples()->first()->time . "\r\n" .
-                            "The chef name is " . $cart->cheforders()->first()->chefs()->first()->users()->first()->first_name . "\r\n" .
+            $this->message = $this->message . self::$lang->desktop()['notification']['meal_name'] . ': ' . $cart->meals()->first()->name . "\r\n" .
+                            self::$lang->desktop()['notification']['unite_price'] . ': ' . $cart->unite_price . "\r\n" .
+                            self::$lang->desktop()['notification']['people_order'] . ': ' . $cart->people_order . "\r\n" .
+                            self::$lang->desktop()['notification']['total_price'] . ': ' . $cart->price . "\r\n" .
+                            self::$lang->desktop()['notification']['in'] . ': ' . $cart->method . " method" . "\r\n" .
+                            self::$lang->desktop()['notification']['on'] . ': ' . $cart->datetimepeoples()->first()->date . "\r\n" .
+                            self::$lang->desktop()['notification']['at'] . ': ' . $cart->datetimepeoples()->first()->time . "\r\n" .
+                            self::$lang->desktop()['notification']['chef_name'] . $cart->cheforders()->first()->chefs()->first()->users()->first()->first_name . "\r\n" .
                             "\r\n";
         });
 
         return (new MailMessage)
-                    ->subject('Zhoker.com User Meal Order Confirmation')
-                    ->line('Welcome use Zhoker.com')
-                    ->line('This is the meal you order:')
+                    ->subject(self::$lang->desktop()['notification']['userorder_title'])
+                    ->line(self::$lang->desktop()['notification']['userorder_p1'])
+                    ->line(self::$lang->desktop()['notification']['userorder_p2'])
                     ->line($this->message)
-                    ->line('Those meals need chefs confirm first. You will not be charged before the chef comfirm the meal.')
-                    ->line('You will be informed agian after chef confirm the meal.')
-                    ->line('Thanks choose Zhoker.com and please feel free to ask if you have any question.');
+                    ->line(self::$lang->desktop()['notification']['userorder_p3'])
+                    ->line(self::$lang->desktop()['notification']['userorder_p4'])
+                    ->line(self::$lang->desktop()['notification']['userorder_p5']);
     }
 
     /**

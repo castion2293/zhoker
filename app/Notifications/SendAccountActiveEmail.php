@@ -21,6 +21,8 @@ class SendAccountActiveEmail extends Notification
     public function __construct($token)
     {
         $this->token = $token->token;
+
+        parent::boot();
     }
 
     /**
@@ -44,10 +46,10 @@ class SendAccountActiveEmail extends Notification
     {
         return (new MailMessage)
                     ->success()
-                    ->subject('Registered Email Confirmation')
-                    ->line('Please click the link below to activate your account')
-                    ->action('Activate', 'https://zhoker.com/auth/register/activate/'.$this->token)
-                    ->line('Thank you for using our application!');
+                    ->subject(self::$lang->desktop()['notification']['Accountactive_title'])
+                    ->line(self::$lang->desktop()['notification']['Accountactive_p1'])
+                    ->action(self::$lang->desktop()['notification']['Accountactive_action'], 'https://zhoker.com/auth/register/activate/'.$this->token)
+                    ->line(self::$lang->desktop()['notification']['Accountactive_p2']);
     }
 
     /**

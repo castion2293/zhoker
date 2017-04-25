@@ -22,6 +22,8 @@ class SendUserConfirmEmail extends Notification implements ShouldQueue
     public function __construct($cart)
     {
         $this->cart = $cart;
+
+        parent::boot();
     }
 
     /**
@@ -45,11 +47,11 @@ class SendUserConfirmEmail extends Notification implements ShouldQueue
     {
         
         return (new MailMessage)
-                    ->subject('Zhoker.com Meal Order Confirmation')
-                    ->line('Welcome use Zhoker.com')
-                    ->line('Your meal order: ' . $this->cart->meals()->first()->name . ' was comfirmed')
-                    ->line('and we charge you $' . $this->cart->price . ' successfully!')
-                    ->line('please remember attend your meal appointment on time. Thanks again using our Zhoker.com service and enjoy your meal!!');
+                    ->subject(self::$lang->desktop()['notification']['userconfirm_title'])
+                    ->line(self::$lang->desktop()['notification']['userconfirm_p1'])
+                    ->line(self::$lang->desktop()['notification']['userconfirm_p2'] . $this->cart->meals()->first()->name . self::$lang->desktop()['notification']['userconfirm_confirm'])
+                    ->line(self::$lang->desktop()['notification']['userconfirm_p3'] . $this->cart->price . self::$lang->desktop()['notification']['userconfirm_success'])
+                    ->line(self::$lang->desktop()['notification']['userconfirm_p4']);
                     
     }
 

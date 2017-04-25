@@ -22,6 +22,8 @@ class SendUserCancelEmail extends Notification implements ShouldQueue
     public function __construct($cart)
     {
         $this->cart = $cart;
+
+        parent::boot();
     }
 
     /**
@@ -43,22 +45,22 @@ class SendUserCancelEmail extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-         $this->message = "Meal Name: " . $this->cart->meals()->first()->name . "\r\n" .
-                         "Unite Price:" . $this->cart->unite_price . "\r\n" .
-                         "People order: " . $this->cart->people_order . "\r\n" .
-                         "Total Price: " . $this->cart->price . "\r\n" .
-                         "in " . $this->cart->method . " method" . "\r\n" .
-                         "on " . $this->cart->datetimepeoples()->first()->date . "\r\n" .
-                         "at " . $this->cart->datetimepeoples()->first()->time . "\r\n" .
-                         "The chef name is " . $this->cart->cheforders()->first()->chefs()->first()->users()->first()->first_name . "\r\n" .
+         $this->message = self::$lang->desktop()['notification']['meal_name'] . ': ' . $this->cart->meals()->first()->name . "\r\n" .
+                         self::$lang->desktop()['notification']['unite_price'] . ': ' . $this->cart->unite_price . "\r\n" .
+                         self::$lang->desktop()['notification']['people_order'] . ': ' . $this->cart->people_order . "\r\n" .
+                         self::$lang->desktop()['notification']['total_price'] . ': ' . $this->cart->price . "\r\n" .
+                         self::$lang->desktop()['notification']['in'] . ': ' . $this->cart->method . " method" . "\r\n" .
+                         self::$lang->desktop()['notification']['on'] . ': ' . $this->cart->datetimepeoples()->first()->date . "\r\n" .
+                         self::$lang->desktop()['notification']['at'] . ': ' . $this->cart->datetimepeoples()->first()->time . "\r\n" .
+                         self::$lang->desktop()['notification']['chef_name'] . ': ' . $this->cart->cheforders()->first()->chefs()->first()->users()->first()->first_name . "\r\n" .
                          "\r\n";
 
         return (new MailMessage)
-                    ->subject('Zhoker.com User Meal Order Cancellation Notification')
-                    ->line('This is the meal meal information:')
+                    ->subject(self::$lang->desktop()['notification']['usercancel_title'])
+                    ->line(self::$lang->desktop()['notification']['usercancel_p1'])
                     ->line($this->message)
-                    ->line('This meal was cancelled by you and you will get refund back in couple business days')
-                    ->line('Thanks choose Zhoker.com and please feel free to ask if you have any question.');
+                    ->line(self::$lang->desktop()['notification']['usercancel_p2'])
+                    ->line(self::$lang->desktop()['notification']['usercancel_p3']);
     }
 
     /**

@@ -602,6 +602,67 @@ class LangPresenter_en implements LangPresenterInterface
                 'cancel_btn' => 'Cancel',
 
             ],
+
+            'notification' => [
+                'ResetPassword_title' => 'You are receiving this email because we received a password reset request for your account.',
+                'ResetPassword_action' => 'Reset Password',
+                'ResetPassword_footer' => 'If you did not request a password reset, no further action is required.',
+
+                'Accountactive_title' => 'Registered Email Confirmation',
+                'Accountactive_p1' => 'Please click the link below to activate your account',
+                'Accountactive_action' => 'Activate',
+                'Accountactive_p2' => 'Thank you for using our application!',
+
+                'chefcancel_title' => 'Zhoker.com User Meal Order Cancellation Notification',
+                'chefcancel_p1' => 'This is the meal cancelation information:',
+                'chefcancel_p2' => 'This meal was cancelled by that user and payment will refund back to user',
+                'chefcancel_p3' => 'Thanks choose Zhoker.com and please feel free to ask if you have any question.',
+
+                'cheforder_title' => 'Zhoker.com Chef Order Confirmation',
+                'cheforder_p1' => 'You have couple meals need to approve. please click the link below and approve that.',
+                'cheforder_action' => 'Approval',
+                'cheforder_p2' => 'Thanks choose Zhoker.com and please feel free to ask if you have any question.',
+
+                'usercancel_title' => 'Zhoker.com User Meal Order Cancellation Notification',
+                'usercancel_p1' => 'This is the meal cancelation information:',
+                'usercancel_p2' => 'This meal was cancelled by you and you will get refund back in couple business days',
+                'usercancel_p3' => 'Thanks choose Zhoker.com and please feel free to ask if you have any question.',
+
+                'userconfirm_title' => 'Zhoker.com Meal Order Confirmation',
+                'userconfirm_p1' => 'Welcome use Zhoker.com',
+                'userconfirm_p2' => 'Your meal order: ',
+                'userconfirm_confirm' => ' was comfirmed',
+                'userconfirm_p3' => 'and we charge you $',
+                'userconfirm_success' => ' successfully!',
+                'userconfirm_p4' => 'please remember attend your meal appointment on time. Thanks again using our Zhoker.com service and enjoy your meal!!',
+
+                'userorder_title' => 'Zhoker.com User Meal Order Confirmation',
+                'userorder_p1' => 'Welcome use Zhoker.com',
+                'userorder_p2' => 'This is the meal you order:',
+                'userorder_p3' => 'Those meals need chefs confirm first. You will not be charged before the chef comfirm the meal.',
+                'userorder_p4' => 'You will be informed agian after chef confirm the meal.',
+                'userorder_p5' => 'Thanks choose Zhoker.com and please feel free to ask if you have any question.',
+
+                'userreject_title' => 'Zhoker.com Meal Order Confirmation',
+                'userreject_p1' => 'Welcome use Zhoker.com',
+                'userreject_p2' => 'Sorry, Your meal order: ',
+                'userreject_reject' => ' was rejected.',
+                'userreject_p3' => 'But do not worry about that. We will not charge any bill from the meal order and you still can use our platform to order other meals',
+                'userreject_p4' => 'Thank you again for using our application!',
+
+                'welcome_title' => 'Welcome you to use Zhoker.com',
+                'welcome_p1' => 'Welcome to Zhoker.com',
+                'welcome_p2' => 'Thank you for using our application service!',
+
+                'meal_name' => 'Meal Name',
+                'unite_price' => 'Unite Price',
+                'people_order' => 'People order',
+                'total_price' => 'Total Price',
+                'in' => 'In ',
+                'on' => 'On ',
+                'at' => 'At ',
+                'chef_name' => 'The chef name is '
+            ],
         ];
     }
 }

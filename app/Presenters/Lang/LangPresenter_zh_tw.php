@@ -600,6 +600,67 @@ class LangPresenter_zh_tw implements LangPresenterInterface
                 'reject_confirm_btn' => '確認拒絕!',
                 'cancel_btn' => '取消',
             ],
+
+            'notification' => [
+                'ResetPassword_title' => '因為你需要重設密碼，所以我們發了此郵件給你',
+                'ResetPassword_action' => '重設密碼',
+                'ResetPassword_footer' => '如果你不需要重設密碼，你可以不用在乎此郵件',
+
+                'Accountactive_title' => '電子郵件註冊確認信',
+                'Accountactive_p1' => '請點選下面的連結來啟動你的帳號',
+                'Accountactive_action' => '啟動',
+                'Accountactive_p2' => '感謝你使用我們的服務!',
+
+                'chefcancel_title' => 'Zhoker.com 餐點取消通知',
+                'chefcancel_p1' => '以下是取消餐點訊息:',
+                'chefcancel_p2' => '此餐點已被取消且費用將會退回',
+                'chefcancel_p3' => '感謝使用 Zhoker.com 如有任何的問題，請向我們聯絡',
+
+                'cheforder_title' => 'Zhoker.com 餐點訂單通知',
+                'cheforder_p1' => '你目前有幾個餐點需要確認，請點選下面的連結來確認這些餐點',
+                'cheforder_action' => '確認',
+                'cheforder_p2' => '感謝使用 Zhoker.com 如有任何的問題，請向我們聯絡',
+
+                'usercancel_title' => 'Zhoker.com 餐點取消通知',
+                'usercancel_p1' => '以下是取消餐點訊息:',
+                'usercancel_p2' => '你已經取消此餐點，費用會在幾個工作天後退還',
+                'usercancel_p3' => '感謝使用 Zhoker.com 如有任何的問題，請向我們聯絡',
+
+                'userconfirm_title' => 'Zhoker.com 餐點訂單通知',
+                'userconfirm_p1' => '歡迎使用 Zhoker.com',
+                'userconfirm_p2' => '這是你的訂單: ',
+                'userconfirm_confirm' => ' 已被確認',
+                'userconfirm_p3' => '而且我們已經扣款了 $',
+                'userconfirm_success' => ' 成功了',
+                'userconfirm_p4' => '請準時取餐，再次感謝你使用 Zhoker.com 的服務!!',
+
+                'userorder_title' => 'Zhoker.com 餐點訂單通知',
+                'userorder_p1' => '歡迎使用 Zhoker.com',
+                'userorder_p2' => '這是你的訂單:',
+                'userorder_p3' => '這些訂單需要由廚師先確認，在訂單確認前我們不會向你收取任何費用',
+                'userorder_p4' => '在訂單被確認後，我們會再向你通知',
+                'userorder_p5' => '感謝使用 Zhoker.com 如有任何的問題，請向我們聯絡',
+
+                'userreject_title' => 'Zhoker.com 餐點訂單通知',
+                'userreject_p1' => '歡迎使用 Zhoker.com',
+                'userreject_p2' => '不好意思, 你的訂單: ',
+                'userreject_reject' => ' 被拒絕了',
+                'userreject_p3' => '不需要擔心，我們沒有向你索取此餐點的任何費用且你還是可以訂購其他餐點',
+                'userreject_p4' => '感謝使用 Zhoker.com 如有任何的問題，請向我們聯絡!',
+
+                'welcome_title' => '歡迎來到 Zhoker.com',
+                'welcome_p1' => '歡迎使用 Zhoker.com',
+                'welcome_p2' => '感謝你使用我們的服務!',
+
+                'meal_name' => '餐點',
+                'unite_price' => '單價',
+                'people_order' => '訂購人數',
+                'total_price' => '總額',
+                'in' => '供餐方式 ',
+                'on' => '在 ',
+                'at' => '在 ',
+                'chef_name' => '廚師名子是 '
+            ],
         ];
     }
 }

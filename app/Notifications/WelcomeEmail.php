@@ -18,7 +18,7 @@ class WelcomeEmail extends Notification implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        parent::boot();
     }
 
     /**
@@ -42,9 +42,9 @@ class WelcomeEmail extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->success()
-                    ->subject('Welcome you to use Zhoker.com')
-                    ->line('Welcome to Zhoker.com')
-                    ->line('Thank you for using our application service!');
+                    ->subject(self::$lang->desktop()['notification']['welcome_title'])
+                    ->line(self::$lang->desktop()['notification']['welcome_p1'])
+                    ->line(self::$lang->desktop()['notification']['welcome_p2']);
     }
 
     /**
