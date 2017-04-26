@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="title">You don't have authorized.</div>
             </div>
         </div>
     </body>
