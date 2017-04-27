@@ -35,12 +35,10 @@ class CartFilters extends QueryFilter
     public function fresh()
     {
         $this->builder->where(function ($query) {
-            $cart_id = [];
 
-            foreach ($this->builder->get() as $cart) {
-                if (!$this->overTime($cart)) 
-                    $cart_id = array_prepend($cart_id, $cart->id);
-            }
+            $cart_id = $this->builder->get()->filter(function ($value) {
+                return !$this->overTime($value);
+            })->pluck('id');
 
             $query->whereIn('id', $cart_id);
         });
@@ -55,12 +53,10 @@ class CartFilters extends QueryFilter
     public function hasMeal()
     {
         $this->builder->where(function ($query) {
-            $cart_id = [];
 
-            foreach ($this->builder->get() as $cart) {
-                if ($cart->meals)
-                    $cart_id = array_prepend($cart_id, $cart->id);
-            }
+            $cart_id = $this->builder->get()->filter(function ($value) {
+                return !! $value->meals;
+            })->pluck('id');
 
             $query->whereIn('id', $cart_id);
         });
@@ -75,16 +71,20 @@ class CartFilters extends QueryFilter
     public function hasDateTimePeople()
     {
         $this->builder->where(function ($query) {
-            $cart_id = [];
 
-            foreach ($this->builder->get() as $cart) {
-                if ($cart->datetimepeoples) {
-                    $cart_id = array_prepend($cart_id, $cart->id);
-                }
-            }
+            $cart_id = $this->builder->get()->filter(function ($value) {
+                return !! $value->datetimepeoples;
+            })->pluck('id');
            
             $query->whereIn('id', $cart_id);
         });
+
+        return $this;
+    }
+
+    public function eagerLoadMeal()
+    {
+        $this->builder->with('meals');
 
         return $this;
     }

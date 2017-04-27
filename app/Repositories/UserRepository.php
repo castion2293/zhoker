@@ -54,6 +54,7 @@ class UserRepository
                             ->fresh()
                             ->hasMeal()
                             ->hasDateTimePeople()
+                            ->eagerLoadMeal()
                             ->getQuery()
                             ->get();
     }
