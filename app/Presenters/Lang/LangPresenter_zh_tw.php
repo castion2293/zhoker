@@ -225,6 +225,7 @@ class LangPresenter_zh_tw implements LangPresenterInterface
                 'prop_message' => '此餐點可供訂餐的人數',
                 'prop_confirm' => '確認',
                 'people' => '位',
+                'cancel_meal' => '你確定要刪除嗎?'
             ],
 
             'chef_order' => [

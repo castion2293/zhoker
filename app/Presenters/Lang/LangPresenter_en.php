@@ -225,6 +225,7 @@ class LangPresenter_en implements LangPresenterInterface
                 'prop_message' => 'How many people can order this meal in this day',
                 'prop_confirm' => 'Confirm',
                 'people' => 'people',
+                'cancel_meal' => 'Do you want to cancel?'
             ],
 
             'chef_order' => [

@@ -125,7 +125,7 @@
                     // event.title = People.concat(" People");
 
                     // $('#calendar').fullCalendar('updateEvent',event);
-                    var r = confirm("Do you want to cancel?");
+                    var r = confirm("{{ $lang->desktop()['chef_datetimepeople']['cancel_meal'] }}");
 
                     if (r) {
                         $('#calendar').fullCalendar('removeEvents',event._id);
