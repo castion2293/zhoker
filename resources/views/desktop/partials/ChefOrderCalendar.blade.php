@@ -126,7 +126,7 @@
 </div>
 
 <!--datatimepeople modal-->
-<script src="{{ URL::to('js/fullcalendar/locale/zh-tw.js') }}"></script>
+
 <script>
     $(function () {
 

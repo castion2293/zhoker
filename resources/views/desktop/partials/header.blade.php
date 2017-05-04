@@ -1,6 +1,6 @@
 <!-- Navbar (sit on top) -->
   @inject('UserPresenter', 'App\Presenters\UserPresenter')
-  <div class="w3-top" style="height:10%;z-index:3;">
+  <div class="w3-top" style="height:10%;z-index:10;">
     <ul class="w3-navbar" id="myNavbar">
       @if (Auth::check())
           @if (Auth::user()->isChef() && Session::get('login') == 'chef')

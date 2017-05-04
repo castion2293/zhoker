@@ -27,6 +27,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe.min.js'></script><!--photoswipe-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.1/photoswipe-ui-default.min.js'></script><!--photoswipe-->
     <script src="https://unpkg.com/vue@2.1.8/dist/vue.js"></script>
+    <script src="{{ URL::to('js/fullcalendar/locale/zh-tw.js') }}"></script><!--Chinese fullcalendar-->
     <script src="{{ URL::to('js/all.js') }}"></script>
     @yield('styles')
 </head>

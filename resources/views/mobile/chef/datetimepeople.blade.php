@@ -63,6 +63,7 @@
 
             //FullCalendar
             $('#calendar').fullCalendar({
+                locale: '{{ $lang->desktop()['language'] }}',
                 header: {
                     left: 'prev,next today',
                     center: 'title',
