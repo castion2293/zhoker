@@ -33,14 +33,15 @@
 </head>
 
 <body>
+
     @include('mobile.partials.header')
 
     @include('desktop.partials.flash')
-    
+
     @yield('content')
 
     @include('mobile.partials.footer')
-    
+
     @yield('scripts')
 
     <script src="{{ URL::to('js/vue_component.js') }}"></script>
