@@ -1,4 +1,4 @@
-~@extends('desktop.layout.master')
+@extends('desktop.layout.master')
 
 @section('title', '| Chef create')
 
