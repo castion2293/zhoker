@@ -216,7 +216,8 @@
     $(function () {
         $("#datepicker").datetimepicker({
             format: 'YYYY-MM-DD',
-            minDate: moment()
+            minDate: moment(),
+            locale: '{{ $lang->desktop()['language'] }}'
         });
 
         $("#eat-location").val("{{ $lang->desktop()['index']['search_city'] }}");
