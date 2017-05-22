@@ -147,7 +147,7 @@ class LangPresenter_en implements LangPresenterInterface
                 'order_action' => 'ACTION',
                 'people_order' => 'people order',
                 'order_approved' => 'Approved',
-                'order_penddng' => 'Pending',
+                'order_pending' => 'Pending',
                 'order_pay' => 'Paid',
                 'order_not_pay' => 'Not Pay',
                 'go_order' => 'Go To Order',
