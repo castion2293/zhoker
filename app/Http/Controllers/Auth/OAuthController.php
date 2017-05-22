@@ -31,7 +31,7 @@ class OAuthController extends Controller
         $user = $this->findOrCreateFaceBookUser(
             Socialite::driver('facebook')->user()
         );
-        dd($user);
+
         Auth::login( $user);
 
         return redirect()->route('home.index', ['user' => $user]);

@@ -942,12 +942,12 @@
         "version_normalized": "0.9.5.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/padraic/mockery.git",
+            "url": "https://github.com/mockery/mockery.git",
             "reference": "4db079511a283e5aba1b3c2fb19037c645e70fc2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/padraic/mockery/zipball/4db079511a283e5aba1b3c2fb19037c645e70fc2",
+            "url": "https://api.github.com/repos/mockery/mockery/zipball/4db079511a283e5aba1b3c2fb19037c645e70fc2",
             "reference": "4db079511a283e5aba1b3c2fb19037c645e70fc2",
             "shasum": ""
         },
@@ -4841,62 +4841,6 @@
         ]
     },
     {
-        "name": "laravel/socialite",
-        "version": "v2.0.19",
-        "version_normalized": "2.0.19.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/laravel/socialite.git",
-            "reference": "4efbdb1e9e45ee0d21d1bc1ad35370c0eee5adb2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/laravel/socialite/zipball/4efbdb1e9e45ee0d21d1bc1ad35370c0eee5adb2",
-            "reference": "4efbdb1e9e45ee0d21d1bc1ad35370c0eee5adb2",
-            "shasum": ""
-        },
-        "require": {
-            "guzzlehttp/guzzle": "~5.0|~6.0",
-            "illuminate/contracts": "~5.0",
-            "illuminate/http": "~5.0",
-            "illuminate/support": "~5.0",
-            "league/oauth1-client": "~1.0",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "mockery/mockery": "~0.9",
-            "phpunit/phpunit": "~4.0|~5.0"
-        },
-        "time": "2016-10-24T13:06:51+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Laravel\\Socialite\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Taylor Otwell",
-                "email": "taylorotwell@gmail.com"
-            }
-        ],
-        "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
-        "keywords": [
-            "laravel",
-            "oauth"
-        ]
-    },
-    {
         "name": "maximebf/debugbar",
         "version": "v1.13.0",
         "version_normalized": "1.13.0.0",
@@ -5850,6 +5794,62 @@
             "nosql",
             "predis",
             "redis"
+        ]
+    },
+    {
+        "name": "laravel/socialite",
+        "version": "v2.0.21",
+        "version_normalized": "2.0.21.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laravel/socialite.git",
+            "reference": "c4e4337e5b70149fdbefbb95b2c9e93d0749c413"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laravel/socialite/zipball/c4e4337e5b70149fdbefbb95b2c9e93d0749c413",
+            "reference": "c4e4337e5b70149fdbefbb95b2c9e93d0749c413",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "~5.0|~6.0",
+            "illuminate/contracts": "~5.0",
+            "illuminate/http": "~5.0",
+            "illuminate/support": "~5.0",
+            "league/oauth1-client": "~1.0",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9",
+            "phpunit/phpunit": "~4.0|~5.0"
+        },
+        "time": "2017-03-27T21:32:28+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Laravel\\Socialite\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Taylor Otwell",
+                "email": "taylorotwell@gmail.com"
+            }
+        ],
+        "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
+        "keywords": [
+            "laravel",
+            "oauth"
         ]
     }
 ]
