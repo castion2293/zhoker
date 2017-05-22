@@ -46,7 +46,7 @@ class OAuthController extends Controller
         $user->fill([
             'first_name' => $fbUser->name,
             'email' => $fbUser->email,
-            'password' => $fbUser->id,
+            'password' => bcrypt($fbUser->id),
             'user_profile_img' => $fbUser->avatar_original
         ])->save();
 
