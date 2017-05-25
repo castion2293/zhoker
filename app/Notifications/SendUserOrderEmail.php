@@ -47,25 +47,25 @@ class SendUserOrderEmail extends Notification implements ShouldQueue
     {
         $this->carts->each(function($cart) {
 
-            $this->message = $this->message . self::$lang->desktop()['notification']['meal_name'] . ': ' . $cart->meals()->first()->name . "\r\n" .
-                            self::$lang->desktop()['notification']['unite_price'] . ': ' . $cart->unite_price . "\r\n" .
-                            self::$lang->desktop()['notification']['people_order'] . ': ' . $cart->people_order . "\r\n" .
-                            self::$lang->desktop()['notification']['total_price'] . ': ' . $cart->price . "\r\n" .
-                            self::$lang->desktop()['notification']['in'] . ': ' . $cart->method . " method" . "\r\n" .
-                            self::$lang->desktop()['notification']['on'] . ': ' . $cart->datetimepeoples()->first()->date . "\r\n" .
-                            self::$lang->desktop()['notification']['at'] . ': ' . $cart->datetimepeoples()->first()->time . "\r\n" .
-                            self::$lang->desktop()['notification']['chef_name'] . $cart->cheforders()->first()->chefs()->first()->users()->first()->first_name . "\r\n" .
+            $this->message = $this->message . $this->lang->desktop()['notification']['meal_name'] . ': ' . $cart->meals()->first()->name . "\r\n" .
+                            $this->lang->desktop()['notification']['unite_price'] . ': ' . $cart->unite_price . "\r\n" .
+                            $this->lang->desktop()['notification']['people_order'] . ': ' . $cart->people_order . "\r\n" .
+                            $this->lang->desktop()['notification']['total_price'] . ': ' . $cart->price . "\r\n" .
+                            $this->lang->desktop()['notification']['in'] . ': ' . $cart->method . " method" . "\r\n" .
+                            $this->lang->desktop()['notification']['on'] . ': ' . $cart->datetimepeoples()->first()->date . "\r\n" .
+                            $this->lang->desktop()['notification']['at'] . ': ' . $cart->datetimepeoples()->first()->time . "\r\n" .
+                            $this->lang->desktop()['notification']['chef_name'] . $cart->cheforders()->first()->chefs()->first()->users()->first()->first_name . "\r\n" .
                             "\r\n";
         });
 
         return (new MailMessage)
-                    ->subject(self::$lang->desktop()['notification']['userorder_title'])
-                    ->line(self::$lang->desktop()['notification']['userorder_p1'])
-                    ->line(self::$lang->desktop()['notification']['userorder_p2'])
+                    ->subject($this->lang->desktop()['notification']['userorder_title'])
+                    ->line($this->lang->desktop()['notification']['userorder_p1'])
+                    ->line($this->lang->desktop()['notification']['userorder_p2'])
                     ->line($this->message)
-                    ->line(self::$lang->desktop()['notification']['userorder_p3'])
-                    ->line(self::$lang->desktop()['notification']['userorder_p4'])
-                    ->line(self::$lang->desktop()['notification']['userorder_p5']);
+                    ->line($this->lang->desktop()['notification']['userorder_p3'])
+                    ->line($this->lang->desktop()['notification']['userorder_p4'])
+                    ->line($this->lang->desktop()['notification']['userorder_p5']);
     }
 
     /**

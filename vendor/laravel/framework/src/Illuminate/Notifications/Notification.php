@@ -15,7 +15,7 @@ class Notification
      */
     public $id;
 
-    public static $lang;
+    public $lang;
 
     /**
      * Get the channels the event should broadcast on.
@@ -27,8 +27,8 @@ class Notification
         return [];
     }
 
-    public static function boot()
+    public function boot()
     {
-        self::$lang = getLocaleLang();
+         $this->lang = getLocaleLang();
     }
 }

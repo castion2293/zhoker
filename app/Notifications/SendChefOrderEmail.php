@@ -46,10 +46,10 @@ class SendChefOrderEmail extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->success()
-                    ->subject(self::$lang->desktop()['notification']['cheforder_title'])
-                    ->line(self::$lang->desktop()['notification']['cheforder_p1'])
-                    ->action(self::$lang->desktop()['notification']['cheforder_action'], url('/order/chef_order/'.$this->chef_id))
-                    ->line(self::$lang->desktop()['notification']['cheforder_p2']);
+                    ->subject($this->lang->desktop()['notification']['cheforder_title'])
+                    ->line($this->lang->desktop()['notification']['cheforder_p1'])
+                    ->action($this->lang->desktop()['notification']['cheforder_action'], url('/order/chef_order/'.$this->chef_id))
+                    ->line($this->lang->desktop()['notification']['cheforder_p2']);
     }
 
     /**

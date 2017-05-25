@@ -42,9 +42,9 @@ class WelcomeEmail extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->success()
-                    ->subject(self::$lang->desktop()['notification']['welcome_title'])
-                    ->line(self::$lang->desktop()['notification']['welcome_p1'])
-                    ->line(self::$lang->desktop()['notification']['welcome_p2']);
+                    ->subject($this->lang->desktop()['notification']['welcome_title'])
+                    ->line($this->lang->desktop()['notification']['welcome_p1'])
+                    ->line($this->lang->desktop()['notification']['welcome_p2']);
     }
 
     /**

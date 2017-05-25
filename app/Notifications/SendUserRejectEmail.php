@@ -45,11 +45,11 @@ class SendUserRejectEmail extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject(self::$lang->desktop()['notification']['userreject_title'])
-                    ->line(self::$lang->desktop()['notification']['userreject_p1'])
-                    ->line(self::$lang->desktop()['notification']['userreject_p2'] . $this->cart->meals()->first()->name . self::$lang->desktop()['notification']['userreject_reject'])
-                    ->line(self::$lang->desktop()['notification']['userreject_p3'])
-                    ->line(self::$lang->desktop()['notification']['userreject_p4']);
+                    ->subject($this->lang->desktop()['notification']['userreject_title'])
+                    ->line($this->lang->desktop()['notification']['userreject_p1'])
+                    ->line($this->lang->desktop()['notification']['userreject_p2'] . $this->cart->meals()->first()->name . $this->lang->desktop()['notification']['userreject_reject'])
+                    ->line($this->lang->desktop()['notification']['userreject_p3'])
+                    ->line($this->lang->desktop()['notification']['userreject_p4']);
     }
 
     /**

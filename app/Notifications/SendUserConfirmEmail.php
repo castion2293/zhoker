@@ -47,11 +47,11 @@ class SendUserConfirmEmail extends Notification implements ShouldQueue
     {
         
         return (new MailMessage)
-                    ->subject(self::$lang->desktop()['notification']['userconfirm_title'])
-                    ->line(self::$lang->desktop()['notification']['userconfirm_p1'])
-                    ->line(self::$lang->desktop()['notification']['userconfirm_p2'] . $this->cart->meals()->first()->name . self::$lang->desktop()['notification']['userconfirm_confirm'])
-                    ->line(self::$lang->desktop()['notification']['userconfirm_p3'] . $this->cart->price . self::$lang->desktop()['notification']['userconfirm_success'])
-                    ->line(self::$lang->desktop()['notification']['userconfirm_p4']);
+                    ->subject($this->lang->desktop()['notification']['userconfirm_title'])
+                    ->line($this->lang->desktop()['notification']['userconfirm_p1'])
+                    ->line($this->lang->desktop()['notification']['userconfirm_p2'] . $this->cart->meals()->first()->name . $this->lang->desktop()['notification']['userconfirm_confirm'])
+                    ->line($this->lang->desktop()['notification']['userconfirm_p3'] . $this->cart->price . $this->lang->desktop()['notification']['userconfirm_success'])
+                    ->line($this->lang->desktop()['notification']['userconfirm_p4']);
                     
     }
 

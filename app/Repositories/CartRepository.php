@@ -86,7 +86,7 @@ class CartRepository
      */
     public function delete(Cart $cart)
     {
-        return $cart->forceDelete();
+        return $cart->Delete();
     }
 
     /**

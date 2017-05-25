@@ -46,10 +46,10 @@ class SendAccountActiveEmail extends Notification
     {
         return (new MailMessage)
                     ->success()
-                    ->subject(self::$lang->desktop()['notification']['Accountactive_title'])
-                    ->line(self::$lang->desktop()['notification']['Accountactive_p1'])
-                    ->action(self::$lang->desktop()['notification']['Accountactive_action'], 'https://zhoker.com/auth/register/activate/'.$this->token)
-                    ->line(self::$lang->desktop()['notification']['Accountactive_p2']);
+                    ->subject($this->lang->desktop()['notification']['Accountactive_title'])
+                    ->line($this->lang->desktop()['notification']['Accountactive_p1'])
+                    ->action($this->lang->desktop()['notification']['Accountactive_action'], 'https://zhoker.com/auth/register/activate/'.$this->token)
+                    ->line($this->lang->desktop()['notification']['Accountactive_p2']);
     }
 
     /**
