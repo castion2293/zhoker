@@ -103,7 +103,7 @@ class OrderController extends Controller
 
                 flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['accept_order']);
 
-                $url = "order/chef_order/" . $chefOrder->chef_id . "?chefOrderType=approve";
+                $url = "order/chef_order/" . $chefOrder->chef_id . "?chefOrderType=Approve";
                 return redirect($url);
             }
 
@@ -172,7 +172,7 @@ class OrderController extends Controller
         
         flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['reject_order']);
         
-        $url = "order/chef_order/" . $chefOrder->chef_id . "?chefOrderType=reject";
+        $url = "order/chef_order/" . $chefOrder->chef_id . "?chefOrderType=Reject";
         return redirect($url);
     }
 
@@ -196,7 +196,7 @@ class OrderController extends Controller
 
         flash()->success(Self::$lang->desktop()['flash']['success'], Self::$lang->desktop()['flash']['cancel_order']);
        
-        $url = "order/user_order/" . $user->id . "?userOrderType=cancel";
+        $url = "order/user_order/" . $user->id . "?userOrderType=Cancel";
         return redirect($url);
     }
 }
