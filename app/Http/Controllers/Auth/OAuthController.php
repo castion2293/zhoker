@@ -35,7 +35,7 @@ class OAuthController extends Controller
         Auth::login( $user);
 
         //return redirect()->route('home.index', ['user' => $user]);
-        return redirect()->back();
+        return redirect(url()->previous());
     }
 
     protected function findOrCreateFaceBookUser($fbUser)
