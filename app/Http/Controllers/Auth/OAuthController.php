@@ -33,7 +33,7 @@ class OAuthController extends Controller
         );
 
         Auth::login( $user);
-
+        //redirect to home page
         return redirect()->route('home.index', ['user' => $user]);
     }
 
