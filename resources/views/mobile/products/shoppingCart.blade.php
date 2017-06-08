@@ -25,7 +25,7 @@
                         <span class="w3-text-grey w3-large"><b>{{ str_limit($cart->meals->name,24) }}</b></span>
                     </div>
                     <div class="w3-col s4" style="margin-top:0.5em;">
-                        <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}TWD</span></span>
+                        <span class="w3-text-green w3-large">$<span id="{{ $cart->id }}united_price" class="w3-text-green w3-large">{{ $cart->meals->price }}USD</span></span>
                          <!--span class="w3-text-grey w3-large">{{ $cart->people_order }} people order</span-->
                     </div>
                     <div class="w3-col s12">
@@ -110,7 +110,7 @@
                         <span class="w3-text-grey w3-large"><b>{{ str_limit($datetimepeople->meals->name, 24) }}</b></span>
                     </div>
                     <div class="w3-col s4" style="margin-top:0.5em;">
-                        <span class="w3-text-green w3-large">${{ $datetimepeople->meals->price }}TWD</span>
+                        <span class="w3-text-green w3-large">${{ $datetimepeople->meals->price }}USD</span>
                     </div>
                     <div class="w3-col s12">
                         <img src="{{ asset($datetimepeople->meals->cover_img) }}" alt="meal photo" style="width:100%">
@@ -152,7 +152,7 @@
                         <span class="w3-text-grey w3-large"><b>{{ $meal->name }}</b></span>
                     </div>
                     <div class="w3-col s4" style="margin-top:0.5em;">
-                        <span class="w3-text-green w3-large">${{ $meal->price }}TWD</span>
+                        <span class="w3-text-green w3-large">${{ $meal->price }}USD</span>
                     </div>
                     <div class="w3-col s12">
                         <img src="{{ asset($meal->cover_img) }}" alt="meal photo" style="width:100%">

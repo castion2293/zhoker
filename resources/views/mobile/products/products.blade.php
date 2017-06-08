@@ -27,7 +27,7 @@
             </div>
             <div class="w3-rest"></div>
             <div class="w3-col s4 w3-right">
-                <b class="w3-text-green w3-large w3-right w3-margin-right" style="margin-top:1em;">${{ $meal->price }}TWD</b>
+                <b class="w3-text-green w3-large w3-right w3-margin-right" style="margin-top:1em;">${{ $meal->price }}USD</b>
             </div>
         </div>
         <div class="w3-row w3-padding-12">

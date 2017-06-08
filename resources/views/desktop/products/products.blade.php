@@ -29,7 +29,7 @@
                 <h1 class="w3-text-grey w3-xxlarge w3-margin-left" style="font-family: cursive">{{ $meal->name }}</h1>
             </div>
             <div class="w3-col l2 m2">
-                <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}TWD</b>
+                <b class="w3-text-green w3-xlarge w3-right w3-margin-right" style="margin-top:2em;">${{ $meal->price }}USD</b>
             </div>
         </div>
         <div class="w3-row w3-padding-12">

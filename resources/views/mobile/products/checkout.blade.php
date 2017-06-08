@@ -26,7 +26,7 @@
                             <span class="w3-text-grey w3-large"><b>{{ str_limit($cart->meals->name, 24) }}</b></span>
                         </div>
                         <div class="w3-col s4" style="margin-top:0.5em;">
-                            <span class="w3-text-green w3-large">${{ $cart->unite_price }}TWD</span>
+                            <span class="w3-text-green w3-large">${{ $cart->unite_price }}USD</span>
                         </div>
                         <div class="w3-col s12">
                             <img src="{{ asset($cart->meals->cover_img) }}" alt="meal photo" style="width:100%">
