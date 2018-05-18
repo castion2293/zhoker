@@ -80,23 +80,23 @@
         <div class="carousel-inner" role="listbox">
 
         <div class="item w3-display-container active">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201601.jpg" alt="Food1" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051701.JPG" alt="Food1" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201605.jpg" alt="Food3" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051702.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201602.jpg" alt="Food3" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051703.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201604.jpg" alt="Food3" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051704.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201603.jpg" alt="Food3" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051705.JPG" alt="Food3" style="width:100%">
         </div>
 
         <!-- Left and right controls -->

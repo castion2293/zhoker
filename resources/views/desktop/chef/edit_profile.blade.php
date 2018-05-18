@@ -16,7 +16,7 @@
 @section('content')
     <!--header picture-->
     <div class="" id="top-pic">
-        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1031201605.JPG" alt="profile" style="width:100%">
+        <img src="https://s3.amazonaws.com/zhoker-pics/2018051604.JPG" alt="profile" style="width:100%">
     </div>
 
     <!--content-->
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="w3-col l5 m5">
-                        <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1028201602.jpg') }}" alt="profile" style="width:100%">
+                        <img src="{{ URL::to('https://s3.amazonaws.com/zhoker-pics/2018051801.JPG') }}" alt="profile" style="width:100%">
                     </div>
                 </div>
                 <div class="w3-border-green w3-border-bottom w3-padding-12">

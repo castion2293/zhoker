@@ -32,7 +32,7 @@
             <div class="w3-row">
                <div class="w3-col l4 m4">
                   <div class="w3-margin-top">
-                    <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1028201602.jpg') }}" alt="profile" style="width:100%">
+                    <img src="{{ URL::to('https://s3.amazonaws.com/zhoker-pics/2018051804.JPG') }}" alt="profile" style="width:100%">
                   </div>
                 </div>
                 <div class="w3-col l8 m8" style="padding-left:2em;">

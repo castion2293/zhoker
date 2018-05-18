@@ -25,7 +25,7 @@ trait ImageTrait
 
         dispatch(new SaveImagetoS3($filePath, $imageFile));
 
-        return 'https://s3-us-west-2.amazonaws.com/zhoker' . $filePath;
+        return 'https://s3.amazonaws.com/zhoker-pics' . $filePath;
     }
 
     /**

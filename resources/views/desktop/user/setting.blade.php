@@ -9,7 +9,7 @@
 @section('content')
     <!--header picture-->
     <div class="" id="top-pic">
-        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1104201604.JPG" alt="profile" style="width:100%">
+        <img src="https://s3.amazonaws.com/zhoker-pics/2018051504.jpg" alt="profile" style="width:100%">
     </div>
 
     <!--content-->
@@ -23,7 +23,7 @@
             {!! Form::model($user, ['route' => ['user_profile.update', $user->id], 'method' => 'PUT', 'data-parsley-validate' => '', 'files' => true]) !!}
                <div class="w3-col l7 m7 w3-padding-small">
                     <div class="w3-border-grey w3-border-bottom w3-margin-bottom">
-                        <span class="w3-text-grey w3-xlarge">{{ $lang->desktop()['user_edit_profile']['public_info'] }}<span>
+                        <span class="w3-text-grey w3-xlarge">{{ $lang->desktop()['user_edit_profile']['public_info'] }}</span>
                     </div>
                     <div class="w3-row">
                         <div class="w3-col l6 m6" style="padding-right:0.8em;">
@@ -94,7 +94,7 @@
 
         <div class="w3-row" style="padding-bottom: 2em;">
             <div class="w3-col l4 m4 w3-padding-small">
-                <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1028201602.jpg') }}" alt="profile" style="width:100%">
+                <img src="{{ URL::to('https://s3.amazonaws.com/zhoker-pics/2018051608.JPG') }}" alt="profile" style="width:100%">
             </div>
             <div class="w3-col l7 m7" style="margin-left:3em;">
                 @if ($user->creditcards()->get()->isEmpty())

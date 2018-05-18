@@ -9,7 +9,7 @@
 @section('content')
     <!--header picture-->
     <div class="" id="top-pic">
-        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201615.JPG" alt="profile" style="width:100%">
+        <img src="https://s3.amazonaws.com/zhoker-pics/2018051609.JPG" alt="profile" style="width:100%">
     </div>
 
     <!--content-->

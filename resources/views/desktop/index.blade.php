@@ -85,23 +85,23 @@
         <div class="carousel-inner" role="listbox">
 
         <div class="item w3-display-container active">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201601.jpg" alt="Food1" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051701.JPG" alt="Food1" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201605.jpg" alt="Food3" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051702.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201602.jpg" alt="Food3" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051703.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201604.jpg" alt="Food3" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051704.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201603.jpg" alt="Food3" style="width:100%">
+            <img src="https://s3.amazonaws.com/zhoker-pics/2018051705.JPG" alt="Food3" style="width:100%">
         </div>
 
         <!-- Left and right controls -->
@@ -131,7 +131,7 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201606.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://s3.amazonaws.com/zhoker-pics/2018051706.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_chinese'] }}</b></h3>
                         </div>
@@ -142,7 +142,7 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201607.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://s3.amazonaws.com/zhoker-pics/2018051707.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_french'] }}</b></h3>
                         </div>
@@ -153,7 +153,7 @@
             <div class="w3-col l4 m4">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1128201608.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://s3.amazonaws.com/zhoker-pics/2018051708.JPG" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_barbecu'] }}</b></h3>
                         </div>

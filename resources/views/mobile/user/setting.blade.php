@@ -9,7 +9,7 @@
 @section('content')
     <!--header picture-->
     <div class="" id="top-pic">
-        <img src="https://s3-us-west-2.amazonaws.com/zhoker/images/1104201604.JPG" alt="profile" style="width:100%">
+        <img src="https://s3.amazonaws.com/zhoker-pics/2018051504.jpg" alt="profile" style="width:100%">
     </div>
 
     <!--content-->
@@ -95,7 +95,7 @@
 
         <div class="w3-row" style="padding-bottom: 2em;">
             <div class="w3-col s12">
-                <img src="{{ URL::to('https://s3-us-west-2.amazonaws.com/zhoker/images/1028201602.jpg') }}" alt="profile" style="width:100%">
+                <img src="{{ URL::to('https://s3.amazonaws.com/zhoker-pics/2018051608.JPG') }}" alt="profile" style="width:100%">
             </div>
             <div class="w3-col s12">
                 @if ($user->creditcards()->get()->isEmpty())
