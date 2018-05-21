@@ -104,6 +104,7 @@ class CashierController extends Controller
         $this->creditCardService->setAPIKey(config('services.stripe.secret'));
         try {
             $customer = $this->creditCardService->createCustomer($user, $request);
+
             $carts = $this->cashierService->findCartByUser($user)->getCart();
             $totalPrice = $this->cashierService->getTotalPrice($carts);
 

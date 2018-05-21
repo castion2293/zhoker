@@ -47,7 +47,7 @@ class CreditCardService
             "description" => $user->first_name,
         ]);
 
-        return $this;
+        return $this->customer;
     }
 
     /**
