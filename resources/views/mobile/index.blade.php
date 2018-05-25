@@ -80,23 +80,23 @@
         <div class="carousel-inner" role="listbox">
 
         <div class="item w3-display-container active">
-            <img src="https://s3.amazonaws.com/zhoker-pics/2018051701.JPG" alt="Food1" style="width:100%">
+            <img src="https://d4kfrsvmp3cgg.cloudfront.net/2018051701.JPG" alt="Food1" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3.amazonaws.com/zhoker-pics/2018051702.JPG" alt="Food3" style="width:100%">
+            <img src="https://d4kfrsvmp3cgg.cloudfront.net/2018051702.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3.amazonaws.com/zhoker-pics/2018051703.JPG" alt="Food3" style="width:100%">
+            <img src="https://d4kfrsvmp3cgg.cloudfront.net/2018051703.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3.amazonaws.com/zhoker-pics/2018051704.JPG" alt="Food3" style="width:100%">
+            <img src="https://d4kfrsvmp3cgg.cloudfront.net/2018051704.JPG" alt="Food3" style="width:100%">
         </div>
 
         <div class="item w3-display-container">
-            <img src="https://s3.amazonaws.com/zhoker-pics/2018051705.JPG" alt="Food3" style="width:100%">
+            <img src="https://d4kfrsvmp3cgg.cloudfront.net/2018051705.JPG" alt="Food3" style="width:100%">
         </div>
 
         <!-- Left and right controls -->
@@ -126,7 +126,7 @@
             <div class="w3-col s12">
                 <a href="#">
                     <div class="w3-display-container img-wrapper">
-                        <img src="https://cdn.pixabay.com/photo/2018/03/15/12/17/food-3228058_1280.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://d4kfrsvmp3cgg.cloudfront.net/food-3228058_1920.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_chinese'] }}</b></h3>
                         </div>
@@ -137,7 +137,7 @@
             <div class="w3-col s12">
                 <a href="#">
                     <div class="w3-display-container img-wrapper w3-margin-top">
-                        <img src="https://cdn.pixabay.com/photo/2018/04/28/00/44/food-3356314_1280.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://d4kfrsvmp3cgg.cloudfront.net/cheese-tray-1433504_1920.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_french'] }}</b></h3>
                         </div>
@@ -148,7 +148,7 @@
             <div class="w3-col s12">
                 <a href="#">
                     <div class="w3-display-container img-wrapper w3-margin-top">
-                        <img src="https://cdn.pixabay.com/photo/2014/08/14/14/21/shish-kebab-417994_1280.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://d4kfrsvmp3cgg.cloudfront.net/shish-kebab-417994_1920.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_barbecu'] }}</b></h3>
                         </div>
@@ -159,7 +159,7 @@
             <div class="w3-col s12">
                 <a href="#">
                     <div class="w3-display-container img-wrapper w3-margin-top">
-                        <img src="https://cdn.pixabay.com/photo/2016/03/05/23/01/asian-1239427_1280.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://d4kfrsvmp3cgg.cloudfront.net/abstract-1238248_1920.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_seafood'] }}</b></h3>
                         </div>
@@ -170,7 +170,7 @@
             <div class="w3-col s12">
                 <a href="#">
                     <div class="w3-display-container img-wrapper w3-margin-top">
-                        <img src="https://cdn.pixabay.com/photo/2017/10/10/11/37/japan-2836904_1280.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://d4kfrsvmp3cgg.cloudfront.net/sushi-2455981_1920.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_japanese'] }}</b></h3>
                         </div>
@@ -181,7 +181,7 @@
             <div class="w3-col s12">
                 <a href="#">
                     <div class="w3-display-container img-wrapper w3-margin-top">
-                        <img src="https://cdn.pixabay.com/photo/2017/08/08/09/44/food-photography-2610863_1280.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
+                        <img src="https://d4kfrsvmp3cgg.cloudfront.net/food-photography-2610863_1920.jpg" alt="picture1" style="width:100%;margin-bottom:0;" class="zk-enlarge-hover">
                         <div class="w3-display-bottommiddle w3-deep-orange w3-text-white" style="width:100%;opacity:0.8;">
                             <h3 class="w3-xxlarge"><b>{{ $lang->desktop()['index']['serve_korean'] }}</b></h3>
                         </div>
